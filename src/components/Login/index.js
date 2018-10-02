@@ -1,13 +1,33 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.css';
-import { Menu, Container } from 'semantic-ui-react';
+import { Segment, Button, Divider } from 'semantic-ui-react'
+import Header from '../../template/Header';
+import Footer from '../../template/Footer';
 
-class Login extends Component {
+class LoginContent extends Component {
     render() {
         return (            
-            <h1> Login </h1>
+            <Segment padded>
+                <Button primary fluid>
+                    Login
+                </Button>
+                <Divider horizontal>Or</Divider>
+                <Button secondary fluid>
+                    Sign Up Now
+                </Button>
+            </Segment>
         );
     }
 }
 
-export default Login;
+export default class Login extends Component {
+    render() {
+      return (
+        <div>
+          <Header/>
+          <LoginContent/>
+          <Footer/>
+        </div>
+      );
+    }
+  }
