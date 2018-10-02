@@ -10,3 +10,4 @@
  - สร้าง folder ด้วย
  - เอา Template มาเปลี่ยน class 
  - เเก้เอง
+ - ทุกอย่างทำใน components
