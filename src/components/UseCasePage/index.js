@@ -13,7 +13,7 @@ class Content extends Component {
   }
 }
 
-export default class Xx extends Component {
+export default class xx extends Component {
   render() {
     return (
       <div>

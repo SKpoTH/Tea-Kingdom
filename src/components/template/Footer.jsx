@@ -8,7 +8,7 @@ export default class Footer extends Component {
     return (
       <Segment vertical className='footer'>
         <Container>
-          <Grid columns='equal'>
+          <Grid columns='equal' stackable>
             <Grid.Column>
               <Header as='h4'>Colum1</Header>
               <List link>
