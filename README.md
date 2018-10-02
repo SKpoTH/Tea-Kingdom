@@ -5,3 +5,8 @@
  - npm install
 ### run
  - npm start
+ 
+### HowToUse
+ - สร้าง folder ด้วย
+ - เอา Template มาเปลี่ยน class 
+ - เเก้เอง
