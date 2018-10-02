@@ -16,7 +16,7 @@
   #### routes.js
   - เพิ่มดังนี้<br>
    1<br>
-   ```import [newOne]() from './components/newOne';```<br>
+   ```import newOne from './components/newOne';```<br>
    2<br>
    ```<Router {...props}>```<br>
    ``` <Route path="/newOne" component={newOne}/>```<br>
