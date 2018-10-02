@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.css';
-import { Segment, Button, Divider } from 'semantic-ui-react';
+import {} from 'semantic-ui-react';
 import Header from '../template/Header';
 import Footer from '../template/Footer';
 
