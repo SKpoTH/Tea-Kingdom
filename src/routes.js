@@ -1,10 +1,10 @@
 import React from 'react';
 import {Router, Route } from 'react-router';
-import productTable from './components/productTable';
+import xx from './components/UseCasePage';
 
 const Routes = (props) => (
     <Router {...props}>
-        <Route path="/productTable" component={productTable}/>
+        <Route path="/xx" component={xx}/>
     </Router>
 );
 

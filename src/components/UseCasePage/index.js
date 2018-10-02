@@ -4,7 +4,7 @@ import Footer from '../template/Footer';
 import 'semantic-ui-css/semantic.css';
 import {} from 'semantic-ui-react';
 
-class productTableShow extends Component {
+class Content extends Component {
   render() {
     return (
       //code here (delete <div/> below)            
@@ -13,12 +13,12 @@ class productTableShow extends Component {
   }
 }
 
-export default class productTable extends Component {
+export default class Xx extends Component {
   render() {
     return (
       <div>
         <Header/>
-        <productTableShow/>
+        <Content/>
         <Footer/>
       </div>
     );
