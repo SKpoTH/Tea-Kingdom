@@ -1,10 +1,10 @@
 import React from 'react';
 import {Router, Route } from 'react-router';
-import xx from './components/UseCasePage';
+import AboutUs from './components/AboutUs';
 
 const Routes = (props) => (
     <Router {...props}>
-        <Route path="/xx" component={xx}/>
+        <Route path="/AboutUs" component={AboutUs}/>
     </Router>
 );
 
