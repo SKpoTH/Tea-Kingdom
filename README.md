@@ -7,7 +7,17 @@
  - npm start
  
 ### HowToUse
- - สร้าง folder ด้วย
- - เอา Template มาเปลี่ยน class 
- - เเก้เอง
- - ทุกอย่างทำใน components
+ #### tea-kingdom\src\components\
+ - copy folder [UseCasePage]() -> [UseCasePage222222]()
+ - เปลี่ยนชื่อ folder [UseCasePage222222]() เป็นหน้าเพจที่ต้องการสร้าง {[newOne]()}
+ - เเก้ไขใน [newOne]()/index.js
+ - เปลี่ยนชื่อ class [newOne]()Show extends Component {
+ - เปลี่ยนชื่อ export default class [newOne]() extends Component {
+  #### routes.js
+  - เพิ่มดังนี้<br>
+   1<br>
+   ```import [newOne]() from './components/newOne';```<br>
+   2<br>
+   ```<Router {...props}>```<br>
+   ``` <Route path="/newOne" component={newOne}/>```<br>
+   ```</Router>```
