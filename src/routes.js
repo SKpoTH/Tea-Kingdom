@@ -5,7 +5,8 @@ import App from './components/App';
 import About from './components/About';
 import Login from './components/Login';
 import NotFound from './components/NotFound';
-import Xx from './components/UseCasePage ';
+import Xx from './components/UseCasePage';
+import Register from './components/Register';
 
 const Routes = (props) => (
     <Router {...props}>
@@ -13,7 +14,8 @@ const Routes = (props) => (
         <Route path="/about" component={About} />
         <Route path="/notfound" component={NotFound} />
         <Route path="/login" component={Login}/>
-        <Route path="/xx" component={Xx}/>      
+        <Route path="/xx" component={Xx}/>
+        <Route path="/register" component={Register}/>            
     </Router>
 );
 
