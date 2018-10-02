@@ -8,7 +8,7 @@ import Footer from '../template/Footer';
 class Content extends Component {
     render() {
         return (            
-            <h1>Hello World</h1>
+            <h1>Code here</h1>
         );
     }
 }
