@@ -5,7 +5,7 @@ import App from './components/App';
 import About from './components/About';
 import Login from './components/Login';
 import NotFound from './components/NotFound';
-import Xx from './components/TemplatePage ';
+import Xx from './components/UseCasePage ';
 
 const Routes = (props) => (
     <Router {...props}>
