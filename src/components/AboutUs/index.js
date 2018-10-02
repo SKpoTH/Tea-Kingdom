@@ -2,18 +2,26 @@ import React, { Component } from 'react';
 import Header from '../template/Header';
 import Footer from '../template/Footer';
 import 'semantic-ui-css/semantic.css';
-import { Grid , Container , Message } from 'semantic-ui-react';
+import { Grid , Container , Message , Image , List} from 'semantic-ui-react';
 
 class PersonalData extends Component{
   render() {
     return (
-      <Container textAlign={"center"}>
+      <Container textAlign={"right"}>
         <Grid columns='three' divided>
           <Grid.Row>
             <Grid.Column width={5}>
               <Message>
                 <Message.Header>Arniwatt Chonkiattipoom</Message.Header>
-                <p>Chief Executive Officer</p>
+                <p>
+                  Chief Executive Officer
+                  <List>
+                    <List.Item style={{display:"inline"}}>
+                      <List.Icon name='mail' />
+                        arniwatt.c@ku.th
+                    </List.Item>
+                  </List>
+                </p>
               </Message>
               {/* <Image src='/images/wireframe/media-paragraph.png' /> */}
             </Grid.Column>
@@ -66,11 +74,19 @@ class Content extends Component {
   render() {
       return (
         <div>
-          <Container textAlign='center'>
-            <Message>
-              <Message.Header>About Us</Message.Header>
-            </Message>
+          <Container>
+            <Container textAlign='center'>
+              <Message size='massive'>About Us</Message>
+            </Container>
+            <List>
+              <List.Item icon='users' content='Tea Kingdom' />
+              <List.Item icon='marker' content='Thailand, Bangkok' />
+              {/* <List.Item icon='mail' content={<a href='mailto:jack@semantic-ui.com'>arniwatt.c@ku.th</a>} /> */}
+              <List.Item icon='mail' content='TeaKingdom@ku.th' />
+              <List.Item icon='tty' content='xxx-xxx-xxx' />
+            </List>
           </Container>
+          
           <PersonalData/>
         </div>
       );
