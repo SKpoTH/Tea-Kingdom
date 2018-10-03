@@ -10,7 +10,7 @@ export default class Footer extends Component {
         <Container>
           <Grid columns='equal'>
             <Grid.Column>
-              <Header as='h4'>About Us</Header>
+              <Header as='h4'>Contact Us</Header>
               <List>
                 <List.Item icon='users' content='Tea Kingdom' />
                 <List.Item icon='marker' content='Thailand, Bangkok' />
@@ -22,7 +22,7 @@ export default class Footer extends Component {
               <Header as='h4'>Customer Service</Header>
               <List link>
                 <List.Item as='a'>Help</List.Item>
-                <List.Item as='a'>Contact Us</List.Item>
+                <List.Item as='a'>About Us</List.Item>
                 <List.Item as='a'>General Policies</List.Item>
               </List>
             </Grid.Column>
