@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Header from '../template/Header';
-import Footer from '../template/Footer';
+import HeaderTm from '../template/Header';
+import FooterTm from '../template/Footer';
 import 'semantic-ui-css/semantic.css';
 import { Grid , Container , Message , Image , List} from 'semantic-ui-react';
 
@@ -28,14 +28,30 @@ class PersonalData extends Component{
             <Grid.Column width={5}>
               <Message>
                 <Message.Header>Chanchai Chanatapaporn</Message.Header>
-                <p>Busiess Owner</p>
+                <p>
+                  Busiess Owner
+                  <List>
+                    <List.Item style={{display:"inline"}}>
+                      <List.Icon name='mail' />
+                        chanchai.c@ku.th
+                    </List.Item>
+                  </List>  
+                </p>
               </Message>
               {/* <Image src='/images/wireframe/media-paragraph.png' /> */}
             </Grid.Column>
             <Grid.Column width={5}>
               <Message>
-                <Message.Header>Kittipob</Message.Header>
-                <p>Developer</p>
+                <Message.Header>Kittipob Patanavanich</Message.Header>
+                <p>
+                  Developer
+                  <List>
+                    <List.Item style={{display:"inline"}}>
+                      <List.Icon name='mail' />
+                        Kittipob.pa@ku.th
+                    </List.Item>
+                  </List>  
+                </p>
               </Message>
               {/* <Image src='/images/wireframe/media-paragraph.png' /> */}
             </Grid.Column>
@@ -44,22 +60,46 @@ class PersonalData extends Component{
         <Grid.Row>
             <Grid.Column width={5}>
               <Message>
-                <Message.Header>Siwakun</Message.Header>
-                <p>Project Manager</p>
+                <Message.Header>Siwakun Kunsuk</Message.Header>
+                <p>
+                  Project Manager
+                  <List>
+                    <List.Item style={{display:"inline"}}>
+                      <List.Icon name='mail' />
+                        siwakun.k@ku.th
+                    </List.Item>
+                  </List>
+                </p>
               </Message>
               {/* <Image src='/images/wireframe/media-paragraph.png' /> */}
             </Grid.Column>
             <Grid.Column width={5}>
               <Message>
-                <Message.Header>Pattrapon</Message.Header>
-                <p>Quality Assurance</p>
+                <Message.Header>Pattarapon Romphet</Message.Header>
+                <p>
+                  Quality Assurance
+                  <List>
+                    <List.Item style={{display:"inline"}}>
+                      <List.Icon name='mail' />
+                        Pattarapon.r@ku.th
+                    </List.Item>
+                  </List>
+                </p>
               </Message>
               {/* <Image src='/images/wireframe/media-paragraph.png' /> */}
             </Grid.Column>
             <Grid.Column width={5}>
               <Message>
-                <Message.Header>Udom</Message.Header>
-                <p>Developer Assistant</p>
+                <Message.Header>Udom Chaowanakosol</Message.Header>
+                <p>
+                  Developer Assistant
+                  <List>
+                    <List.Item style={{display:"inline"}}>
+                      <List.Icon name='mail' />
+                        Udom.ch@ku.th
+                    </List.Item>
+                  </List>  
+                </p>
               </Message>
               {/* <Image src='/images/wireframe/media-paragraph.png' /> */}
             </Grid.Column>
@@ -73,18 +113,9 @@ class PersonalData extends Component{
 class Content extends Component {
   render() {
       return (
-        <div>
-          <Container>
-            <Container textAlign='center'>
-              <Message size='massive'>About Us</Message>
-            </Container>
-            <List>
-              <List.Item icon='users' content='Tea Kingdom' />
-              <List.Item icon='marker' content='Thailand, Bangkok' />
-              {/* <List.Item icon='mail' content={<a href='mailto:jack@semantic-ui.com'>arniwatt.c@ku.th</a>} /> */}
-              <List.Item icon='mail' content='TeaKingdom@ku.th' />
-              <List.Item icon='tty' content='xxx-xxx-xxx' />
-            </List>
+        <div>>
+          <Container textAlign='center'>
+            <Message size='massive'>About Us</Message>
           </Container>
           
           <PersonalData/>
@@ -97,9 +128,9 @@ export default class AboutUs extends Component {
   render() {
     return (
       <div>
-        <Header/>
+        <HeaderTm/>
         <Content/>
-        <Footer/>
+        <FooterTm/>
       </div>
     );
   }
