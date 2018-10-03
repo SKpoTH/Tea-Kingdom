@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
-import Header from '../template/Header';
-import Footer from '../template/Footer';
+
+import TemplateTKD from '../template/TemplateTKD';
 import 'semantic-ui-css/semantic.css';
-import {} from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 
 class Content extends Component {
   render() {
     return (
-      //code here (delete <div/> below)            
-      <div/>
+      <div>
+        {/* code here (don't delete <div>) */}
+      </div>
     );
   }
 }
 
-export default class Xx extends Component {
+export default class xx extends Component {
   render() {
     return (
-      <div>
-        <Header/>
-        <Content/>
-        <Footer/>
-      </div>
+      <TemplateTKD>
+        <Content />
+      </TemplateTKD>
     );
   }
 }
