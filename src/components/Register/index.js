@@ -18,15 +18,20 @@ class Regis extends Component {
                 <input placeholder='your@email.com' />
               </Form.Field>
               
-              <Form.Field>
-                <label>Password</label>
-                <input type="password" placeholder='password' />
-            </Form.Field>
-            
+              
+
+            <Form.Group unstackable widths={2}>
             <Form.Field>
                 <label>Password</label>
                 <input type="password" placeholder='password' />
             </Form.Field>
+
+            <Form.Field>
+                <label>Retype Password</label>
+                <input type="password" placeholder='password' />
+            </Form.Field>
+            
+            </Form.Group>
               
               
             <Form.Group unstackable widths={2}>
