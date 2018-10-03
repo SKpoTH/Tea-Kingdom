@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Header from '../template/Header';
-import Footer from '../template/Footer';
+import HeaderTm from '../template/Header';
+import FooterTm from '../template/Footer';
 import 'semantic-ui-css/semantic.css';
-import {} from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 
 class Content extends Component {
   render() {
@@ -13,13 +13,15 @@ class Content extends Component {
   }
 }
 
-export default class Xx extends Component {
+export default class xx extends Component {
   render() {
     return (
       <div>
-        <Header/>
-        <Content/>
-        <Footer/>
+        <HeaderTm/>
+        <Container>
+          <Content/>
+        </Container>
+        <FooterTm/>
       </div>
     );
   }
