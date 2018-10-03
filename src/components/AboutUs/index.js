@@ -113,7 +113,7 @@ class PersonalData extends Component{
 class Content extends Component {
   render() {
       return (
-        <div>>
+        <div>
           <Container textAlign='center'>
             <Message size='massive'>About Us</Message>
           </Container>
