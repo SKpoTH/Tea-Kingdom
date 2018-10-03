@@ -33,7 +33,14 @@ export default class TemplateTKD extends Component {
             vertical
             visible={visible}
             width='thin'
-          />
+          >
+            <Menu.Item name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} page=''/>
+            <Menu.Item name='AboutUS' active={activeItem === 'AboutUS'} onClick={this.handleItemClick} page='AboutUs'/>
+            <Menu.Item name='Product' active={activeItem === 'Product'} onClick={this.handleItemClick} page='product'/>
+            <Menu.Item name='ProductDetail' active={activeItem === 'ProductDetail'} onClick={this.handleItemClick} page='ProductDetail'/>
+            <Menu.Item name='Register' active={activeItem === 'Register'} onClick={this.handleItemClick} page='register'/>
+            <Menu.Item name='Login' active={activeItem === 'Login'} onClick={this.handleItemClick} page='login'/>
+          </Sidebar>
           <Sidebar.Pusher dimmed={visible}>
             {/* totalMenu */}
             {/* mobile */}
