@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import HeaderTm from '../template/Header';
-import FooterTm from '../template/Footer';
+
+import TemplateTKD from '../template/TemplateTKD';
 import 'semantic-ui-css/semantic.css';
 import { Container } from 'semantic-ui-react';
 
 class Content extends Component {
   render() {
     return (
-      //code here (delete <div/> below)            
-      <div/>
+      <div>
+        {/* code here (don't delete <div>) */}
+      </div>
     );
   }
 }
@@ -16,13 +17,9 @@ class Content extends Component {
 export default class xx extends Component {
   render() {
     return (
-      <div>
-        <HeaderTm/>
-        <Container>
-          <Content/>
-        </Container>
-        <FooterTm/>
-      </div>
+      <TemplateTKD>
+        <Content />
+      </TemplateTKD>
     );
   }
 }
