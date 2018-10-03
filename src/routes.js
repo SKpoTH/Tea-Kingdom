@@ -10,7 +10,7 @@ import ProductDetail from './components/ProductDetail';
 
 const Routes = (props) => (
     <Router {...props}>
-        <Route path="/xx" component={xx}/>
+        <Route path="/" component={xx}/>
         <Route path="/product" component={productTable}/>
         <Route path="/AboutUs" component={AboutUs}/>
         <Route path="/login" component={Login}/>

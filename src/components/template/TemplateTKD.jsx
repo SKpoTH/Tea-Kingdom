@@ -48,7 +48,7 @@ export default class TemplateTKD extends Component {
             <Container>        
               <Menu secondary>
                 <Menu.Item><Image src={icon} className="small" alt=""/></Menu.Item>
-                <Menu.Item name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} page='xx'/>
+                <Menu.Item name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} page=''/>
                 <Menu.Item name='AboutUS' active={activeItem === 'AboutUS'} onClick={this.handleItemClick} page='AboutUs'/>
                 <Menu.Item name='Product' active={activeItem === 'Product'} onClick={this.handleItemClick} page='product'/>
                 <Menu.Item name='ProductDetail' active={activeItem === 'ProductDetail'} onClick={this.handleItemClick} page='ProductDetail'/>
