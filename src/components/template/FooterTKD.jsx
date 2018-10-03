@@ -3,7 +3,7 @@ import { Segment, Container , Grid , Header , List , Item , Divider } from 'sema
 import 'semantic-ui-css/semantic.css';
 
 
-export default class Footer extends Component {
+export default class FooterTKD extends Component {
   render() {
     return (
       <Segment vertical className='footer'>

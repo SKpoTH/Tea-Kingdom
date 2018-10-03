@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Header from '../template/Header';
-import Footer from '../template/Footer';
+import TemplateTKD from '../template/TemplateTKD';
 import 'semantic-ui-css/semantic.css';
-import { Container, Card , Image , Button ,Icon, Message } from 'semantic-ui-react';
+import { Container, Card , Image , Button ,Icon, Message, Divider } from 'semantic-ui-react';
 
 class EEElement extends Component {
 	render() {
@@ -30,7 +29,7 @@ class EEElement extends Component {
 class Content extends Component {
   render() {
     return (
-			<Container>
+			<div>
 				<Card.Group centered>
 					<EEElement name="Au long" des="ชาชั้นดีจากประทศจีน" img="imgs/printColorTest.jpg" price="2000"/>
 					<EEElement name="Au long" des="ชาชั้นดีจากประทศจีน" img="imgs/printColorTest.jpg" price="2000"/>
@@ -42,17 +41,18 @@ class Content extends Component {
 					<EEElement name="Au long" des="ชาชั้นดีจากประทศจีน" img="imgs/printColorTest.jpg" price="2000"/>
 					<EEElement name="Au long" des="ชาชั้นดีจากประทศจีน" img="imgs/printColorTest.jpg" price="2000"/>
 				</Card.Group>
-				<br/><br/>
-				<Button.Group floated='right' compact>
-					<Button icon='left chevron' compact/>
-					<Button content='1' compact disabled/>
-					<Button content='2' compact/>
-					<Button content='3' compact/>
-					<Button content='4' compact/>
-					<Button icon='right chevron' compact/>
-				</Button.Group>
-				<br/><br/><br/>
-			</Container>
+				<Divider hidden/>
+				<center>
+					<Button.Group compact>
+						<Button icon='left chevron' compact/>
+						<Button content='1' compact disabled/>
+						<Button content='2' compact/>
+						<Button content='3' compact/>
+						<Button content='4' compact/>
+						<Button icon='right chevron' compact/>
+					</Button.Group>
+				</center>
+			</div>
     );
   }
 }
@@ -60,11 +60,9 @@ class Content extends Component {
 export default class productTable extends Component {
   render() {
     return (
-      <div>
-        <Header/>
-        <Content/>
-        <Footer/>
-      </div>
+      <TemplateTKD>
+        <Content />
+      </TemplateTKD>
     );
   }
 }
