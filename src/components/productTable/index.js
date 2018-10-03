@@ -41,15 +41,17 @@ class Content extends Component {
 					<EEElement name="Au long" des="ชาชั้นดีจากประทศจีน" img="imgs/printColorTest.jpg" price="2000"/>
 					<EEElement name="Au long" des="ชาชั้นดีจากประทศจีน" img="imgs/printColorTest.jpg" price="2000"/>
 					<EEElement name="Au long" des="ชาชั้นดีจากประทศจีน" img="imgs/printColorTest.jpg" price="2000"/>
-					<EEElement name="Au long" des="ชาชั้นดีจากประทศจีน" img="imgs/printColorTest.jpg" price="2000"/>
-					<EEElement name="Au long" des="ชาชั้นดีจากประทศจีน" img="imgs/printColorTest.jpg" price="2000"/>
-					<EEElement name="Au long" des="ชาชั้นดีจากประทศจีน" img="imgs/printColorTest.jpg" price="2000"/>
-					<EEElement name="Au long" des="ชาชั้นดีจากประทศจีน" img="imgs/printColorTest.jpg" price="2000"/>
-					<EEElement name="Au long" des="ชาชั้นดีจากประทศจีน" img="imgs/printColorTest.jpg" price="2000"/>
-					<EEElement name="Au long" des="ชาชั้นดีจากประทศจีน" img="imgs/printColorTest.jpg" price="2000"/>
-					<EEElement name="Au long" des="ชาชั้นดีจากประทศจีน" img="imgs/printColorTest.jpg" price="2000"/>
-					<EEElement name="Au long" des="ชาชั้นดีจากประทศจีน" img="imgs/printColorTest.jpg" price="2000"/>					
 				</Card.Group>
+				<br/><br/>
+				<Button.Group floated='right' compact>
+					<Button icon='left chevron' compact/>
+					<Button content='1' compact disabled/>
+					<Button content='2' compact/>
+					<Button content='3' compact/>
+					<Button content='4' compact/>
+					<Button icon='right chevron' compact/>
+				</Button.Group>
+				<br/><br/><br/>
 			</Container>
     );
   }
