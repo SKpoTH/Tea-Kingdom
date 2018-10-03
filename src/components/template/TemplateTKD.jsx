@@ -11,7 +11,8 @@ export default class TemplateTKD extends Component {
 
   handleSidebarHide = () => this.setState({ visible: false })
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { page }) => window.location = page
+  // handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
 
@@ -47,12 +48,13 @@ export default class TemplateTKD extends Component {
             <Container>        
               <Menu secondary>
                 <Menu.Item><Image src={icon} className="small" alt=""/></Menu.Item>
-                <Menu.Item name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
-                <Menu.Item name='AboutUS' active={activeItem === 'AboutUS'} onClick={this.handleItemClick} />
-                <Menu.Item name='Product' active={activeItem === 'Product'} onClick={this.handleItemClick} />
+                <Menu.Item name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} page='xx'/>
+                <Menu.Item name='AboutUS' active={activeItem === 'AboutUS'} onClick={this.handleItemClick} page='AboutUs'/>
+                <Menu.Item name='Product' active={activeItem === 'Product'} onClick={this.handleItemClick} page='product'/>
+                <Menu.Item name='ProductDetail' active={activeItem === 'ProductDetail'} onClick={this.handleItemClick} page='ProductDetail'/>
                 <Menu.Menu position='right'>
-                  <Menu.Item name='Register' active={activeItem === 'Register'} onClick={this.handleItemClick} />
-                  <Menu.Item name='Login' active={activeItem === 'Login'} onClick={this.handleItemClick} />
+                  <Menu.Item name='Register' active={activeItem === 'Register'} onClick={this.handleItemClick} page='register'/>
+                  <Menu.Item name='Login' active={activeItem === 'Login'} onClick={this.handleItemClick} page='login'/>
                 </Menu.Menu>
               </Menu>
             </Container>

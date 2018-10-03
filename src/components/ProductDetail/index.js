@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-
-import Header from '../template/Header';
-import Footer from '../template/Footer';
+import TemplateTKD from '../template/TemplateTKD';
+import 'semantic-ui-css/semantic.css';
 
 import MainProduct from './MainProduct';
 import Review from './Review';
 import SubProduct from './SubProduct';
 
-import 'semantic-ui-css/semantic.css';
 import {} from 'semantic-ui-react';
 
 class Content extends Component {
@@ -22,14 +20,12 @@ class Content extends Component {
   }
 }
 
-export default class Xx extends Component {
+export default class ProductDetail extends Component {
   render() {
     return (
-      <div>
-        <Header/>
-        <Content/>
-        <Footer/>
-      </div>
+      <TemplateTKD>
+        <Content />
+      </TemplateTKD>
     );
   }
 }

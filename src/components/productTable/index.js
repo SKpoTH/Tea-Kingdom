@@ -15,7 +15,7 @@ class EEElement extends Component {
 					<Card.Description>{this.props.des}</Card.Description>
 					<Card.Description as='h3'><Icon name="dollar"/>{this.props.price}</Card.Description>
 				</Card.Content>
-				<Card.Content textAlign="center">
+				<Card.Content>
 					<div className='ui two buttons'>
 						<Button color='red' content='favorite' icon='heart'/>
 						<Button color='blue'content='add to cart' icon='shop'/>
