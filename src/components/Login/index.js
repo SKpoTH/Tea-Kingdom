@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
+import TemplateTKD from '../template/TemplateTKD';
 import 'semantic-ui-css/semantic.css';
-import {Container, Button, Form, Grid} from 'semantic-ui-react';
-import Head from '../template/Header';
-import Footer from '../template/Footer';
+import {Container, Button, Form, } from 'semantic-ui-react';
 
-class LoginContent extends Component {
+class Content extends Component {
     render() {
         return (          
           <Container>
@@ -24,7 +23,7 @@ class LoginContent extends Component {
 
               <Form.Field>
                 <Button color='blue'>Login</Button>               
-                <a href="#" onclick="console.log('The link was clicked.'); return false"> Forgot your password? </a>   
+                <a onclick="console.log('The link was clicked.'); return false"> Forgot your password? </a>   
               </Form.Field>
               
               <Form.Field>
@@ -50,13 +49,11 @@ class LoginContent extends Component {
 }
 
 export default class Login extends Component {
-    render() {
-      return (
-        <div>
-          <Head/>
-          <LoginContent/>
-          <Footer/>
-        </div>
-      );
-    }
+  render() {
+    return (
+      <TemplateTKD>
+        <Content />
+      </TemplateTKD>
+    );
   }
+}

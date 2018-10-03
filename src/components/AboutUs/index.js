@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import HeaderTm from '../template/Header';
-import FooterTm from '../template/Footer';
+import TemplateTKD from '../template/TemplateTKD';
 import 'semantic-ui-css/semantic.css';
-import { Grid , Container , Message , Image , List} from 'semantic-ui-react';
+import { Grid , Container , Message , List} from 'semantic-ui-react';
 
 class PersonalData extends Component{
   render() {
@@ -127,11 +126,9 @@ class Content extends Component {
 export default class AboutUs extends Component {
   render() {
     return (
-      <div>
-        <HeaderTm/>
-        <Content/>
-        <FooterTm/>
-      </div>
+      <TemplateTKD>
+        <Content />
+      </TemplateTKD>
     );
   }
 }

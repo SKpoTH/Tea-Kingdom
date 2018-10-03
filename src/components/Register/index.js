@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
+import TemplateTKD from '../template/TemplateTKD';
 import 'semantic-ui-css/semantic.css';
 import {Form , Button, Container} from 'semantic-ui-react';
-import Header from '../template/Header';
-import Footer from '../template/Footer';
 
-
-class Regis extends Component {
+class Content extends Component {
     render() {
         return (
             <Container>
@@ -56,13 +54,11 @@ class Regis extends Component {
 }
 
 export default class Register extends Component {
-    render() {
-      return (
-        <div>
-          <Header/>
-          <Regis/>
-          <Footer/>
-        </div>
-      );
-    }
+  render() {
+    return (
+      <TemplateTKD>
+        <Content />
+      </TemplateTKD>
+    );
   }
+}

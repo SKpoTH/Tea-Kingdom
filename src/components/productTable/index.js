@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TemplateTKD from '../template/TemplateTKD';
 import 'semantic-ui-css/semantic.css';
-import { Container, Card , Image , Button ,Icon, Message, Divider } from 'semantic-ui-react';
+import { Card , Image , Button ,Icon, Message, Divider } from 'semantic-ui-react';
 
 class EEElement extends Component {
 	render() {
