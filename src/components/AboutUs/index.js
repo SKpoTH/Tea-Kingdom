@@ -10,7 +10,7 @@ class PersonalData extends Component{
       <Container textAlign={"right"}>
         <Grid columns='three' divided>
           <Grid.Row>
-            <Grid.Column width={5}>
+            <Grid.Column width={5.5}>
               <Message>
                 <Message.Header>Arniwatt Chonkiattipoom</Message.Header>
                 <p>
@@ -25,7 +25,7 @@ class PersonalData extends Component{
               </Message>
               {/* <Image src='/images/wireframe/media-paragraph.png' /> */}
             </Grid.Column>
-            <Grid.Column width={5}>
+            <Grid.Column width={5.5}>
               <Message>
                 <Message.Header>Chanchai Chanatapaporn</Message.Header>
                 <p>
@@ -40,7 +40,7 @@ class PersonalData extends Component{
               </Message>
               {/* <Image src='/images/wireframe/media-paragraph.png' /> */}
             </Grid.Column>
-            <Grid.Column width={5}>
+            <Grid.Column width={5.5}>
               <Message>
                 <Message.Header>Kittipob Patanavanich</Message.Header>
                 <p>
@@ -58,7 +58,7 @@ class PersonalData extends Component{
         </Grid.Row>
 
         <Grid.Row>
-            <Grid.Column width={5}>
+            <Grid.Column width={5.5}>
               <Message>
                 <Message.Header>Siwakun Kunsuk</Message.Header>
                 <p>
@@ -73,7 +73,7 @@ class PersonalData extends Component{
               </Message>
               {/* <Image src='/images/wireframe/media-paragraph.png' /> */}
             </Grid.Column>
-            <Grid.Column width={5}>
+            <Grid.Column width={5.5}>
               <Message>
                 <Message.Header>Pattarapon Romphet</Message.Header>
                 <p>
@@ -88,7 +88,7 @@ class PersonalData extends Component{
               </Message>
               {/* <Image src='/images/wireframe/media-paragraph.png' /> */}
             </Grid.Column>
-            <Grid.Column width={5}>
+            <Grid.Column width={5.5}>
               <Message>
                 <Message.Header>Udom Chaowanakosol</Message.Header>
                 <p>
