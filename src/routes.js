@@ -7,6 +7,7 @@ const Routes = (props) => (
     <Router {...props}>
         <Route path="/xx" component={xx}/>
         <Route path="/product" component={productTable}/>
+        <Route path="/itemid" component={itemid}/>
     </Router>
 );
 
