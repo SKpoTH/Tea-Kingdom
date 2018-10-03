@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+
 import TemplateTKD from '../template/TemplateTKD';
 import 'semantic-ui-css/semantic.css';
-import {} from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 
 class Content extends Component {
   render() {
