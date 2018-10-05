@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import TemplateTKD from "../template/TemplateTKD";
 import "semantic-ui-css/semantic.css";
 import { Form, Button, Checkbox, Container } from "semantic-ui-react";
 
@@ -47,10 +46,6 @@ class Content extends Component {
 
 export default class Register extends Component {
   render() {
-    return (
-      <TemplateTKD>
-        <Content />
-      </TemplateTKD>
-    );
+    return <Content />;
   }
 }

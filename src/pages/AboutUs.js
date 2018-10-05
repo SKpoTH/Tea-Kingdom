@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TemplateTKD from "../components/template/TemplateTKD";
 import "semantic-ui-css/semantic.css";
+import Member from "../components/AboutUs/AboutUs";
 
 class Content extends Component {
   render() {
@@ -12,7 +13,7 @@ export default class AboutUs extends Component {
   render() {
     return (
       <TemplateTKD>
-        <Content />
+        <Member />
       </TemplateTKD>
     );
   }
