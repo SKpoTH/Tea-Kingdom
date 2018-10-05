@@ -1,0 +1,24 @@
+.productName {
+    padding: 15px;
+}
+
+.priceSpace {
+    padding: 15px;
+}
+
+.setMargin {
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.subArea {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}

@@ -45,7 +45,7 @@ export default class TemplateTKD extends Component {
               name="Home"
               active={activeItem === "Home"}
               onClick={this.handleItemClick}
-              page=""
+              page="/"
             />
             <Menu.Item
               name="AboutUS"

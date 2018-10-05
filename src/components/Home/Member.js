@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import TemplateTKD from "../template/TemplateTKD";
-import "semantic-ui-css/semantic.css";
 import { Container, Image, Grid, Message, List } from "semantic-ui-react";
+import "semantic-ui-css/semantic.css";
 
-class PersonalData extends Component {
+export default class Member extends Component {
   render() {
     return (
       <Container textAlign={"right"} className="ddddddd">
@@ -105,32 +104,6 @@ class PersonalData extends Component {
           </Grid.Row>
         </Grid>
       </Container>
-    );
-  }
-}
-
-class HomePage extends Component {
-  render() {
-    return (
-      <div>
-        <Image src="./background.jpg" fluid />
-
-        <Container textAlign="center">
-          <Message size="massive">About Us</Message>
-        </Container>
-
-        <PersonalData />
-      </div>
-    );
-  }
-}
-
-export default class Homepage extends Component {
-  render() {
-    return (
-      <TemplateTKD>
-        <HomePage />
-      </TemplateTKD>
     );
   }
 }
