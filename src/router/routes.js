@@ -4,7 +4,7 @@ import productTable from "../pages/ProductTable";
 import AboutUs from "../pages/AboutUs";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import ProductDetail from "../components/ProductDetail/index";
+import ProductDetail from "../pages/ProductDetail";
 import Homepage from "../pages/Home";
 
 const Routes = props => (
