@@ -74,7 +74,7 @@ export default class Registration extends Component {
             phone : this.state.phone
         }
         
-        axios.post('http://localhost:5000/user/add', user)
+        axios.post('http://localhost:5000/authen/signup', user)
             .then(res => console.log(res.data))
     
         this.setState({
