@@ -3,12 +3,20 @@ import TemplateTKD from "../components/template/TemplateTKD";
 import "semantic-ui-css/semantic.css";
 import ProductTable from "../components/productTable/ProductTable";
 
-export default class ProdTable extends Component {
+class ProdTable extends Component {
+  state = {
+    msg: "productTable"
+  };
+
   render() {
     return (
-      <TemplateTKD>
-        <ProductTable />
-      </TemplateTKD>
+      <div>
+        <TemplateTKD>
+          <ProductTable />
+        </TemplateTKD>
+      </div>
     );
   }
 }
+
+export default ProdTable;

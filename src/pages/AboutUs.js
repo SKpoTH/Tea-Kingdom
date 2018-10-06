@@ -3,18 +3,20 @@ import TemplateTKD from "../components/template/TemplateTKD";
 import "semantic-ui-css/semantic.css";
 import Member from "../components/AboutUs/AboutUs";
 
-class Content extends Component {
-  render() {
-    return <div>{/* code here (don't delete <div>) */}</div>;
-  }
-}
+class AboutUs extends Component {
+  state = {
+    msg: "AboutUs"
+  };
 
-export default class AboutUs extends Component {
   render() {
     return (
-      <TemplateTKD>
-        <Member />
-      </TemplateTKD>
+      <div>
+        <TemplateTKD>
+          <Member />
+        </TemplateTKD>
+      </div>
     );
   }
 }
+
+export default AboutUs;

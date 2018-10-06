@@ -4,12 +4,20 @@ import "semantic-ui-css/semantic.css";
 
 import LoginForm from "../components/Login/LoginForm";
 
-export default class Login extends Component {
+class Login extends Component {
+  state = {
+    msg: "Login"
+  };
+
   render() {
     return (
-      <TemplateTKD>
-        <LoginForm />
-      </TemplateTKD>
+      <div>
+        <TemplateTKD>
+          <LoginForm />
+        </TemplateTKD>
+      </div>
     );
   }
 }
+
+export default Login;
