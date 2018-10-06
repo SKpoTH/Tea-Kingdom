@@ -15,7 +15,9 @@ AuthRouter.get('/', function(req, res, next){
 });
 
 AuthRouter.get('/login', function(req, res, next){
-    res.send('login');
+    res.json({
+        login: 'fail'
+    });
 })
 
 AuthRouter.get('/signup', function(req, res, next){
@@ -23,7 +25,10 @@ AuthRouter.get('/signup', function(req, res, next){
 });
 
 AuthRouter.get('/profile', loggedin, function(req, res, next){
-    res.send(req.session);
+    //res.send(req.session);
+    res.json({
+        login: 'success'
+    });
 });
 
 AuthRouter.get('/logout', function(req, res){

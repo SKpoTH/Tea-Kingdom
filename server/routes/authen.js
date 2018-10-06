@@ -10,10 +10,10 @@ module.exports = function(passport){
             password = body.password;
         User.findOne({email: email}, function(err, doc){
             if(err) {
-                res.status(500).send('error occured')
+                res.send('error occured')
             } else {
                 if(doc) {
-                    res.status(500).send('email already used')
+                    res.send('email already used')
                 } else{
                     var user = new User()
                     user.email = email;
@@ -31,7 +31,7 @@ module.exports = function(passport){
     });
 
     AuthRouter.post('/login', passport.authenticate('local', {
-        failureRedirect: '/signup',
+        failureRedirect: '/login',
         successRedirect: '/profile',
     }) , function(req, res){
         res.send('hey')

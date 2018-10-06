@@ -1,91 +1,79 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import './ProductDetail.css';
+import "./ProductDetail.css";
 
-import { Container, Header, Comment, Button, Form } from 'semantic-ui-react';
+import { Container, Header, Comment, Button, Form } from "semantic-ui-react";
+
+class MyComment extends Component {
+  render() {
+    return (
+      <Comment>
+        <Comment.Avatar src={this.props.src} />
+        <Comment.Content>
+          <Comment.Author as="a">{this.props.name}</Comment.Author>
+          <Comment.Metadata>
+            <div>{this.props.time}</div>
+          </Comment.Metadata>
+          <Comment.Text>{this.props.text}</Comment.Text>
+          <Comment.Actions>
+            <Comment.Action>Reply</Comment.Action>
+          </Comment.Actions>
+        </Comment.Content>
+      </Comment>
+    );
+  }
+}
 
 const CommentSection = () => (
-    <Container className='setMargin'>
+  <Container className="setMargin">
+    <Comment.Group>
+      <Header as="h2" dividing>
+        Comments
+      </Header>
+      <MyComment
+        src="https://react.semantic-ui.com/images/avatar/small/matt.jpg"
+        name="Matt"
+        time="Today at 5:42PM"
+        text="How artistic!"
+      />
+      <Comment>
+        <MyComment
+          src="https://react.semantic-ui.com/images/avatar/small/elliot.jpg"
+          name="Elliot Fu"
+          time="Yesterday at 12:30AM"
+          text="This has been very useful for my research. Thanks as well!"
+        />
         <Comment.Group>
-            <Header as='h2' dividing>
-                Comments
-            </Header>
-            <Comment>
-                <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
-                <Comment.Content>
-                    <Comment.Author as='a'>Matt</Comment.Author>
-                    <Comment.Metadata>
-                        <div>Today at 5:42PM</div>
-                    </Comment.Metadata>
-                    <Comment.Text>How artistic!</Comment.Text>
-                    <Comment.Actions>
-                        <Comment.Action>Reply</Comment.Action>
-                    </Comment.Actions>
-                </Comment.Content>
-            </Comment>
-
-            <Comment>
-                <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/elliot.jpg' />
-                <Comment.Content>
-                    <Comment.Author as='a'>Elliot Fu</Comment.Author>
-                    <Comment.Metadata>
-                        <div>Yesterday at 12:30AM</div>
-                    </Comment.Metadata>
-                    <Comment.Text>
-                        <p>This has been very useful for my research. Thanks as well!</p>
-                    </Comment.Text>
-                    <Comment.Actions>
-                        <Comment.Action>Reply</Comment.Action>
-                    </Comment.Actions>
-                </Comment.Content>
-                <Comment.Group>
-                    <Comment>
-                        <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/jenny.jpg' />
-                        <Comment.Content>
-                            <Comment.Author as='a'>Jenny Hess</Comment.Author>
-                            <Comment.Metadata>
-                                <div>Just now</div>
-                            </Comment.Metadata>
-                            <Comment.Text>Elliot you are always so right :)</Comment.Text>
-                            <Comment.Actions>
-                                <Comment.Action>Reply</Comment.Action>
-                            </Comment.Actions>
-                        </Comment.Content>
-                    </Comment>
-                </Comment.Group>
-            </Comment>
-
-            <Comment>
-                <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/joe.jpg' />
-                <Comment.Content>
-                    <Comment.Author as='a'>Joe Henderson</Comment.Author>
-                    <Comment.Metadata>
-                        <div>5 days ago</div>
-                    </Comment.Metadata>
-                    <Comment.Text>Dude, this is awesome. Thanks so much</Comment.Text>
-                    <Comment.Actions>
-                        <Comment.Action>Reply</Comment.Action>
-                    </Comment.Actions>
-                </Comment.Content>
-            </Comment>
-
-            <Form reply>
-                <Form.TextArea />
-                <Button content='Add Reply' labelPosition='left' icon='edit' primary />
-            </Form>
+          <MyComment
+            src="https://react.semantic-ui.com/images/avatar/small/jenny.jpg"
+            name="Jenny Hess"
+            time="Just now"
+            text="Elliot you are always so right :)"
+          />
         </Comment.Group>
-    </Container>
-)
+      </Comment>
+      <MyComment
+        src="https://react.semantic-ui.com/images/avatar/small/joe.jpg"
+        name="Joe Henderson"
+        time="5 days ago"
+        text="Dude, this is awesome. Thanks so much"
+      />
+
+      <Form reply>
+        <Form.TextArea />
+        <Button content="Add Reply" labelPosition="left" icon="edit" primary />
+      </Form>
+    </Comment.Group>
+  </Container>
+);
 
 export default class Review extends Component {
-    constructor(props){
-        super(props);
-        this.state = {};
-    }
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-    render(){
-        return (
-            <CommentSection />
-        );
-    }
+  render() {
+    return <CommentSection />;
+  }
 }

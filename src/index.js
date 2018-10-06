@@ -1,14 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
 
 // import registerServiceWorker from './registerServiceWorker';
-import {browserHistory} from 'react-router';
+import { browserHistory } from "react-router";
 
-import Routes from './routes';
+import Routes from "./router/routes";
 
 ReactDOM.render(
-    <Routes history={browserHistory}/>,
-    document.getElementById('root')
+  <Routes history={browserHistory} />,
+  document.getElementById("root")
 );
-
