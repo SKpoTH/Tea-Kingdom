@@ -1,13 +1,12 @@
 import React from 'react';
 import {Router, Route } from 'react-router';
-import xx from './components/UseCasePage';
 import productTable from './components/productTable';
 import AboutUs from './components/AboutUs';
 import Login from './components/Login';
 import Register from './components/Register';
 import ProductDetail from './components/ProductDetail';
 import Homepage from './components/Home';
-import receiveData form '/comments/receiveData';
+import receiveData from '/comments/receiveData';
 
 const Routes = (props) => (
     <Router {...props}>
