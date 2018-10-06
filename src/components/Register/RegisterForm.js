@@ -14,8 +14,8 @@ class Content extends Component {
           <NormalForm label="Email" placeholder="your@email.com" />
 
           <Form.Group unstackable widths={2}>
-            <PasswordForm label="password" placeholder="password" />
-            <PasswordForm label="retype password" placeholder="password" />
+            <PasswordForm label="Password" placeholder="password" />
+            <PasswordForm label="Retype password" placeholder="password" />
           </Form.Group>
 
           <Form.Group unstackable widths={2}>
