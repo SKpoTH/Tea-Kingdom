@@ -9,6 +9,7 @@ import axios from "axios";
 class Content extends Component {
   constructor(props){
     super(props);
+<<<<<<< HEAD
         this.state = {
           message : 
 			      { massageHidden : true, content :'', status: ""},
@@ -51,6 +52,56 @@ class Content extends Component {
             { massageHidden : false, content :error.response.status, status: "negative"}});
 				});
 		}    
+=======
+    
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+    this.onLoginSubmit = this.onLoginSubmit.bind(this);
+
+    this.state = {
+          email : '',
+          password : '',
+          login: ''
+    }
+  }
+
+  onChangeEmail(e){
+    this.setState({
+      email: e.target.value
+    });
+  }
+
+  onChangePassword(e){
+    this.setState({
+      password: e.target.value
+    });
+  }
+
+  onLoginSubmit = async e => {
+    e.preventDefault();
+    
+    const Account = {
+      email: this.state.email,
+      password: this.state.password
+    }
+    
+    console.log(this.state.email);
+    console.log(this.state.password);
+
+    var response = await axios.post('http://localhost:5000/authen/login', Account)
+        .then(res => {
+          console.log(res.data);
+          return res.data;
+      });
+    
+    //console.log(response);      
+
+    if(response.status === 'success')
+      window.location = '/';
+    
+    else if(response.status === 'fail')
+      window.location = '/login';
+>>>>>>> ae-backend
   }
 
   render() {
@@ -59,6 +110,7 @@ class Content extends Component {
         <Container>
           <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status}/>
           <h1>LOG IN</h1>
+<<<<<<< HEAD
           <Form onSubmit={ this.onLoginSubmit } >
             <Form.Field>
               <label>Email</label>
@@ -68,6 +120,23 @@ class Content extends Component {
             <Form.Field>
               <label>Password</label>
               <input type="password" placeholder='password' ref={(input) => this.password = input} />
+=======
+          <Form onSubmit={ this.onLoginSubmit }>
+
+            <Form.Field>
+              <label>Email</label>
+              <input type="email" placeholder='your@email.com' 
+                    onChange={ this.onChangeEmail }
+                    value={ this.state.email }
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>Password</label>
+              <input type="password" placeholder='password' 
+                    onChange={ this.onChangePassword }
+                    value={ this.state.password }
+              />
+>>>>>>> ae-backend
             </Form.Field>
             <MyButton color="blue" text="Login" />
 

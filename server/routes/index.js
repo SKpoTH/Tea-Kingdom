@@ -5,7 +5,7 @@ var loggedin = function(req, res, next){
     if(req.isAuthenticated()){
         next();
     } else{
-        res.redirect('/login')
+        res.redirect('/signup')
     }
 }
 
@@ -21,11 +21,12 @@ AuthRouter.get('/login', function(req, res, next){
 })
 
 AuthRouter.get('/signup', function(req, res, next){
-    res.send('สมัครก่อนไอ้สัด');
+    res.json({
+        login: 'success'
+    });
 });
 
 AuthRouter.get('/profile', loggedin, function(req, res, next){
-    //res.send(req.session);
     res.json({
         login: 'success'
     });

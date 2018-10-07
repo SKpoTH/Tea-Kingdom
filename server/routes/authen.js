@@ -30,13 +30,44 @@ module.exports = function(passport){
             }
         })
     });
-
+    /*
+    AuthRouter.post('/login', function(req, res, next) {
+        passport.authenticate('local', function(err, user, info) {
+            if (err) { return next(err); }
+            if (!user) { return res.redirect('/login'); }
+                req.logIn(user, function(err) {
+                if (err) { return next(err); }
+                    return res.redirect('/login');
+            });
+        })(req, res, next);
+    });
+    */
+    /*
     AuthRouter.post('/login', passport.authenticate('local', {
-        failureRedirect: '/login',
+        session: false,
         successRedirect: '/profile',
+        failureRedirect: '/login'
     }) , function(req, res){
-        res.send('hey')
+        
     })
+    */
+    AuthRouter.post('/login', (req, res, next) => {
+        passport.authenticate('local', (err, user, info) => {
+        //console.log(user);
+        //console.log(user);
+        if (err) {
+            res.json({status: 'fail'})
+        } else if (user) {
+            //console.log("someone call");
+            res.json({status: 'success'})
+        } else {
+            //console.log("someone call");
+            res.json({status: 'fail'})
+        }
+        })(req, res, next)
+    })
+    /*
+
 
     AuthRouter.get('/logout', passport.authenticate('local'), function(req, res){
         res.json({
@@ -47,6 +78,6 @@ module.exports = function(passport){
             lastname    : req.user.lastname
         });
     })
-
+    */
     return AuthRouter;
 };

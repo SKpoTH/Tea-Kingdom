@@ -33,7 +33,7 @@ mongoose.connect(config.db).then(
 
 
 //Router
-//const index = require('./routes/index');
+const index = require('./routes/index');
 const UserRouter = require('./routes/UserRouter');
 const Authen = require('./routes/authen')(passport);
 
@@ -42,8 +42,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, './../public')));
+
+
 app.use(session({
-    secret: 'the secret',
+    secret: 'thesecret',
     saveUnintialized: false,
     resave: false
 }))
@@ -54,7 +56,7 @@ app.use(passport.session());
 
 //apply Route
 app.use('/user', UserRouter);
-//app.use('/', index);
+app.use('/', index);
 app.use('/authen', Authen);
 
 app.listen(PORT, () => {

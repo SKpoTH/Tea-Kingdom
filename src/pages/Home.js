@@ -14,7 +14,6 @@ class Home extends Component {
       <div>
         <TemplateTKD>
           <HomeHead />
-          <Member />
         </TemplateTKD>
       </div>
     );

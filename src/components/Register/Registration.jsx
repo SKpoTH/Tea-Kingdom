@@ -55,8 +55,6 @@ export default class Registration extends Component {
 						{ massageHidden : false, content :error.response.status, status: "negative"}});
 				});
 		}
-        // window.location = '/';
-        //this.props.history.push('/login');
       }
 	render() {
 		return (

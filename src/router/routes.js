@@ -7,7 +7,7 @@ import Register from "../pages/Register";
 import ProductDetail from "../pages/ProductDetail";
 import Homepage from "../pages/Home";
 
-import receiveData from '../pages/receiveData';
+//import receiveData from '../pages/receiveData';
 
 const Routes = props => (
   <Router {...props}>
@@ -16,9 +16,13 @@ const Routes = props => (
     <Route path="/AboutUs" component={AboutUs} />
     <Route path="/login" component={Login} />
     <Route path="/register" component={Register} />
+<<<<<<< HEAD
     <Route exact path="/ProductDetail:id" component={ProductDetail} something="ss"/>
 
     <Route path='/receiveData' component={receiveData}/>
+=======
+    <Route path="/ProductDetail" component={ProductDetail} />
+>>>>>>> ae-backend
   </Router>
 );
 
