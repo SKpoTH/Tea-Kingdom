@@ -42,9 +42,12 @@ class ProductDetail extends Component {
           }
 				})
 				.catch((error) => {
-          self.setState( {cantLoad : true} );
-					self.setState( {message : 
-            { massageHidden : false, content :error.response.status, status: "negative"}});
+          self.setState({ cantLoad : true });
+					self.setState({ message : 
+            { massageHidden : false, 
+              content :"Error : "+error.response.status+" => "+error.response.data.split("<pre>")[1].split("</pre>")[0], 
+              status: "negative"}}
+            );
 				});
   };
   render() {

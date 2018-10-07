@@ -22,7 +22,7 @@ class EEElement extends Component {
         <Card.Content>
           <div className="ui two buttons">
             <Button color="red" content="favorite" icon="heart" />
-            <Button color="blue" content="add to cart" icon="shop" />
+            <Button color="blue" content="see details" icon="eye" onClick={() => {window.location = "/ProductDetail"+this.props.id }} />
           </div>
         </Card.Content>
       </Card>
@@ -30,84 +30,24 @@ class EEElement extends Component {
   }
 }
 
-class Content extends Component {
+export default class productTable extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
-      <div>
+      <React.Fragment>
         <Card.Group centered>
-          <EEElement
-            name="Au long"
-            des="ชาชั้นดีจากประทศจีน"
-            img="imgs/printColorTest.jpg"
-            price="2000"
-          />
-          <EEElement
-            name="Au long"
-            des="ชาชั้นดีจากประทศจีน"
-            img="imgs/printColorTest.jpg"
-            price="2000"
-          />
-          <EEElement
-            name="Au long"
-            des="ชาชั้นดีจากประทศจีน"
-            img="imgs/printColorTest.jpg"
-            price="2000"
-          />
-          <EEElement
-            name="Au long"
-            des="ชาชั้นดีจากประทศจีน"
-            img="imgs/printColorTest.jpg"
-            price="2000"
-          />
-          <EEElement
-            name="Au long"
-            des="ชาชั้นดีจากประทศจีน"
-            img="imgs/printColorTest.jpg"
-            price="2000"
-          />
-          <EEElement
-            name="Au long"
-            des="ชาชั้นดีจากประทศจีน"
-            img="imgs/printColorTest.jpg"
-            price="2000"
-          />
-          <EEElement
-            name="Au long"
-            des="ชาชั้นดีจากประทศจีน"
-            img="imgs/printColorTest.jpg"
-            price="2000"
-          />
-          <EEElement
-            name="Au long"
-            des="ชาชั้นดีจากประทศจีน"
-            img="imgs/printColorTest.jpg"
-            price="2000"
-          />
-          <EEElement
-            name="Au long"
-            des="ชาชั้นดีจากประทศจีน"
-            img="imgs/printColorTest.jpg"
-            price="2000"
-          />
+          {this.props.all.map(item => (
+            <EEElement name={item.productName} 
+                      des={item.productDes} 
+                      img={item.imgurl} 
+                      price={item.productPrice} 
+                      id={item.productId} />
+          ))}
         </Card.Group>
         <Divider hidden />
-        <center>
-          <Button.Group compact>
-            <Button icon="left chevron" compact />
-            <Button content="1" compact disabled />
-            <Button content="2" compact />
-            <Button content="3" compact />
-            <Button content="4" compact />
-            <Button icon="right chevron" compact />
-          </Button.Group>
-        </center>
-      </div>
-    );
-  }
-}
-
-export default class productTable extends Component {
-  render() {
-    return <Content />;
+      </React.Fragment>
+      );
   }
 }
