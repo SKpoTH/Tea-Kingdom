@@ -35,7 +35,7 @@ class Content extends Component {
 			this.setState( {message : 
         { massageHidden : false, content :'You must containt datas in all field.', status: "negative"}});
 		} else {
-			axios.post('http://localhost:5000/login/login', Account)
+			axios.post('http://localhost:5000/login', Account)
 				.then((res) => {
 					if(res.data.status === "fail") {
 						this.setState( {message : 

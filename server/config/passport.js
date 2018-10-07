@@ -1,4 +1,3 @@
-
 const localStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
 
@@ -7,20 +6,17 @@ module.exports = function(passport) {
         usernameField: 'email',
         passwordField: 'password'
     }, function(email, password, done){
-        //console.log('ohaiyo');
+
+        //find email match
         let query = { email };
         User.findOne(query, function(err, doc){
-            //console.log('someone call');
             if(err) {
-                //console.log('someone call');
                 done(err);
             } else{
-                //console.log(doc);
                 if(doc) {
-                    //console.log('============');
+                    //check passwrod match
                     var valid = doc.comparePassword(password, doc.password)
                     if(valid) {
-                        //console.log('============');
                         done(null, {
                             email : doc.email,
                             password: doc.password
@@ -29,17 +25,16 @@ module.exports = function(passport) {
                         done(null, false)
                     }
                 } else{
-                    //console.log('someone call');
                     done(null, false)
                 }
             }
         })
     }))
 
-    passport.serializeUser(function(email, done){
-        done(null, email);
+    passport.serializeUser(function(user, done){
+        done(null, user);
     })
-    passport.deserializeUser(function(email, done){
-        done(null, email);
+    passport.deserializeUser(function(user, done){
+        done(null, user);
     })
 }

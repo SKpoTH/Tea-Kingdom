@@ -7,20 +7,57 @@ import {
   Button,
   Divider,
   Image,
-  Sidebar
+  Sidebar,
+  Icon
 } from "semantic-ui-react";
 import FooterTKD from "./FooterTKD";
+import axios from 'axios';
 const icon = "imgs/mylogo2.png";
 
 export default class TemplateTKD extends Component {
-  state = { visible: false };
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false,
+      login : false,
+      userData :
+        { name :undefined, favouriteAmout:undefined, cartAmout:undefined, user_id:undefined }
+    }
+    this.getData()
+  }
+  getData = () => {
+    axios.get('http://localhost:5000/authen/logged_in')
+				.then((res) => {
+          if(res.data.status === "logged in")
+          {
+            this.state.login = true;
+            this.state.userData.name = res.data.name;
+            this.state.userData.user_id = res.data.user_id;
+          } else {
+            this.state.login = false;
+          }
+				})
+				.catch((error) => {
+					console.log(error.response.data);
+        });
+  };
+  sendLogot = () => {
+    axios.get('http://localhost:5000/authen/logout')
+				.then((res) => {
+          if(res.data.status === "logout")
+          {
+            this.setState({ login : false});
+            this.setState({ userData : { name :undefined, favouriteAmout:undefined, cartAmout:undefined, user_id:undefined }});
+          }
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+  };
 
   handleButtonClick = () => this.setState({ visible: !this.state.visible });
-
   handleSidebarHide = () => this.setState({ visible: false });
-
   handleItemClick = (e, { page }) => (window.location = page);
-  // handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
     const { activeItem } = this.state;
@@ -39,8 +76,13 @@ export default class TemplateTKD extends Component {
             onHide={this.handleSidebarHide}
             vertical
             visible={visible}
-            width="thin"
           >
+            {this.state.login ?
+              <Menu.Item>
+                <Icon name='user' />
+                {this.state.userData.name}
+              </Menu.Item>
+            : null}
             <Menu.Item
               name="Home"
               active={activeItem === "Home"}
@@ -59,18 +101,25 @@ export default class TemplateTKD extends Component {
               onClick={this.handleItemClick}
               page="product"
             />
-            <Menu.Item
-              name="Register"
-              active={activeItem === "Register"}
-              onClick={this.handleItemClick}
-              page="register"
-            />
-            <Menu.Item
-              name="Login"
-              active={activeItem === "Login"}
-              onClick={this.handleItemClick}
-              page="login"
-            />
+            {this.state.login ? 
+              <Menu.Item name="Logout" onClick={this.sendLogot}/>
+               : 
+              <React.Fragment>
+                <Menu.Item
+                  name="Register"
+                  active={activeItem === "Register"}
+                  onClick={this.handleItemClick}
+                  page="register"
+                />
+                <Menu.Item
+                  name="Login"
+                  active={activeItem === "Login"}
+                  onClick={this.handleItemClick}
+                  page="login"
+                />
+              </React.Fragment>
+            }
+            
           </Sidebar>
           <Sidebar.Pusher dimmed={visible}>
             {/* totalMenu */}
@@ -114,20 +163,33 @@ export default class TemplateTKD extends Component {
                     onClick={this.handleItemClick}
                     page="product"
                   />
-                  <Menu.Menu position="right">
-                    <Menu.Item
-                      name="Register"
-                      active={activeItem === "Register"}
-                      onClick={this.handleItemClick}
-                      page="register"
-                    />
-                    <Menu.Item
-                      name="Login"
-                      active={activeItem === "Login"}
-                      onClick={this.handleItemClick}
-                      page="login"
-                    />
-                  </Menu.Menu>
+                  {this.state.login ? 
+                    <Menu.Menu position="right">
+                      <Menu.Item>
+                        <Icon name='user' />
+                        {this.state.userData.name}
+                      </Menu.Item>
+                      <Menu.Item name="Logout"
+                        active={activeItem === "Logout"}
+                        onClick={this.sendLogot}
+                      />
+                    </Menu.Menu>
+                    :
+                    <Menu.Menu position="right">
+                      <Menu.Item
+                        name="Register"
+                        active={activeItem === "Register"}
+                        onClick={this.handleItemClick}
+                        page="register"
+                      />
+                      <Menu.Item
+                        name="Login"
+                        active={activeItem === "Login"}
+                        onClick={this.handleItemClick}
+                        page="login"
+                      />
+                    </Menu.Menu>
+                  }
                 </Menu>
               </Container>
             </Responsive>

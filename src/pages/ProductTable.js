@@ -10,9 +10,9 @@ class ProdTable extends Component {
     super(props);
     this.state = {
       message : 
-        { massageHidden : true, content :'', status: ""},
+        { massageHidden : true, content :'', status: "" },
       page :undefined,
-      itemPperPage : 9,
+      itemPperPage : 6,
       maxPage : undefined,
       spritCard : [],
     }

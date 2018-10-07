@@ -10,6 +10,7 @@ var User = new Schema({
         email:          { type: String,   require: true,  unique: true},
         password:       { type: String,   require: true},
         address:        { type: String,   require: true},
+        phone:          { type: String,   require: true}
 }, {
         collection: 'users'
 });
@@ -23,4 +24,3 @@ User.methods.comparePassword = function(password, hash){
 }
 
 module.exports = mongoose.model('User', User);
-
