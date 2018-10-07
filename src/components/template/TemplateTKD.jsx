@@ -60,12 +60,6 @@ export default class TemplateTKD extends Component {
               page="product"
             />
             <Menu.Item
-              name="ProductDetail"
-              active={activeItem === "ProductDetail"}
-              onClick={this.handleItemClick}
-              page="ProductDetail"
-            />
-            <Menu.Item
               name="Register"
               active={activeItem === "Register"}
               onClick={this.handleItemClick}
@@ -119,12 +113,6 @@ export default class TemplateTKD extends Component {
                     active={activeItem === "Product"}
                     onClick={this.handleItemClick}
                     page="product"
-                  />
-                  <Menu.Item
-                    name="ProductDetail"
-                    active={activeItem === "ProductDetail"}
-                    onClick={this.handleItemClick}
-                    page="ProductDetail"
                   />
                   <Menu.Menu position="right">
                     <Menu.Item
