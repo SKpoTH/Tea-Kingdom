@@ -98,8 +98,12 @@ export default class Registration extends Component {
 						<Modal trigger={<a>Terms and Conditions</a>}>
 							<Modal.Header>ข้อตกลง</Modal.Header>
 							<Modal.Content>
-								<p>1........</p>
-								<p>2........</p>
+								<p>Tea kingdom, through its Website “www.Tea-kingdom.com”, or any other domain or subdomain linked to it and owned by Tea kingdom (hereinafter, the TEA SHOP Website), may request the User for certain personal data. The data provided by the User will be stored in an automated file of personal data, property of Tea kingdom, which will be processed in order to provide the services requested by the User. The User authorizes the automated processing of the personal data provided, necessary for the provision of the services agreed.
+
+								The personal information collected from registered users is stored in a database owned by Tea kingdom, which takes all the necessary technical, organizational and security measures to ensure the confidentiality and integrity of the information in accordance with the provisions of Basic Law , on Personal Data Protection, and other applicable legislation.
+								
+								Any registered User may, at any time, exercise the rights of access, rectification, cancellation and opposition with regard to his personal data provided to the TEA SHOP website, by written communication addressed to Tea kingdom, this communication may also be made by sending an email to the following address: tea-kingdom@teashop.com.</p>
+								
 							</Modal.Content>
 						</Modal>
 					</Form.Group>
