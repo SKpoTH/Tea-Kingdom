@@ -21,36 +21,34 @@ class Content extends Component {
     e.preventDefault();
     
     const Account = {
-      email: this.state.email,
-      password: this.state.password
+      email : this.email.value,
+      password : this.password.value,
     }
     let checkEmpty = false;
     for(let a in Account) {
+      console.log(Account[a]);
 			if(Account[a] === "" || Account[a] === undefined) {
 				checkEmpty = true;
 			}
 		}
     if(checkEmpty) {
 			this.setState( {message : 
-				{ massageHidden : false, content :'You must containt datas in all field.', status: "negative"}});
+        { massageHidden : false, content :'You must containt datas in all field.', status: "negative"}});
 		} else {
-			axios.post('http://localhost:5000/authen/login', Account)
+			axios.post('http://localhost:5000/login/login', Account)
 				.then((res) => {
-          console.log(res)
-					// if(res.data.status === "email already used") {
-					// 	this.setState( {message : 
-					// 		{ massageHidden : false, content :res.data.status , status: "negative"}});
-					// } else {
-					// 	this.setState({
-					// 		message : 
-					// 			{ massageHidden : true, content :'', status: ""},
-					// 	});
-					// 	window.location = '/';
-					// }
+					if(res.data.status === "fail") {
+						this.setState( {message : 
+              { massageHidden : false, content :res.data.status , status: "negative"}});
+              this.password.value = "";
+              this.email.value = "";
+					} else {
+						window.location = '/';
+					}
 				})
 				.catch((error) => {
 					this.setState( {message : 
-						{ massageHidden : false, content : error , status: "negative"}});
+            { massageHidden : false, content :error.response.status, status: "negative"}});
 				});
 		}    
   }
@@ -61,9 +59,16 @@ class Content extends Component {
         <Container>
           <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status}/>
           <h1>LOG IN</h1>
-          <Form onSubmit={ this.onLoginSubmit }>
-            <NormalFrom label="Email" placeholder="your@email.com" onChange={(e, data) => {this.setState({ email: data.value })}} />
-            <PasswordForm label="password" placeholder="password" onChange={(e, data) => {this.setState({ password: data.value })}} />
+          <Form onSubmit={ this.onLoginSubmit } >
+            <Form.Field>
+              <label>Email</label>
+              <input type="email" placeholder='your@email.com' ref={(input) => this.email = input} />
+            </Form.Field>
+
+            <Form.Field>
+              <label>Password</label>
+              <input type="password" placeholder='password' ref={(input) => this.password = input} />
+            </Form.Field>
             <MyButton color="blue" text="Login" />
 
             <a onclick="console.log('The link was clicked.'); return false">

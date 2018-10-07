@@ -6,16 +6,19 @@ import MainProduct from "../components/ProductDetail/MainProduct";
 import SubProduct from "../components/ProductDetail/SubProduct";
 import Review from "../components/ProductDetail/Review";
 import axios from 'axios'
+import { Message } from "semantic-ui-react";
 
 class ProductDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id : props.params.id,
-      name: "Black tea",
-      src: "/imgs/black_tea_dust.jpg",
-      price: "1200",
-      description: "This is the dust of black cariflonia tea from the leaves and branches"
+      message : 
+				{ massageHidden : true, content :'', status: ""},
+      id : props.params.id
+      // name: "Black tea",
+      // src: "/imgs/black_tea_dust.jpg",
+      // price: "1200",
+      // description: "This is the dust of black cariflonia tea from the leaves and branches"
     }
     this.getData()
   }
@@ -29,19 +32,27 @@ class ProductDetail extends Component {
               name: jsonReturn.name,
               src: jsonReturn.src,
               price: jsonReturn.price,
-              description: jsonReturn.description
-            });
+              description: jsonReturn.description,
+              cantLoad : false
+            })
+          } else {
+            self.setState( {cantLoad : true} );
+            self.setState( {message : 
+              { massageHidden : false, content :'We don\'t have this product.', status: "negative"}});
           }
 				})
 				.catch((error) => {
-					console.log(error);
+          self.setState( {cantLoad : true} );
+					self.setState( {message : 
+            { massageHidden : false, content :error.response.status, status: "negative"}});
 				});
   };
   render() {
     return (
       <div>
         <TemplateTKD>
-          <MainProduct dataR={this.state} />
+          <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status}/>
+          {this.state.cantLoad ? null : <MainProduct dataR={this.state} />}          
           <SubProduct />
           <Review />
         </TemplateTKD>

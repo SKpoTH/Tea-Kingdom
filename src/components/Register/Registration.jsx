@@ -41,23 +41,18 @@ export default class Registration extends Component {
 			this.setState( {message : 
 				{ massageHidden : false, content :'You must consider ours agreement.', status: "negative"}});
 		} else {
-			axios.post('http://localhost:5000/authen/signup', user)
+			axios.post('http://localhost:5000/register/register', user)
 				.then((res) => {
 					if(res.data.status === "email already used") {
 						this.setState( {message : 
 							{ massageHidden : false, content :res.data.status , status: "negative"}});
 					} else {
-						this.setState({
-							message : 
-								{ massageHidden : true, content :'', status: ""},
-							agree : false
-						});
 						window.location = '/login';
 					}
 				})
 				.catch((error) => {
 					this.setState( {message : 
-						{ massageHidden : false, content : error , status: "negative"}});
+						{ massageHidden : false, content :error.response.status, status: "negative"}});
 				});
 		}
         // window.location = '/';
