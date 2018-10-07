@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "semantic-ui-css/semantic.css";
-import { Container, Button, Form } from "semantic-ui-react";
+import { Container, Button, Form, Message } from "semantic-ui-react";
 import NormalFrom from "../../assets/normalForm";
 import PasswordForm from "../../assets/passwordForm";
 import MyButton from "../../assets/Mybutton";
@@ -9,65 +9,61 @@ import axios from "axios";
 class Content extends Component {
   constructor(props){
     super(props);
-    
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
-    this.onLoginSubmit = this.onLoginSubmit.bind(this);
-
-    this.state = {
-          email : '',
-          password : ''
+        this.state = {
+          message : 
+			      { massageHidden : true, content :'', status: ""},
+          email : "",
+          password : ""
     }
   }
 
-  onChangeEmail(e){
-    this.setState({
-      email: e.target.value
-    });
-  }
-
-  onChangePassword(e){
-    this.setState({
-      password: e.targe.value
-    });
-  }
-
-  onLoginSubmit(e){
+  onLoginSubmit = (e) => {
     e.preventDefault();
     
     const Account = {
       email: this.state.email,
-      password: this.state.pass
+      password: this.state.password
     }
-
-    const status = {
-      login: ''
-    }
-
-      axios.post('http://localhost:5000/authen/login', Account)
-        .then(res => console.log(res.data));
-
-    this.setState({
-      email: '',
-      password: ''
-    });
-
-    window.location = '/login';
-    
+    let checkEmpty = false;
+    for(let a in Account) {
+			if(Account[a] === "" || Account[a] === undefined) {
+				checkEmpty = true;
+			}
+		}
+    if(checkEmpty) {
+			this.setState( {message : 
+				{ massageHidden : false, content :'You must containt datas in all field.', status: "negative"}});
+		} else {
+			axios.post('http://localhost:5000/authen/login', Account)
+				.then((res) => {
+          console.log(res)
+					// if(res.data.status === "email already used") {
+					// 	this.setState( {message : 
+					// 		{ massageHidden : false, content :res.data.status , status: "negative"}});
+					// } else {
+					// 	this.setState({
+					// 		message : 
+					// 			{ massageHidden : true, content :'', status: ""},
+					// 	});
+					// 	window.location = '/';
+					// }
+				})
+				.catch((error) => {
+					this.setState( {message : 
+						{ massageHidden : false, content : error , status: "negative"}});
+				});
+		}    
   }
 
   render() {
     return (
       <div>
         <Container>
+          <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status}/>
           <h1>LOG IN</h1>
           <Form onSubmit={ this.onLoginSubmit }>
-            <NormalFrom label="Email" placeholder="your@email.com" 
-                        onChange={ this.onChangeEmail } 
-                        value={ this.state.email }/>
-            <PasswordForm label="password" placeholder="password" 
-                        onChange={ this.onChangePassword }  
-                        value={ this.state.password }/>
+            <NormalFrom label="Email" placeholder="your@email.com" onChange={(e, data) => {this.setState({ email: data.value })}} />
+            <PasswordForm label="password" placeholder="password" onChange={(e, data) => {this.setState({ password: data.value })}} />
             <MyButton color="blue" text="Login" />
 
             <a onclick="console.log('The link was clicked.'); return false">
@@ -82,9 +78,8 @@ class Content extends Component {
               history as well as pre-filled forms during checkout on subsequent
               orders.
             </p>
-
-            <Button>Register</Button>
           </Form>
+          <Button onClick={() => {window.location = '/register'}}>Register</Button>
         </Container>
       </div>
     );
