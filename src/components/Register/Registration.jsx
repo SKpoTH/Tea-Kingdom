@@ -52,7 +52,10 @@ export default class Registration extends Component {
 				})
 				.catch((error) => {
 					this.setState( {message : 
-						{ massageHidden : false, content :error.response.status, status: "negative"}});
+						{ massageHidden : false, 
+						  content :"Error : "+error.response.status+" => "+error.response.data.split("<pre>")[1].split("</pre>")[0], 
+						  status: "negative"}}
+						);
 				});
 		}
       }

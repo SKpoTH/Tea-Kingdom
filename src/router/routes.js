@@ -16,13 +16,7 @@ const Routes = props => (
     <Route path="/AboutUs" component={AboutUs} />
     <Route path="/login" component={Login} />
     <Route path="/register" component={Register} />
-<<<<<<< HEAD
     <Route exact path="/ProductDetail:id" component={ProductDetail} something="ss"/>
-
-    <Route path='/receiveData' component={receiveData}/>
-=======
-    <Route path="/ProductDetail" component={ProductDetail} />
->>>>>>> ae-backend
   </Router>
 );
 
