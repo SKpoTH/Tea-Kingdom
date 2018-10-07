@@ -47,9 +47,18 @@ export default class Registration extends Component {
 						this.setState( {message : 
 							{ massageHidden : false, content :res.data.status , status: "negative"}});
 					} else {
+						this.setState({
+							message : 
+								{ massageHidden : true, content :'', status: ""},
+							agree : false
+						});
 						window.location = '/login';
 					}
 				})
+				.catch((error) => {
+					this.setState( {message : 
+						{ massageHidden : false, content : error , status: "negative"}});
+				});
 		}
         // window.location = '/';
         //this.props.history.push('/login');
@@ -87,8 +96,8 @@ export default class Registration extends Component {
 						<Form.Input label='address' placeholder='Address' onChange={(e,data)=>{ this.address = data.value }} />
 						<Form.Input label='phone' placeholder='Phone' onChange={(e,data)=>{ this.phone = data.value }} />
 					</Form.Group>
-					<Form.Field>
-						<Checkbox label='' />
+					<Form.Group inline>
+					<Form.Field control={Checkbox}onChange={() => {this.state.agree = !this.state.agree}}/>
 						I agree to the&nbsp;
 						<Modal trigger={<a>Terms and Conditions</a>}>
 							<Modal.Header>ข้อตกลง</Modal.Header>
@@ -97,7 +106,7 @@ export default class Registration extends Component {
 								<p>2........</p>
 							</Modal.Content>
 						</Modal>
-					</Form.Field>
+					</Form.Group>
 					<Button type='submit'>Submit</Button>
 				</Form>
 			</Container>   
