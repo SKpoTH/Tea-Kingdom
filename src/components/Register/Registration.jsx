@@ -1,151 +1,106 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-
 import 'semantic-ui-css/semantic.css';
-import {Form , Button, Container} from 'semantic-ui-react';
+import {Form , Button, Container, Message, Checkbox, Modal} from 'semantic-ui-react';
 
 export default class Registration extends Component {
     constructor(props){
-        super(props);
-    
-        this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
-        this.onChangeFirstname = this.onChangeFirstname.bind(this);
-        this.onChangeLastname = this.onChangeLastname.bind(this);
-        this.onChangePhone = this.onChangePhone.bind(this);
-        this.onChangeAddress = this.onChangeAddress.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    
+        super(props);    
         this.state = {
-          firstname : '',
-          lastname : '',
-          email : '',
-          password : '',
-          address : '',
-          phone : ''
-        }
+			message : 
+				{ massageHidden : true, content :'', status: ""},
+			agree : false
+		}
     }
     
-    onChangeEmail(event) {
-        this.setState({
-          email : event.target.value
-        })
-    }
-      
-    onChangePassword(event) {
-        this.setState({
-          password : event.target.value
-        })
-    }
-    
-    onChangeFirstname(event) {
-        this.setState({
-          firstname : event.target.value
-        })
-    }
-
-    onChangeLastname(event) {
-        this.setState({
-          lastname : event.target.value
-        })
-    }
-    
-    onChangeAddress(event) {
-        this.setState({
-          address : event.target.value
-        })
-    }
-      
-    onChangePhone(event) {
-        this.setState({
-          phone : event.target.value
-        })
-    }
-
-    onSubmit(event) {
+    onSubmit = (event) => {
         event.preventDefault();
-    
         const user = {
-            firstname : this.state.firstname,
-            lastname : this.state.lastname,
-            email : this.state.email,
-            password : this.state.password,
-            address : this.state.address,
-            phone : this.state.phone
-        }
-        
-        axios.post('http://localhost:5000/authen/signup', user)
-            .then(res => console.log(res.data))
-    
-        this.setState({
-            firstname : '',
-            lastname : '',
-            email : '',
-            password : '',
-            address : '',
-            phone : ''
-        })
-        
-        window.location = '/';
-
+            firstname : this.firstname,
+            lastname : this.lastname,
+            email : this.email.value,
+            password : this.password.value,
+            address : this.address,
+            phone : this.phone
+		}
+		let checkEmpty = false;
+		for(let a in user) {
+			if(user[a] === "" || user[a] === undefined) {
+				checkEmpty = true;
+			}
+		}
+		if(checkEmpty) {
+			this.setState( {message : 
+				{ massageHidden : false, content :'You must containt datas in all field.', status: "negative"}});
+		} else if(this.password.value !== this.rePassword.value) {
+			this.setState( {message : 
+				{ massageHidden : false, content :'You password doesn\'t match.', status: "negative"}});
+			this.password.value = "";
+			this.rePassword.value = "";
+		} else if(!this.state.agree) {
+			this.setState( {message : 
+				{ massageHidden : false, content :'You must consider ours agreement.', status: "negative"}});
+		} else {
+			axios.post('http://localhost:5000/authen/signup', user)
+				.then((res) => {
+					if(res.data.status === "email already used") {
+						this.setState( {message : 
+							{ massageHidden : false, content :res.data.status , status: "negative"}});
+					} else {
+						window.location = '/login';
+					}
+				})
+		}
+        // window.location = '/';
         //this.props.history.push('/login');
       }
-    
-        render() {
-            return (
-                <Container>
-                <h1>Register</h1>
-                <Form onSubmit={ this.onSubmit }>
-                    <Form.Field>
-                        <label>Email</label>
-                        <input type="email" placeholder='your@email.com' 
-                            onChange={ this.onChangeEmail }
-                            value={ this.state.email }
-                        />
-                    </Form.Field>
+	render() {
+		return (
+			<Container>
+				<Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status}/>
+				<h1>Register</h1>
+				<Form onSubmit={ this.onSubmit } >
+					<Form.Field>
+						<label>Email</label>
+						<input type="email" placeholder='your@email.com' ref={(input) => this.email = input} />
+					</Form.Field>
 
-                    <Form.Group unstackable widths={2}>
-                        <Form.Field>
-                            <label>Password</label>
-                            <input type="password" placeholder='password' 
-                                onChange={ this.onChangePassword }
-                                value={ this.state.password }
-                            />
-                        </Form.Field>
+					<Form.Group unstackable widths={2}>
+						<Form.Field>
+							<label>Password</label>
+							<input type="password" placeholder='password' ref={(input) => this.password = input} />
+						</Form.Field>
 
-                        <Form.Field>
-                            <label>Retype Password</label>
-                            <input type="password" placeholder='re-password' />
-                        </Form.Field>
-                        
-                    </Form.Group>
-                    
-                    <Form.Group unstackable widths={2}>
-                        <Form.Input label='firstname' placeholder='First name' 
-                                    onChange={ this.onChangeFirstname }
-                                    value={ this.state.firstname }
-                        />
-                        <Form.Input label='lastname' placeholder='Last name' 
-                                    onChange={ this.onChangeLastname }
-                                    value={ this.state.lastname }
-                        />
-                    </Form.Group>
+						<Form.Field>
+							<label>Retype Password</label>
+							<input type="password" placeholder='re-password' ref={(input) => this.rePassword = input} />
+						</Form.Field>
+						
+					</Form.Group>
+					
+					<Form.Group unstackable widths={2}>
+						<Form.Input label='firstname' placeholder='First name' onChange={(e,data)=>{ this.firstname = data.value }} />
+						<Form.Input label='lastname' placeholder='Last name' onChange={(e,data)=>{ this.lastname = data.value }} />
+					</Form.Group>
 
-                    <Form.Group widths={2}>
-                        <Form.Input label='address' placeholder='Address' 
-                                    onChange={ this.onChangeAddress }
-                                    value={ this.state.address }
-                        />
-                        <Form.Input label='phone' placeholder='Phone' 
-                                    onChange={ this.onChangePhone }
-                                    value={ this.state.phone }
-                        />
-                    </Form.Group>
-                    
-                    <Form.Checkbox label='I agree to the Terms and Conditions' />
-                    <Button type='submit'>Submit</Button>
-                </Form>
-                </Container>   
-            );
-        }
+					<Form.Group widths={2}>
+						<Form.Input label='address' placeholder='Address' onChange={(e,data)=>{ this.address = data.value }} />
+						<Form.Input label='phone' placeholder='Phone' onChange={(e,data)=>{ this.phone = data.value }} />
+					</Form.Group>
+					<Form.Field>
+						<Checkbox label='' />
+						I agree to the&nbsp;
+						<Modal trigger={<a>Terms and Conditions</a>}>
+							<Modal.Header>ข้อตกลง</Modal.Header>
+							<Modal.Content>
+								<p>1........</p>
+								<p>2........</p>
+							</Modal.Content>
+						</Modal>
+					</Form.Field>
+					<Button type='submit'>Submit</Button>
+				</Form>
+			</Container>   
+		);
+	}
 }

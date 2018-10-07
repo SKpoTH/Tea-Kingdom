@@ -6,7 +6,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import ProductDetail from './components/ProductDetail';
 import Homepage from './components/Home';
-import receiveData from '/comments/receiveData';
+import receiveData from './components/receiveData';
 
 const Routes = (props) => (
     <Router {...props}>

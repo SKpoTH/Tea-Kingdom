@@ -13,7 +13,8 @@ module.exports = function(passport){
                 res.send('error occured')
             } else {
                 if(doc) {
-                    res.send('email already used')
+                    res.json({status : 'email already used'})
+                    console.log("someone call");
                 } else{
                     var user = new User()
                     user.email = email;
