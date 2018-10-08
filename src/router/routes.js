@@ -17,7 +17,7 @@ const Routes = props => (
     <Route path="/login" component={Login} />
     <Route path="/register" component={Register} />
     <Route exact path="/ProductDetail:id" component={ProductDetail} />
-    <Route exact path="/UseCase" component={UseCase} />
+    <Route path="/UseCase" component={UseCase} />
   </Router>
 );
 

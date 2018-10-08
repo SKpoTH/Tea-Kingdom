@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import TemplateTKD from "../template/TemplateTKD";
 import "semantic-ui-css/semantic.css";
-import { Button } from "semantic-ui-react";
-
 
 export default class Login extends Component {
   constructor(props){

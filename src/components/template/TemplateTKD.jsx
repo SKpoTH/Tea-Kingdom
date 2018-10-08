@@ -176,6 +176,12 @@ export default class TemplateTKD extends Component {
                     :
                     <Menu.Menu position="right">
                       <Menu.Item
+                        name="UseCase"
+                        active={activeItem === "UseCase"}
+                        onClick={this.handleItemClick}
+                        page="UseCase"
+                      />
+                      <Menu.Item
                         name="Register"
                         active={activeItem === "Register"}
                         onClick={this.handleItemClick}
