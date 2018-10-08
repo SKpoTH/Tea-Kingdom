@@ -30,10 +30,7 @@ class EEElement extends Component {
   }
 }
 
-export default class productTable extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default class productT extends Component {
   render() {
     return (
       <React.Fragment>

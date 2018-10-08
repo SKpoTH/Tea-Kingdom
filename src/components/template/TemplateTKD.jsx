@@ -30,11 +30,10 @@ export default class TemplateTKD extends Component {
 				.then((res) => {
           if(res.data.status === "logged in")
           {
-            this.state.login = true;
-            this.state.userData.name = res.data.name;
-            this.state.userData.user_id = res.data.user_id;
+            this.setState({login : true});
+            this.setState({userData : {name :  res.data.name, user_id : res.data.user_id}});
           } else {
-            this.state.login = false;
+            this.setState({login : false});
           }
 				})
 				.catch((error) => {

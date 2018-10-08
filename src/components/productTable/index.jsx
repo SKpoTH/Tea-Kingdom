@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import TemplateTKD from "../components/template/TemplateTKD";
+import TemplateTKD from "../template/TemplateTKD";
 import "semantic-ui-css/semantic.css";
-import ProductTable from "../components/productTable/ProductTable";
+import ProductT from "./ProductT";
 import { Message, Button } from "semantic-ui-react";
 import axios from 'axios'
 
@@ -14,17 +14,17 @@ class ProdTable extends Component {
       page :undefined,
       itemPperPage : 6,
       maxPage : undefined,
-      spritCard : [],
     }
     this.allcard = [];
+    this.spritCard = [];
     this.getData()
   }
   
   loadDataPage = (page2) => {
-    this.state.spritCard = [];
+    this.spritCard = [];
     for(let i = (page2-1)*this.state.itemPperPage; i < page2*this.state.itemPperPage; i++) {
       if(this.allcard[i] !== undefined)
-        this.state.spritCard.push(this.allcard[i]);
+        this.spritCard.push(this.allcard[i]);
       else
         break;
     }
@@ -50,19 +50,17 @@ class ProdTable extends Component {
 
   render() {
     return (
-      <div>
-        <TemplateTKD>
-          <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status}/>
-          {this.state.spritCard ? <ProductTable all={this.state.spritCard} /> : null}
-          <center>
-            <Button.Group compact>
-              {Array.from({length: this.state.maxPage}, (v, k) => k+1).map(item => (
-                <Button content={item} compact className={item === this.state.page ? "disabled" : ""} onClick={() => {this.loadDataPage(item)}} />
-              ))}
-            </Button.Group>
-          </center>
-        </TemplateTKD>
-      </div>
+      <TemplateTKD>
+        <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status}/>
+        {this.spritCard ? <ProductT all={this.spritCard} /> : null}
+        <center>
+          <Button.Group compact>
+            {Array.from({length: this.state.maxPage}, (v, k) => k+1).map(item => (
+              <Button content={item} compact className={item === this.state.page ? "disabled" : ""} onClick={() => {this.loadDataPage(item)}} />
+            ))}
+          </Button.Group>
+        </center>
+      </TemplateTKD>
     );
   }
 }

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import TemplateTKD from "../components/template/TemplateTKD";
+import TemplateTKD from "../template/TemplateTKD";
 import "semantic-ui-css/semantic.css";
 
-import MainProduct from "../components/ProductDetail/MainProduct";
-import SubProduct from "../components/ProductDetail/SubProduct";
-import Review from "../components/ProductDetail/Review";
+import MainProduct from "./MainProduct";
+import SubProduct from "./SubProduct";
+import Review from "./Review";
 import axios from 'axios'
 import { Message } from "semantic-ui-react";
 
@@ -15,10 +15,6 @@ class ProductDetail extends Component {
       message : 
 				{ massageHidden : true, content :'', status: ""},
       id : props.params.id
-      // name: "Black tea",
-      // src: "/imgs/black_tea_dust.jpg",
-      // price: "1200",
-      // description: "This is the dust of black cariflonia tea from the leaves and branches"
     }
     this.getData()
   }
@@ -52,14 +48,12 @@ class ProductDetail extends Component {
   };
   render() {
     return (
-      <div>
-        <TemplateTKD>
-          <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status}/>
-          {this.state.cantLoad ? null : <MainProduct dataR={this.state} />}          
-          <SubProduct />
-          <Review />
-        </TemplateTKD>
-      </div>
+      <TemplateTKD>
+        <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status}/>
+        {this.state.cantLoad ? null : <MainProduct dataR={this.state} />}          
+        <SubProduct />
+        <Review />
+      </TemplateTKD>
     );
   }
 }

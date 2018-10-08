@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import 'semantic-ui-css/semantic.css';
-import {Form , Button, Container, Message, Checkbox, Modal} from 'semantic-ui-react';
+import {Form , Button, Message, Checkbox, Modal} from 'semantic-ui-react';
+import TemplateTKD from "../template/TemplateTKD";
 
 export default class Registration extends Component {
     constructor(props){
@@ -43,11 +44,12 @@ export default class Registration extends Component {
 		} else {
 			axios.post('http://localhost:5000/signup', user)
 				.then((res) => {
+					// console.log(res.data);
 					if(res.data.status === "email already used") {
 						this.setState( {message : 
 							{ massageHidden : false, content :res.data.status , status: "negative"}});
 					} else {
-						window.location = '/login';
+						window.location = '/login'+user.email;
 					}
 				})
 				.catch((error) => {
@@ -61,7 +63,7 @@ export default class Registration extends Component {
       }
 	render() {
 		return (
-			<Container>
+			<TemplateTKD>
 				<Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status}/>
 				<h1>Register</h1>
 				<Form onSubmit={ this.onSubmit } >
@@ -93,7 +95,7 @@ export default class Registration extends Component {
 						<Form.Input label='phone' placeholder='Phone' onChange={(e,data)=>{ this.phone = data.value }} />
 					</Form.Group>
 					<Form.Group inline>
-					<Form.Field control={Checkbox}onChange={() => {this.state.agree = !this.state.agree}}/>
+					<Form.Field control={Checkbox}onChange={() => {this.setState({agree : !this.state.agree})}}/>
 						I agree to the&nbsp;
 						<Modal trigger={<a>Terms and Conditions</a>}>
 							<Modal.Header>ข้อตกลง</Modal.Header>
@@ -109,7 +111,7 @@ export default class Registration extends Component {
 					</Form.Group>
 					<Button type='submit'>Submit</Button>
 				</Form>
-			</Container>   
+			</TemplateTKD>   
 		);
 	}
 }

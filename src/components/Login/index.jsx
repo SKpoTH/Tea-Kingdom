@@ -1,19 +1,22 @@
 import React, { Component } from "react";
 import "semantic-ui-css/semantic.css";
 import { Container, Button, Form, Message } from "semantic-ui-react";
-import NormalFrom from "../../assets/normalForm";
-import PasswordForm from "../../assets/passwordForm";
-import MyButton from "../../assets/Mybutton";
 import axios from "axios";
+import TemplateTKD from "../template/TemplateTKD";
 
-class Content extends Component {
+export default class Login extends Component {
   constructor(props){
+    // console.log(props.params.Semail);
     super(props);
         this.state = {
           message : 
 			      { massageHidden : true, content :'', status: ""},
           email : "",
-          password : ""
+          password : "",
+          eamilRe : props.params.Semail
+    }
+    if(this.state.eamilRe !== undefined) {
+      this.state.message = { massageHidden : false, content :"Register Success : "+this.state.eamilRe, status: "success"};
     }
   }
 
@@ -37,13 +40,14 @@ class Content extends Component {
 		} else {
 			axios.post('http://localhost:5000/login', Account)
 				.then((res) => {
+          console.log(res.data.status);
 					if(res.data.status === "fail") {
 						this.setState( {message : 
               { massageHidden : false, content :res.data.status , status: "negative"}});
               this.password.value = "";
               this.email.value = "";
 					} else {
-						window.location = '/';
+            window.location = '/';
 					}
 				})
 				.catch((error) => {
@@ -58,7 +62,7 @@ class Content extends Component {
 
   render() {
     return (
-      <div>
+      <TemplateTKD>
         <Container>
           <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status}/>
           <h1>LOG IN</h1>
@@ -72,7 +76,7 @@ class Content extends Component {
               <label>Password</label>
               <input type="password" placeholder='password' ref={(input) => this.password = input} />
             </Form.Field>
-            <MyButton color="blue" text="Login" />
+            <Button color="blue" >Login</Button>
 
             <a onclick="console.log('The link was clicked.'); return false">
               {" "}
@@ -89,13 +93,7 @@ class Content extends Component {
           </Form>
           <Button onClick={() => {window.location = '/register'}}>Register</Button>
         </Container>
-      </div>
+      </TemplateTKD>
     );
-  }
-}
-
-export default class Login extends Component {
-  render() {
-    return <Content />;
   }
 }

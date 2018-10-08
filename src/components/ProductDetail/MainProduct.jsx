@@ -25,10 +25,6 @@ class MenuBar extends Component {
 }
 */
 export default class MainProduct extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Container>
