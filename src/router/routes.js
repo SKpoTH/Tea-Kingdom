@@ -7,6 +7,9 @@ import Register from "../components/Register";
 import ProductDetail from "../components/ProductDetail";
 import Homepage from "../components/Home";
 import UseCase from "../components/UseCase";
+import Order from "../components/Order";
+import UnderConstruction from "../components/UnderConstruction"
+import Tracking from "../components/Tracking"
 
 const Routes = props => (
   <Router {...props}>
@@ -18,6 +21,9 @@ const Routes = props => (
     <Route path="/register" component={Register} />
     <Route exact path="/ProductDetail:id" component={ProductDetail} />
     <Route path="/UseCase" component={UseCase} />
+    <Route path="/order" component={Order} />
+    <Route path="/under" component={UnderConstruction} />
+    <Route path="/Track" component={Tracking} />
   </Router>
 );
 

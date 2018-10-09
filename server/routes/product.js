@@ -55,7 +55,7 @@ router.post('/load', function(req, res){
     }, {
         imgurl: './imgs/aulong.jpg',
         productName: 'ชาอูหลง',
-        productPrice: '300',
+        productPrice: '200',
         productDes: 'ชาชั้นดีจากประเทศจีนที่ สดใหม่',
         productId: '123456789'
     }])

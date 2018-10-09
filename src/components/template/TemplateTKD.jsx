@@ -160,11 +160,18 @@ export default class TemplateTKD extends Component {
                   />
                   {this.state.login ? 
                     <Menu.Menu position="right">
+                      <Menu.Item page="order" onClick={this.handleItemClick} ><Icon name='cart' /></Menu.Item>
                       <Menu.Item
                         name="UseCase"
                         active={activeItem === "UseCase"}
                         onClick={this.handleItemClick}
                         page="UseCase"
+                      />
+                      <Menu.Item
+                        name="track"
+                        active={activeItem === "track"}
+                        onClick={this.handleItemClick}
+                        page="track"
                       />
                       <Menu.Item>
                         <Icon name='user' />

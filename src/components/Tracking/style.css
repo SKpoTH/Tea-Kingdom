@@ -1,0 +1,69 @@
+.sidebar {
+	color: black;
+	text-align: center;
+}
+
+
+.ten wide column {
+	margin: 0px;
+	padding: 0px;
+}
+
+.h3,.h4 {
+	text-align: center;
+}
+
+.p {
+	text-align: center;
+}
+
+.total {
+	position: absolute;
+	bottom: 0;
+}
+
+.total-offset {
+	height: 36px;
+	padding: 0px;
+	margin: 0px;
+}
+
+.table-head p {
+	text-align: center;
+}
+
+.table h5 {
+	font-size: 16px;
+	font-style: normal;
+	font-weight: normal;
+	text-align: left;
+
+}
+
+.status-container div {
+	margin-left: 20px;
+}
+
+.status {
+	text-align: left;
+}
+
+.tracking-policy  {
+	color: #777;
+}
+
+.tracking-policy h5 {
+	margin: 0;
+}
+
+.tracking-policy p {
+	text-align: left;
+}
+
+.tracking-number h1,h4 {
+	margin: 0;
+}
+
+
+
+
