@@ -45,21 +45,9 @@ export default class TemplateTKD extends Component {
   };
   sendLogot = () => {
     if(localStorage.getItem("token")) {
-      axios.get('http://localhost:5000/authen/logout', { headers: { Authorization: localStorage.getItem("token") } })
-				.then((res) => {
-          if(res.data.status === "logout")
-          {
-            localStorage.clear();
-            window.location = '/';
-          }
-				})
-				.catch((error) => {
-					console.log(error);
-        });
-    } else {
       localStorage.clear();
-      window.location = '/';
     }
+    window.location = '/';
   };
 
   handleButtonClick = () => this.setState({ visible: !this.state.visible });
