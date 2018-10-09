@@ -41,7 +41,7 @@ export default class Login extends Component {
 			axios.post('http://localhost:5000/login', Account)
 				.then((res) => {
           console.log(res.data);
-					if(res.data.status === "fail") {
+					if(res.data.status === "User and Password are not matched") {
 						this.setState( {message : 
               { massageHidden : false, content :res.data.status , status: "negative"}});
               this.password.value = "";
