@@ -22,8 +22,8 @@ const Routes = props => (
     <Route exact path="/ProductDetail:id" component={ProductDetail} />
     <Route path="/UseCase" component={UseCase} />
     <Route path="/order" component={Order} />
+    <Route path="/track" component={Tracking} />
     <Route path="/under" component={UnderConstruction} />
-    <Route path="/Track" component={Tracking} />
   </Router>
 );
 
