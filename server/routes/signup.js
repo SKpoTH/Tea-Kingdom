@@ -1,44 +1,54 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcryptjs')
+//const jwt = require('jsonwebtoken');
+//const passport = require('passport');
+const User = require('../models/user');
 
-var User = require('../models/user');
-
-module.exports = function(passport){
-    router.post('/signup', function(req, res){
-        var body = req.body,
-            email = body.email,
-            password = body.password,
-            firstname = body.firstname,
-            lastname = body.lastname,
-            address = body.address,
-            phone = body.phone
-        User.findOne({email: email}, function(err, doc){
-            if(err) {
-                res.send('error occured')
-            } else {
-                if(doc) {
-                    res.json({status : 'email already used'})
-                    console.log("someone call");
-                } else{
-                    var user = new User()
-                    //User Data
-                    user.email = email;
-                    user.password = user.hashPassword(password);
-                    user.firstname = firstname;
-                    user.lastname = lastname;
-                    user.address = address;
-                    user.phone = phone
-
-                    user.save(function(err, user){
-                        if(err){
-                            res.status(500).send('db error')
-                        } else{
-                            res.send(user);
-                        }
-                    })
-                }
+router.post('/signup', (req, res) => {
+    //find email if it was used
+    User.findOne({
+        email: req.body.email
+    })
+        .then(user =>{
+            if(user) {
+                return res.json({
+                    status: 'Email already used'
+                })
+            } else{
+                //create New User
+                var newUser = new User({
+                    email: req.body.email,
+                    password: req.body.password,
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
+                    address: req.body.address,
+                    phone: req.body.phone
+                })
+                
+                //Encode the password with bcrypt
+                bcrypt.genSalt(10, (err, salt) => {
+                    if(err){
+                        console.error('Error: ', err);
+                    } else{
+                        bcrypt.hash(newUser.password, salt, (err, hash) => {
+                            if(err){
+                                console.error('Error: ', err)
+                            } else{
+                                //Save password in hash
+                                newUser.password = hash;
+                                newUser.save()
+                                    .then(user => {
+                                        res.json({
+                                            status: 'Successful Registration'
+                                        })
+                                    })
+                            }
+                        })
+                    }
+                })
             }
         })
-    });
-    return router;
-};
+})
+
+module.exports = router;

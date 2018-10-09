@@ -7,7 +7,7 @@ router.post('/load', function(req, res){
     res.json({
         status : 'found',
         name: 'ชาอูหลง',
-        src: '/imgs/green_tea.jpg',
+        src: './imgs/aulong.jpg',
         price: '300',
         description: 'ชาชั้นดีจากประเทศจีนที่ สดใหม่'
     })

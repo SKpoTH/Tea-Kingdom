@@ -1,25 +1,58 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken');
+const passport = require('passport');
+const User = require('../models/user');
 
-var User = require('../models/user');
+router.post('/login', (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
 
-
-module.exports = function(passport){
-    router.post('/login', (req, res, next) => {
-        passport.authenticate('local', (err, user, info) => {
-        
-        console.log(user);
-
-        // login status
-        if (err) {
-            res.json({status: 'fail'})
-        } else if (user) {
-            res.json({status: 'success'})
-        } else {
-            res.json({status: 'fail'})
-        }
-        })(req, res, next)
+    //find the email if was in system or not
+    User.findOne({
+        email
     })
+        .then(user => {
+            if(!user){
+                return res.json({
+                    status: 'User and Password are not matched'
+                })
+            } else{
+                //Compare password in database & the input password
+                bcrypt.compare(password, user.password)
+                    .then(isMatch => {
+                        if(isMatch){
+                            //Set up pay load for JWT
+                            const payload = {
+                                email: user.email,
+                                firstname: user.firstname,
+                                lastname: user.lastname,
+                                address: user.address,
+                                phone: user.phone
+                            }
+                            //Get token and send to the frontend
+                            jwt.sign(payload, '12345', {
+                                expiresIn: 3600
+                            }, (err, token) => {
+                                if(err){
+                                    console.error('Error: ', err);
+                                } else{
+                                    //Send token
+                                    res.json({
+                                        status: 'Successful login',
+                                        token: 'Bearer '+token
+                                    })
+                                }
+                            })
+                        } else{
+                            return res.json({
+                                status: 'User and Password are not matched'
+                            })
+                        }
+                    })
+            }
+        })
+})
 
-    return router;
-};
+module.exports = router;

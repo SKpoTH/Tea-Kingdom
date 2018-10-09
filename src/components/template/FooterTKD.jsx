@@ -42,7 +42,7 @@ export default class FooterTKD extends Component {
           <Divider/>
         </Container>
         <Container textAlign='center'>
-          <Item center>&copy; 2018 Tea-kingdom</Item>
+          <Item className="center">&copy; 2018 Tea-kingdom</Item>
         </Container>
       </Segment>
     );

@@ -40,13 +40,14 @@ export default class Login extends Component {
 		} else {
 			axios.post('http://localhost:5000/login', Account)
 				.then((res) => {
-          console.log(res.data.status);
+          console.log(res.data);
 					if(res.data.status === "fail") {
 						this.setState( {message : 
               { massageHidden : false, content :res.data.status , status: "negative"}});
               this.password.value = "";
               this.email.value = "";
 					} else {
+            localStorage.setItem('token', res.data.token);//////////////////
             window.location = '/';
 					}
 				})
@@ -78,7 +79,7 @@ export default class Login extends Component {
             </Form.Field>
             <Button color="blue" >Login</Button>
 
-            <a onclick="console.log('The link was clicked.'); return false">
+            <a>
               {" "}
               Forgot your password?{" "}
             </a>

@@ -21,37 +21,45 @@ export default class TemplateTKD extends Component {
       visible: false,
       login : false,
       userData :
-        { name :undefined, favouriteAmout:undefined, cartAmout:undefined, user_id:undefined }
+        { name :undefined, favouriteAmout:undefined, cartAmout:undefined }
     }
     this.getData()
   }
   getData = () => {
-    axios.get('http://localhost:5000/authen/logged_in')
-				.then((res) => {
-          if(res.data.status === "logged in")
-          {
-            this.setState({login : true});
-            this.setState({userData : {name :  res.data.name, user_id : res.data.user_id}});
-          } else {
-            this.setState({login : false});
-          }
-				})
-				.catch((error) => {
-					console.log(error.response.data);
-        });
+    if(localStorage.getItem("token")) {
+      // console.log(localStorage.getItem("token"));
+      axios.get('http://localhost:5000/authen/load',{ headers: { Authorization: localStorage.getItem("token") } })
+      .then((res) => {
+        if(res.data.status === "logged in")
+        {
+          this.setState({login : true});
+          this.setState({userData : {name :  res.data.firstname }});
+        } else {
+          this.setState({login : false});
+        }
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+    }
   };
   sendLogot = () => {
-    axios.get('http://localhost:5000/authen/logout')
+    if(localStorage.getItem("token")) {
+      axios.get('http://localhost:5000/authen/logout', { headers: { Authorization: localStorage.getItem("token") } })
 				.then((res) => {
           if(res.data.status === "logout")
           {
-            this.setState({ login : false});
-            this.setState({ userData : { name :undefined, favouriteAmout:undefined, cartAmout:undefined, user_id:undefined }});
+            localStorage.clear();
+            window.location = '/';
           }
 				})
 				.catch((error) => {
 					console.log(error);
-				});
+        });
+    } else {
+      localStorage.clear();
+      window.location = '/';
+    }
   };
 
   handleButtonClick = () => this.setState({ visible: !this.state.visible });

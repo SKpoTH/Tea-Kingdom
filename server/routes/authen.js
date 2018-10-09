@@ -1,41 +1,18 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken');
+const passport = require('passport');
+const User = require('../models/user');
 
-var User = require('../models/user');
-/*
-var loggedin = function(req, res, next){
-    if(req.isAuthenticated()){
-        next();
-    } else{
-        res.redirect('/login')
-    }
-}*/
-module.exports = function(passport){
-    router.get('/logged_in', (req, res, user) => {
-        passport.authenticate('local'), (res, req) => {
-            if(req.isAuthenticated()){
-                res.json({
-                    status: 'logged in',
-                    _id: req.user._id,
-                    name: req.user.firstname        
-                });
-            } else {
-                res.json({
-                    status: 'not logged in',
-                    _id: '',
-                    name: ''
-                })
-            }
-        }
+router.get('/load', passport.authenticate('jwt', { session: false}), (req, res) =>{
+    //Body come from authenticate
+    // console.log(req.user);
+    return res.json({
+        status: 'logged in',
+        email: req.user.email,
+        firstname: req.user.firstname
     })
+})
 
-    router.get('/logout', function(req, res){
-        req.logout()
-        res.json({
-            status: 'logout'
-        })
-    })
-
-    return router;
-}
-
+module.exports = router;

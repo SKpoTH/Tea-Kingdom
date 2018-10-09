@@ -33,35 +33,38 @@ mongoose.connect(config.db).then(
 
 
 //Router
-const login = require('./routes/login')(passport);
-const signup = require('./routes/signup')(passport);
-const authen = require('./routes/authen')(passport);
+const login = require('./routes/login');
+const signup = require('./routes/signup');
+const authen = require('./routes/authen');
 const product = require('./routes/product');
 const product_detail = require('./routes/product_detail');
 
 app.use(cors());
-
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, './../public')));
+//app.use(express.static(path.join(__dirname, './../public')));
 
+/*
 app.use(session({
     secret: 'thesecret',
     saveUnintialized: false,
     resave: false
 }))
+*/
 
 //Midleware
 app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.session());
 
-//apply Route
+
+//apply main path
 app.use('/', login);
 app.use('/', signup);
 app.use('/authen', authen);
 app.use('/product', product);
 app.use('/product_detail', product_detail);
+
 
 app.listen(PORT, () => {
     console.log('Server is running on Port: ', PORT);
