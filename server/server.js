@@ -38,12 +38,18 @@ const signup = require('./routes/signup');
 const authen = require('./routes/authen');
 const product = require('./routes/product');
 const product_detail = require('./routes/product_detail');
+const add_product = require('./routes/add_product');
+const edit_profile = require('./routes/edit_profile');
+const order = require('./routes/order');
+const add_to_cart = require('./routes/add_to_cart');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
+//app.use('/uploads',express.static('uploads'));
 //app.use(express.static(path.join(__dirname, './../public')));
+//app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 /*
 app.use(session({
@@ -64,6 +70,10 @@ app.use('/', signup);
 app.use('/authen', authen);
 app.use('/product', product);
 app.use('/product_detail', product_detail);
+app.use('/add_product', add_product);
+app.use('/edit_profile', edit_profile);
+app.use('/order', order);
+app.use('/add_to_cart', add_to_cart);
 
 
 app.listen(PORT, () => {

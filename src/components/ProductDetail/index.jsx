@@ -20,22 +20,28 @@ class ProductDetail extends Component {
   }
   getData = () => {
     var self = this;
-    axios.post('http://localhost:5000/product_detail/load', {productID: this.state.id} )
+
+    //
+    console.log(this.state.id);
+
+    axios.post('http://localhost:5000/product_detail/load', { productID: this.state.id } )
 				.then((res) => {
           let jsonReturn = res.data;
 					if(jsonReturn.status === "found") {
             self.setState({
               name: jsonReturn.name,
-              src: jsonReturn.src,
+              src: jsonReturn.productImage,
               price: jsonReturn.price,
               description: jsonReturn.description,
               cantLoad : false
             })
+
           } else {
             self.setState( {cantLoad : true} );
             self.setState( {message : 
               { massageHidden : false, content :'We don\'t have this product.', status: "negative"}});
           }
+
 				})
 				.catch((error) => {
           self.setState({ cantLoad : true });

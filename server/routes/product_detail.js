@@ -1,16 +1,43 @@
 var express = require('express');
 var router = express.Router();
 
-var User = require('../models/user');
+var Product = require('../models/product');
+var Review = require('../models/review');
 
 router.post('/load', function(req, res){
-    res.json({
-        status : 'found',
-        name: 'ชาอูหลง',
-        src: './imgs/aulong.jpg',
-        price: '300',
-        description: 'ชาชั้นดีจากประเทศจีนที่ สดใหม่'
+    
+    Product.findOne({ _id: req.body.productID })
+        .then( product => {
+            var item = {
+                status: 'found',
+                _id: product._id,
+                name: product.name,
+                brand: product.brand,
+                type: product.type,
+                discountPrice: product.discountPrice,
+                price: product.price,
+                weight: product.weight,
+                region: product.region,
+                description: product.description,
+                review: product.review,
+                score: product.score,
+                process: product.process,
+                amount: product.amount,
+                pending: product.pending,
+                productImage: product.productImage
+            }
+            //console.log(item);
+            res.json(item);
+        })
+})
+
+
+router.post('/review', function(req, res){
+
+    Review.find( { productID: req.body.productID }, (err, reviews) => {
+        res.json(reviews);
     })
+
 })
 
 module.exports = router;

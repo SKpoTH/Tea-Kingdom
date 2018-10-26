@@ -1,9 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
-var User = require('../models/user');
+var Product = require('../models/product');
 
 router.post('/load', function(req, res){
+    Product.find({}, (err, product) => {
+        res.json(product);
+    });
+
+    /*
     res.json([{
         imgurl: './imgs/aulong.jpg',
         productName: 'ชาอูหลง',
@@ -59,6 +64,7 @@ router.post('/load', function(req, res){
         productDes: 'ชาชั้นดีจากประเทศจีนที่ สดใหม่',
         productId: '123456789'
     }])
+    */
 })
 
 module.exports = router;

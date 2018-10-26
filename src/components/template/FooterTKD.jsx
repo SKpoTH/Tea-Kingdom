@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import { Segment, Container , Grid , Header , List , Item , Divider , Icon } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.css';
+import styled from 'styled-components'
+
+const Margin = styled.div`
+  margin-top: 50px;
+`
+
 
 
 export default class FooterTKD extends Component {
   render() {
     return (
+      <Margin>
       <Segment vertical className='footer'>
         <Container>
           <Grid columns='equal' stackable>
@@ -45,6 +52,7 @@ export default class FooterTKD extends Component {
           <Item className="center">&copy; 2018 Tea-kingdom</Item>
         </Container>
       </Segment>
+      </Margin>
     );
   }
 }

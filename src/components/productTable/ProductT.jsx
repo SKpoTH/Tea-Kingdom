@@ -36,11 +36,11 @@ export default class productT extends Component {
       <React.Fragment>
         <Card.Group centered>
           {this.props.all.map(item => (
-            <EEElement name={item.productName} 
-                      des={item.productDes} 
-                      img={item.imgurl} 
-                      price={item.productPrice} 
-                      id={item.productId} />
+            <EEElement name={item.name} 
+                      des={item.description} 
+                      img={item.productImage} 
+                      price={item.price} 
+                      id={item._id} />
           ))}
         </Card.Group>
         <Divider hidden />

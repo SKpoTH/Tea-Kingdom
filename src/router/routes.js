@@ -10,6 +10,7 @@ import UseCase from "../components/UseCase";
 import Order from "../components/Order";
 import UnderConstruction from "../components/UnderConstruction"
 import Tracking from "../components/Tracking"
+import EditUser from "../components/EditProfile"
 
 const Routes = props => (
   <Router {...props}>
@@ -24,6 +25,7 @@ const Routes = props => (
     <Route path="/order" component={Order} />
     <Route path="/track" component={Tracking} />
     <Route path="/under" component={UnderConstruction} />
+    <Route path="/edit" component={EditUser} />
   </Router>
 );
 

@@ -12,6 +12,12 @@ import {
 } from "semantic-ui-react";
 import FooterTKD from "./FooterTKD";
 import axios from 'axios';
+import styled from 'styled-components'
+
+const Margin = styled.div`
+  margin-bottom: 200px;
+`
+
 const icon = "imgs/mylogo2.png";
 
 export default class TemplateTKD extends Component {
@@ -52,6 +58,7 @@ export default class TemplateTKD extends Component {
 
   handleButtonClick = () => this.setState({ visible: !this.state.visible });
   handleSidebarHide = () => this.setState({ visible: false });
+  
   handleItemClick = (e, { page }) => (window.location = page);
 
   render() {
@@ -78,12 +85,15 @@ export default class TemplateTKD extends Component {
                 {this.state.userData.name}
               </Menu.Item>
             : null}
+
+
             <Menu.Item
               name="Home"
               active={activeItem === "Home"}
               onClick={this.handleItemClick}
               page="/"
             />
+            
             <Menu.Item
               name="AboutUS"
               active={activeItem === "AboutUS"}
@@ -207,15 +217,21 @@ export default class TemplateTKD extends Component {
                 </Menu>
               </Container>
             </Responsive>
+            
             {/* totalMenu */}
             {/* content */}
+
+            <Margin>
             <Divider fitted />
             <Divider hidden />
             <Container>
               {this.props.children}
               <Divider hidden />
               <Divider fitted />
+              
             </Container>
+            </Margin>
+
             <FooterTKD />
             {/* content */}
           </Sidebar.Pusher>
