@@ -9,13 +9,17 @@ const Head = styled.div`
     background-image: url(${pic});
     background-size: cover;
     min-height: 400px;
-    padding-top: 150px
+    position: relative;
 `
 
 const Text = styled.div`
     text-align: center;
-    margin: 50px;
-    font-size: 50px;   
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 50px; 
+    line-height: 1.2em;  
     font-weight: 400;
     color: white;
     font-family: sans-serif;

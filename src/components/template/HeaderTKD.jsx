@@ -221,12 +221,7 @@ export default class TemplateTKD extends Component {
 
 
             <Margin>
- 
-            <Container>
               {this.props.children}
-
-              
-            </Container>
             </Margin>
             
           </Sidebar.Pusher>

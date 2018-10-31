@@ -14,12 +14,11 @@ const AddBG = styled.div`
     background-color: lightgrey; 
 `
 
-
 class Home extends Component {
     render() {
         return(
             <div>
-            <HeaderTKD/>
+            <HeaderTKD>
                 <Header/>
                 
                 <Container fluid>
@@ -31,6 +30,7 @@ class Home extends Component {
                 </Container>
                
             <FooterTKD/>
+            </HeaderTKD>
             </div>
         );
     }
