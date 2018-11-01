@@ -45,7 +45,7 @@ export default class Registration extends Component {
 			axios.post('/api/signup', user)
 				.then((res) => {
 					// console.log(res.data);
-					if(res.data.status === "email already used") {
+					if(res.data.status === "Email already used") {
 						this.setState( {message : 
 							{ massageHidden : false, content :res.data.status , status: "negative"}});
 					} else {
