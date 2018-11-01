@@ -20,8 +20,8 @@ require('./config/passport')(passport);
 
 
 // server PORT
-const PORT = 5000;
-
+// const PORT = 5000;
+const PORT = process.env.PORT;
 
 // Link to mongodb
 const config = require('./database/db');
