@@ -24,7 +24,7 @@ class ProductDetail extends Component {
     //
     console.log(this.state.id);
 
-    axios.post('http://localhost:5000/product_detail/load', { productID: this.state.id } )
+    axios.post('/api/product_detail/load', { productID: this.state.id } )
 				.then((res) => {
           let jsonReturn = res.data;
 					if(jsonReturn.status === "found") {

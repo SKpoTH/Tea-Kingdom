@@ -35,7 +35,7 @@ export default class Content1 extends Component {
         <Margin>
         <Image src={pic} floated='left' 
         
-        href='http://localhost:3000/product'
+        href='/product'
         />
         <br/>
         <Head>We provide</Head>

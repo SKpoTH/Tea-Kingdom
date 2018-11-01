@@ -16,7 +16,7 @@ export default class Login extends Component {
   onEventSend = (e) => {
     e.preventDefault();
     let data = {}
-    axios.post('http://localhost:5000/?', data)
+    axios.get('/api/????',{ headers: { Authorization: localStorage.getItem("token") } })
     .then((res) => {
       console.log(res.data);
     })

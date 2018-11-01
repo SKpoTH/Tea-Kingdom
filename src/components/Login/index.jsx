@@ -38,7 +38,7 @@ export default class Login extends Component {
 			this.setState( {message : 
         { massageHidden : false, content :'You must containt datas in all field.', status: "negative"}});
 		} else {
-			axios.post('http://localhost:5000/login', Account)
+			axios.post('/api/login', Account)
 				.then((res) => {
           console.log(res.data);
 					if(res.data.status === "User and Password are not matched") {

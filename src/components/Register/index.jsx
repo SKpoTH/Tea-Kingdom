@@ -42,7 +42,7 @@ export default class Registration extends Component {
 			this.setState( {message : 
 				{ massageHidden : false, content :'You must consider ours agreement.', status: "negative"}});
 		} else {
-			axios.post('http://localhost:5000/signup', user)
+			axios.post('/api/signup', user)
 				.then((res) => {
 					// console.log(res.data);
 					if(res.data.status === "email already used") {

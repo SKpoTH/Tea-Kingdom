@@ -65,15 +65,20 @@ app.use(passport.initialize());
 
 
 //apply main path
-app.use('/', login);
-app.use('/', signup);
-app.use('/authen', authen);
-app.use('/product', product);
-app.use('/product_detail', product_detail);
-app.use('/add_product', add_product);
-app.use('/edit_profile', edit_profile);
-app.use('/order', order);
-app.use('/add_to_cart', add_to_cart);
+app.use('/api', login);
+app.use('/api', signup);
+app.use('/api/authen', authen);
+app.use('/api/product', product);
+app.use('/api/product_detail', product_detail);
+app.use('/api/add_product', add_product);
+app.use('/api/edit_profile', edit_profile);
+app.use('/api/order', order);
+app.use('/api/add_to_cart', add_to_cart);
+
+// app.use(express.static(path.join(__dirname, '/build')));
+// app.get('*', (req,res) =>{
+//     res.sendFile(path.join(__dirname+'/build/index.html'));
+// });
 
 
 app.listen(PORT, () => {

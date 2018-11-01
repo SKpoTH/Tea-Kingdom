@@ -32,7 +32,7 @@ export default class TemplateTKD extends Component {
   getData = () => {
     if(localStorage.getItem("token")) {
       // console.log(localStorage.getItem("token"));
-      axios.get('http://localhost:5000/authen/load',{ headers: { Authorization: localStorage.getItem("token") } })
+      axios.get('/api/authen/load',{ headers: { Authorization: localStorage.getItem("token") } })
       .then((res) => {
         if(res.data.status === "logged in")
         {

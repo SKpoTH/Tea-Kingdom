@@ -33,7 +33,7 @@ class ProdTable extends Component {
 
   getData = () => {
     var self = this;
-    axios.post('http://localhost:5000/product/load')
+    axios.post('/api/product/load')
 				.then((res) => {
           this.allcard = res.data;
           this.setState( {maxPage : Math.ceil(this.allcard.length/this.state.itemPperPage) });

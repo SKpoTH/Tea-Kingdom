@@ -28,7 +28,7 @@ export default class Product extends Component{
     }
     getData = () => {
         if(localStorage.getItem("token")) {
-            axios.get('http://localhost:5000/authen/load',{ headers: { Authorization: localStorage.getItem("token") } })
+            axios.get('/api/authen/load',{ headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
                 this.setState({describe: 'Tea'});
                 this.setState({productName: 'Tea'});
@@ -55,22 +55,22 @@ export default class Product extends Component{
                 <Image 
                     src={src}
                     size='small'
-                    href='http://localhost:3000/product'
+                    href='/product'
                 />
                 <Image 
                     src={src}
                     size='small'
-                    href='http://localhost:3000/product'
+                    href='/product'
                 />
                 <Image 
                     src={src}
                     size='small'
-                    href='http://localhost:3000/product'
+                    href='/product'
                 />
                 <Image 
                     src={src}
                     size='small'
-                    href='http://localhost:3000/product'
+                    href='/product'
                 />
             
 
