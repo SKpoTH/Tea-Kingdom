@@ -75,10 +75,12 @@ app.use('/api/edit_profile', edit_profile);
 app.use('/api/order', order);
 app.use('/api/add_to_cart', add_to_cart);
 
-// app.use(express.static(path.join(__dirname, '/build')));
-// app.get('*', (req,res) =>{
-//     res.sendFile(path.join(__dirname+'/build/index.html'));
-// });
+//for deploy only start
+app.use(express.static(path.join(__dirname, '/build')));
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/build/index.html'));
+});
+//for deploy only end
 
 
 app.listen(PORT, () => {
