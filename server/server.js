@@ -20,8 +20,8 @@ require('./config/passport')(passport);
 
 
 // server PORT
-// const PORT = 5000;
-const PORT = process.env.PORT;
+const PORT = 5000;
+// const PORT = process.env.PORT;
 
 // Link to mongodb
 const config = require('./database/db');
@@ -76,10 +76,10 @@ app.use('/api/order', order);
 app.use('/api/add_to_cart', add_to_cart);
 
 //for deploy only start
-app.use(express.static(path.join(__dirname, '/build')));
-app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/build/index.html'));
-});
+// app.use(express.static(path.join(__dirname, '/build')));
+// app.get('*', (req,res) =>{
+//     res.sendFile(path.join(__dirname+'/build/index.html'));
+// });
 //for deploy only end
 
 
