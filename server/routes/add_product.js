@@ -37,6 +37,7 @@ router.post('/add', upload.single('productImage'), function(req, res){
     Product.findOne({
         name: req.body.name,
         brand: req.body.brand,
+        company: req.body.company,
         type: req.body.type
     })
         .then(product => {
@@ -52,17 +53,25 @@ router.post('/add', upload.single('productImage'), function(req, res){
                 var newProduct = new Product({
                     name: req.body.name,
                     brand: req.body.brand,
+                    company: req.body.company,
                     type: req.body.type,
-                    discountPrice: req.body.discountPrice,
+
+                    email: req.body.email,
+
+                    discount: req.body.discount,
                     price: req.body.price,
+                    discountPrice: req.body.discountPrice,
+
                     weight: req.body.weight,
                     region: req.body.region,
                     description: req.body.description,
-                    review: req.body.review,
-                    score: req.body.score,
                     process: req.body.process,
+                    score: req.body.score,
+
                     amount: req.body.amount,
-                    pending: req.body.pending,
+
+                    pending: true,
+
                     productImage: slicePath
                 })
 
@@ -73,6 +82,11 @@ router.post('/add', upload.single('productImage'), function(req, res){
                         })
                     })
             }
+        })
+        .catch( err => {
+            res.json({
+                status: 'Error Upload Product'
+            })
         })
 })
 

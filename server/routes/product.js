@@ -4,7 +4,9 @@ var router = express.Router();
 var Product = require('../models/product');
 
 router.post('/load', function(req, res){
-    Product.find({}, (err, product) => {
+    Product.find({
+        pending: false
+    }, (err, product) => {
         res.json(product);
     });
 

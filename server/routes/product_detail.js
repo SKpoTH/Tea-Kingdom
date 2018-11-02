@@ -13,17 +13,25 @@ router.post('/load', function(req, res){
                 _id: product._id,
                 name: product.name,
                 brand: product.brand,
+                company: product.company,
                 type: product.type,
-                discountPrice: product.discountPrice,
+
+                email: product.email,
+
+                discount: product.discount,
                 price: product.price,
+                discountPrice: product.discountPrice,
+
                 weight: product.weight,
                 region: product.region,
                 description: product.description,
-                review: product.review,
-                score: product.score,
                 process: product.process,
+                score: product.score,
+
                 amount: product.amount,
+
                 pending: product.pending,
+                
                 productImage: product.productImage
             }
             //console.log(item);

@@ -18,28 +18,60 @@ router.post('/add', function(req, res){
                     _id: req.body.productID
                 })
                     .then( product => {
+
+                        var i = order.product.length
+                        var item;
+                        var found = false
+
+                        while(i--){
+                            if(order.product[i].productID == req.body.productID){
+                                item = order.product[i];
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if(found){
+                            item.amount++;
+                            order.save()
+                            res.json({
+                                status: 'Successfully Add 1',
+                                amount: item.amount
+                            })
+                        
+                        } else {
                         //push new product to the pending order
-                        order.product.push({
-                            productID: product._id,
-                            name: product.name,
-                            brand: product.brand,
-                            type: product.type,
-                            discountPrice: product.discountPrice,
-                            price: product.price,
-                            weight: product.weight,
-                            region: product.region,
-                            description: product.description,
-                            review: product.review,
-                            score: product.score,
-                            process: product.process,
-                            amount: product.amount,
-                            pending: product.pending,
-                            productImage: product.productImage
-                        })
-                        order.save()
-                        res.json({
-                            status: 'Successfully Add Order'
-                        })
+                            order.product.push({
+                                productID: product._id,
+
+                                name: product.name,
+                                brand: product.brand,
+                                company: product.company,
+                                type: product.type,
+
+                                email: product.email,
+
+                                discount: product.discount,
+                                price: product.price,
+                                discountPrice: product.discountPrice,
+
+                                weight: product.weight,
+                                region: product.region,
+                                description: product.description,
+                                process: product.process,
+                                score: product.score,
+
+                                amount: 1,
+
+                                pending: product.pending,
+
+                                productImage: product.productImage
+                            })
+                            order.save()
+                            res.json({
+                                status: 'Successfully Add Order'
+                            })
+                        }
                     })
             } else{
                 //if no pending order
@@ -52,19 +84,28 @@ router.post('/add', function(req, res){
                             email: user_email,
                             product: [{
                                 productID: product._id,
+                    
                                 name: product.name,
                                 brand: product.brand,
+                                company: product.company,
                                 type: product.type,
-                                discountPrice: product.discountPrice,
+
+                                email: product.email,
+
+                                discount: product.discount,
                                 price: product.price,
+                                discountPrice: product.discountPrice,
+
                                 weight: product.weight,
                                 region: product.region,
                                 description: product.description,
-                                review: product.review,
-                                score: product.score,
                                 process: product.process,
-                                amount: product.amount,
+                                score: product.score,
+
+                                amount: 1,
+
                                 pending: product.pending,
+                                
                                 productImage: product.productImage
                             }],
                             date: Date.now(),
