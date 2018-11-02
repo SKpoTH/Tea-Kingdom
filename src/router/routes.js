@@ -11,12 +11,13 @@ import Order from "../components/Order";
 import UnderConstruction from "../components/UnderConstruction"
 import Tracking from "../components/Tracking"
 import EditUser from "../components/EditProfile"
+import AboutUs2  from "../components/AboutUs2";
 
 const Routes = props => (
   <Router {...props}>
     <Route path="/" component={Homepage} />
     <Route path="/product" component={productTable} />
-    <Route path="/AboutUs" component={AboutUs} />
+    <Route path="/AboutUs" component={AboutUs2} />
     <Route exact path="/login:Semail" component={Login} />
     <Route path="/login" component={Login} />
     <Route path="/register" component={Register} />
