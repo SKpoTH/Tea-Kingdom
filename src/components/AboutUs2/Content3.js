@@ -1,12 +1,12 @@
 import React ,{Component} from 'react';
 import styled from 'styled-components'
 import "semantic-ui-css/semantic.css";
-
+import { Divider } from 'semantic-ui-react'
 
 const Center = styled.div`
-    text-align: center;
+    text-align: left;
     margin-top: 30px;
-    font-size: 30px;
+    font-size: 25px;
 ` 
 const Margin = styled.div`
     margin: 1em 0;
@@ -23,18 +23,16 @@ export default class Content1 extends Component {
       <Center>
         <Margin>
           <Head>
-          Find the best tea for you
+            Main Goal
           </Head>
         </Margin>
-
+        <Divider />
         <Margin>
           <p>
-           We make tea for drinking both hot and over ice. 
-            It matters because we know it's really all about the ingredients, 
-            full-left teas, selected herbs, real fruit pieces, 
-            essential oils and all natural flavors 
+            The company's main goal is to provide high-quality tea for a reasonable price, and make it affordable to everyone.
           </p>
         </Margin>
+        
       </Center>
     );
 

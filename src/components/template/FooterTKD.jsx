@@ -7,8 +7,6 @@ const Margin = styled.div`
   margin-top: 50px;
 `
 
-
-
 export default class FooterTKD extends Component {
   render() {
     return (
