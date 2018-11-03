@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import 'semantic-ui-css/semantic.css';
-import {Form , Button, Message, Modal, Checkbox, TextArea} from 'semantic-ui-react';
+import {Form , Button, Message, Modal, Checkbox, TextArea, Container, Grid, GridRow, Image, GridColumn, Label, Header} from 'semantic-ui-react';
 import TemplateTKD from "../template/TemplateTKD";
 import styled from 'styled-components'
 
@@ -9,8 +9,33 @@ import styled from 'styled-components'
 const Center = styled.div`
 	text-align: center;
 	font-size: 30px;
-	margin: 20px;
+	margin-top: 20px;
+	margin-bottom: 40px;
 `
+
+const UploadImage = styled.div`
+    margin-top: 20px;
+	margin-bottom: 20px;
+`
+
+const HeaderSize = styled.div`
+	font-size: 18px;
+`
+
+const Comment = styled.div`
+	margin-top: 25px;
+	background: 'white';
+`
+
+const SubmitSection = styled.div`
+	margin-top: 25px;
+`
+
+const options = [
+	{ key: 't', text: 'Tea', value: 'tea' },
+	{ key: 'e', text: 'Equipment', value: 'equipment' }
+  ]
+
 export default class AddProduct extends Component {
 	constructor(props){
 		super(props);
@@ -25,11 +50,11 @@ export default class AddProduct extends Component {
 			region: '',
 			region: '',
 			amount: '',
-			type: 'tea',
+			type: '',
 			email: 'skpoxpolice@gmailc.com',
 			discount: false,
-			price: '100',
-			discountPrice: '100',
+			price: '',
+			discountPrice: '',
 			score: '50',
 			weight: '',
 			description: ''
@@ -73,16 +98,15 @@ export default class AddProduct extends Component {
 		bodyFormData.set('region', this.state.region);
 		bodyFormData.set('amount', this.state.amount);
 
-		bodyFormData.set('type', 'tea');
+		bodyFormData.set('type', this.state.type);
 		bodyFormData.set('email', 'skpoxpolice@gmail.com');
-		bodyFormData.set('discount', false);
-		bodyFormData.set('price', '100');
-		bodyFormData.set('discountPrice', '90');
+		bodyFormData.set('discount', this.state.discount);
+		bodyFormData.set('price', this.state.price);
+		bodyFormData.set('discountPrice', this.state.discountPrice);
 		bodyFormData.set('score', '50');
 
-		bodyFormData.set('amountperpack', '12');
-		bodyFormData.set('weight', '1000');
-		bodyFormData.set('description', 'Hello World');
+		bodyFormData.set('weight', this.state.weight);
+		bodyFormData.set('description', this.state.description);
 		bodyFormData.append('productImage', this.state.file);
 
 		console.log(this.state.file);
@@ -135,20 +159,72 @@ export default class AddProduct extends Component {
 		let {imagePreviewUrl} = this.state;
 		let $imagePreview = null;
 		if (imagePreviewUrl) {
-			$imagePreview = (<img src={imagePreviewUrl} style={{width:'20%',height:'20%'}}/>);
+			$imagePreview = (<img src={imagePreviewUrl} style={{width:'100%',height:'100%'}}/>);
+		}
+		else{
+			$imagePreview = (
+			<center>
+			<UploadImage>
+				<Image src='/imgs/unupload_image.png' size='medium' wrapped />
+			</UploadImage>
+			</center>
+			);
 		}
 		return (
 			<TemplateTKD>
 				<Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status}/>
 				<Center>Create New Product</Center>
 				<Form onSubmit={ this.onSubmit } >
+				<Grid>
+					{/* Upload Image Section */}
+					<Grid.Column width={4}>
+					<div>
+						<form onSubmit={this._handleSubmit}>
+							{$imagePreview}
+							<input type="file" onChange={this._handleImageChange} />
+							{/* <Button type='file' onChange={this._handleImageChange}>Upload</Button> */}
+							{/* <button type="submit" onClick={this._handleSubmit} style={{display:'block'}}>Upload Image</button> */}
+						</form>
+					</div>			
+					</Grid.Column>
+
+					{/* Fill the Form Section */}
+					<Grid.Column width={12}>
 					<Form>
 						<Form.Field>
-							<Form.Input label='Product Name' placeholder='product name' onChange={(e,data)=>{ this.state.name = data.value }} />
+							<HeaderSize>
+							<Form.Input label='Product Name' placeholder='Name' onChange={(e,data)=>{ this.state.name = data.value }} />
+							</HeaderSize>
 						</Form.Field>
 						<Form.Group unstackable widths={2}>
 							<Form.Input label='Company Name' placeholder='company name' onChange={(e,data)=>{ this.state.company = data.value }} />
 							<Form.Input label='Brand' placeholder='brand' onChange={(e,data)=>{ this.state.brand = data.value }} />
+						</Form.Group>
+
+						<Grid>
+							<Grid.Column width={8}>
+							<Form.Group unstackable widths={2}>
+								<Form.Input label='Price (Baht)' placeholder='Baht' onChange={(e,data)=>{ this.state.price = data.value }} />
+								<Form.Input label='Discount Price (Baht)' placeholder='Baht' onChange={(e,data)=>{ this.state.discountPrice = data.value }} />
+							</Form.Group>
+							</Grid.Column>
+							<Grid.Column width={8}>
+								<Comment>
+								<Label style={{ background: 'white'}}>The discount Price will use when you active Discount Period</Label>
+								</Comment>
+							</Grid.Column>
+						</Grid>
+
+						<Form.Group unstackable widths={2}>
+							<Form.Input label='Stock' placeholder='Initial amount of prodcut' onChange={(e,data)=>{ this.state.amount = data.value }} />
+						</Form.Group>
+
+						{/* Properties Detail Section */}
+						<Header as='h3'>Proporties Detail</Header>
+
+						<Form.Group unstackable widths={2}>
+							<Form.Select fluid label='Type' options={options} placeholder='Type of Prodcut' onChange={(e,data)=>{ this.state.type = data.value }} />
+							<Form.Input label='Weight' placeholder='Weight Per One Product' onChange={(e,data)=>{ this.state.weight = data.value }} />
 						</Form.Group>
 
 						<Form.Group unstackable widths={2}>
@@ -156,15 +232,6 @@ export default class AddProduct extends Component {
 							<Form.Input label='Region' placeholder='Japan / China / English / Other' onChange={(e,data)=>{ this.state.region = data.value }} />
 						</Form.Group>
 						
-						<Form.Group unstackable widths={2}>
-							<Form.Input label='จำนวนที่ลงขาย' placeholder='จำนวนที่ลงขาย' onChange={(e,data)=>{ this.state.amount = data.value }} />
-							<Form.Input label='จำนวนซองต่อสินค้า 1 กล่อง' placeholder='1 กล่องมีกี่ซอง' onChange={(e,data)=>{ this.state.amountperpack = data.value }} />
-						</Form.Group>
-						
-						<Form.Group unstackable widths={2}>
-							<Form.Input label='น้ำหนักของสินค้า 1 กล่อง' placeholder='1 กล่องหนักกี่กรัม' onChange={(e,data)=>{ this.state.weight = data.value }} />
-						</Form.Group>
-
 						<Form>
 							<Form.Field>
 								<label>Description</label>
@@ -172,15 +239,10 @@ export default class AddProduct extends Component {
 							</Form.Field>
 						</Form>
 					</Form>
-					
-					<div>
-						<form onSubmit={this._handleSubmit}>
-							<input type="file" onChange={this._handleImageChange} />
-							{$imagePreview}
-							<button type="submit" onClick={this._handleSubmit} style={{display:'block'}}>Upload Image</button>
-						</form>
-					</div>			
-					
+
+					{/* Accept condition and Submit Section */}
+
+					<SubmitSection>
 					<Form.Group inline>
 					<Form.Field control={Checkbox}onChange={() => {this.setState({agree : !this.state.agree})}}/>
 						I agree to the&nbsp;
@@ -195,6 +257,10 @@ export default class AddProduct extends Component {
 					</Form.Group>
 
 					<Button type='submit'>Submit</Button>
+					</SubmitSection>
+					</Grid.Column>
+				</Grid>
+				
 				</Form>
 			</TemplateTKD>   
 		);
