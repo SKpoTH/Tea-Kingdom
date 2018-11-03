@@ -32,6 +32,7 @@ export default class Content1 extends Component {
             The company's main goal is to provide high-quality tea for a reasonable price, and make it affordable to everyone.
           </p>
         </Margin>
+        
       </Center>
     );
 

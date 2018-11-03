@@ -8,7 +8,7 @@ const Head = styled.div`
     background-position: center 50%;
     background-image: url(${pic});
     background-size: cover;
-    min-height: 400px;
+    min-height: 300px;
     position: relative;
 `
 

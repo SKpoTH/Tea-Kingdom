@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.css';
-import { Grid , Container , Message , List, Image,} from 'semantic-ui-react';
+import { Grid , Container , Message , List, Image} from 'semantic-ui-react';
 
 class PersonalData extends Component{
   render() {
@@ -104,24 +104,11 @@ class PersonalData extends Component{
   }
 }
 
-class Content extends Component {
-  render() {
-      return (
-        <div>
-          <Container textAlign='center'>
-            <Message color='black' size='massive'>About Us</Message>
-          </Container>
-          
-          <PersonalData/>
-        </div>
-      );
-  }
-}
 
 export default class AboutUs extends Component {
   render() {
     return (
-        <Content />   
+        <PersonalData  />   
     );
   }
 }
