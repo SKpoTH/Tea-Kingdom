@@ -2,8 +2,12 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 
+const passport = require('passport')
+
 
 const Product = require('../models/product');
+
+
 
 const storage = multer.diskStorage({
     
@@ -30,7 +34,7 @@ const upload = multer({storage: storage, limits: {
     fileSize: 1024 * 1024 * 5
 }});
 
-router.post('/add', upload.single('productImage'), function(req, res){
+router.post('/add', upload.single('productImage'), passport.authenticate('jwt', { session: false}), function(req, res){
 
     console.log(req.file);
 
@@ -56,7 +60,7 @@ router.post('/add', upload.single('productImage'), function(req, res){
                     company: req.body.company,
                     type: req.body.type,
 
-                    email: req.body.email,
+                    email: req.user.email,
 
                     discount: req.body.discount,
                     price: req.body.price,

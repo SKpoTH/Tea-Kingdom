@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
+var passport = require('passport');
+
 var Product = require('../models/product');
 var Order = require('../models/order');
 
-router.post('/load', function(req, res){
+router.post('/load', passport.authenticate('jwt', { session: false}), function(req, res){
     Product.find({
         pending: true
     })
@@ -19,7 +21,7 @@ router.post('/load', function(req, res){
 })
 
 
-router.post('/confirm', function(req, res){
+router.post('/confirm', passport.authenticate('jwt', { session: false}), function(req, res){
     Product.findOne({
         _id: req.body.productID
     })

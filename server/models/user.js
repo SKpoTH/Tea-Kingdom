@@ -40,7 +40,9 @@ var User = new Schema({
                         pending:        { type: Boolean,require: true},
                         
                         productImage:   { type: String, require: true}
-        }]
+        }],
+
+        profileImage:   { type: String, require: true }
 }, {
         collection: 'users'
 });

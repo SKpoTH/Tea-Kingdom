@@ -1,24 +1,34 @@
 var express = require('express');
 var router = express.Router();
 
+var passport = require('passport');
+
 var Product = require('../models/product');
 var Order = require('../models/order');
 
 //Load doc of Order page
-router.post('/load', function(req, res){
-    var user_email = req.body.email;
+router.post('/load', passport.authenticate('jwt', { session: false}), function(req, res){
+    var user_email = req.user.email;
     Order.findOne({ 
         email: user_email,
         status: 'Ordering' 
     }, 
         (err, orders) => {
-            res.json(orders);
+            if(orders){
+                orders.status = 'Found Order';
+                res.json(orders);
+            }
+            else{
+                res.json({
+                    status: 'No Ordering'
+                });
+            }
     })
 })
 
 //Remove Current Order
-router.post('/remove_order', function(req, res){
-    var user_email = req.body.email;
+router.post('/remove_order', passport.authenticate('jwt', { session: false}), function(req, res){
+    var user_email = req.user.email;
     Order.findOneAndRemove({
         email: user_email,
         status: 'Ordering'
@@ -31,8 +41,8 @@ router.post('/remove_order', function(req, res){
 })
 
 //Remove Product from current order
-router.post('/remove_product_from_order', function(req, res){
-    var user_email = req.body.email;
+router.post('/remove_product_from_order', passport.authenticate('jwt', { session: false}), function(req, res){
+    var user_email = req.user.email;
 
     Order.findOne({
         email: user_email,

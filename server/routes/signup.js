@@ -24,7 +24,8 @@ router.post('/signup', (req, res) => {
                     firstname: req.body.firstname,
                     lastname: req.body.lastname,
                     address: req.body.address,
-                    phone: req.body.phone
+                    phone: req.body.phone,
+                    profileImage: '/imgs/profile_default.png'
                 })
                 
                 //Encode the password with bcrypt

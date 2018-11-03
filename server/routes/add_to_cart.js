@@ -3,10 +3,11 @@ var router = express.Router();
 
 var Product = require('../models/product');
 var Order = require('../models/order');
+var passport = require('passport');
+const jwt = require('jsonwebtoken');
 
-
-router.post('/add', function(req, res){
-    var user_email = req.body.email;
+router.post('/add', passport.authenticate('jwt', { session: false}), function(req, res){
+    var user_email = req.user.email;
     Order.findOne({ 
         email: user_email,
         status: 'Ordering' 
@@ -32,10 +33,10 @@ router.post('/add', function(req, res){
                         }
 
                         if(found){
-                            item.amount++;
+                            item.amount += Number(req.body.amount);
                             order.save()
                             res.json({
-                                status: 'Successfully Add 1',
+                                status: 'Successfully Add',
                                 amount: item.amount
                             })
                         
@@ -61,7 +62,7 @@ router.post('/add', function(req, res){
                                 process: product.process,
                                 score: product.score,
 
-                                amount: 1,
+                                amount: req.body.amount,
 
                                 pending: product.pending,
 
@@ -102,7 +103,7 @@ router.post('/add', function(req, res){
                                 process: product.process,
                                 score: product.score,
 
-                                amount: 1,
+                                amount: req.body.amount,
 
                                 pending: product.pending,
                                 

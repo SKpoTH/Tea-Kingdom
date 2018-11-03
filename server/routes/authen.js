@@ -11,7 +11,8 @@ router.get('/load', passport.authenticate('jwt', { session: false}), (req, res) 
     return res.json({
         status: 'logged in',
         email: req.user.email,
-        firstname: req.user.firstname
+        firstname: req.user.firstname,
+        profileImage: req.user.profileImage
     })
 })
 
