@@ -5,7 +5,7 @@ import { Divider } from 'semantic-ui-react'
 
 const Center = styled.div`
     text-align: left;
-    margin-: 30px;
+    margin-top: 30px;
     font-size: 25px;
 ` 
 const Margin = styled.div`

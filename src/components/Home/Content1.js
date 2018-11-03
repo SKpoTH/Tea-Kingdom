@@ -5,7 +5,7 @@ import "semantic-ui-css/semantic.css";
 
 const Center = styled.div`
     text-align: center;
-    margin-: 30px;
+    margin-top: 30px;
     font-size: 30px;
 ` 
 const Margin = styled.div`

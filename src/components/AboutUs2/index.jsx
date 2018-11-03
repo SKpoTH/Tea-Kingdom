@@ -8,6 +8,7 @@ import Content2 from "./Content2";
 import Content3 from "./Content3";
 import Content4 from "./Content4";
 import Content5 from "./Content5";
+import Bottom from "./Bottom";
 
 import TKD from "../template/TemplateTKD"
 
@@ -38,13 +39,12 @@ class Home extends Component {
                 <Container fluid>
                     <Content4/>
                 </Container>
-
+                <Container>
+                <Bottom/>
+                </Container>
                 <Content5/>
                 
-
-
-                
-            
+                      
             </TKD>
             </div>
         );
