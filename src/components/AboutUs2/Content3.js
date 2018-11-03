@@ -23,13 +23,13 @@ export default class Content1 extends Component {
       <Center>
         <Margin>
           <Head>
-            About our company
+            Main Goal
           </Head>
         </Margin>
         <Divider />
         <Margin>
           <p>
-           Tea Kingdom is a tea company that was founded on 2018, and during that short period - it has successfully estabilished it self as a strong force on the tea market in Thailand. 
+            The company's main goal is to provide high-quality tea for a reasonable price, and make it affordable to everyone.
           </p>
         </Margin>
       </Center>

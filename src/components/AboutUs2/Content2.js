@@ -1,63 +1,22 @@
 import React ,{Component} from 'react';
-import styled from 'styled-components'
 import "semantic-ui-css/semantic.css";
 import { Image ,Container} from 'semantic-ui-react'
-import pic from './tea1.jpg'
-
-
-const Margin = styled.div`
-    margin-top: 30px;
-    margin-bottom: 165px;
-    margin: 1em;
-`
-const Para = styled.div`
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 20px;
-    
-` 
-const Head = styled.div`
-    margin-top: 15px;
-    text-align: center;
-    margin-bottom: 15px;
-    font-size: 30px;
-    
-` 
-
-
-
-
+import pic1 from './tea1.jpg';
+import pic2 from './tea2.jpg';
+import pic3 from './tea3.jpg';
 
 export default class Content1 extends Component {
   render(){
     return (
+        <center>
     <Container fluid>
-        <Margin>
-        <Image src={pic} floated='left' 
-        
-        href='/product'
-        />
-        <br/>
-        <Head>We provide</Head>
-        <Para>
-            High quality teas, and tea accessories  for retail and wholesale customers.
-        </Para> 
-
-        <Head>The Perfect Tea for you</Head>
-        
-        <Para>
-        We can help. Choose the words that best describe your mood and we'll find the perfect tea for you.
-        </Para>
-
-        <Head>
-            Importer of fine tea since 1894 
-        </Head>
-
-        <Para>
-        "I believes that the drink should be prepared with love so that your body experiences not only physical nourishment but emotional and spiritual nourishment as well"
-        </Para>
-        </Margin>
+        <Image.Group size='medium'>
+            <Image src={pic1} />
+            <Image src={pic2} />
+            <Image src={pic3} />
+        </Image.Group>
      </Container>
+     </center>
     );
   } 
 }

@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import styled from 'styled-components'
 import Header from './Header'
 import Limit from './Limit'
-import HeaderTKD from "../template/HeaderTKD";
-import FooterTKD from "../template/FooterTKD" 
+
 import Content1 from "./Content1";
-import Content2 from "./Content2"
+import Content2 from "./Content2";
+import Content3 from "./Content3";
+import TKD from "../template/TemplateTKD"
 
 const Container = styled(Limit)`
   padding: 1em;
@@ -18,22 +19,25 @@ class Home extends Component {
     render() {
         return(
             <div>
-            <HeaderTKD>
-                <Header/>
-                
+            <TKD>
+                <Container fluid>
+                    <Header/> 
+                </Container>
                 <Container fluid>
                     <Content1/>
                 </Container>
-                
-                <Container>
-                    <Content2/>
+                <Content2/>
+                <Container fluid>
+                    <Content3/>
                 </Container>
-               
-            <FooterTKD/>
-            </HeaderTKD>
+                
+            
+            </TKD>
             </div>
         );
     }
 }
 
 export default Home;
+
+
