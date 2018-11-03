@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
 const fileFilter = (req, file, cb) => {
     
     //accept only jpeg and png
-    if (file.mimetype === 'image/jpeg' || file,mimetype === 'image/png'){
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
         cb(null, true);       
     } else {
         cb(null, false);
@@ -70,7 +70,7 @@ router.post('/add', upload.single('productImage'), function(req, res){
 
                     amount: req.body.amount,
 
-                    pending: true,
+                    pending: false,                             // temp status to all confirm
 
                     productImage: slicePath
                 })

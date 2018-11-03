@@ -11,6 +11,7 @@ import Order from "../components/Order";
 import UnderConstruction from "../components/UnderConstruction"
 import Tracking from "../components/Tracking"
 import EditUser from "../components/EditProfile"
+import AddProduct from "../components/Addproduct"
 
 const Routes = props => (
   <Router {...props}>
@@ -26,6 +27,7 @@ const Routes = props => (
     <Route path="/track" component={Tracking} />
     <Route path="/under" component={UnderConstruction} />
     <Route path="/edit" component={EditUser} />
+    <Route path="/addproduct" component={AddProduct} />
   </Router>
 );
 
