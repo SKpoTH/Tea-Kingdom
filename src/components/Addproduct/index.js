@@ -8,6 +8,8 @@ import styled from 'styled-components'
 
 const Center = styled.div`
 	text-align: center;
+	font-size: 30px;
+	margin: 20px;
 `
 export default class AddProduct extends Component {
 	constructor(props){
@@ -23,11 +25,11 @@ export default class AddProduct extends Component {
 			region: '',
 			region: '',
 			amount: '',
-			type: '',
-			email: '',
+			type: 'tea',
+			email: 'skpoxpolice@gmailc.com',
 			discount: false,
-			price: '',
-			discountPrice: '',
+			price: '100',
+			discountPrice: '100',
 			score: '50',
 			weight: '',
 			description: ''
@@ -138,7 +140,7 @@ export default class AddProduct extends Component {
 		return (
 			<TemplateTKD>
 				<Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status}/>
-				<Center>Add Product</Center>
+				<Center>Create New Product</Center>
 				<Form onSubmit={ this.onSubmit } >
 					<Form>
 						<Form.Field>
