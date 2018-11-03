@@ -19,7 +19,7 @@ export default class User extends Component {
 
         console.log(this.state.id);
 
-        axios.post('/api/user_detail/load', { userID: this.state.id })
+        axios.post('/api/user_detail/load', { email: this.state.id })
             .then((res) => {
                 let jsonReturn = res.data;
                 if (jsonReturn.status === "found") {
