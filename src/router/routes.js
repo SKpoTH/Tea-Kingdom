@@ -11,6 +11,7 @@ import UnderConstruction from "../components/UnderConstruction"
 import Tracking from "../components/Tracking"
 import EditUser from "../components/EditProfile"
 import AboutUs2  from "../components/AboutUs2";
+import User from "../components/User";
 
 const Routes = props => (
   <Router {...props}>
@@ -26,6 +27,7 @@ const Routes = props => (
     <Route path="/track" component={Tracking} />
     <Route path="/under" component={UnderConstruction} />
     <Route path="/edit" component={EditUser} />
+    <Route path="/user" component={User} />
   </Router>
 );
 
