@@ -1,9 +1,9 @@
 .productName {
-    padding: 15px;
+    padding-top: 15px;
 }
 
 .priceSpace {
-    padding: 15px;
+    padding: 5px 0 5px 0;
 }
 
 .setMargin {
@@ -16,9 +16,59 @@
     margin-left: 20px;
 }
 
+.padd15 {
+    padding: 0 0 12px 15px;
+}
 .center {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
+}
+.oldPrice {
+    text-decoration: line-through;
+    color: rgba(0, 0, 0, 0.3);
+    display:inline !important;
+}
+.CON {
+    color: rgba(0, 0, 0, 0.5);
+    display:inline !important;
+}
+
+.inlineE {
+    display:inline !important;
+}
+
+.indent {
+    text-indent: 20pt;
+}
+
+.margintop0 {
+    margin-top: 0%;
+}
+
+.centerText {
+    text-align: center !important;
+}
+
+.PointerEdit {
+    cursor: pointer;
+    margin: 0 0 0 0;
+    
+}
+
+.leftText {
+    text-align: right !important;
+}
+
+.colume {
+    padding: 0 0 0 0 !important;
+}
+
+.hidD {
+    display: none !important;
+}
+
+.margin7 {
+    margin: 7px 0 7px 0 !important;
 }

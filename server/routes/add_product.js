@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
     
     //source of uploaded images
     destination: function(req, file, cb) {
-        cb(null, './public/uploads/product_images/');
+        cb(null, './server/build/uploads/product_images/');
     },
     filename: function(req, file, cb) {
         cb(null, Date.now() + file.originalname);   //the name of file
@@ -37,7 +37,7 @@ const upload = multer({storage: storage, limits: {
 router.post('/add', upload.single('productImage'), passport.authenticate('jwt', { session: false}), function(req, res){
 
     console.log(req.file);
-
+    // console.log(req.file.path.slice(13));
     Product.findOne({
         name: req.body.name,
         brand: req.body.brand,
@@ -52,7 +52,7 @@ router.post('/add', upload.single('productImage'), passport.authenticate('jwt', 
             } else{
 
                 var path = req.file.path;
-                var slicePath = path.slice(7);
+                var slicePath = path.slice(13);
 
                 var newProduct = new Product({
                     name: req.body.name,

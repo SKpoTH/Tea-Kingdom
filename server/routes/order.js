@@ -26,6 +26,40 @@ router.post('/load', passport.authenticate('jwt', { session: false}), function(r
     })
 })
 
+//
+router.post('/update', passport.authenticate('jwt', { session: false}), function(req, res){
+    var user_email = req.user.email;
+    
+    Order.findOne({
+        email: user_email,
+        status: 'Ordering'
+    })
+        .then( order => {
+            if(order){
+
+                var i = order.product.length;
+
+                while(i--){
+                    if(order.product[i].productID == req.body.productID){
+                        order.product[i].amount = req.body.amount;
+                    }
+                }
+
+                order.save()
+                .then( order => {
+                    res.json({
+                        status: 'Successfully Update'
+                    })
+                })
+
+            } else{
+                res.json({
+                    status: 'Not found Ordering'
+                })
+            }
+        })
+})
+
 //Remove Current Order
 router.post('/remove_order', passport.authenticate('jwt', { session: false}), function(req, res){
     var user_email = req.user.email;

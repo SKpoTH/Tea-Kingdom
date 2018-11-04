@@ -13,13 +13,16 @@ export default class User extends Component {
             id: props.params.id
         }
         this.getData()
+
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
+
     }
     getData = () => {
         var self = this;
 
         console.log(this.state.id);
 
-        axios.post('/api/user_detail/load', { email: this.state.id })
+        axios.get('/api/edit_profile/load')
             .then((res) => {
                 let jsonReturn = res.data;
                 if (jsonReturn.status === "found") {
@@ -32,6 +35,7 @@ export default class User extends Component {
                         phone: jsonReturn.phone,
                         cantLoad: false
                     })
+                    console.log(this.state);
 
                 } else {
                     self.setState({ cantLoad: true });
@@ -48,7 +52,7 @@ export default class User extends Component {
                     message:
                     {
                         massageHidden: false,
-                        content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
+                        //content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
                         status: "negative"
                     }
                 }
@@ -69,7 +73,7 @@ export default class User extends Component {
                     Tablet
                     </Responsive>
                 <Responsive {...Responsive.onlyComputer}>
-                    Computer
+                    <h1>{this.state.Fname}</h1>
                     </Responsive>
             </TKD>
         );

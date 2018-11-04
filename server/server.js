@@ -42,22 +42,12 @@ const add_product = require('./routes/add_product');
 const edit_profile = require('./routes/edit_profile');
 const order = require('./routes/order');
 const add_to_cart = require('./routes/add_to_cart');
+const reply = require('./routes/reply');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
-//app.use('/uploads',express.static('uploads'));
-//app.use(express.static(path.join(__dirname, './../public')));
-//app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
-
-/*
-app.use(session({
-    secret: 'thesecret',
-    saveUnintialized: false,
-    resave: false
-}))
-*/
 
 //Midleware
 app.use(passport.initialize());
@@ -74,12 +64,13 @@ app.use('/api/add_product', add_product);
 app.use('/api/edit_profile', edit_profile);
 app.use('/api/order', order);
 app.use('/api/add_to_cart', add_to_cart);
+app.use('/api/reply', reply);
 
 //for deploy only start
-// app.use(express.static(path.join(__dirname, '/build')));
-// app.get('*', (req,res) =>{
-//     res.sendFile(path.join(__dirname+'/build/index.html'));
-// });
+app.use(express.static(path.join(__dirname, '/build')));
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/build/index.html'));
+});
 //for deploy only end
 
 

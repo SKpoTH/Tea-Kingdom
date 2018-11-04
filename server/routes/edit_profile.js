@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
     
     //source of uploaded images
     destination: function(req, file, cb) {
-        cb(null, './public/uploads/profile_images/');
+        cb(null, './server/build/uploads/profile_images/');
     },
     filename: function(req, file, cb) {
         cb(null, Date.now() + file.originalname);   //the name of file
@@ -64,7 +64,7 @@ router.post('/edit', upload.single('profileImage'), passport.authenticate('jwt',
             if(user) {
 
                 var path = req.file.path;
-                var slicePath = path.slice(7)
+                var slicePath = path.slice(13)
 
                 user.firstname = req.body.firstname;
                 user.lastname = req.body.lastname;

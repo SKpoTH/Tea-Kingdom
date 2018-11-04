@@ -38,5 +38,15 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5000"
+
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:5000",
+      "ws": true
+    },
+    "/uploads": {
+      "target": "http://localhost:5000",
+      "ws": true
+    }
+  }
 }
