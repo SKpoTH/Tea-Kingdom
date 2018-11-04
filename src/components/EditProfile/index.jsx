@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import 'semantic-ui-css/semantic.css';
-import { Form, Button, Message, Image } from 'semantic-ui-react';
+import { Form, Button, Message, Image, Responsive, Grid, Container } from 'semantic-ui-react';
 import TemplateTKD from "../template/TemplateTKD";
 import styled from 'styled-components';
 
+
 const UploadImage = styled.div`
-    margin-top: 20px;
+    margin-top: 20px ;
 	margin-bottom: 20px;
 `
 
@@ -16,8 +17,8 @@ export default class EditUser extends Component {
 		this.state = {
 			message:
 				{ massageHidden: true, content: '', status: "" },
-			firstname: '',
-			lastname: '',
+			Fname: '',
+			Lname: '',
 			address: '',
 			phone: '',
 
@@ -129,31 +130,107 @@ export default class EditUser extends Component {
 		return (
 			<TemplateTKD>
 				<Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status} />
-				<h1>Edit User</h1>
 				<Form onSubmit={this.onSubmit} >
+					<Responsive  {...Responsive.onlyMobile}>
+						<Container>
+							<h1>Edit User</h1>
+							<center><h2>Profile</h2></center>
+							<form onSubmit={this._handleSubmit}>
+								{$imagePreview}
+								<input type="file" onChange={this._handleImageChange} />
+								{/* <Button type='file' onChange={this._handleImageChange}>Upload</Button> */}
+								{/* <button type="submit" onClick={this._handleSubmit} style={{display:'block'}}>Upload Image</button> */}
+							</form>
 
-					<form onSubmit={this._handleSubmit}>
-						{$imagePreview}
-						<input type="file" onChange={this._handleImageChange} />
-						{/* <Button type='file' onChange={this._handleImageChange}>Upload</Button> */}
-						{/* <button type="submit" onClick={this._handleSubmit} style={{display:'block'}}>Upload Image</button> */}
-					</form>
+							<br />
+
+							<Form.Input label='First name' placeholder='First name' onChange={(e, data) => { this.state.Fname = data.value }} />
+							<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => { this.state.Lname = data.value }} />
+
+							<Form.Input label='Address' placeholder='Address' onChange={(e, data) => { this.state.address = data.value }} />
+							<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => { this.state.phone = data.value }} />
+							<Button primary type='submit'>Submit</Button>
+						</Container>
 
 
-					<Form.Group unstackable widths={2}>
-						<Form.Input label='firstname' placeholder='First name' onChange={(e, data) => { this.state.firstname = data.value }} />
-						<Form.Input label='lastname' placeholder='Last name' onChange={(e, data) => { this.state.lastname = data.value }} />
-					</Form.Group>
+					</Responsive>
+					<Responsive  {...Responsive.onlyTablet}>
 
-					<Form.Group widths={2}>
-						<Form.Input label='address' placeholder='Address' onChange={(e, data) => { this.state.address = data.value }} />
-						<Form.Input label='phone' placeholder='Phone' onChange={(e, data) => { this.state.phone = data.value }} />
-					</Form.Group>
+						<Container>
+							<h1>Edit User</h1>
 
 
-					<Button type='submit'>Submit</Button>
+							<Grid>
+								<Grid.Row>
+									<Grid.Column width={5}>
+										<center><h2>Profile</h2></center>
+										<form onSubmit={this._handleSubmit}>
+											{$imagePreview}
+											<input type="file" onChange={this._handleImageChange} />
+											{/* <Button type='file' onChange={this._handleImageChange}>Upload</Button> */}
+											{/* <button type="submit" onClick={this._handleSubmit} style={{display:'block'}}>Upload Image</button> */}
+										</form>
+
+									</Grid.Column>
+									<Grid.Column width={8}>
+										<br />
+
+										<Form.Input label='First name' placeholder='First name' onChange={(e, data) => { this.state.Fname = data.value }} />
+										<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => { this.state.Lname = data.value }} />
+
+										<Form.Input label='Address' placeholder='Address' onChange={(e, data) => { this.state.address = data.value }} />
+										<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => { this.state.phone = data.value }} />
+										<Button primary type='submit'>Submit</Button>
+									</Grid.Column>
+
+								</Grid.Row>
+
+							</Grid>
+
+						</Container>
+					</Responsive>
+					<Responsive {...Responsive.onlyComputer}>
+
+						<Container>
+							<h1>Edit User</h1>
+
+
+							<Grid>
+								<Grid.Row>
+									<Grid.Column width={5}>
+										<center><h2>Profile</h2></center>
+										<form onSubmit={this._handleSubmit}>
+											{$imagePreview}
+											<input type="file" onChange={this._handleImageChange} />
+											{/* <Button type='file' onChange={this._handleImageChange}>Upload</Button> */}
+											{/* <button type="submit" onClick={this._handleSubmit} style={{display:'block'}}>Upload Image</button> */}
+										</form>
+
+									</Grid.Column>
+									<Grid.Column width={8}>
+										<br />
+
+										<Form.Input label='First name' placeholder='First name' onChange={(e, data) => { this.state.Fname = data.value }} />
+										<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => { this.state.Lname = data.value }} />
+
+										<Form.Input label='Address' placeholder='Address' onChange={(e, data) => { this.state.address = data.value }} />
+										<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => { this.state.phone = data.value }} />
+										<Button primary type='submit'>Submit</Button>
+									</Grid.Column>
+
+								</Grid.Row>
+
+							</Grid>
+
+						</Container>
+					</Responsive>
+
+
+
+
 				</Form>
-			</TemplateTKD>
+
+			</TemplateTKD >
 		);
 	}
 }

@@ -1,7 +1,7 @@
-import React ,{Component} from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components'
 import "semantic-ui-css/semantic.css";
-import { Divider } from 'semantic-ui-react'
+
 
 const Quote = styled.div`
     text-align: center;
@@ -9,12 +9,12 @@ const Quote = styled.div`
     font-size: 25px;
     width: 60%;
     margin: 1em 0;
-` 
+`
 
 
 
 export default class Content1 extends Component {
-  render(){
+  render() {
     return (
       <center>
         <Quote>

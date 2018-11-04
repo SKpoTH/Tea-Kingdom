@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import { Segment, Container , Grid , Header , List , Item , Divider , Icon } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.css';
-import styled from 'styled-components'
-
-const Margin = styled.div`
-  margin-top: 50px;
-`
 
 export default class FooterTKD extends Component {
   render() {
     return (
-      <Margin>
       <Segment vertical className='footer'>
         <Container>
           <Grid columns='equal' stackable>
@@ -44,13 +38,12 @@ export default class FooterTKD extends Component {
               <Item as='p'>Support for the continued development of Semantic UI comes directly from the community.</Item>
             </Grid.Column>
           </Grid>
-          <Divider/>
         </Container>
+        <Divider/>
         <Container textAlign='center'>
           <Item className="center">&copy; 2018 Tea-kingdom</Item>
         </Container>
       </Segment>
-      </Margin>
     );
   }
 }

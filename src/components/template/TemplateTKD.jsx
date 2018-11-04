@@ -12,11 +12,19 @@ import {
 } from "semantic-ui-react";
 import FooterTKD from "./FooterTKD";
 import axios from 'axios';
-import styled from 'styled-components'
 
-const Margin = styled.div`
-  margin-bottom: 200px;
-`
+import * as normalLeft from './menu/normal/normalLeft.json';
+import * as normalRight from './menu/normal/normalRight.json';
+import * as normalMobile from './menu/normal/normalMobile.json';
+import * as userLeft from './menu/user/userLeft.json';
+import * as userRight from './menu/user/userRight.json';
+import * as userMobile from './menu/user/userMobile.json';
+import * as adminLeft from './menu/admin/adminLeft.json';
+import * as adminRight from './menu/admin/adminRight.json';
+import * as adminMobile from './menu/admin/adminMobile.json';
+import * as sellerLeft from './menu/seller/sellerLeft.json';
+import * as sellerRight from './menu/seller/sellerRight.json';
+import * as sellerMobile from './menu/seller/sellerMobile.json';
 
 const icon = "imgs/mylogo2.png";
 
@@ -25,11 +33,10 @@ export default class TemplateTKD extends Component {
     super(props);
     this.state = {
       visible: false,
-      login : false,
       userData :
-        { name :undefined, favouriteAmout:undefined, cartAmout:undefined }
+        { name :undefined, profileImage: undefined, type: undefined },
     }
-    this.getData()
+    this.getData();
   }
   getData = () => {
     if(localStorage.getItem("token")) {
@@ -37,12 +44,7 @@ export default class TemplateTKD extends Component {
       axios.get('/api/authen/load',{ headers: { Authorization: localStorage.getItem("token") } })
       .then((res) => {
         if(res.data.status === "logged in")
-        {
-          this.setState({login : true});
-          this.setState({userData : {name :  res.data.firstname }});
-        } else {
-          this.setState({login : false});
-        }
+          this.setState({userData : {name :  res.data.firstname , profileImage: res.data.profileImage, type: res.data.type }});
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -58,14 +60,34 @@ export default class TemplateTKD extends Component {
 
   handleButtonClick = () => this.setState({ visible: !this.state.visible });
   handleSidebarHide = () => this.setState({ visible: false });
-  
   handleItemClick = (e, { page }) => (window.location = page);
 
   render() {
     const { activeItem } = this.state;
-
     const { visible } = this.state;
-
+    let left, right, mobile;
+    console.log(this.state.userData.type);
+    switch(this.state.userData.type) {
+      case "Consumer":
+        left = userLeft;
+        right = userRight;
+        mobile = userMobile;
+        break;
+      case "seller":
+        left = sellerLeft;
+        right = sellerRight;
+        mobile = sellerMobile;
+        break;
+      case "admin":
+        left = adminLeft;
+        right = adminRight;
+        mobile = adminMobile;
+        break;
+      default:
+        left = normalLeft;
+        right = normalRight;
+        mobile = normalMobile;
+    }
     return (
       <div>
         {/* slider */}
@@ -79,52 +101,22 @@ export default class TemplateTKD extends Component {
             vertical
             visible={visible}
           >
-            {this.state.login ?
-              <Menu.Item>
-                <Icon name='user' />
-                {this.state.userData.name}
-              </Menu.Item>
-            : null}
-
-
-            <Menu.Item
-              name="Home"
-              active={activeItem === "Home"}
-              onClick={this.handleItemClick}
-              page="/"
-            />
             
-            <Menu.Item
-              name="AboutUS"
-              active={activeItem === "AboutUS"}
-              onClick={this.handleItemClick}
-              page="AboutUs"
-            />
-            <Menu.Item
-              name="Product"
-              active={activeItem === "Product"}
-              onClick={this.handleItemClick}
-              page="product"
-            />
-            {this.state.login ? 
-              <Menu.Item name="Logout" onClick={this.sendLogot}/>
-               : 
+            {mobile.map(item => 
               <React.Fragment>
-                <Menu.Item
-                  name="Register"
-                  active={activeItem === "Register"}
-                  onClick={this.handleItemClick}
-                  page="register"
-                />
-                <Menu.Item
-                  name="Login"
-                  active={activeItem === "Login"}
-                  onClick={this.handleItemClick}
-                  page="login"
-                />
+                {item.show === "PERSON" ? <Menu.Item page={item.url} onClick={this.handleItemClick}><Image src={this.state.userData.profileImage} avatar /><br />{this.state.userData.name}</Menu.Item> : 
+                  item.show === "Logout" ? <Menu.Item name={item.show} onClick={this.sendLogot} /> :
+                  <Menu.Item
+                    name={item.show}
+                    active={activeItem === item.show}
+                    onClick={this.handleItemClick}
+                    page={item.url}
+                  />
+                }
               </React.Fragment>
-            }
-            
+            )}
+
+
           </Sidebar>
           <Sidebar.Pusher dimmed={visible}>
             {/* totalMenu */}
@@ -150,87 +142,55 @@ export default class TemplateTKD extends Component {
                   <Menu.Item>
                     <Image src={icon} className="small" alt="" />
                   </Menu.Item>
+                  {left.map(item => 
                   <Menu.Item
-                    name="Home"
-                    active={activeItem === "Home"}
+                    name={item.show}
+                    active={activeItem === item.show}
                     onClick={this.handleItemClick}
-                    page="/"
+                    page={item.url}
                   />
-                  <Menu.Item
-                    name="AboutUS"
-                    active={activeItem === "AboutUS"}
-                    onClick={this.handleItemClick}
-                    page="AboutUs"
-                  />
-                  <Menu.Item
-                    name="Product"
-                    active={activeItem === "Product"}
-                    onClick={this.handleItemClick}
-                    page="product"
-                  />
-                  {this.state.login ? 
-                    <Menu.Menu position="right">
-                      <Menu.Item page="order" onClick={this.handleItemClick} ><Icon name='cart' /></Menu.Item>
-                      <Menu.Item
-                        name="UseCase"
-                        active={activeItem === "UseCase"}
-                        onClick={this.handleItemClick}
-                        page="UseCase"
-                      />
-                      <Menu.Item
-                        name="track"
-                        active={activeItem === "track"}
-                        onClick={this.handleItemClick}
-                        page="track"
-                      />
-                      <Menu.Item>
-                        <Icon name='user' />
-                        {this.state.userData.name}
-                      </Menu.Item>
-                      <Menu.Item name="Logout"
-                        active={activeItem === "Logout"}
-                        onClick={this.sendLogot}
-                      />
-                    </Menu.Menu>
-                    :
-                    <Menu.Menu position="right">
-                      <Menu.Item
-                        name="UseCase"
-                        active={activeItem === "UseCase"}
-                        onClick={this.handleItemClick}
-                        page="UseCase"
-                      />
-                      <Menu.Item
-                        name="Register"
-                        active={activeItem === "Register"}
-                        onClick={this.handleItemClick}
-                        page="register"
-                      />
-                      <Menu.Item
-                        name="Login"
-                        active={activeItem === "Login"}
-                        onClick={this.handleItemClick}
-                        page="login"
-                      />
-                    </Menu.Menu>
-                  }
+                  )}
+                  <Menu.Menu position="right">
+                    {right.map(item => 
+                      <React.Fragment>
+                        {item.show === "Cart" ? <Menu.Item page={item.url} onClick={this.handleItemClick} ><Icon name='cart' /></Menu.Item> : 
+                          item.show === "PERSON" ? <Menu.Item page={item.url} onClick={this.handleItemClick}><Image src={this.state.userData.profileImage} avatar />{this.state.userData.name}</Menu.Item> : 
+                           item.show === "Logout" ? <Menu.Item name={item.show} active={activeItem === item.show} onClick={this.sendLogot} /> :
+                            <Menu.Item
+                              name={item.show}
+                              active={activeItem === item.show}
+                              onClick={this.handleItemClick}
+                              page={item.url}
+                            />
+                        }
+                      </React.Fragment>
+                    )}
+                  </Menu.Menu>
                 </Menu>
               </Container>
             </Responsive>
             
             {/* totalMenu */}
             {/* content */}
-
-            <Margin>
-            <Divider fitted />
-            <Divider hidden />
-            <Container>
-              {this.props.children}
-              <Divider hidden />
-              <Divider fitted />
-              
-            </Container>
-            </Margin>
+            {this.props.marginNon === 'true' ? 
+              <React.Fragment>
+                {this.props.children}
+                <Container>
+                  <Divider fitted />
+                </Container> 
+              </React.Fragment>
+              : 
+              <React.Fragment>
+                <Divider fitted />
+                <Divider hidden />
+                <Container>
+                  {this.props.children}
+                  <Divider hidden />
+                  <Divider fitted /> 
+                </Container>
+              </React.Fragment>
+            }
+            
 
             <FooterTKD />
             {/* content */}

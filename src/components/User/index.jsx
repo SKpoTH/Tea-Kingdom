@@ -3,6 +3,8 @@ import TKD from "../template/TemplateTKD"
 import { Responsive, Message } from 'semantic-ui-react'
 import axios from 'axios'
 import Mobile from "./Mobile"
+import Computer from "./computer";
+
 export default class User extends Component {
 
     constructor(props) {
@@ -14,27 +16,30 @@ export default class User extends Component {
         }
         this.getData()
 
-        axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
+        //axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
 
     }
     getData = () => {
         var self = this;
 
-        console.log(this.state.id);
+        //console.log(this.state.id);
+        console.log('=================');
 
-        axios.get('/api/edit_profile/load')
+        axios.get('/api/edit_profile/load', { headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
                 let jsonReturn = res.data;
+                // console.log(jsonReturn);
                 if (jsonReturn.status === "found") {
                     self.setState({
-                        Fname: jsonReturn.Fname,
-                        Lname: jsonReturn.Lname,
-                        src: jsonReturn.userImage,
+                        Fname: jsonReturn.firstname,        //fix Fname -> firstname
+                        Lname: jsonReturn.lastname,         //fix too
+                        src: jsonReturn.profileImage,       //fix too
                         email: jsonReturn.email,
                         address: jsonReturn.address,
                         phone: jsonReturn.phone,
                         cantLoad: false
                     })
+
                     console.log(this.state);
 
                 } else {
@@ -70,11 +75,13 @@ export default class User extends Component {
                     {this.state.cantLoad ? null : <Mobile data={this.state} />}
                 </Responsive>
                 <Responsive {...Responsive.onlyTablet}>
-                    Tablet
-                    </Responsive>
+                    <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status} />
+                    {this.state.cantLoad ? null : <Computer data={this.state} />}
+                </Responsive>
                 <Responsive {...Responsive.onlyComputer}>
-                    <h1>{this.state.Fname}</h1>
-                    </Responsive>
+                    <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status} />
+                    {this.state.cantLoad ? null : <Computer data={this.state} />}
+                </Responsive>
             </TKD>
         );
 
