@@ -14,27 +14,30 @@ export default class User extends Component {
         }
         this.getData()
 
-        axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
+        //axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
 
     }
     getData = () => {
         var self = this;
 
-        console.log(this.state.id);
+        //console.log(this.state.id);
+        console.log('=================');
 
-        axios.get('/api/edit_profile/load')
+        axios.get('/api/edit_profile/load', { headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
                 let jsonReturn = res.data;
+                // console.log(jsonReturn);
                 if (jsonReturn.status === "found") {
                     self.setState({
-                        Fname: jsonReturn.Fname,
-                        Lname: jsonReturn.Lname,
-                        src: jsonReturn.userImage,
+                        Fname: jsonReturn.firstname,        //fix Fname -> firstname
+                        Lname: jsonReturn.lastname,         //fix too
+                        src: jsonReturn.profileImage,       //fix too
                         email: jsonReturn.email,
                         address: jsonReturn.address,
                         phone: jsonReturn.phone,
                         cantLoad: false
                     })
+
                     console.log(this.state);
 
                 } else {

@@ -33,15 +33,28 @@ const upload = multer({storage: storage, limits: {
 }});
 
 //load profile
-router.post('/load', passport.authenticate('jwt', { session: false}), (req, res) => {
+router.get('/load', passport.authenticate('jwt', { session: false}), (req, res) => {
+    
+    //console.log('=======================================');
+    
     //find email if it was used
     User.findOne({
         email: req.user.email
     })
         .then(user =>{
             if(user) {
-                user.status = 'Successfully load'
-                res.json(user)
+                const getUser = {
+                    email: user.email,
+                    firstname: user.firstname,
+                    lastname: user.lastname,
+                    address: user.address,
+                    phone: user.phone,
+                    profileImage: user.profileImage,
+                    favourite: user.favourite,
+                    status: 'found'
+                }
+                //console.log(getUser);
+                res.json(getUser);
             } else{
                 res.json({
                     status: 'Fail to load'
