@@ -15,7 +15,7 @@ import axios from 'axios';
 import styled from 'styled-components'
 
 const Margin = styled.div`
-  margin-bottom: 200px;
+  margin-bottom: 50px;
 `
 
 const icon = "imgs/mylogo2.png";
@@ -25,32 +25,31 @@ export default class TemplateTKD extends Component {
     super(props);
     this.state = {
       visible: false,
-      login : false,
-      userData :
-        { name :undefined, favouriteAmout:undefined, cartAmout:undefined }
+      login: false,
+      userData:
+        { name: undefined, favouriteAmout: undefined, cartAmout: undefined }
     }
     this.getData()
   }
   getData = () => {
-    if(localStorage.getItem("token")) {
+    if (localStorage.getItem("token")) {
       // console.log(localStorage.getItem("token"));
-      axios.get('/api/authen/load',{ headers: { Authorization: localStorage.getItem("token") } })
-      .then((res) => {
-        if(res.data.status === "logged in")
-        {
-          this.setState({login : true});
-          this.setState({userData : {name :  res.data.firstname }});
-        } else {
-          this.setState({login : false});
-        }
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+      axios.get('/api/authen/load', { headers: { Authorization: localStorage.getItem("token") } })
+        .then((res) => {
+          if (res.data.status === "logged in") {
+            this.setState({ login: true });
+            this.setState({ userData: { name: res.data.firstname } });
+          } else {
+            this.setState({ login: false });
+          }
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
     }
   };
   sendLogot = () => {
-    if(localStorage.getItem("token")) {
+    if (localStorage.getItem("token")) {
       localStorage.clear();
     }
     window.location = '/';
@@ -58,7 +57,7 @@ export default class TemplateTKD extends Component {
 
   handleButtonClick = () => this.setState({ visible: !this.state.visible });
   handleSidebarHide = () => this.setState({ visible: false });
-  
+
   handleItemClick = (e, { page }) => (window.location = page);
 
   render() {
@@ -84,7 +83,7 @@ export default class TemplateTKD extends Component {
                 <Icon name='user' />
                 {this.state.userData.name}
               </Menu.Item>
-            : null}
+              : null}
 
 
             <Menu.Item
@@ -93,7 +92,7 @@ export default class TemplateTKD extends Component {
               onClick={this.handleItemClick}
               page="/"
             />
-            
+
             <Menu.Item
               name="AboutUS"
               active={activeItem === "AboutUS"}
@@ -106,9 +105,9 @@ export default class TemplateTKD extends Component {
               onClick={this.handleItemClick}
               page="product"
             />
-            {this.state.login ? 
-              <Menu.Item name="Logout" onClick={this.sendLogot}/>
-               : 
+            {this.state.login ?
+              <Menu.Item name="Logout" onClick={this.sendLogot} />
+              :
               <React.Fragment>
                 <Menu.Item
                   name="Register"
@@ -124,7 +123,7 @@ export default class TemplateTKD extends Component {
                 />
               </React.Fragment>
             }
-            
+
           </Sidebar>
           <Sidebar.Pusher dimmed={visible}>
             {/* totalMenu */}
@@ -168,7 +167,7 @@ export default class TemplateTKD extends Component {
                     onClick={this.handleItemClick}
                     page="product"
                   />
-                  {this.state.login ? 
+                  {this.state.login ?
                     <Menu.Menu position="right">
                       <Menu.Item page="order" onClick={this.handleItemClick} ><Icon name='cart' /></Menu.Item>
                       <Menu.Item
@@ -217,19 +216,19 @@ export default class TemplateTKD extends Component {
                 </Menu>
               </Container>
             </Responsive>
-            
+
             {/* totalMenu */}
             {/* content */}
 
             <Margin>
-            <Divider fitted />
-            <Divider hidden />
-            <Container>
-              {this.props.children}
-              <Divider hidden />
               <Divider fitted />
-              
-            </Container>
+              <Divider hidden />
+              <Container>
+                {this.props.children}
+                <Divider hidden />
+                <Divider fitted />
+
+              </Container>
             </Margin>
 
             <FooterTKD />
