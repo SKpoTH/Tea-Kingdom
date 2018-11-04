@@ -65,7 +65,7 @@ class ProductDetail extends Component {
         <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status}/>
         {this.state.cantLoad ? null : <MainProduct dataR={this.state} />}          
         {/* <SubProduct /> */}
-        <Review idR={this.state.id}/>
+        {this.state.cantLoad ? null : <Review idR={this.state.id}/>}
       </TemplateTKD>
     );
   }

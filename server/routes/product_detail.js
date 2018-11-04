@@ -36,7 +36,7 @@ router.post('/load', function(req, res){
             }
             //console.log(item);
             res.json(item);
-        })
+        }).catch(err => res.json({status : 'notfound'}));
 })
 
 
