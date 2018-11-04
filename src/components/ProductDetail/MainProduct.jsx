@@ -46,7 +46,8 @@ export default class MainProduct extends Component {
         .then((res) => {console.log(res.data)})
 				.catch((error) => {
           console.log(error)
-				});
+        });
+    window.location = "/order";
   };
   render() {
     return (

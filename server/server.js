@@ -43,6 +43,10 @@ const edit_profile = require('./routes/edit_profile');
 const order = require('./routes/order');
 const add_to_cart = require('./routes/add_to_cart');
 const reply = require('./routes/reply');
+const seller = require('./routes/seller');
+const edit_product = require('./routes/edit_product');
+const payment = require('./routes/payment');
+const userdata = require('./routes/userData');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -65,6 +69,10 @@ app.use('/api/edit_profile', edit_profile);
 app.use('/api/order', order);
 app.use('/api/add_to_cart', add_to_cart);
 app.use('/api/reply', reply);
+app.use('/api/seller', seller);
+app.use('/api/edit_product', edit_product)
+app.use('/api/payment', payment);
+app.use('/api/userdata', userdata);
 
 //for deploy only start
 app.use(express.static(path.join(__dirname, '/build')));

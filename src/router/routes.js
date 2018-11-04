@@ -13,7 +13,9 @@ import EditUser from "../components/EditProfile"
 import AddProduct from "../components/Addproduct"
 import AboutUs2 from "../components/AboutUs2";
 import User from "../components/User";
-
+import Admin from "../components/Admin"
+import Seller from "../components/SellerProduct";
+import Confirm from "../components/ConfirmOrder";
 
 const Routes = props => (
     <Router {...props}>
@@ -31,7 +33,9 @@ const Routes = props => (
         <Route path="/edit" component={EditUser} />
         <Route path="/addproduct" component={AddProduct} />
         <Route path="/user" component={User} />
-
+        <Route path="/admin" component={Admin} />
+        <Route path="/seller" component={Seller} />
+        <Route path="/confirm" component={Confirm} />
     </Router>
 );
 

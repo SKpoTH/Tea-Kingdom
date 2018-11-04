@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import TKD from "../template/TemplateTKD";
-import { Container, Divider, Image, Grid } from "semantic-ui-react";
+import { Container, Divider, Image, Grid, Button } from "semantic-ui-react";
 import styled from 'styled-components'
 import picTest from "./test.jpg"
-import BG from "./back.png"
+import BG from "./head.jpg"
 
 
 const Margin = styled.div`
@@ -47,75 +47,71 @@ export default class Mobile extends Component {
 
 
                 <h1> Profile </h1>
-                <AddBG>
-                    <shiftTop>
-                        <br />
-                        <Image size='medium' circular centered src={this.props.data.src} />
-                    </shiftTop>
+
+                <shiftTop>
+                    <br />
+                    <Image size='medium' circular centered src={this.props.data.src} />
+                </shiftTop>
+                <Divider />
+
+
+                <br />
+
+
+                <Grid>
+                    <Grid.Row>
+                        <Grid.Column width={6}>
+                            <Head>Name: </Head>
+                        </Grid.Column>
+                        <Divider />
+                        <Grid.Column width={8}>
+                            <Normal>{this.props.data.Fname} {this.props.data.Lname}</Normal>
+
+                        </Grid.Column>
+
+                    </Grid.Row>
                     <Divider />
+                    <Grid.Row>
+                        <Grid.Column width={6}>
+                            <Head>Email: </Head>
+                        </Grid.Column>
+                        <Divider />
+                        <Grid.Column width={8}>
+                            <Normal>{this.props.data.email}</Normal>
+                        </Grid.Column>
 
-                    <AddFootBg>
-                        <br />
+                    </Grid.Row>
+                    <Divider />
+                    <Grid.Row>
+                        <Grid.Column width={6}>
+                            <Head>Address: </Head>
+                        </Grid.Column>
+                        <Divider />
+                        <Grid.Column width={8}>
+                            <Normal>{this.props.data.address}</Normal>
+                        </Grid.Column>
 
+                    </Grid.Row>
+                    <Divider />
+                    <Grid.Row>
+                        <Grid.Column width={6}>
+                            <Head>Phone: </Head>
+                        </Grid.Column>
+                        <Divider />
+                        <Grid.Column width={8}>
+                            <Normal>{this.props.data.phone}</Normal>
+                        </Grid.Column>
 
-                        <Grid>
-                            <Grid.Row>
-                                <Grid.Column width={6}>
-                                    <Head>Name: </Head>
-                                </Grid.Column>
-                                <Divider />
-                                <Grid.Column width={8}>
-                                    <Normal>{this.props.data.Fname} {this.props.data.Lname}</Normal>
-
-                                </Grid.Column>
-
-                            </Grid.Row>
-                            <Divider />
-                            <Grid.Row>
-                                <Grid.Column width={6}>
-                                    <Head>Email: </Head>
-                                </Grid.Column>
-                                <Divider />
-                                <Grid.Column width={8}>
-                                    <Normal>{this.props.data.email}</Normal>
-                                </Grid.Column>
-
-                            </Grid.Row>
-                            <Divider />
-                            <Grid.Row>
-                                <Grid.Column width={6}>
-                                    <Head>Address: </Head>
-                                </Grid.Column>
-                                <Divider />
-                                <Grid.Column width={8}>
-                                    <Normal>{this.props.data.address}</Normal>
-                                </Grid.Column>
-
-                            </Grid.Row>
-                            <Divider />
-                            <Grid.Row>
-                                <Grid.Column width={6}>
-                                    <Head>Phone: </Head>
-                                </Grid.Column>
-                                <Divider />
-                                <Grid.Column width={8}>
-                                    <Normal>{this.props.data.phone}</Normal>
-                                </Grid.Column>
-
-                            </Grid.Row>
+                    </Grid.Row>
 
 
-                        </Grid>
-                        <br />
-                    </AddFootBg>
+                </Grid>
+                <br />
 
-                </AddBG>
-                }
+                <center><Button onClick={() => { window.location = '/edit' }} primary size='big'> Edit my profile</Button></center>
 
 
-
-
-            </Container >
+            </Container>
         );
     }
 }

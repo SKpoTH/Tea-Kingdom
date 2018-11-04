@@ -73,12 +73,12 @@ export default class TemplateTKD extends Component {
         right = userRight;
         mobile = userMobile;
         break;
-      case "seller":
+      case "Seller":
         left = sellerLeft;
         right = sellerRight;
         mobile = sellerMobile;
         break;
-      case "admin":
+      case "Admin":
         left = adminLeft;
         right = adminRight;
         mobile = adminMobile;

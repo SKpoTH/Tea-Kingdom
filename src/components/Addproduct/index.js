@@ -18,9 +18,6 @@ const UploadImage = styled.div`
 	margin-bottom: 20px;
 `
 
-const HeaderSize = styled.div`
-	font-size: 18px;
-`
 
 const Comment = styled.div`
 	margin-top: 25px;
@@ -153,7 +150,7 @@ export default class AddProduct extends Component {
 						});
 					} else {
 						console.log(res.data.status);
-						// window.location = '/AboutUs';
+						window.location = '/seller';
 					}
 				})
 				.catch(err => console.error(err));
@@ -200,9 +197,9 @@ export default class AddProduct extends Component {
 						<Form>
 							<Form.Field>
 								<br />
-								<HeaderSize>
-									<Form.Input label='Product Name' placeholder='Name' onChange={(e, data) => { this.state.name = data.value }} />
-								</HeaderSize>
+
+								<Form.Input label='Product Name' placeholder='Name' onChange={(e, data) => { this.state.name = data.value }} />
+
 							</Form.Field>
 
 							<Form.Group unstackable widths={2}>
@@ -301,9 +298,9 @@ export default class AddProduct extends Component {
 						<Form>
 							<Form.Field>
 								<br />
-								<HeaderSize>
-									<Form.Input label='Product Name' placeholder='Name' onChange={(e, data) => { this.state.name = data.value }} />
-								</HeaderSize>
+
+								<Form.Input label='Product Name' placeholder='Name' onChange={(e, data) => { this.state.name = data.value }} />
+
 							</Form.Field>
 
 							<Form.Group unstackable widths={2}>
@@ -396,9 +393,9 @@ export default class AddProduct extends Component {
 							<Grid.Column width={12}>
 								<Form>
 									<Form.Field>
-										<HeaderSize>
-											<Form.Input label='Product Name' placeholder='Name' onChange={(e, data) => { this.state.name = data.value }} />
-										</HeaderSize>
+
+										<Form.Input label='Product Name' placeholder='Name' onChange={(e, data) => { this.state.name = data.value }} />
+
 									</Form.Field>
 									<Form.Group unstackable widths={2}>
 										<Form.Input label='Company Name' placeholder='company name' onChange={(e, data) => { this.state.company = data.value }} />

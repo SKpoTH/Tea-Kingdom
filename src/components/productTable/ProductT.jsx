@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "semantic-ui-css/semantic.css";
+import "./style.css";
 import { Card, Image, Button, Icon, Message, Divider } from "semantic-ui-react";
 
 class EEElement extends Component {
@@ -13,15 +14,15 @@ class EEElement extends Component {
         </Message>
         <Image src={this.props.img} alt="" />
         <Card.Content>
-          <Card.Description>{this.props.des}</Card.Description>
+          <Card.Description className="max-lines">{this.props.des}</Card.Description>
           <Card.Description as="h3">
-            <Icon name="dollar" />
+            <Icon name="btc" />
             {this.props.price}
           </Card.Description>
         </Card.Content>
         <Card.Content>
           <div className="ui two buttons">
-            <Button color="red" content="favorite" icon="heart" />
+            <Button color="red" content="favorite" icon="heart"  onClick={() => {window.location = "/under" }}/>
             <Button color="blue" content="see details" icon="eye" onClick={() => {window.location = "/ProductDetail"+this.props.id }} />
           </div>
         </Card.Content>

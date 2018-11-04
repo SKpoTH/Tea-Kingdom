@@ -1,319 +1,243 @@
 import React, { Component } from 'react';
 import TemplateTKD from '../template/TemplateTKD';
 import 'semantic-ui-css/semantic.css';
-import { Grid, Segment, List} from 'semantic-ui-react'
-import StickyBox from 'react-sticky-box';
-import 'react-sticky-header/styles.css';
-// import StickyHeader from 'react-sticky-header';
-import '../Tracking/style.css';
-
-
-
+import {Icon, Header,Container,Segment,Grid,Table,Responsive,Divider, Message} from 'semantic-ui-react'
 
 class Content extends Component {
-  state = {}
-
-  handleContextRef = contextRef => this.setState({ contextRef })
-
   render() {
-    // const { contextRef } = this.state
-
     return (
-      <div>
-        {/* code here (don't delete <div>) */
-        <Grid>
+      <Container textAlign = 'center'>
 
-          <Grid.Row>
-            <Grid.Column width = {10}>
-              <Grid>
-                <Grid.Row className = 'table-head'>
-                  <Grid.Column width = {5}>
-                    <h3>Item</h3>
-                  </Grid.Column>
-                  <Grid.Column width = {5}>
-                    <h3>Amount</h3>
-                  </Grid.Column>
-                  <Grid.Column width = {6}>
-                    <h3>Price</h3>
-                  </Grid.Column>
-
-                </Grid.Row>
-              </Grid>
+         <Header as='h2' icon>
+            <Icon name='truck' />
+            <u>Tracking</u>
+          </Header>
 
 
-              <Segment.Group className = 'table'>
-                <Segment>
-                  <Grid>
-                    <Grid.Column width = {5}>
-                      <p>Green Tea</p>
-                    </Grid.Column>
-                    <Grid.Column width = {5}>
-                      <p>2</p>
-                    </Grid.Column>
-                    <Grid.Column width = {6}>
-                      <p>300</p>
-                    </Grid.Column>
-                  </Grid>
-                </Segment>
+          <Responsive minWidth={768}>
+            <Grid padded>
+              <Grid.Row>
+                <Grid.Column width={4} textAlign='left'>
+                  <Icon name='list alternate outline' /><b>Tracking Number</b>
+                </Grid.Column>
+                <Grid.Column width={12} textAlign='left'>
+                  <b>SHP4005987790</b>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
 
-                <Segment>
-                  <Grid>
-                    <Grid.Column width = {5}>
-                      <p>Thai Tea</p>
-                    </Grid.Column>
-                    <Grid.Column width = {5}>
-                      <p>9</p>
-                    </Grid.Column>
-                    <Grid.Column width = {6}>
-                      <p>900</p>
-                    </Grid.Column>
-                  </Grid>
-                </Segment>
+            <Grid padded>
+              <Grid.Row>
+                <Grid.Column width={4} textAlign='left'>
+                  <Icon name='map marker alternate' /><b>Address</b>
+                </Grid.Column>
+                <Grid.Column width={12} textAlign='left'>
+                  50 Ngam Wong Wan Rd. Ladyao Chatuchak Bangkok 10900
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
 
-                <Segment>
-                  <Grid>
-                    <Grid.Column width = {5}>
-                      <p>Black Tea</p>
-                    </Grid.Column>
-                    <Grid.Column width = {5}>
-                      <p>7</p>
-                    </Grid.Column>
-                    <Grid.Column width = {6}>
-                      <p>700</p>
-                    </Grid.Column>
-                  </Grid>
-                </Segment>
+            <Grid padded>
+              <Grid.Row>
+                <Grid.Column width={4} textAlign='left'>
+                  <Icon name='envelope outline' /><b>Shipment Detail</b>
+                </Grid.Column>
+                <Grid.Column width={12} textAlign='left'>
+                  Kerry
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          
+            <Segment celled textAlign = 'left' inverted color='olive'>
+              <Icon name='truck' /><b>Tracking Information</b>
+              <Table celled>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell width={1}>Date</Table.HeaderCell>
+                    <Table.HeaderCell width={1}>Time</Table.HeaderCell>
+                    <Table.HeaderCell width={2}>Location</Table.HeaderCell>
+                    <Table.HeaderCell width={2}>Status</Table.HeaderCell>
+                  </Table.Row>
+                </Table.Header>
 
-                <Segment>
-                  <Grid>
-                    <Grid.Column width = {5}>
-                      <p>Yellow Tea</p>
-                    </Grid.Column>
-                    <Grid.Column width = {5}>
-                      <p>1</p>
-                    </Grid.Column>
-                    <Grid.Column width = {6}>
-                      <p>10</p>
-                    </Grid.Column>
-                  </Grid>
-                </Segment>
+                <Table.Body>
+                  <Table.Row>
+                    <Table.Cell>01/01/2018</Table.Cell>
+                    <Table.Cell>11.00</Table.Cell>
+                    <Table.Cell>Chonburi</Table.Cell>
+                    <Table.Cell>Delivered</Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>02/01/2018</Table.Cell>
+                    <Table.Cell>13.00</Table.Cell>
+                    <Table.Cell>Bangkok</Table.Cell>
+                    <Table.Cell>Arrived Hub</Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>03/01/2018</Table.Cell>
+                    <Table.Cell>09.00</Table.Cell>
+                    <Table.Cell>Bangkok</Table.Cell>
+                    <Table.Cell>Picked Up</Table.Cell>
+                  </Table.Row>
+                </Table.Body>
+              </Table>
+            </Segment>
+          </Responsive>
 
-                <Segment>
-                  <Grid>
-                    <Grid.Column width = {5}>
-                      <p>White Tea</p>
-                    </Grid.Column>
-                    <Grid.Column width = {5}>
-                      <p>2</p>
-                    </Grid.Column>
-                    <Grid.Column width = {6}>
-                      <p>600</p>
-                    </Grid.Column>
-                  </Grid>
-                </Segment>
 
-                <Segment>
-                  <Grid>
-                    <Grid.Column width = {5}>
-                      <p>Milk Tea</p>
-                    </Grid.Column>
-                    <Grid.Column width = {5}>
-                      <p>10</p>
-                    </Grid.Column>
-                    <Grid.Column width = {6}>
-                      <p>200</p>
-                    </Grid.Column>
-                  </Grid>
-                </Segment>
 
-                <Segment>
-                  <Grid>
-                    <Grid.Column width = {5}>
-                      <p>Apple Tea</p>
-                    </Grid.Column>
-                    <Grid.Column width = {5}>
-                      <p>3</p>
-                    </Grid.Column>
-                    <Grid.Column width = {6}>
-                      <p>900</p>
-                    </Grid.Column>
-                  </Grid>
-                </Segment>
-                <Segment>
-                  <Grid>
-                    <Grid.Column width = {5}>
-                      <p>Green Tea</p>
-                    </Grid.Column>
-                    <Grid.Column width = {5}>
-                      <p>2</p>
-                    </Grid.Column>
-                    <Grid.Column width = {6}>
-                      <p>300</p>
-                    </Grid.Column>
-                  </Grid>
-                </Segment>
 
-                <Segment>
-                  <Grid>
-                    <Grid.Column width = {5}>
-                      <p>Thai Tea</p>
-                    </Grid.Column>
-                    <Grid.Column width = {5}>
-                      <p>9</p>
-                    </Grid.Column>
-                    <Grid.Column width = {6}>
-                      <p>900</p>
-                    </Grid.Column>
-                  </Grid>
-                </Segment>
-
-                <Segment>
-                  <Grid>
-                    <Grid.Column width = {5}>
-                      <p>Black Tea</p>
-                    </Grid.Column>
-                    <Grid.Column width = {5}>
-                      <p>7</p>
-                    </Grid.Column>
-                    <Grid.Column width = {6}>
-                      <p>700</p>
-                    </Grid.Column>
-                  </Grid>
-                </Segment>
-
-                <Segment>
-                  <Grid>
-                    <Grid.Column width = {5}>
-                      <p>Yellow Tea</p>
-                    </Grid.Column>
-                    <Grid.Column width = {5}>
-                      <p>1</p>
-                    </Grid.Column>
-                    <Grid.Column width = {6}>
-                      <p>10</p>
-                    </Grid.Column>
-                  </Grid>
-                </Segment>
-
-                <Segment>
-                  <Grid>
-                    <Grid.Column width = {5}>
-                      <p>White Tea</p>
-                    </Grid.Column>
-                    <Grid.Column width = {5}>
-                      <p>2</p>
-                    </Grid.Column>
-                    <Grid.Column width = {6}>
-                      <p>600</p>
-                    </Grid.Column>
-                  </Grid>
-                </Segment>
-
-                <Segment>
-                  <Grid>
-                    <Grid.Column width = {5}>
-                      <p>Milk Tea</p>
-                    </Grid.Column>
-                    <Grid.Column width = {5}>
-                      <p>10</p>
-                    </Grid.Column>
-                    <Grid.Column width = {6}>
-                      <p>200</p>
-                    </Grid.Column>
-                  </Grid>
-                </Segment>
-
-                <Segment>
-                  <Grid>
-                    <Grid.Column width = {5}>
-                      <p>Apple Tea</p>
-                    </Grid.Column>
-                    <Grid.Column width = {5}>
-                      <p>3</p>
-                    </Grid.Column>
-                    <Grid.Column width = {6}>
-                      <p>900</p>
-                    </Grid.Column>
-                  </Grid>
-                </Segment>
-
-              </Segment.Group>
-
-              <Grid>
+          <Responsive maxWidth={767}>
+            <Grid celled>
                 <Grid.Row>
-                  <Grid.Column width = {5}>
-                    <h3 >Total</h3>
+                  <Grid.Column width={5} textAlign='center' verticalAlign='middle'>
+                    <Icon name='list alternate outline' /><b>Tracking Number</b>
                   </Grid.Column>
-                  <Grid.Column width = {5}>
-                    {/* <h3></h3> */}
-                  </Grid.Column>
-                  <Grid.Column width = {6}>
-                    <h4>399</h4>
+                  <Grid.Column width={11} textAlign='left'>
+                    <b>SHP4005987790</b>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
 
+              <Grid celled>
+                <Grid.Row>
+                  <Grid.Column width={5} textAlign='center' verticalAlign='middle'>
+                    <Icon name='map marker alternate' /><b>Address</b>
+                  </Grid.Column>
+                  <Grid.Column width={11} textAlign='left'>
+                    50 Ngam Wong Wan Rd. Ladyao Chatuchak Bangkok 10900
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
 
-            </Grid.Column>
-            <Grid.Column width = {6} id = "tracking-sidebar">
+              <Grid celled>
+                <Grid.Row>
+                  <Grid.Column width={5} textAlign='center' verticalAlign='middle'>
+                    <Icon name='envelope outline' /><b>Shipment Detail</b>
+                  </Grid.Column>
+                  <Grid.Column width={11} textAlign='left'>
+                    Kerry
+                  </Grid.Column>
+              </Grid.Row>
+            </Grid>
 
-              <StickyBox className="sidebar">
-                <div className = 'status-containter'>
-                  <List className = 'status'>
-                    <List.Item>
-                      <List.Icon name='marker' />
-                      <List.Content>Current Location :  Bangkok</List.Content>
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name='truck' />
-                      <List.Content>Transport Agency : Kerry</List.Content>
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name='clock outline' />
-                      <List.Content>Estimated Time : 5 days</List.Content>
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name='linkify' />
-                      <List.Content>
-                        <a href='http://www.semantic-ui.com'>Package Tracking</a>
-                      </List.Content>
-                    </List.Item>
-                  </List>
-                </div>
+            <Segment textAlign='left'>
+              <Icon name='truck' /><b>Tracking Information</b>
+                <Segment color='teal'>
+                  <Grid padded>
+                    <Grid.Row>
+                      <Grid.Column width={6} textAlign='left'>
+                        <b>Date</b>
+                      </Grid.Column>
+                      <Grid.Column>
+                        01/01/2018
+                      </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Column width={6} textAlign='left'>
+                        <b>Time</b>
+                      </Grid.Column>
+                      <Grid.Column>
+                        11.00
+                      </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Column width={6} textAlign='left'>
+                        <b>Location</b>
+                      </Grid.Column>
+                      <Grid.Column>
+                        Chonburi
+                      </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Column width={6} textAlign='left'>
+                        <b>Status</b>
+                      </Grid.Column>
+                      <Grid.Column>
+                        Delivered
+                      </Grid.Column>
+                    </Grid.Row>
+                  </Grid>
+                </Segment>
 
-                <br></br>
-                <br></br>
+                <Segment color='teal'>
+                  <Grid padded>
+                    <Grid.Row>
+                      <Grid.Column width={6} textAlign='left'>
+                        <b>Date</b>
+                      </Grid.Column>
+                      <Grid.Column>
+                        02/01/2018
+                      </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Column width={6} textAlign='left'>
+                        <b>Time</b>
+                      </Grid.Column>
+                      <Grid.Column>
+                        13.00
+                      </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Column width={6} textAlign='left'>
+                        <b>Location</b>
+                      </Grid.Column>
+                      <Grid.Column>
+                        Bangkok
+                      </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Column width={6} textAlign='left'>
+                        <b>Status</b>
+                      </Grid.Column>
+                      <Grid.Column>
+                        Arrived Hub
+                      </Grid.Column>
+                    </Grid.Row>
+                  </Grid>
+                </Segment>
 
-                <div className = 'tracking-number'>
-                  <h4>Tracking Number</h4>
-                  <h1>1Q2W3E4R</h1>
-                </div>
+                <Segment color='teal'>
+                  <Grid padded>
+                    <Grid.Row>
+                      <Grid.Column width={6} textAlign='left'>
+                        <b>Date</b>
+                      </Grid.Column>
+                      <Grid.Column>
+                        03/01/2018
+                      </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Column width={6} textAlign='left'>
+                        <b>Time</b>
+                      </Grid.Column>
+                      <Grid.Column>
+                        09.00
+                      </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Column width={6} textAlign='left'>
+                        <b>Location</b>
+                      </Grid.Column>
+                      <Grid.Column>
+                        Bangkok
+                      </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Column width={6} textAlign='left'>
+                        <b>Status</b>
+                      </Grid.Column>
+                      <Grid.Column>
+                        Picked Up
+                      </Grid.Column>
+                    </Grid.Row>
+                  </Grid>
+                </Segment>
 
-                <br></br>
-                <br></br>
+            </Segment>
+          </Responsive> 
 
-              </StickyBox>
-
-            </Grid.Column>
-          </Grid.Row>
-
-
-          <div className = 'tracking-policy'>
-            <h5>Tracking Policy</h5>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-  proident, sunt in culpa qui officia deseruntes... <a>more</a></p>
-          </div>
-        </Grid>
-
-
-
-
-        }
-      </div>
+      </Container>
     );
   }
 }

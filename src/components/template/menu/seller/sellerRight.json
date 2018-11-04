@@ -1,6 +1,6 @@
 [
-    { "show": "Track" , "url" : "/track" },
-    { "show": "Cart" , "url" : "/order" },
-    { "show": "PERSON" , "url" : "/TERNGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG" },
+    { "show": "Track" , "url" : "/under" },
+    { "show": "AddProduct" , "url" : "/addproduct" },
+    { "show": "PERSON" , "url" : "/seller" },
     { "show": "Logout" , "url" : "NON_USE" }
 ]

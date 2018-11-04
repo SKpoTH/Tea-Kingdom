@@ -8,8 +8,8 @@ class Content extends Component {
   render() {
     return (
       <Container textAlign = 'center'>
-          <Header as='h1' icon>
-            <Icon name='exclamation triangle' />
+          <Header as='h1' icon >
+            <Icon name='exclamation triangle' color='red'/>
             UNDER CONSTRUCTION
           </Header>
       </Container>

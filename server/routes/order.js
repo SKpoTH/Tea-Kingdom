@@ -7,7 +7,7 @@ var Product = require('../models/product');
 var Order = require('../models/order');
 
 //Load doc of Order page
-router.post('/load', passport.authenticate('jwt', { session: false}), function(req, res){
+router.get('/load', passport.authenticate('jwt', { session: false}), function(req, res){
     var user_email = req.user.email;
     Order.findOne({ 
         email: user_email,
@@ -20,7 +20,7 @@ router.post('/load', passport.authenticate('jwt', { session: false}), function(r
             }
             else{
                 res.json({
-                    status: 'No Ordering'
+                    product: []
                 });
             }
     })
@@ -40,8 +40,8 @@ router.post('/update', passport.authenticate('jwt', { session: false}), function
                 var i = order.product.length;
 
                 while(i--){
-                    if(order.product[i].productID == req.body.productID){
-                        order.product[i].amount = req.body.amount;
+                    if(order.product[i].productID == req.body.product[i].productID){
+                        order.product[i].amount = req.body.product[i].amount;
                     }
                 }
 
@@ -61,7 +61,7 @@ router.post('/update', passport.authenticate('jwt', { session: false}), function
 })
 
 //Remove Current Order
-router.post('/remove_order', passport.authenticate('jwt', { session: false}), function(req, res){
+router.get('/remove_order', passport.authenticate('jwt', { session: false}), function(req, res){
     var user_email = req.user.email;
     Order.findOneAndRemove({
         email: user_email,
@@ -83,6 +83,7 @@ router.post('/remove_product_from_order', passport.authenticate('jwt', { session
         status: 'Ordering'
     })
         .then( order => {
+            console.log(req.body.productID);
             order.product.id(req.body.productID).remove();
             order.save()
                 .then( order => {

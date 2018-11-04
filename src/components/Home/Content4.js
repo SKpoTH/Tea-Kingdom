@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import "semantic-ui-css/semantic.css";
-import { Image, Container } from 'semantic-ui-react'
-import pic from './tea1.jpg'
+import { Image, Container, Reveal } from 'semantic-ui-react'
+import pic from './tea1.jpg';
+import pic2 from './store.jpg'
 
 
 const Margin = styled.div`
@@ -34,10 +35,14 @@ export default class Content1 extends Component {
         return (
             <Container fluid>
                 <Margin>
-                    <Image src={pic} floated='left'
-
-                        href='/product'
-                    />
+                    <Reveal animated='small fade' >
+                        <Reveal.Content visible>
+                            <Image src={pic} href='/product' />
+                        </Reveal.Content>
+                        <Reveal.Content hidden>
+                            <Image src={pic2} href='/product' />
+                        </Reveal.Content>
+                    </Reveal>
                     <br />
                     <Head>We provide</Head>
                     <Para>

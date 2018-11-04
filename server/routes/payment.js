@@ -6,7 +6,7 @@ const passport = require('passport');
 const Product = require('../models/product');
 const Order = require('../models/order');
 
-router.post('/pay_confirm', passport.authenticate('jwt', { session: false}), function(req, res){
+router.get('/pay_confirm', passport.authenticate('jwt', { session: false}), function(req, res){
     var user_email = req.user.email;
     Order.findOne({
         email: user_email,
