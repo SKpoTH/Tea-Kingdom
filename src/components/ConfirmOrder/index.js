@@ -62,7 +62,7 @@ class Content extends Component {
 			});
 		} else {
 			window.location = '/product';
-			axios.post('/api/...', bill, { headers: { Authorization: localStorage.getItem("token") } })
+			axios.post('/api/payment/credit_card', bill, { headers: { Authorization: localStorage.getItem("token") } })
 				.then((res) => {
 
 					if (res.data.status = "Wrong card number") {
