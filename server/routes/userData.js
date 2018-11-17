@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var user = require('../models/user');
-var passport = require('passport');
+const user = require('../models/user');
+const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
 router.post('/one', passport.authenticate('jwt', { session: false }), function(req, res){

@@ -12,8 +12,6 @@ var User = new Schema({
         address:        { type: String,   require: true},
         phone:          { type: String,   require: true},
 
-        creaditCard:    { type: String,   require: true},
-
         point:          { type: Number,   require: true},
 
         favourite: [{

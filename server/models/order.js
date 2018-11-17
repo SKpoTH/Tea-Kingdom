@@ -30,6 +30,7 @@ const OrderSchema = new Schema({
             
             productImage: { type: String,require: true}
     }],
+
     date:           { type: Date, require: true},
     status:         { type: String, require: true}
 },{

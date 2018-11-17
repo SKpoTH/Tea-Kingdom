@@ -47,6 +47,8 @@ const seller = require('./routes/seller');
 const edit_product = require('./routes/edit_product');
 const payment = require('./routes/payment');
 const userdata = require('./routes/userData');
+const tracking = require('./routes/tracking');
+const favourite = require('./routes/favourite');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -73,6 +75,8 @@ app.use('/api/seller', seller);
 app.use('/api/edit_product', edit_product)
 app.use('/api/payment', payment);
 app.use('/api/userdata', userdata);
+app.use('/api/tracking', tracking);
+app.use('/api/favourite', favourite);
 
 //for deploy only start
 app.use(express.static(path.join(__dirname, '/build')));

@@ -26,7 +26,7 @@ router.get('/load', passport.authenticate('jwt', { session: false}), function(re
     })
 })
 
-//
+// Update the order
 router.post('/update', passport.authenticate('jwt', { session: false}), function(req, res){
     var user_email = req.user.email;
     
@@ -93,8 +93,6 @@ router.post('/remove_product_from_order', passport.authenticate('jwt', { session
                 })
         })
 })
-
-
 
 
 module.exports = router;
