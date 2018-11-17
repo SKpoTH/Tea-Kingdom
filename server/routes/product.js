@@ -11,6 +11,30 @@ router.post('/load', function(req, res){
     });
 })
 
+// Get only one product Information
+router.post('/stock', function(req, res){
+    Product.findOne({
+        _id: req.body.productID
+    })
+    .then( product => {
+        if(product){
+            res.json({
+                data: product,
+                status: 'Successfully Get Data'
+            })
+        } else{
+            res.json({
+                status: 'No searching product',
+            })
+        }
+    })
+    .catch( err => {
+        res.json({
+            status: 'Error: Cannnot load product information'
+        })
+    })
+})
+
 router.post('/loadAll', function(req, res){
     Product.find((err, product) => {
         res.json(product);

@@ -8,6 +8,8 @@ const User = require('../models/user');
 const Product = require('../models/product');
 
 // Add product to favourite list
+
+
 router.post('/add_favourite', passport.authenticate('jwt', { session: false}), function(req, res){
     
     // Find logged in user email
