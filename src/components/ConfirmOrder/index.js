@@ -41,7 +41,7 @@ class Content extends Component {
 		axios.get('/api/payment/pay_confirm', { headers: { Authorization: localStorage.getItem("token") } })
 			.then((res) => {
 				console.log(res.data.status);
-				window.location = '/product';
+				window.location = '/track';
 			});
 
 		const bill = {
@@ -129,10 +129,6 @@ class Content extends Component {
 							<Segment basic style={{ border: 'white' }} textAlign='right'>{Shipment}</Segment>
 						</Segment.Group>
 						<Segment.Group horizontal style={{ border: 'white' }}>
-							<Segment basic style={{ border: 'white' }}>Earned Point  : </Segment>
-							<Segment basic style={{ border: 'white' }} textAlign='right'>{prePrice / 100}</Segment>
-						</Segment.Group>
-						<Segment.Group horizontal style={{ border: 'white' }}>
 							<Segment basic style={{ border: 'white' }}>Total Price : </Segment>
 							<Segment basic style={{ border: 'white' }} textAlign='right'>{prePrice + Shipment}</Segment>
 						</Segment.Group>
@@ -143,7 +139,7 @@ class Content extends Component {
 				</Grid.Column>
 				<Grid.Column width={5}>
 					<h1> Payment </h1>
-					<Form checkout={this.checkout}>
+					<Form checkout={this.checkout} size='small'>
 						<Form.Field>
 							<label>Card ID</label>
 							<input type="card id" placeholder='card id : xxxx xxxx xxxx xxx' ref={(input) => this.card_id = input} />

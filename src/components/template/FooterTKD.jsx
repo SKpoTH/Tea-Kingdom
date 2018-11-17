@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Container , Grid , Header , List , Item , Divider , Icon } from 'semantic-ui-react'
+import { Segment, Container, Grid, Header, List, Item, Divider, Icon } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.css';
 
 export default class FooterTKD extends Component {
@@ -21,25 +21,25 @@ export default class FooterTKD extends Component {
               <Header as='h4'>Customer Service</Header>
               <List link>
                 <List.Item as='a'>Help</List.Item>
-                <List.Item as='a' onClick={() => {window.location = '/policy'}}>About Us</List.Item>
-                <List.Item as='a'>General Policies</List.Item>
+                <List.Item as='a' onClick={() => { window.location = '/AboutUs' }}>About Us</List.Item>
+                <List.Item as='a' onClick={() => { window.location = '/policy' }}>General Policies</List.Item>
               </List>
             </Grid.Column>
             <Grid.Column>
               <Header as='h4'>Support By</Header>
-              <Icon name='facebook f' size='big'/>
-              <Icon name='twitter' size='big'/>
-              <Icon name='google plus g' size='big'/>
-              <Icon name='instagram' size='big'/>
-              <Icon name='cc visa' size='big'/>
-              <Icon name='cc mastercard' size='big'/>
-              <Icon name='cc paypal' size='big'/>
-              <Icon name='cc amex' size='big'/>
+              <Icon name='facebook f' size='big' />
+              <Icon name='twitter' size='big' />
+              <Icon name='google plus g' size='big' />
+              <Icon name='instagram' size='big' />
+              <Icon name='cc visa' size='big' />
+              <Icon name='cc mastercard' size='big' />
+              <Icon name='cc paypal' size='big' />
+              <Icon name='cc amex' size='big' />
               <Item as='p'>Support for the continued development of Semantic UI comes directly from the community.</Item>
             </Grid.Column>
           </Grid>
         </Container>
-        <Divider/>
+        <Divider />
         <Container textAlign='center'>
           <Item className="center">&copy; 2018 Tea-kingdom</Item>
         </Container>
