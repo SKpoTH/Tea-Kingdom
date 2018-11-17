@@ -36,7 +36,14 @@ export default class MainProduct extends Component {
       }
     }
   }
-  
+  addFev = () => {
+    axios.post('/api/add_favorite', { productID : this.props.id })
+    .then((res) => {console.log(res.data)})
+    .catch((error) => {
+      console.log(error)
+    });
+  }
+
   send = () => {
     const myOrder = {
       productID : this.props.dataR.id,
@@ -100,7 +107,7 @@ export default class MainProduct extends Component {
                         <Item.Extra className="indent">There are {this.props.dataR.amount} available</Item.Extra>
                         <br/>
                         <Button color="blue" content="add to cart" icon="cart" onClick={() => {this.send()}} />
-                        <Button color="red" icon="heart" onClick={() => {this.send()}} />
+                        <Button color="red" icon="heart" onClick={() => {this.addFev()}} />
                         <Divider className="margin7" hidden/>
                       </Item.Content>
                     </Item.Content>

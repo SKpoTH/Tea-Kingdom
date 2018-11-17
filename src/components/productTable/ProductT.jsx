@@ -5,18 +5,14 @@ import { Card, Image, Button, Icon, Message, Divider } from "semantic-ui-react";
 import axios from 'axios'
 
 class EEElement extends Component {
-  send = () => {
-    const myOrder = {
-      productID : this.props.id,
-      amount: 1
-    }
-    axios.post('/api/add_to_cart/add', myOrder)
-        .then((res) => {console.log(res.data)})
-				.catch((error) => {
-          console.log(error)
-        });
-    window.location = "/order";
-  };
+  addFev = () => {
+    axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
+    axios.post('/api/add_favorite', { productID : this.props.id })
+    .then((res) => {console.log(res.data)})
+    .catch((error) => {
+      console.log(error)
+    });
+  }
 
   render() {
     return (
@@ -37,7 +33,7 @@ class EEElement extends Component {
         </Card.Content>
         <Card.Content>
           <div className="ui two buttons">
-            <Button color="red" content="favorite" icon="heart" onClick={() => {this.send()}} />
+            <Button color="red" content="favorite" icon="heart" onClick={() => {this.addFev()}} />
             <Button color="blue" content="see details" icon="eye" onClick={() => {window.location = "/ProductDetail"+this.props.id }} />
           </div>
         </Card.Content>
