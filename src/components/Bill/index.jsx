@@ -102,7 +102,7 @@ export default class Content extends Component {
                         message:
                         {
                             massageHidden: false,
-                            content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
+                            // content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
                             status: "negative"
                         }
                     }
