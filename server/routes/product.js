@@ -5,68 +5,26 @@ var Product = require('../models/product');
 
 router.post('/load', function(req, res){
     Product.find({
-        pending: false
+        pending: true
     }, (err, product) => {
         res.json(product);
     });
+})
 
-    /*
-    res.json([{
-        imgurl: './imgs/aulong.jpg',
-        productName: 'ชาอูหลง',
-        productPrice: '300',
-        productDes: 'ชาชั้นดีจากประเทศจีนที่ สดใหม่',
-        productId: '123456789'
-    }, {
-        imgurl: './imgs/aulong.jpg',
-        productName: 'ชาอูหลง',
-        productPrice: '300',
-        productDes: 'ชาชั้นดีจากประเทศจีนที่ สดใหม่',
-        productId: '123456789'
-    }, {
-        imgurl: './imgs/aulong.jpg',
-        productName: 'ชาอูหลง',
-        productPrice: '300',
-        productDes: 'ชาชั้นดีจากประเทศจีนที่ สดใหม่',
-        productId: '123456789'
-    }, {
-        imgurl: './imgs/aulong.jpg',
-        productName: 'ชาอูหลง',
-        productPrice: '300',
-        productDes: 'ชาชั้นดีจากประเทศจีนที่ สดใหม่',
-        productId: '123456789'
-    }, {
-        imgurl: './imgs/aulong.jpg',
-        productName: 'ชาอูหลง',
-        productPrice: '300',
-        productDes: 'ชาชั้นดีจากประเทศจีนที่ สดใหม่',
-        productId: '123456789'
-    }, {
-        imgurl: './imgs/aulong.jpg',
-        productName: 'ชาอูหลง',
-        productPrice: '300',
-        productDes: 'ชาชั้นดีจากประเทศจีนที่ สดใหม่',
-        productId: '123456789'
-    }, {
-        imgurl: './imgs/aulong.jpg',
-        productName: 'ชาอูหลง',
-        productPrice: '300',
-        productDes: 'ชาชั้นดีจากประเทศจีนที่ สดใหม่',
-        productId: '123456789'
-    }, {
-        imgurl: './imgs/aulong.jpg',
-        productName: 'ชาอูหลง',
-        productPrice: '300',
-        productDes: 'ชาชั้นดีจากประเทศจีนที่ สดใหม่',
-        productId: '123456789'
-    }, {
-        imgurl: './imgs/aulong.jpg',
-        productName: 'ชาอูหลง',
-        productPrice: '200',
-        productDes: 'ชาชั้นดีจากประเทศจีนที่ สดใหม่',
-        productId: '123456789'
-    }])
-    */
+router.post('/loadAll', function(req, res){
+    Product.find((err, product) => {
+        res.json(product);
+    });
+})
+
+router.post('/update', function(req, res){
+    Product.findById(req.body.id)
+    .then(item => {
+        item[req.body.field] = req.body.data;
+        item.save();
+        // console.log(item);
+        res.json({status : "updated"});
+    })
 })
 
 module.exports = router;

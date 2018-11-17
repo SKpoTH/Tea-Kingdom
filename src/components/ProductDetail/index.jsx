@@ -6,7 +6,7 @@ import MainProduct from "./MainProduct";
 import SubProduct from "./SubProduct";
 import Review from "./Review";
 import axios from 'axios'
-import { Message } from "semantic-ui-react";
+import { Message, Dimmer, Loader } from "semantic-ui-react";
 
 class ProductDetail extends Component {
   constructor(props) {
@@ -14,9 +14,12 @@ class ProductDetail extends Component {
     this.state = {
       message : 
 				{ massageHidden : true, content :'', status: ""},
-      id : props.params.id
+      id : props.params.id,
+      loading : "active"
     }
-    this.getData()
+  }
+  componentDidMount() {
+    this.getData();
   }
   getData = () => {
     axios.post('/api/product_detail/load', { productID: this.state.id } )
@@ -40,13 +43,15 @@ class ProductDetail extends Component {
               pending: jsonReturn.pending,
               productImage: jsonReturn.productImage,
               discount: jsonReturn.discount,
-              cantLoad : false
+              cantLoad : false,
+              loading : ""
             })
 
           } else {
-            this.setState( {cantLoad : true} );
             this.setState( {message : 
-              { massageHidden : false, content :'We don\'t have this product.', status: "negative"}});
+              { massageHidden : false, content :'We don\'t have this product.', status: "negative"},
+              cantLoad : true,
+              loading : ""});
           }
 
 				})
@@ -55,13 +60,17 @@ class ProductDetail extends Component {
 					this.setState({ message : 
             { massageHidden : false, 
               content :"Error : "+error.response.status+" => "+error.response.data.split("<pre>")[1].split("</pre>")[0], 
-              status: "negative"}}
+              status: "negative",
+              loading : ""}}
             );
 				});
   };
   render() {
     return (
       <TemplateTKD>
+        <Dimmer className={this.state.loading} inverted>
+          <Loader size='large'>Loading</Loader>
+        </Dimmer>
         <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status}/>
         {this.state.cantLoad ? null : <MainProduct dataR={this.state} />}          
         {/* <SubProduct /> */}

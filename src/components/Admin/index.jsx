@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TemplateTKD from '../template/TemplateTKD';
 import 'semantic-ui-css/semantic.css';
-import { Table, Button, Checkbox, Dropdown, Image, Message, Divider } from 'semantic-ui-react'
+import { Table, Button, Checkbox, Dropdown, Image, Message, Divider, Dimmer, Loader } from 'semantic-ui-react'
 import axios from 'axios'
 import "./style.css";
 
@@ -13,10 +13,15 @@ export default class Admin extends Component {
       userAdjusting : '',
       all : [],
       message : 
-        { massageHidden : true, content :'', status: ""}
+        { massageHidden : true, content :'', status: ""},
+      loading : "active"
     }
 		axios.defaults.headers.common['Authorization'] = localStorage.getItem("token"); 
-    this.getAll()
+    
+  }
+  componentDidMount() {
+    this.getAll();
+    console.log("load success");
   }
   getAll = () => {
     axios.get('/api/userData/all')
@@ -28,11 +33,12 @@ export default class Admin extends Component {
           res.data.data[i].show = 'disabled';
         }
         // console.log(res.data.data);
-        this.setState({all : res.data.data});
+        this.setState({all : res.data.data, loading : ""});
       }   
     })
     .catch((error) => {
       console.log(error);
+      this.setState({loading : ""});
     });
   }
   updateItem(index, itemAttributes) {
@@ -82,6 +88,9 @@ export default class Admin extends Component {
     ]
     return (
       <TemplateTKD>
+        <Dimmer className={this.state.loading} inverted>
+          <Loader size='large'>Loading</Loader>
+        </Dimmer>
         <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status}/>
         <h1>Promote Users</h1>
         <Table celled striped>

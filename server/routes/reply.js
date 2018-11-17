@@ -3,6 +3,8 @@ var router = express.Router();
 
 var review = require('../models/review');
 var passport = require('passport');
+const User = require('../models/user');
+const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 
 router.post('/new', passport.authenticate('jwt', { session: false }), function(req, res){
@@ -35,9 +37,23 @@ router.post('/sub', passport.authenticate('jwt', { session: false }), function(r
     });
 })
 router.post('/load', (req, res) => {
-    review.find({ 
-        productID : req.body.productID
+    //mongoose.product.aggregate({ $lookup: { from: "users", localField: "email", foreignField: "email", as: "user" } })
+    // review.find({ 
+    //     productID : req.body.productID  
+    // })
+    review.aggregate([  { $match: { productID : req.body.productID } },
+                        { $addFields: { uniqueIID : "$_id"} },
+                        { $unwind: { path :"$reply", preserveNullAndEmptyArrays : true } },
+                        { $lookup: { from: "users", localField: "reply.email", foreignField: "email", as: "user" } },
+                        { $addFields: { reply : { prof : { $arrayElemAt: [ "$user", 0 ] } }}},
+                        { $group : { _id : { uniqueIID : "$uniqueIID", productID : "$productID", email : "$email", text : "$text" }, reply : { $push: "$reply"} } },
+                        { $lookup: { from: "users", localField: "_id.email", foreignField: "email", as: "user" } },
+                        { $project : { _id : "$_id.uniqueIID", productID : "$_id.productID", text: "$_id.text", user : { $arrayElemAt: [ "$user", 0 ] }, reply : "$reply" } }
+                    ])
+    .then(s => {
+        // console.log(s)
+        // console.log(s.length)
+        res.json(s)
     })
-    .then(dataJason => {res.json(dataJason)});
 })
 module.exports = router;

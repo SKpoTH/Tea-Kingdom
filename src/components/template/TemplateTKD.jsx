@@ -8,7 +8,8 @@ import {
   Divider,
   Image,
   Sidebar,
-  Icon
+  Icon,
+  Label
 } from "semantic-ui-react";
 import FooterTKD from "./FooterTKD";
 import axios from 'axios';
@@ -34,7 +35,7 @@ export default class TemplateTKD extends Component {
     this.state = {
       visible: false,
       userData :
-        { name :undefined, profileImage: undefined, type: undefined },
+        { name :undefined, profileImage: undefined, type: undefined, chart: 0 },
     }
     this.getData();
   }
@@ -43,8 +44,9 @@ export default class TemplateTKD extends Component {
       // console.log(localStorage.getItem("token"));
       axios.get('/api/authen/load',{ headers: { Authorization: localStorage.getItem("token") } })
       .then((res) => {
+        // console.log(res)
         if(res.data.status === "logged in")
-          this.setState({userData : {name :  res.data.firstname , profileImage: res.data.profileImage, type: res.data.type }});
+          this.setState({userData : {name :  res.data.firstname , profileImage: res.data.profileImage, type: res.data.type, chart: res.data.chart }});
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -153,7 +155,7 @@ export default class TemplateTKD extends Component {
                   <Menu.Menu position="right">
                     {right.map(item => 
                       <React.Fragment>
-                        {item.show === "Cart" ? <Menu.Item page={item.url} onClick={this.handleItemClick} ><Icon name='cart' /></Menu.Item> : 
+                        {item.show === "Cart" ? <Menu.Item page={item.url} onClick={this.handleItemClick} ><Icon name='cart' />{this.state.userData.chart > 0 ? <Label circular size='tiny' color='teal' floating>{this.state.userData.chart}</Label> : null}</Menu.Item> : 
                           item.show === "PERSON" ? <Menu.Item page={item.url} onClick={this.handleItemClick}><Image src={this.state.userData.profileImage} avatar />{this.state.userData.name}</Menu.Item> : 
                            item.show === "Logout" ? <Menu.Item name={item.show} active={activeItem === item.show} onClick={this.sendLogot} /> :
                             <Menu.Item

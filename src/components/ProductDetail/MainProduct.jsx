@@ -99,7 +99,8 @@ export default class MainProduct extends Component {
                         <br/>
                         <Item.Extra className="indent">There are {this.props.dataR.amount} available</Item.Extra>
                         <br/>
-                        <Button color="red" content="add to cart" icon="cart" onClick={() => {this.send()}} />
+                        <Button color="blue" content="add to cart" icon="cart" onClick={() => {this.send()}} />
+                        <Button color="red" icon="heart" onClick={() => {this.send()}} />
                         <Divider className="margin7" hidden/>
                       </Item.Content>
                     </Item.Content>

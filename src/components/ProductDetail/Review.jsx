@@ -9,19 +9,22 @@ export default class Review extends Component {
     super(props);
     this.state = {
       mail_reply : '',
+      name_reply : '',
       show : "hidD",
       comment : '',
       id_host : '',
       load : []
     }
     axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
+  }
+  componentDidMount() {
     this.getD();
   }
   getD = () => {
     axios.post('/api/reply/load', { productID : this.props.idR })
     .then((res) => {
-      this.setState({load : res.data});
-      // console.log(this.state.load)
+      console.log(res.data)
+      this.setState({load : res.data.reverse()})
     })
     .catch((error) => {
       console.log(error)
@@ -40,6 +43,7 @@ export default class Review extends Component {
         // console.log(res.data)
         this.setState({
           mail_reply : '',
+          name_reply : '',
           show : "hidD",
           comment : '',
           id_host : ''
@@ -59,6 +63,7 @@ export default class Review extends Component {
         // console.log(res.data)
         this.setState({
           mail_reply : '',
+          name_reply : '',
           show : "hidD",
           comment : '',
           id_host : ''
@@ -78,36 +83,42 @@ export default class Review extends Component {
           <Header as="h2" dividing>Comments</Header>
           {this.state.load.map(item =>
             <div class="comment">
-              <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
+              <Comment.Avatar src={item.user.profileImage} />
               <div class="content">
-                <a class="author">{item.email}</a>
+                <a class="author">{item.user.firstname}</a>
                 <div class="text">{item.text}</div>
                 <div class="actions">
-                  <a onClick={()=> {this.setState({show: '', mail_reply: item.email, id_host: item._id})}}>Reply</a>
+                  <a onClick={()=> {this.setState({show: '', name_reply: item.user.firstname, mail_reply: item.user.email, id_host: item._id})}}>Reply</a>
                 </div>
               </div>
-              {item.reply.map(sub => 
-                <div class="ui comments">
-                  <div class="comment">
-                    <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/elliot.jpg" />
-                    <div class="content">
-                      <a class="author">{sub.email}</a>
-                      <div class="text">{sub.text}</div>
+              {item.reply.map(sub =>
+                <React.Fragment>
+                  {JSON.stringify(sub) === "{}" ? null : 
+                  <div class="ui comments">
+                    <div class="comment">
+                      <Comment.Avatar src={sub.prof.profileImage} />
+                      <div class="content">
+                        <a class="author">{sub.prof.firstname}</a>
+                        <div class="text">{sub.text}</div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                  }
+                </React.Fragment>
               )}
             </div>
           )}
+          {localStorage.getItem("token") != undefined ? 
           <Form reply>
             <div className={"ui fluid right labeled input "+this.state.show}>
-              <input className='info' type="text" value={"Reply : "+this.state.mail_reply}  disabled/>
+              <input className='info' type="text" value={"Reply : "+this.state.name_reply}  disabled/>
               <button className="ui button label instagram" role="button" onClick={()=>{this.setState({show : "hidD"})}}>Reply Product</button>
             </div>
             <br />
             <Form.TextArea value={this.state.comment} onChange={(e,data)=>{this.setState({comment : data.value})}}/>
             <Button content="Add Reply" labelPosition="left" icon="edit" primary onClick={this.sendE} />
-          </Form>
+          </Form> : null
+          }
         </Comment.Group>
       </Container>
     );
