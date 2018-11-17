@@ -8,7 +8,7 @@ var Order = require('../models/order');
 
 //Load doc of Order page
 router.get('/load', passport.authenticate('jwt', { session: false}), function(req, res){
-    var user_email = req.user.email;
+    let user_email = req.user.email;
     Order.findOne({ 
         email: user_email,
         status: 'Ordering' 

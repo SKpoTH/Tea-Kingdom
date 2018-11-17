@@ -35,6 +35,25 @@ export default class OrderCom extends Component {
 		});
 	}
 
+	checkStock = (productID) => {
+		const sent = {
+			productID: productID
+		}
+
+		let stock;
+
+		axios.post('/api/product/stock', sent, { headers: { Authorization: localStorage.getItem("token") } })
+			.then(res => {
+				console.log('==========================');
+				stock = res.data.data.amount;
+				return stock;
+			})
+			.catch(err => {
+				console.log('Error');
+			})
+	}
+
+
 	// Send Data to update database
 	sendData = () => {
 		const sent = {
@@ -160,18 +179,41 @@ export default class OrderCom extends Component {
 									<Image src={item.productImage} style={{ width: '20%', height: '20%', display: 'inline' }} />
 									{item.name}
 								</Table.Cell>
-								<Table.Cell width='2'>{item.price}</Table.Cell>
+								<Table.Cell width='2'>
+									<h4 className='inlineE'>
+										{ item.discount ?  item.discountPrice : item.price }
+									</h4>
+									&nbsp;&nbsp;&nbsp;
+									<h4 className='oldPrice'>
+										{ item.discount ?  item.price : null }
+									</h4>
+								</Table.Cell>
 								<Table.Cell width='4'>
 									<Label className="PointerEdit button" onClick={() => { (this.state.product[i].amount-1) > 0 ? this.updateItem(i, { amount: this.state.product[i].amount - 1 }) : null }}>
 										<Icon name="minus" fitted />
 									</Label>
 									{item.amount}
-									<Label className="PointerEdit button" onClick={() => { this.updateItem(i, { amount: this.state.product[i].amount + 1 }) }}>
+									<Label className="PointerEdit button" onClick={() => { (this.state.product[i].amount+1) < 30 ? this.updateItem(i, { amount: this.state.product[i].amount + 1 }) : null }}>
 										<Icon name="plus" fitted />
 									</Label>
+									{ console.log(this.checkStock(item.productID)) }
 								</Table.Cell>
 								<Table.Cell width='2'>
-									{item.price * item.amount}
+									<h4 className='inlineE'>
+									{
+										item.discount ?
+										item.discountPrice * item.amount :
+										item.price * item.amount
+									}
+									</h4>
+									&nbsp;&nbsp;&nbsp;
+									<h4 className='oldPrice'>
+									{
+										item.discount ?
+										item.price * item.amount :
+										null
+									}
+									</h4>
 								</Table.Cell>
 								<Table.Cell width='2'>
 									<Button color='red' icon='remove' onClick={() => { this.removeItem(i) }} />

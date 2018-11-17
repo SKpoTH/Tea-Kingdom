@@ -55,23 +55,21 @@ export default class Content extends Component {
     onSubmit = (event) => {
         event.preventDefault();
 
-        //data
-        var billData = new FormData();
-
-        billData.set('card_id', this.state.card_id);
-        billData.set('exp', this.state.exp);
-        billData.set('cvv', this.state.cvv);
-
-        console.log(this.state.file);
+        const billData = {
+            id: this.state.card_id,
+            exp: this.state.exp,
+            cvv: this.state.cvv
+        }
 
         var checkEmpty = false;
 
-        for (var a in this.state) {
-            if (this.state[a] === "" || this.state[a] === undefined) {
-                console.log("Don't have data at -> " + a);
+        for (let a in billData) {
+            if (billData[a] === "" || billData[a] === undefined) {
                 checkEmpty = true;
             }
         }
+
+        console.log(billData);
 
         if (checkEmpty) {
             this.setState({
@@ -79,22 +77,10 @@ export default class Content extends Component {
                     { massageHidden: false, content: 'You must containt datas in all field.', status: "negative" }
             });
         } else {
-            axios.post('/api/payment/credit_card', billData, { headers: { Authorization: localStorage.getItem("token") } })
+            axios.post('/api/payment/pay_confirm', billData, { headers: { Authorization: localStorage.getItem("token") } })
                 .then((res) => {
                     console.log(res.data.status);
                     window.location = '/track';
-
-                    // if (res.data.status = "Wrong card number") {
-                    //     this.setState({
-                    //         message:
-                    //             { massageHidden: false, content: res.data.status, status: "negative" }
-                    //     });
-                    // }
-                    // else {
-                    //     console.log(res.data.status);
-                    //     this.getData();
-                    //     window.location = '/track';
-                    // }
                 })
                 .catch((error) => {
                     this.setState({ cantLoad: true });
@@ -108,13 +94,8 @@ export default class Content extends Component {
                     }
                     );
                 })
-
-
-
         }
     }
-
-
 
     render() {
         let prePrice = 0, Shipment = 40;
@@ -170,7 +151,7 @@ export default class Content extends Component {
                                 <Head> Payment </Head>
                                 <Form.Input label='Card ID' placeholder='card id: xxxx xxxx xxxx xxxx' onChange={(e, data) => { this.state.card_id = data.value }} />
                                 <Form.Input label='exp' placeholder='exp : YY/MM' onChange={(e, data) => { this.state.exp = data.value }} />
-                                <Form.Input label='cvv' placeholder='cvv' onChange={(e, data) => { this.state.card_id = data.value }} />
+                                <Form.Input label='cvv' placeholder='cvv' onChange={(e, data) => { this.state.cvv = data.value }} />
                                 <Button primary type='submit'>Submit</Button>
                             </Grid.Column>
 
@@ -222,7 +203,7 @@ export default class Content extends Component {
                                 <Head> Payment </Head>
                                 <Form.Input label='Card ID' placeholder='card id: xxxx xxxx xxxx xxxx' onChange={(e, data) => { this.state.card_id = data.value }} />
                                 <Form.Input label='exp' placeholder='exp : YY/MM' onChange={(e, data) => { this.state.exp = data.value }} />
-                                <Form.Input label='cvv' placeholder='cvv' onChange={(e, data) => { this.state.card_id = data.value }} />
+                                <Form.Input label='cvv' placeholder='cvv' onChange={(e, data) => { this.state.cvv = data.value }} />
                                 <Button primary type='submit'>Submit</Button>
                             </Grid.Column>
 
