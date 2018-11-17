@@ -11,17 +11,19 @@ import UnderConstruction from "../components/UnderConstruction"
 import Tracking from "../components/Tracking"
 import EditUser from "../components/EditProfile"
 import AddProduct from "../components/Addproduct"
-import AboutUs2 from "../components/AboutUs2";
+import AboutUs from "../components/AboutUs2";
 import User from "../components/User";
 import Admin from "../components/Admin"
 import Seller from "../components/SellerProduct";
 import Confirm from "../components/ConfirmOrder";
+import AddTracking from "../components/AddTracking";
+import Policy from "../components/Policy";
 
 const Routes = props => (
     <Router {...props}>
         <Route path="/" component={Homepage} />
         <Route path="/product" component={productTable} />
-        <Route path="/AboutUs" component={AboutUs2} />
+        <Route path="/AboutUs" component={AboutUs} />
         <Route exact path="/login:Semail" component={Login} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
@@ -36,6 +38,8 @@ const Routes = props => (
         <Route path="/admin" component={Admin} />
         <Route path="/seller" component={Seller} />
         <Route path="/confirm" component={Confirm} />
+        <Route path="/addtracking" component={AddTracking} />
+        <Route path="/policy" component={Policy} />
     </Router>
 );
 
