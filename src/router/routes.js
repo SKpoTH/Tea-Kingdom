@@ -15,7 +15,7 @@ import AboutUs from "../components/AboutUs2";
 import User from "../components/User";
 import Admin from "../components/Admin"
 import Seller from "../components/SellerProduct";
-import Confirm from "../components/ConfirmOrder";
+import Confirm from "../components/Bill";
 import QualifyProduct from "../components/QualifyProduct";
 import AddTracking from "../components/AddTracking";
 import Policy from "../components/Policy";

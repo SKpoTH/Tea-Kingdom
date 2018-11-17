@@ -1,30 +1,21 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import 'semantic-ui-css/semantic.css'
-import { Form, Button, Message, Image, Responsive, Grid, Container } from 'semantic-ui-react';
-import TemplateTKD from "../template/TemplateTKD";
-import styled from 'styled-components';
+import React, { Component } from 'react';
+import TemplateTKD from '../template/TemplateTKD';
+import 'semantic-ui-css/semantic.css';
+import { Header, Segment, Button, Divider, Grid, Form } from 'semantic-ui-react';
+import axios from 'axios';
 
-const Margin = styled.div`
-    margin-top : 20px;
-    margin-bottom : 20px;
-`
-
-export default class Bill extends Component {
+class Content extends Component {
     constructor(props) {
         super(props);
         this.state = {
             message:
-                { messageHidden: true, content: '', status: '' },
+                { massageHidden: true, content: '', status: "" },
             product: [],
-            card_id: '',
-            exp: '',
-            cvv: '',
         }
         this.checkout = this.checkout.bind(this);
+
         this.getData();
     }
-
     getData = () => {
         axios.get('/api/order/load', { headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
@@ -38,7 +29,7 @@ export default class Bill extends Component {
                     message:
                     {
                         massageHidden: false,
-                        content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
+                        // content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
                         status: "negative"
                     }
                 }
@@ -53,17 +44,14 @@ export default class Bill extends Component {
                 window.location = '/track';
             });
 
-        var userData = new FormData();
-
-        userData.set('card_id', this.state.card_id);
-        userData.set('exp', this.state.exp);
-        userData.set('cvv', this.state.cvv);
-
-        console.log(this.state.file);
+        const bill = {
+            card_id: this.card_id,
+            exp: this.exp,
+            cvv: this.cvv,
+        }
         let checkEmpty = false;
-        for (var a in this.state) {
-            if (this.state[a] === "" || this.state[a] === undefined) {
-                console.log("Don't have data at -> " + a);
+        for (let a in bill) {
+            if (bill[a] === "" || bill[a] === undefined) {
                 checkEmpty = true;
             }
         }
@@ -105,4 +93,80 @@ export default class Bill extends Component {
 
     }
 
+
+    render() {
+        let prePrice = 0, Shipment = 40;
+        return (
+            <Grid>
+                <Grid.Column width={10}>
+                    <Segment.Group color='white' >
+                        <Segment basic>
+                            <Header><b style={{ textDecoration: 'underline', fontSize: '20px' }}>Confirmation Ordering</b></Header>
+                        </Segment>
+                        <Segment.Group>
+                            {this.state.product.map(item =>
+                                <Segment.Group horizontal color='white'>
+                                    <div style={{ width: '4' }}>
+                                        <Segment textAlign='left' basic style={{ border: 'white' }}>
+                                            {item.amount}
+                                        </Segment>
+                                    </div>
+                                    <Segment textAlign='left' basic style={{ border: 'white' }}>
+                                        {item.name}
+                                    </Segment>
+                                    <Segment textAlign='right' basic style={{ border: 'white' }}>
+                                        {prePrice += item.amount * item.price}
+                                    </Segment>
+                                </Segment.Group>
+                            )}
+                        </Segment.Group>
+                        <Segment.Group horizontal style={{ border: 'white' }}>
+                            <Segment basic style={{ border: 'white' }}>Product Price : </Segment>
+                            <Segment basic style={{ border: 'white' }} textAlign='right'>{prePrice}</Segment>
+                        </Segment.Group>
+                        <Segment.Group horizontal style={{ border: 'white' }}>
+                            <Segment basic style={{ border: 'white' }}>Shipment Fee  : </Segment>
+                            <Segment basic style={{ border: 'white' }} textAlign='right'>{Shipment}</Segment>
+                        </Segment.Group>
+                        <Segment.Group horizontal style={{ border: 'white' }}>
+                            <Segment basic style={{ border: 'white' }}>Total Price : </Segment>
+                            <Segment basic style={{ border: 'white' }} textAlign='right'>{prePrice + Shipment}</Segment>
+                        </Segment.Group>
+                    </Segment.Group>
+
+                    <Divider hidden />
+                    <Divider hidden />
+                </Grid.Column>
+                <Grid.Column width={5}>
+                    <h1> Payment </h1>
+                    <Form checkout={this.checkout} size='small'>
+                        <Form.Field>
+                            <label>Card ID</label>
+                            <input type="card id" placeholder='card id : xxxx xxxx xxxx xxx' ref={(input) => this.card_id = input} />
+                        </Form.Field>
+                        <Form.Field>
+                            <label>exp </label>
+                            <input type="exp" placeholder='exp: YY/MM' ref={(input) => this.card_id = input} />
+                        </Form.Field>
+                        <Form.Field>
+                            <label>cvv</label>
+                            <input type="password" placeholder='cvv id : xxx' ref={(input) => this.card_id = input} />
+                        </Form.Field>
+                        <br />
+                    </Form>
+                    <Button floated='right' color='green' onClick={this.checkout}>Confirm</Button>
+                </Grid.Column>
+            </Grid>
+        );
+    }
+}
+
+export default class Order extends Component {
+    render() {
+        return (
+            <TemplateTKD>
+                <Content />
+            </TemplateTKD>
+        );
+    }
 }
