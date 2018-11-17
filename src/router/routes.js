@@ -19,6 +19,7 @@ import Confirm from "../components/Bill";
 import QualifyProduct from "../components/QualifyProduct";
 import AddTracking from "../components/AddTracking";
 import Policy from "../components/Policy";
+import Favorite from "../components/Favorite";
 
 const Routes = props => (
     <Router {...props}>
@@ -42,6 +43,7 @@ const Routes = props => (
         <Route path="/itemqualify" component={QualifyProduct} />
         <Route path="/addtracking" component={AddTracking} />
         <Route path="/policy" component={Policy} />
+        <Route path="/favorite" component={Favorite} />
     </Router>
 );
 
