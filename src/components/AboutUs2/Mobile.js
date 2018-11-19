@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
-import Header from './Header2'
+import Header from './Mobile/Header2'
 import Limit from './Limit'
 
-import Content1 from "./Content6";
-import Content2 from "./Content7";
-import Content3 from "./Content8";
-import Content4 from "./Content9";
-import Content5 from "./Content10";
+import Content1 from "./Mobile/Content1";
+import Content2 from "./Mobile/Content2";
+import Content3 from "./Mobile/Content3";
+import Content4 from "./Mobile/Content4";
+import Content5 from "./Mobile/Content5";
 import Bottom from "./Bottom";
 
 
