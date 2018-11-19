@@ -36,6 +36,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "deploy": "sh deploy.sh",
     "eject": "react-scripts eject"
   },
   "proxy": {
