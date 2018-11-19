@@ -12,10 +12,12 @@ export default class Order extends Component {
         <Container>
           <Responsive {...Responsive.onlyComputer}>
             <Ordercom />
+            <br />
           </Responsive>
 
           <Responsive {...Responsive.onlyTablet}>
             <Ordercom />
+            <br />
           </Responsive>
 
           <Responsive {...Responsive.onlyMobile}>

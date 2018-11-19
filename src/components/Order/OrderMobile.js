@@ -156,9 +156,9 @@ export default class OrderCom extends Component {
               <Card.Content>
                 <Button.Group floated='left'>
                   <Button color='red' onClick={() => { this.removeItem(i) }} >Remove</Button>
-                  <Button color='blue' onClick={() => { (this.state.product[i].amount-1) > 0 ? this.updateItem(i, { amount: this.state.product[i].amount - 1 }) : null }}>Minus</Button>
+                  <Button color='blue' onClick={() => { (this.state.product[i].amount - 1) > 0 ? this.updateItem(i, { amount: this.state.product[i].amount - 1 }) : null }}>Minus</Button>
                   <Button color='green' onClick={() => { this.updateItem(i, { amount: this.state.product[i].amount + 1 }) }} >Plus</Button>
-                  
+
                 </Button.Group>
               </Card.Content>
 
@@ -168,10 +168,11 @@ export default class OrderCom extends Component {
 
         <br />
         <br />
+
         <Grid centered>
           <Button color='red' onClick={() => { this.removeOrder() }} >Clear</Button>
           <Button primary onClick={() => { this.sendData() }} >Update</Button>
-          <Button color='yellow' onClick={() => {window.location='/confirm'}}>Checkout</Button>
+          <Button color='yellow' onClick={() => { window.location = '/confirm' }}>Checkout</Button>
         </Grid>
 
         <br />

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.css';
-import { Image, Button, Table, Icon, Grid, Label, GridColumn } from 'semantic-ui-react'
+import { Image, Button, Table, Icon, Grid, Label } from 'semantic-ui-react'
 import axios from 'axios';
 // import MyRender from './Render';
 
@@ -181,38 +181,38 @@ export default class OrderCom extends Component {
 								</Table.Cell>
 								<Table.Cell width='2'>
 									<h4 className='inlineE'>
-										{ item.discount ?  item.discountPrice : item.price }
+										{item.discount ? item.discountPrice : item.price}
 									</h4>
 									&nbsp;&nbsp;&nbsp;
 									<h4 className='oldPrice'>
-										{ item.discount ?  item.price : null }
+										{item.discount ? item.price : null}
 									</h4>
 								</Table.Cell>
 								<Table.Cell width='4'>
-									<Label className="PointerEdit button" onClick={() => { (this.state.product[i].amount-1) > 0 ? this.updateItem(i, { amount: this.state.product[i].amount - 1 }) : null }}>
+									<Label className="PointerEdit button" onClick={() => { (this.state.product[i].amount - 1) > 0 ? this.updateItem(i, { amount: this.state.product[i].amount - 1 }) : null }}>
 										<Icon name="minus" fitted />
 									</Label>
 									{item.amount}
-									<Label className="PointerEdit button" onClick={() => { (this.state.product[i].amount+1) < 30 ? this.updateItem(i, { amount: this.state.product[i].amount + 1 }) : null }}>
+									<Label className="PointerEdit button" onClick={() => { (this.state.product[i].amount + 1) < 30 ? this.updateItem(i, { amount: this.state.product[i].amount + 1 }) : null }}>
 										<Icon name="plus" fitted />
 									</Label>
-									{ console.log(this.checkStock(item.productID)) }
+									{console.log(this.checkStock(item.productID))}
 								</Table.Cell>
 								<Table.Cell width='2'>
 									<h4 className='inlineE'>
-									{
-										item.discount ?
-										item.discountPrice * item.amount :
-										item.price * item.amount
-									}
+										{
+											item.discount ?
+												item.discountPrice * item.amount :
+												item.price * item.amount
+										}
 									</h4>
 									&nbsp;&nbsp;&nbsp;
 									<h4 className='oldPrice'>
-									{
-										item.discount ?
-										item.price * item.amount :
-										null
-									}
+										{
+											item.discount ?
+												item.price * item.amount :
+												null
+										}
 									</h4>
 								</Table.Cell>
 								<Table.Cell width='2'>
@@ -229,7 +229,7 @@ export default class OrderCom extends Component {
 
 					</Grid.Column>
 					<Grid.Column floated='right' width={3}>
-						<Button primary onClick={() => {window.location='/confirm'}}>Checkout</Button>
+						<Button primary onClick={() => { window.location = '/confirm' }}>Checkout</Button>
 					</Grid.Column>
 
 				</Grid>
