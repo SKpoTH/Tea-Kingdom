@@ -3,11 +3,11 @@ import styled from 'styled-components'
 import Header from './Computer/Header'
 import Limit from './Limit'
 
-import Content1 from "./Content1";
-import Content2 from "./Content2";
-import Content3 from "./Content3";
-import Content4 from "./Content4";
-import Content5 from "./Content5";
+import Content1 from "./Computer/Content1";
+import Content2 from "./Computer/Content2";
+import Content3 from "./Computer/Content3";
+import Content4 from "./Computer/Content4";
+import Content5 from "./Computer/Content5";
 import Bottom from "./Bottom";
 
 

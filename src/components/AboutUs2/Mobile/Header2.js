@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
-import pic from './head.jpg'
+import pic from '../head.jpg'
 import "semantic-ui-css/semantic.css";
 
 

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components'
 import "semantic-ui-css/semantic.css";
 import { Image, Container, Reveal } from 'semantic-ui-react'
-import pic from './tea1.jpg'
-import pic2 from './store.jpg'
+import pic from '../tea1.jpg'
+import pic2 from '../store.jpg'
 
 
 const Margin = styled.div`
