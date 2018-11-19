@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
-import Header from './Header'
+import Header from './Computer/Header'
 import Limit from './Limit'
 
 

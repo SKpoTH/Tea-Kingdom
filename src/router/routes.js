@@ -11,7 +11,7 @@ import UnderConstruction from "../components/UnderConstruction"
 import Tracking from "../components/Tracking"
 import EditUser from "../components/EditProfile"
 import AddProduct from "../components/Addproduct"
-import AboutUs from "../components/AboutUs2";
+import AboutUs from "../components/AboutUs";
 import User from "../components/User";
 import Admin from "../components/Admin"
 import Seller from "../components/SellerProduct";

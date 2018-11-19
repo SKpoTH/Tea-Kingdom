@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
-import pic from '../head.jpg'
+import pic from '../pic/head.jpg'
 import "semantic-ui-css/semantic.css";
 
 
@@ -18,7 +18,7 @@ const Text = styled.div`
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
-    font-size: 50px; 
+    font-size: 40px; 
     line-height: 1.2em;  
     font-weight: 400;
     color: white;

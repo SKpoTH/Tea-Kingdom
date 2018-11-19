@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
-import pic from '../head.jpg'
+import pic from '../pic/head.jpg'
 import "semantic-ui-css/semantic.css";
 
 
@@ -8,7 +8,7 @@ const Head = styled.div`
     background-position: center 50%;
     background-image: url(${pic});
     background-size: cover;
-    min-height: 300px;
+    min-height: 400px;
     position: relative;
 `
 
@@ -18,7 +18,7 @@ const Text = styled.div`
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
-    font-size: 40px; 
+    font-size: 30px; 
     line-height: 1.2em;  
     font-weight: 400;
     color: white;
@@ -28,7 +28,7 @@ const Text = styled.div`
 export default () => (
     <Head>
         <Text>
-            About Us
+            Tea Kingdom
         </Text>
     </Head>
 )
