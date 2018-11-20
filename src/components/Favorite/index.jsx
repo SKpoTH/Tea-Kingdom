@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TemplateTKD from '../template/TemplateTKD';
 import 'semantic-ui-css/semantic.css';
 import { Container, Responsive } from 'semantic-ui-react';
-import { Image, Button, Table, Icon, Grid, Label } from 'semantic-ui-react'
+import { Image, Button, Table, Card, Grid, Label } from 'semantic-ui-react'
 import axios from 'axios';
 import styled from 'styled-components'
 
@@ -13,7 +13,9 @@ const Head = styled.div`
     margin-bottom: 20px;
     
 `
-
+const Marg = styled.div`
+    margin: 20px;
+`
 export default class Favorite extends Component {
     constructor(props) {
         super(props);
@@ -199,11 +201,97 @@ export default class Favorite extends Component {
                     </Responsive>
 
                     <Responsive {...Responsive.onlyTablet}>
-                        ;
+                        <Head>Favorite</Head>
+                        <Table celled fixed>
+                            <Table.Header>
+                                <Table.Row>
+                                    <Table.HeaderCell width='1'></Table.HeaderCell>
+                                    <Table.HeaderCell width='4'><center>Product</center></Table.HeaderCell>
+                                    <Table.HeaderCell width='3'><center>Name</center></Table.HeaderCell>
+                                    <Table.HeaderCell width='2'><center>Detail</center></Table.HeaderCell>
+                                    <Table.HeaderCell width='2'><center>Delete</center></Table.HeaderCell>
+                                </Table.Row>
+                            </Table.Header>
+
+                            {this.state.product.map((item, i) =>
+                                <Table.Body>
+                                    <Table.Row>
+                                        <Table.Cell width='1'>{Count++}</Table.Cell>
+                                        <Table.Cell width='4'>
+                                            <Image src={item.productImage} style={{ width: '20%', height: '20%', display: 'inline' }} />
+                                        </Table.Cell>
+                                        <Table.Cell width='3'>
+                                            {item.name}
+                                        </Table.Cell>
+                                        <Table.Cell width='2'>
+                                            Detail
+                                        </Table.Cell>
+                                        <Table.Cell width='2'>
+                                            <Button color='red' icon='remove' onClick={() => { this.removeItem(i) }} />
+                                        </Table.Cell>
+                                    </Table.Row>
+                                </Table.Body>
+                            )}
+                        </Table>
+                        <Grid>
+                            <Grid.Column floated='left' width={5}>
+                                <Button primary onClick={() => { this.sendData() }} >Update</Button>
+                                <Button color='red' onClick={() => { this.removeOrder() }} >Clear</Button>
+
+                            </Grid.Column>
+                            <Grid.Column floated='right' width={3}>
+                                <Button primary onClick={() => { window.location = '/confirm' }}>Checkout</Button>
+                            </Grid.Column>
+
+                        </Grid>
+                        <br />
+
                     </Responsive>
 
                     <Responsive {...Responsive.onlyMobile}>
-                        ;
+                        <Head>
+                            Favorite
+                        </Head>
+
+                        {this.state.product.map((item, i) =>
+                            <Card.Group centered>
+                                <Card color='black'>
+                                    <Card.Content>
+                                        <Card.Header><center>{item.name}</center></Card.Header>
+                                        <Marg>
+                                            <Image size='small' src={item.productImage} />
+                                        </Marg>
+
+                                        <Card.Meta><center>{item.brand}</center></Card.Meta>
+
+                                        <h5 style={{ marginTop: '5px' }}><center>Price : {item.price} ฿</center></h5>
+                                        <h5 style={{ marginTop: '5px' }}><center>Amount : {item.amount}</center></h5>
+                                    </Card.Content>
+
+                                    <Card.Content>
+                                        <Button.Group floated='left'>
+                                            <Button color='red' onClick={() => { this.removeItem(i) }} >Remove</Button>
+                                            <Button color='blue' onClick={() => { (this.state.product[i].amount - 1) > 0 ? this.updateItem(i, { amount: this.state.product[i].amount - 1 }) : null }}>Minus</Button>
+                                            <Button color='green' onClick={() => { this.updateItem(i, { amount: this.state.product[i].amount + 1 }) }} >Plus</Button>
+
+                                        </Button.Group>
+                                    </Card.Content>
+
+                                </Card>
+                            </Card.Group>
+                        )}
+
+                        <br />
+                        <br />
+
+                        <Grid centered>
+                            <Button primary onClick={() => { this.sendData() }} >Update</Button>
+                            <Button color='red' onClick={() => { this.removeOrder() }} >Clear</Button>
+                            <Button primary onClick={() => { window.location = '/confirm' }}>Checkout</Button>
+                        </Grid>
+
+                        <br />
+                        <br />
                     </Responsive>
                 </Container>
             </TemplateTKD>
