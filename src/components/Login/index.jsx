@@ -6,7 +6,7 @@ import TemplateTKD from "../template/TemplateTKD";
 
 export default class Login extends Component {
   constructor(props) {
-    // console.log(props.params.Semail);
+
     super(props);
     this.state = {
       message:
@@ -27,13 +27,16 @@ export default class Login extends Component {
       email: this.email.value,
       password: this.password.value,
     }
+
     let checkEmpty = false;
+
     for (let a in Account) {
       console.log(Account[a]);
       if (Account[a] === "" || Account[a] === undefined) {
         checkEmpty = true;
       }
     }
+
     if (checkEmpty) {
       this.setState({
         message:
@@ -51,7 +54,7 @@ export default class Login extends Component {
             this.password.value = "";
             this.email.value = "";
           } else {
-            localStorage.setItem('token', res.data.token);//////////////////
+            localStorage.setItem('token', res.data.token);
             window.location = '/';
           }
         })
