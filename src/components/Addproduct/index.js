@@ -139,7 +139,7 @@ export default class AddProduct extends Component {
 			//console.log(addnewproduct);
 			axios({
 				method: 'post',
-				url: 'api/add_product/add',
+				url: '/api/product/seller/add',
 				data: bodyFormData,
 				config: { headers: { 'Content-Type': 'multipart/form-data' } }
 			})

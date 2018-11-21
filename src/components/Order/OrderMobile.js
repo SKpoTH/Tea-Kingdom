@@ -66,7 +66,7 @@ export default class OrderCom extends Component {
 
     console.log(this.state.product[index]._id);
 
-    axios.post('/api/order/remove_product_from_order', sent, { headers: { Authorization: localStorage.getItem("token") } })
+    axios.post('/api/order/remove/one', sent, { headers: { Authorization: localStorage.getItem("token") } })
       .then((res) => {
         console.log(res.data.status);
         this.getData();
@@ -86,7 +86,7 @@ export default class OrderCom extends Component {
   }
 
   removeOrder = () => {
-    axios.get('/api/order/remove_order', { headers: { Authorization: localStorage.getItem("token") } })
+    axios.get('/api/order/remove/all', { headers: { Authorization: localStorage.getItem("token") } })
       .then((res) => {
         console.log(res.data.status);
         this.getData();

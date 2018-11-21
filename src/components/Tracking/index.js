@@ -17,7 +17,7 @@ class Content extends Component {
   }
   getData = () => {
     console.log("getdata")
-    axios.get('/api/tracking/consumer_load', { headers: { Authorization: localStorage.getItem("token") } })
+    axios.get('/api/tracking/consumer/load', { headers: { Authorization: localStorage.getItem("token") } })
       .then((res) => {
         console.log("this is res->", res)
         this.setState({

@@ -42,7 +42,7 @@ export default class Content extends Component {
         axios.get('/api/order/load', { headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
                 this.setState({
-                    product: res.data.product
+                    product: res.data.data.product
                 });
             })
             .catch((error) => {
@@ -95,7 +95,7 @@ export default class Content extends Component {
                     { massageHidden: false, content: 'You must containt datas in all field.', status: "negative" }
             });
         } else {
-            axios.post('/api/payment/pay_confirm', billData, { headers: { Authorization: localStorage.getItem("token") } })
+            axios.post('/api/payment/confirm', billData, { headers: { Authorization: localStorage.getItem("token") } })
                 .then((res) => {
                     console.log(res.data.status);
                     window.location = '/track';

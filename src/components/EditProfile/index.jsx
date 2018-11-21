@@ -87,7 +87,7 @@ export default class EditUser extends Component {
 		} else {
 			axios({
 				method: 'post',
-				url: 'api/edit_profile/edit',
+				url: '/api/userData/edit',
 				data: userData,
 				config: { headers: { 'Content-Type': 'multipart/form-data' } }
 			})

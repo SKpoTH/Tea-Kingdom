@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import TKD from "../template/TemplateTKD";
+
 import { Container, Divider, Image, Grid, Button } from "semantic-ui-react";
 import styled from 'styled-components'
-import picTest from "./test.jpg"
 import BG from "./back.png"
 import Header from "./Header"
 
