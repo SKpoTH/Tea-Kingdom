@@ -2,22 +2,15 @@
 // Import
 const express = require('express');
 const path = require('path');
-const logger = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const session = require('express-session')
 const cors = require('cors');
 const passport = require('passport');
-//const flash = require('connect-flash');
-
-
 
 const app = express();
 
-
 require('./config/passport')(passport);
-
 
 // server PORT
 const PORT = 5000;
@@ -31,52 +24,62 @@ mongoose.connect(config.db).then(
     err => { console.log('Cannot connect to database' +err)}
 );
 
+// ============================ Router ==================================
+// ----- For All -----
+const login = require('./routes/all/login');
+const signup = require('./routes/all/signup');
+const authen = require('./routes/all/authen');
+const product = require('./routes/all/product');
+const reply = require('./routes/all/reply');
 
-//Router
-const login = require('./routes/login');
-const signup = require('./routes/signup');
-const authen = require('./routes/authen');
-const product = require('./routes/product');
-const product_detail = require('./routes/product_detail');
-const add_product = require('./routes/add_product');
-const edit_profile = require('./routes/edit_profile');
-const order = require('./routes/order');
-const add_to_cart = require('./routes/add_to_cart');
-const reply = require('./routes/reply');
-const seller = require('./routes/seller');
-const edit_product = require('./routes/edit_product');
-const payment = require('./routes/payment');
-const userdata = require('./routes/userData');
-const tracking = require('./routes/tracking');
-const favourite = require('./routes/favourite');
+// ----- For Consumer -----
+const consumerUserData = require('./routes/consumer/userData');
+const consumerOrder = require('./routes/consumer/order');
+const consumerFavourite = require('./routes/consumer/favourite');
+const consumerPayment = require('./routes/consumer/payment');
+const consumerTracking = require('./routes/consumer/tracking');
+
+// ----- For Seller -----
+const sellerProduct = require('./routes/seller/product');
+
+// ----- For Admin -----
+const adminProduct = require('./routes/admin/product');
+const adminUserData = require('./routes/admin/userData');
+const adminTracking = require('./routes/admin/tracking');
+// ======================================================================
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-//Midleware
+// Midleware
 app.use(passport.initialize());
 //app.use(passport.session());
 
-
-//apply main path
+// ========================= Apply main path ============================
+// ----- For All -----
 app.use('/api', login);
 app.use('/api', signup);
 app.use('/api/authen', authen);
 app.use('/api/product', product);
-app.use('/api/product_detail', product_detail);
-app.use('/api/add_product', add_product);
-app.use('/api/edit_profile', edit_profile);
-app.use('/api/order', order);
-app.use('/api/add_to_cart', add_to_cart);
 app.use('/api/reply', reply);
-app.use('/api/seller', seller);
-app.use('/api/edit_product', edit_product)
-app.use('/api/payment', payment);
-app.use('/api/userdata', userdata);
-app.use('/api/tracking', tracking);
-app.use('/api/favourite', favourite);
+
+// ----- For Consumer -----
+app.use('/api/userData', consumerUserData);
+app.use('/api/order', consumerOrder);
+app.use('/api/favourite', consumerFavourite);
+app.use('/api/payment', consumerPayment);
+app.use('/api/tracking', consumerTracking);
+
+// ----- For Seller -----
+app.use('/api/seller/product', sellerProduct);
+
+// ----- For Admin -----
+app.use('/api/admin/product', adminProduct);
+app.use('/api/admin/userData', adminUserData);
+app.use('/api/admin/tracking', adminTracking);
+// ======================================================================
 
 //for deploy only start
 app.use(express.static(path.join(__dirname, '/build')));

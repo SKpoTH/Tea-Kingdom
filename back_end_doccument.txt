@@ -1,0 +1,153 @@
+List of routes in the Back-End
+///////////////////////////////////////
+// Clean Level 1
+///////////////////////////////////////
+*************************************************
+Undone Cleaned
+*************************************************
+	reply.js
+
+*************************************************
+Done Cleaned
+*************************************************
+	authen.js
+	signup.js
+	login.js
+	favourite.js
+	edit_profile.js
+	order.js
+	add_to_cart.js
+	tracking.js
+	product_detail.js
+	product.js
+	seller.js
+	add_product.js
+	admin.js
+	userData.js
+	payment.js
+	edit_product.js
+
+//////////////////////////////////////
+// Clean Level 2
+//////////////////////////////////////
+*************************************************
+Undone Cleaned
+*************************************************
+
+*************************************************
+Done Cleaned
+*************************************************
+	product.js
+	authen.js
+	login.js
+	signup.js
+	userData.js
+	reply.js
+	order.js
+	favourite.js
+	payment.js
+	tacking.js
+
+
+
+
+
+
+=================================================
+login.js	
+=================================================
+// Handle the login that have been coming
+
+=================================================
+signup.js
+=================================================
+// Register the new account(Consumer)
+
+=================================================
+tracking.js
+=================================================
+// Manage the tracking information
+
+=================================================
+favourite.js
+=================================================
+// Favourite product management
+
+=================================================
+userData.js
+=================================================
+// All about user data here
+
+=================================================
+order.js
+=================================================
+// All operations of orders
+
+=================================================
+product.js
+=================================================
+// All operation of product
+
+
+*************************************************
+From old path to The New One!
+*************************************************
+
+Get Status of API Response -> "res.data.status"
+Get data from API Response -> "res.data" change to "res.data.data" 
+
+/api/signup							->		/api/signup
+
+/api/login							->		/api/login
+
+/api/authen							->		/api/authen
+
+/api/edit_profile/load				->		/api/userData/load
+
+/api/edit_profile/edit 				->		/api/userData/edit
+
+/api/tracking/admin_load			->		/api/tracking/admin/load
+
+/api/tracking/update_state			->		/api/tracking/admin/update
+
+/api/tracking/consumer_load 		->		/api/tracking/consumer/load
+
+/api/favourite/add_favourite		->		/api/favourite/add
+
+/api/favourite/remove_favourite		->		/api/favourite/remove
+
+/api/order/load						->		/api/order/load
+
+/api/order/remove_order				->		/api/order/remove/all
+
+/api/order/remove_product_from_order->		/api/order/remove/one
+
+/api/order/update					->		/api/order/update
+
+/api/add_to_cart/add				->		/api/order/add
+
+/api/product_detail/load			->		/api/product/load/one
+
+/api/product/loadAll				->		/api/product/load/all (post -> get)
+
+/api/product/update					->		/api/product/update
+
+/api/seller/load					->		/api/product/seller/load/all
+
+/api/add_product/add				->		/api/product/seller/add
+
+/api/admin/load					->		/api/product/admin/load/all (post -> get)
+
+*/api/admin/confirm					->		/api/product/admin/confirm
+
+/api/edit_profile/edit				->		/api/userData/edit
+
+/api/userdata/all					->		/api/userData/admin/load/all
+
+*/api/userdata/update				->		/api/userData/admin/update
+
+/api/payment/pay_confirm			->		/api/payment/confirm
+
+/api/edit_product/load				->		/api/product/seller/load
+
+/api/edit_product/edit				->		/api/product/seller/edit

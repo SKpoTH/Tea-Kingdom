@@ -35,25 +35,6 @@ export default class OrderCom extends Component {
 		});
 	}
 
-	checkStock = (productID) => {
-		const sent = {
-			productID: productID
-		}
-
-		let stock;
-
-		axios.post('/api/product/stock', sent, { headers: { Authorization: localStorage.getItem("token") } })
-			.then(res => {
-				console.log('==========================');
-				stock = res.data.data.amount;
-				return stock;
-			})
-			.catch(err => {
-				console.log('Error');
-			})
-	}
-
-
 	// Send Data to update database
 	sendData = () => {
 		const sent = {
@@ -87,7 +68,7 @@ export default class OrderCom extends Component {
 
 		console.log(this.state.product[index]._id);
 
-		axios.post('/api/order/remove_product_from_order', sent, { headers: { Authorization: localStorage.getItem("token") } })
+		axios.post('/api/order/remove/one', sent, { headers: { Authorization: localStorage.getItem("token") } })
 			.then((res) => {
 				console.log(res.data.status);
 				this.getData();
@@ -107,7 +88,7 @@ export default class OrderCom extends Component {
 	}
 
 	removeOrder = () => {
-		axios.get('/api/order/remove_order', { headers: { Authorization: localStorage.getItem("token") } })
+		axios.get('/api/order/remove/all', { headers: { Authorization: localStorage.getItem("token") } })
 			.then((res) => {
 				console.log(res.data.status);
 				this.getData();
@@ -126,13 +107,36 @@ export default class OrderCom extends Component {
 			})
 	}
 
+	// Get stock info of product
+	getStock = () => {
+		for (let i in this.state.product){
+			//console.log(this.state.product[i]);
+			let stockProduct = {
+				productID: this.state.product[i].productID
+			}
+
+			axios.post('/api/product/load/one', stockProduct)
+				.then(res => {
+					console.log(res.data.status);
+					this.state.product[i].stock = res.data.data.amount;
+				})
+				.catch(err => {
+					console.log('Error');
+				})
+		}
+		// console.log(this.state.product);
+	}
+
 	// Get loaded Data from back-end
 	getData = () => {
 		axios.get('/api/order/load', { headers: { Authorization: localStorage.getItem("token") } })
 			.then((res) => {
+				console.log(res.data.status);
 				this.setState({
-					product: res.data.product
+					product: res.data.data.product
 				});
+
+				this.getStock();
 			})
 			.catch((error) => {
 				this.setState({ cantLoad: true });
@@ -193,10 +197,9 @@ export default class OrderCom extends Component {
 										<Icon name="minus" fitted />
 									</Label>
 									{item.amount}
-									<Label className="PointerEdit button" onClick={() => { (this.state.product[i].amount+1) < 30 ? this.updateItem(i, { amount: this.state.product[i].amount + 1 }) : null }}>
+									<Label className="PointerEdit button" onClick={() => { (this.state.product[i].amount+1) <= item.stock ? this.updateItem(i, { amount: this.state.product[i].amount + 1 }) : null }}>
 										<Icon name="plus" fitted />
 									</Label>
-									{ console.log(this.checkStock(item.productID)) }
 								</Table.Cell>
 								<Table.Cell width='2'>
 									<h4 className='inlineE'>

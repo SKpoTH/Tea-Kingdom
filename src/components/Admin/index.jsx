@@ -62,7 +62,7 @@ export default class Admin extends Component {
       return
     else {
       console.log("send")
-      axios.post('/api/userData/update', update)
+      axios.post('update', update)
       .then((res) => {
           console.log(res.data.status);
           this.setState( {message : 
