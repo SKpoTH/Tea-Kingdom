@@ -13,8 +13,7 @@ const app = express();
 require('./config/passport')(passport);
 
 // server PORT
-const PORT = 5000;
-// const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 // Link to mongodb
 const config = require('./database/db');

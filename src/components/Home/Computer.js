@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
-import Header from './Header'
+import Header from './Computer/Header'
 import Limit from './Limit'
 
 
-import Content1 from "./Content1";
-import Content2 from "./Content2"
+import Content1 from "./Computer/Content1";
+import Content2 from "./Computer/Content2"
 
 const Container = styled(Limit)`
   padding: 1em;

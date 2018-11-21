@@ -10,6 +10,13 @@ const Head = styled.div`
     font-weight: bold;
     margin-bottom : 10px;
 `
+
+const Marg = styled.div`
+    margin-right: 25px;
+    margin-left: 25px;
+    margin-bottom: 25px;
+`
+
 export default class Content extends Component {
     constructor(props) {
         super(props);
@@ -52,6 +59,14 @@ export default class Content extends Component {
             });
     };
 
+    cancel = (event) => {
+        console.log('cancel');
+        axios.post('/api/payment/cancel', null, { headers: { Authorization: localStorage.getItem("token") } })
+        window.location = '/order';
+    }
+
+
+
     onSubmit = (event) => {
         event.preventDefault();
 
@@ -67,7 +82,10 @@ export default class Content extends Component {
             if (billData[a] === "" || billData[a] === undefined) {
                 checkEmpty = true;
             }
+
         }
+
+
 
         console.log(billData);
 
@@ -103,7 +121,67 @@ export default class Content extends Component {
             <TKD>
                 <Form onSubmit={this.onSubmit} >
                     <Responsive  {...Responsive.onlyMobile}>
-                        ;
+                        <Marg>
+                            <Segment.Group color='white' >
+
+                                <Segment basic>
+                                    <Head><center>Confirmation Ordering</center></Head>
+                                </Segment>
+
+                                <Segment.Group>
+                                    {this.state.product.map(item =>
+                                        <Segment.Group horizontal color='white'>
+                                            <div style={{ width: '4' }}>
+                                                <Segment textAlign='left' basic style={{ border: 'white' }}>
+                                                    {item.amount}
+                                                </Segment>
+                                            </div>
+                                            <Segment textAlign='left' basic style={{ border: 'white' }}>
+                                                {item.name}
+                                            </Segment>
+                                            <Segment textAlign='right' basic style={{ border: 'white' }}>
+                                                {prePrice += item.amount * item.price}
+                                            </Segment>
+                                        </Segment.Group>
+                                    )}
+                                </Segment.Group>
+
+                                <Segment.Group horizontal style={{ border: 'white' }}>
+                                    <Segment basic style={{ border: 'white' }}>Product Price : </Segment>
+                                    <Segment basic style={{ border: 'white' }} textAlign='right'>{prePrice}</Segment>
+                                </Segment.Group>
+
+                                <Segment.Group horizontal style={{ border: 'white' }}>
+                                    <Segment basic style={{ border: 'white' }}>Shipment Fee  : </Segment>
+                                    <Segment basic style={{ border: 'white' }} textAlign='right'>{Shipment}</Segment>
+                                </Segment.Group>
+
+                                <Segment.Group horizontal style={{ border: 'white' }}>
+                                    <Segment basic style={{ border: 'white' }}>Total Price : </Segment>
+                                    <Segment basic style={{ border: 'white' }} textAlign='right'>{prePrice + Shipment}</Segment>
+                                </Segment.Group>
+
+                            </Segment.Group>
+                            <Segment.Group color='white' >
+
+                                <Segment basic>
+                                    <Head><center> Payment </center> </Head>
+                                </Segment>
+
+                                <Marg>
+                                    <Form.Input label='Card ID' placeholder='card id: xxxx xxxx xxxx xxxx' onChange={(e, data) => { this.state.card_id = data.value }} />
+                                    <Form.Input label='exp' placeholder='exp : YY/MM' onChange={(e, data) => { this.state.exp = data.value }} />
+                                    <Form.Input label='cvv' placeholder='cvv' onChange={(e, data) => { this.state.cvv = data.value }} />
+
+
+                                    <Button.Group size='medium' widths='2'>
+                                        <Button onClick={this.checkInput} primary type='submit' >Submit</Button>
+                                        <Button negative onClick={this.cancel}> Cancel </Button>
+                                    </Button.Group>
+                                </Marg>
+
+                            </Segment.Group>
+                        </Marg>
                     </Responsive>
                     <Responsive  {...Responsive.onlyTablet}>
                         <Grid>
@@ -115,28 +193,35 @@ export default class Content extends Component {
                                     <Segment.Group>
                                         {this.state.product.map(item =>
                                             <Segment.Group horizontal color='white'>
+
                                                 <div style={{ width: '4' }}>
                                                     <Segment textAlign='left' basic style={{ border: 'white' }}>
                                                         {item.amount}
                                                     </Segment>
                                                 </div>
+
                                                 <Segment textAlign='left' basic style={{ border: 'white' }}>
                                                     {item.name}
                                                 </Segment>
+
                                                 <Segment textAlign='right' basic style={{ border: 'white' }}>
                                                     {prePrice += item.amount * item.price}
                                                 </Segment>
+
                                             </Segment.Group>
                                         )}
                                     </Segment.Group>
+
                                     <Segment.Group horizontal style={{ border: 'white' }}>
                                         <Segment basic style={{ border: 'white' }}>Product Price : </Segment>
                                         <Segment basic style={{ border: 'white' }} textAlign='right'>{prePrice}</Segment>
                                     </Segment.Group>
+
                                     <Segment.Group horizontal style={{ border: 'white' }}>
                                         <Segment basic style={{ border: 'white' }}>Shipment Fee  : </Segment>
                                         <Segment basic style={{ border: 'white' }} textAlign='right'>{Shipment}</Segment>
                                     </Segment.Group>
+
                                     <Segment.Group horizontal style={{ border: 'white' }}>
                                         <Segment basic style={{ border: 'white' }}>Total Price : </Segment>
                                         <Segment basic style={{ border: 'white' }} textAlign='right'>{prePrice + Shipment}</Segment>
@@ -149,10 +234,15 @@ export default class Content extends Component {
 
                             <Grid.Column width={5}>
                                 <Head> Payment </Head>
+
                                 <Form.Input label='Card ID' placeholder='card id: xxxx xxxx xxxx xxxx' onChange={(e, data) => { this.state.card_id = data.value }} />
                                 <Form.Input label='exp' placeholder='exp : YY/MM' onChange={(e, data) => { this.state.exp = data.value }} />
                                 <Form.Input label='cvv' placeholder='cvv' onChange={(e, data) => { this.state.cvv = data.value }} />
-                                <Button primary type='submit'>Submit</Button>
+
+                                <Button.Group size='medium' widths='2'>
+                                    <Button primary type='submit' >Submit</Button>
+                                    <Button negative onClick={this.cancel}> Cancel </Button>
+                                </Button.Group>
                             </Grid.Column>
 
                         </Grid>
@@ -161,9 +251,11 @@ export default class Content extends Component {
                         <Grid>
                             <Grid.Column width={10}>
                                 <Segment.Group color='white' >
+
                                     <Segment basic>
                                         <Head>Confirmation Ordering</Head>
                                     </Segment>
+
                                     <Segment.Group>
                                         {this.state.product.map(item =>
                                             <Segment.Group horizontal color='white'>
@@ -181,14 +273,17 @@ export default class Content extends Component {
                                             </Segment.Group>
                                         )}
                                     </Segment.Group>
+
                                     <Segment.Group horizontal style={{ border: 'white' }}>
                                         <Segment basic style={{ border: 'white' }}>Product Price : </Segment>
                                         <Segment basic style={{ border: 'white' }} textAlign='right'>{prePrice}</Segment>
                                     </Segment.Group>
+
                                     <Segment.Group horizontal style={{ border: 'white' }}>
                                         <Segment basic style={{ border: 'white' }}>Shipment Fee  : </Segment>
                                         <Segment basic style={{ border: 'white' }} textAlign='right'>{Shipment}</Segment>
                                     </Segment.Group>
+
                                     <Segment.Group horizontal style={{ border: 'white' }}>
                                         <Segment basic style={{ border: 'white' }}>Total Price : </Segment>
                                         <Segment basic style={{ border: 'white' }} textAlign='right'>{prePrice + Shipment}</Segment>
@@ -200,13 +295,18 @@ export default class Content extends Component {
                             </Grid.Column>
 
                             <Grid.Column width={5}>
+
                                 <Head> Payment </Head>
                                 <Form.Input label='Card ID' placeholder='card id: xxxx xxxx xxxx xxxx' onChange={(e, data) => { this.state.card_id = data.value }} />
                                 <Form.Input label='exp' placeholder='exp : YY/MM' onChange={(e, data) => { this.state.exp = data.value }} />
                                 <Form.Input label='cvv' placeholder='cvv' onChange={(e, data) => { this.state.cvv = data.value }} />
-                                <Button primary type='submit'>Submit</Button>
-                            </Grid.Column>
 
+                                <Button.Group size='medium' widths='2'>
+                                    <Button primary type='submit' >Submit</Button>
+                                    <Button negative onClick={this.cancel}> Cancel </Button>
+                                </Button.Group>
+
+                            </Grid.Column>
                         </Grid>
                     </Responsive>
                 </Form>

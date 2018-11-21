@@ -11,7 +11,7 @@ import UnderConstruction from "../components/UnderConstruction"
 import Tracking from "../components/Tracking"
 import EditUser from "../components/EditProfile"
 import AddProduct from "../components/Addproduct"
-import AboutUs from "../components/AboutUs2";
+import AboutUs from "../components/AboutUs";
 import User from "../components/User";
 import Admin from "../components/Admin"
 import Seller from "../components/SellerProduct";
@@ -19,6 +19,7 @@ import Confirm from "../components/Bill";
 import QualifyProduct from "../components/QualifyProduct";
 import AddTracking from "../components/AddTracking";
 import Policy from "../components/Policy";
+import Favorite from "../components/Favorite";
 
 const Routes = props => (
     <Router {...props}>
@@ -42,6 +43,7 @@ const Routes = props => (
         <Route path="/itemqualify" component={QualifyProduct} />
         <Route path="/addtracking" component={AddTracking} />
         <Route path="/policy" component={Policy} />
+        <Route path="/favorite" component={Favorite} />
     </Router>
 );
 
