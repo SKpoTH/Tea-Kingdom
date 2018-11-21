@@ -54,7 +54,7 @@ export default class Login extends Component {
             this.password.value = "";
             this.email.value = "";
           } else {
-            localStorage.setItem('token', res.data.data.token);
+            localStorage.setItem('token', res.data.token);
             window.location = '/';
           }
         })

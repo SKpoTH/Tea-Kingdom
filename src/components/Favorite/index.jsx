@@ -118,7 +118,6 @@ export default class Favorite extends Component {
                         </Table>
                         <Grid>
                             <Grid.Column floated='left' width={5}>
-                                <Button primary onClick={() => { this.sendData() }} >Update</Button>
                                 <Button color='red' onClick={() => { this.removeOrder() }} >Clear</Button>
 
                             </Grid.Column>
