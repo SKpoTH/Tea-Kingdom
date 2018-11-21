@@ -55,8 +55,7 @@ export default class OrderCom extends Component {
 						// content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
 						status: "negative"
 					}
-				}
-				);
+				});
 			})
 	}
 
@@ -174,8 +173,7 @@ export default class OrderCom extends Component {
 							<Table.HeaderCell width='2'>Delete</Table.HeaderCell>
 						</Table.Row>
 					</Table.Header>
-
-					{this.state.product.map((item, i) =>
+					{ this.state.product.map((item, i) =>
 						<Table.Body>
 							<Table.Row>
 								<Table.Cell width='1'>{Count++}</Table.Cell>
@@ -200,7 +198,6 @@ export default class OrderCom extends Component {
 									<Label className="PointerEdit button" onClick={() => { (this.state.product[i].amount + 1) < 30 ? this.updateItem(i, { amount: this.state.product[i].amount + 1 }) : null }}>
 										<Icon name="plus" fitted />
 									</Label>
-									{console.log(this.checkStock(item.productID))}
 								</Table.Cell>
 								<Table.Cell width='2'>
 									<h4 className='inlineE'>
