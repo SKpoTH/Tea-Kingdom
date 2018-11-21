@@ -29,7 +29,7 @@ export default class AddTracking extends Component {
         this.getData()
     }
     getData = () => {
-        axios.get('/api/tracking/admin_load', { headers: { Authorization: localStorage.getItem("token") } })
+        axios.get('/api/tracking/admin/load', { headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
                 this.setState({
                     mymessage: res.data.data
@@ -62,7 +62,7 @@ export default class AddTracking extends Component {
             })
         }
         console.log("this is update ->", update)
-        axios.post('/api/tracking/update_state', update, { headers: { Authorization: localStorage.getItem("token") } })
+        axios.post('/api/tracking/admin/update', update, { headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
                 console.log("send")
                 console.log(res.data)

@@ -6,6 +6,8 @@ import { Image, Button, Table, Card, Grid, Label } from 'semantic-ui-react'
 import axios from 'axios';
 import styled from 'styled-components'
 
+//wait//-------------------------
+
 const Head = styled.div`
     font-size: 25px;
     font-weight: bold;
@@ -29,58 +31,6 @@ export default class Favorite extends Component {
         this.getData();
     }
 
-    updateItem = (index, itemAttributes) => {
-        this.setState({
-            product: [
-                ...this.state.product.slice(0, index),
-                Object.assign({}, this.state.product[index], itemAttributes),
-                ...this.state.product.slice(index + 1)
-            ]
-        });
-    }
-
-    checkList = (productID) => {
-        const sent = {
-            productID: productID
-        }
-
-        let list;
-
-        axios.post('....', sent, { headers: { Authorization: localStorage.getItem("token") } })
-            .then(res => {
-                console.log('==========================');
-                list = res.data.data.amount;
-                return list;
-            })
-            .catch(err => {
-                console.log('Error');
-            })
-    }
-
-    sendData = () => {
-        const sent = {
-            product: this.state.product
-        }
-
-        axios.post('...', sent, { headers: { Authorization: localStorage.getItem("token") } })
-            .then((res) => {
-                console.log(res.data.status);
-                this.getData();
-            })
-            .catch((error) => {
-                this.setState({ cantLoad: true });
-                this.setState({
-                    message:
-                    {
-                        massageHidden: false,
-                        // content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
-                        status: "negative"
-                    }
-                }
-                );
-            })
-    }
-
     removeItem = (index) => {
         const sent = {
             productID: this.state.product[index]._id
@@ -88,27 +38,7 @@ export default class Favorite extends Component {
 
         console.log(this.state.product[index]._id);
 
-        axios.post('api/favourite/remove_favourite', sent, { headers: { Authorization: localStorage.getItem("token") } })
-            .then((res) => {
-                console.log(res.data.status);
-                this.getData();
-            })
-            .catch((error) => {
-                this.setState({ cantLoad: true });
-                this.setState({
-                    message:
-                    {
-                        massageHidden: false,
-                        // content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
-                        status: "negative"
-                    }
-                }
-                );
-            })
-    }
-
-    removeOrder = () => {
-        axios.get('...', { headers: { Authorization: localStorage.getItem("token") } })
+        axios.post('api/favourite/remove', sent, { headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
                 console.log(res.data.status);
                 this.getData();
@@ -128,10 +58,10 @@ export default class Favorite extends Component {
     }
 
     getData = () => {
-        axios.get('...', { headers: { Authorization: localStorage.getItem("token") } })
+        axios.get('/api/userData/load/', { headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
                 this.setState({
-                    product: res.data.product
+                    product: res.data.data.favorite
                 });
             })
             .catch((error) => {

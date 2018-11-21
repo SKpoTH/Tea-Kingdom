@@ -25,11 +25,11 @@ export default class User extends Component {
         //console.log(this.state.id);
         console.log('=================');
 
-        axios.get('/api/edit_profile/load', { headers: { Authorization: localStorage.getItem("token") } })
+        axios.get('/api/userData/load', { headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
-                let jsonReturn = res.data;
-                // console.log(jsonReturn);
-                if (jsonReturn.status === "found") {
+                let jsonReturn = res.data.data;
+                console.log(res.data.status);
+                if (res.data.status === "Successfully Load User Data") {
                     self.setState({
                         Fname: jsonReturn.firstname,        //fix Fname -> firstname
                         Lname: jsonReturn.lastname,         //fix too

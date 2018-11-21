@@ -45,7 +45,7 @@ export default class Login extends Component {
     } else {
       axios.post('/api/login', Account)
         .then((res) => {
-          console.log(res.data);
+          console.log(res.data.data);
           if (res.data.status === "User and Password are not matched") {
             this.setState({
               message:
@@ -54,7 +54,7 @@ export default class Login extends Component {
             this.password.value = "";
             this.email.value = "";
           } else {
-            localStorage.setItem('token', res.data.token);
+            localStorage.setItem('token', res.data.data.token);
             window.location = '/';
           }
         })

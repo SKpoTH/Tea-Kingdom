@@ -136,7 +136,7 @@ Get data from API Response -> "res.data" change to "res.data.data"
 
 /api/add_product/add				->		/api/product/seller/add
 
-/api/admin/load					->		/api/product/admin/load/all (post -> get)
+/api/admin/load						->		/api/product/admin/load/all (post -> get)
 
 */api/admin/confirm					->		/api/product/admin/confirm
 
