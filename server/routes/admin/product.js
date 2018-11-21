@@ -7,7 +7,7 @@ const passport = require('passport');
 const Product = require('../../models/product');
 
 // Load all products for addmin
-router.get('/admin/load/all', passport.authenticate('jwt', { session: false } ), function(req, res){
+router.get('/load/all', passport.authenticate('jwt', { session: false } ), function(req, res){
     Product.find({})
         .then( products => {
             // Response If Success
@@ -25,7 +25,7 @@ router.get('/admin/load/all', passport.authenticate('jwt', { session: false } ),
 })
 
 // Confirm the product by Admin
-router.post('/admin/confirm', passport.authenticate('jwt', { session: false }), function(req, res){
+router.post('/confirm', passport.authenticate('jwt', { session: false }), function(req, res){
     // Find the product that will be confirmed
     Product.findOne({
         _id: req.body.productID
