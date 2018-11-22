@@ -60,9 +60,11 @@ export default class Favorite extends Component {
     getData = () => {
         axios.get('/api/userData/load/', { headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
+                console.log(res.data.data);
                 this.setState({
-                    product: res.data.data.favorite
+                    product: res.data.data.favourite
                 });
+                console.log(this.state.product)
             })
             .catch((error) => {
                 this.setState({ cantLoad: true });
@@ -77,6 +79,7 @@ export default class Favorite extends Component {
                 );
             });
     };
+
 
     render() {
         let Count = 1;

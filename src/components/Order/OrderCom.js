@@ -108,7 +108,7 @@ export default class OrderCom extends Component {
 
 	// Get stock info of product
 	getStock = () => {
-		for (let i in this.state.product){
+		for (let i in this.state.product) {
 			//console.log(this.state.product[i]);
 			let stockProduct = {
 				productID: this.state.product[i].productID
@@ -173,7 +173,8 @@ export default class OrderCom extends Component {
 							<Table.HeaderCell width='2'>Delete</Table.HeaderCell>
 						</Table.Row>
 					</Table.Header>
-					{ this.state.product.map((item, i) =>
+
+					{this.state.product.map((item, i) =>
 						<Table.Body>
 							<Table.Row>
 								<Table.Cell width='1'>{Count++}</Table.Cell>
