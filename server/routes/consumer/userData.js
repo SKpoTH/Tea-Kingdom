@@ -48,6 +48,7 @@ router.get('/load', passport.authenticate('jwt', { session: false}), (req, res) 
             // User not exist
             } else{
                 res.json({
+                    data: user,
                     status: "The User doesn't exist"
                 })
             }
