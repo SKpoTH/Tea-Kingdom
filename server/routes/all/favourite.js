@@ -91,6 +91,7 @@ router.post('/add', passport.authenticate('jwt', { session: false}), function(re
             } else {
                 // Response if not Logged in
                 res.json({
+                    data: user,
                     status: "The User doesn't exist"
                 })
             }
