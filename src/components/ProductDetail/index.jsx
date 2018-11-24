@@ -21,6 +21,7 @@ class ProductDetail extends Component {
   componentDidMount() {
     this.getData();
   }
+
   getData = () => {
     axios.post('/api/product/load/one', { productID: this.state.id })
       .then((res) => {

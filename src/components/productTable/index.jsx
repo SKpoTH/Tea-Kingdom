@@ -62,6 +62,7 @@ class ProdTable extends Component {
         <Dimmer className={this.state.loading} inverted>
           <Loader size='large'>Loading</Loader>
         </Dimmer>
+
         <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status} />
         {this.spritCard ? <ProductT all={this.spritCard} /> : null}
         <center>

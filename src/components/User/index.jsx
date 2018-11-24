@@ -22,13 +22,11 @@ export default class User extends Component {
     getData = () => {
         var self = this;
 
-        //console.log(this.state.id);
-        console.log('=================');
-
         axios.get('/api/userData/load', { headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
                 let jsonReturn = res.data.data;
                 console.log(res.data.status);
+
                 if (res.data.status === "Successfully Load User Data") {
                     self.setState({
                         Fname: jsonReturn.firstname,        //fix Fname -> firstname
@@ -74,10 +72,12 @@ export default class User extends Component {
                     <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status} />
                     {this.state.cantLoad ? null : <Mobile data={this.state} />}
                 </Responsive>
+
                 <Responsive {...Responsive.onlyTablet}>
                     <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status} />
                     {this.state.cantLoad ? null : <Computer data={this.state} />}
                 </Responsive>
+
                 <Responsive {...Responsive.onlyComputer}>
                     <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status} />
                     {this.state.cantLoad ? null : <Computer data={this.state} />}

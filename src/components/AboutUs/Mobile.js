@@ -36,12 +36,15 @@ export default class Computer extends Component {
                 </Container>
 
                 <Content2 />
+
                 <Container fluid>
                     <Content4 />
                 </Container>
+
                 <Container>
                     <Bottom />
                 </Container>
+
                 <Content5 />
             </div>
         );

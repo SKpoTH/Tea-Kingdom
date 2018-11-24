@@ -41,6 +41,7 @@ export default class Content extends Component {
     getData = () => {
         axios.get('/api/order/load', { headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
+                console.log(res.data.status)
                 this.setState({
                     product: res.data.data.product
                 });

@@ -14,6 +14,7 @@ const UploadImage = styled.div`
 export default class EditUser extends Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
 			message:
 				{ massageHidden: true, content: '', status: "" },
@@ -21,8 +22,8 @@ export default class EditUser extends Component {
 			Lname: '',
 			address: '',
 			phone: '',
-
 		}
+
 		this._handleImageChange = this._handleImageChange.bind(this);
 		this._handleSubmit = this._handleSubmit.bind(this);
 		axios.defaults.headers.common['Authorization'] = localStorage.getItem("token"); //Importand 
@@ -37,6 +38,7 @@ export default class EditUser extends Component {
 		e.preventDefault();
 
 		let reader = new FileReader();
+
 		let file = e.target.files[0];
 
 		reader.onloadend = () => {
@@ -44,8 +46,8 @@ export default class EditUser extends Component {
 				file: file,
 				imagePreviewUrl: reader.result
 			});
-
 		}
+
 		reader.readAsDataURL(file)
 		// reader.readAsArrayBuffer(file)
 	}
@@ -128,6 +130,7 @@ export default class EditUser extends Component {
 
 
 		return (
+
 			<TemplateTKD>
 				<Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status} />
 				<Form onSubmit={this.onSubmit} >
