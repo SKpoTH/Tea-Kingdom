@@ -52,6 +52,70 @@ export default class EditUser extends Component {
 		// reader.readAsArrayBuffer(file)
 	}
 
+	CheckEmpty(state) {
+		for (let a in state) {
+			if (state[a] === "" || state[a] === undefined) {
+				return true;
+			}
+		}
+		return false
+	}
+
+	CheckFileEmpty(file) {
+		if (file === undefined) {
+			console.log('No upload File');
+			return true
+		}
+		return false
+	}
+
+	emptyData() {
+		this.setState({
+			message:
+				{ massageHidden: false, content: 'You must containt datas in all field.', status: "negative" }
+		});
+	}
+
+	errorPage(error) {
+		this.setState({
+			message:
+			{
+				massageHidden: false,
+				content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
+				status: "negative"
+			}
+		}
+		);
+
+	}
+
+	sendData(userData) {
+		axios({
+			method: 'post',
+			url: '/api/userData/edit',
+			data: userData,
+			config: { headers: { 'Content-Type': 'multipart/form-data' } }
+		})
+			.then((res) => {
+				console.log(res.data.status);
+				window.location = '/user';
+
+			})
+			.catch((error) => {
+				this.errorPage(error)
+			});
+
+	}
+
+	submitData(state, file, userData) {
+		if (this.CheckEmpty(state) && this.CheckFileEmpty(file)) {
+			this.emptyData()
+		} else {
+			this.sendData(userData)
+		}
+
+	}
+
 	onSubmit = (event) => {
 		event.preventDefault();
 
@@ -67,49 +131,49 @@ export default class EditUser extends Component {
 
 		console.log(this.state.file);
 
-		var checkEmpty = false;
+		// var checkEmpty = false;
+		// for (var a in this.state) {
+		// 	if (this.state[a] === "" || this.state[a] === undefined) {
+		// 		console.log("Don't have data at -> " + a);
+		// 		checkEmpty = true;
+		// 	}
+		// }
 
-		for (var a in this.state) {
-			if (this.state[a] === "" || this.state[a] === undefined) {
-				console.log("Don't have data at -> " + a);
-				checkEmpty = true;
-			}
-		}
 		//Check if image file is empty
-		if (this.state.file === undefined) {
-			console.log('No upload File');
-			checkEmpty = true;
-		}
+		// if (this.state.file === undefined) {
+		// 	console.log('No upload File');
+		// 	checkEmpty = true;
+		// }
 
-		if (checkEmpty) {
-			this.setState({
-				message:
-					{ massageHidden: false, content: 'You must containt datas in all field.', status: "negative" }
-			});
-		} else {
-			axios({
-				method: 'post',
-				url: '/api/userData/edit',
-				data: userData,
-				config: { headers: { 'Content-Type': 'multipart/form-data' } }
-			})
-				.then((res) => {
-					console.log(res.data.status);
-					window.location = '/user';
-					// window.location = '/login' + user.email;
-				})
-				.catch((error) => {
-					this.setState({
-						message:
-						{
-							massageHidden: false,
-							content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
-							status: "negative"
-						}
-					}
-					);
-				});
-		}
+		this.submitData(this.state, this.state.file, userData)
+
+		// if (this.CheckEmpty(this.state) && this.CheckFileEmpty(this.state.file)) {
+		// 	this.emptyData()
+		// } else {
+		// 	this.sendData(userData)
+		// 	// axios({
+		// 	// 	method: 'post',
+		// 	// 	url: '/api/userData/edit',
+		// 	// 	data: userData,
+		// 	// 	config: { headers: { 'Content-Type': 'multipart/form-data' } }
+		// 	// })
+		// 	// 	.then((res) => {
+		// 	// 		console.log(res.data.status);
+		// 	// 		window.location = '/user';
+		// 	// 		// window.location = '/login' + user.email;
+		// 	// 	})
+		// 	// 	.catch((error) => {
+		// 	// 		this.setState({
+		// 	// 			message:
+		// 	// 			{
+		// 	// 				massageHidden: false,
+		// 	// 				content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
+		// 	// 				status: "negative"
+		// 	// 			}
+		// 	// 		}
+		// 	// 		);
+		// 	// 	});
+		// }
 	}
 
 	render() {

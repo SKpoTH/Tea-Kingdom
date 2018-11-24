@@ -6,6 +6,7 @@ import pic from '../pic/tea1.jpg'
 import pic2 from '../pic/store.jpg'
 
 
+
 const Margin = styled.div`
     margin-top: 30px;
     margin-bottom: 165px;
@@ -43,10 +44,6 @@ export default class Content1 extends Component {
                             <Image src={pic2} href='/product' />
                         </Reveal.Content>
                     </Reveal>
-
-
-
-
 
                     <br />
                     <Head>We provide</Head>
