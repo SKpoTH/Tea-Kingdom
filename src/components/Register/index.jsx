@@ -159,9 +159,11 @@ export default class Registration extends Component {
 						<Form.Input label='address' placeholder='Address' onChange={(e, data) => { this.address = data.value }} />
 						<Form.Input label='phone' placeholder='Phone' onChange={(e, data) => { this.phone = data.value }} />
 					</Form.Group>
+
 					<Form.Group inline>
 						<Form.Field control={Checkbox} onChange={() => { this.setState({ agree: !this.state.agree }) }} />
 						I agree to the&nbsp;
+
 						<Modal trigger={<AA>Terms and Conditions</AA>}>
 							<Modal.Header>ข้อตกลง</Modal.Header>
 							<Modal.Content>

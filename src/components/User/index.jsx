@@ -16,9 +16,31 @@ export default class User extends Component {
         }
         this.getData()
 
-        //axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
 
     }
+
+    contactUs() {
+        this.setState({ cantLoad: true });
+        this.setState({
+            message:
+                { massageHidden: false, content: 'Please contact us.', status: "negative" }
+        });
+
+    }
+
+    cantLoad() {
+        this.setState({ cantLoad: true });
+        this.setState({
+            message:
+            {
+                massageHidden: false,
+                status: "negative"
+            }
+        }
+        );
+
+    }
+
     getData = () => {
         var self = this;
 
@@ -37,29 +59,15 @@ export default class User extends Component {
                         phone: jsonReturn.phone,
                         cantLoad: false
                     })
-
+                    //unsuccess load data
                     console.log(this.state);
 
                 } else {
-                    self.setState({ cantLoad: true });
-                    self.setState({
-                        message:
-                            { massageHidden: false, content: 'Please contact us.', status: "negative" }
-                    });
+                    this.contactUs()
                 }
-
             })
             .catch((error) => {
-                self.setState({ cantLoad: true });
-                self.setState({
-                    message:
-                    {
-                        massageHidden: false,
-                        //content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
-                        status: "negative"
-                    }
-                }
-                );
+                this.cantLoad()
             });
     };
 
