@@ -1,120 +1,182 @@
 import React, { Component } from "react";
-import axios from 'axios'
+import Connection from '../pomLib/connection';
+import Token from '../pomLib/token';
 import "./ProductDetail.css";
-
 import { Container, Header, Segment, Item, Divider, Label, Icon, Input, Button, Grid } from "semantic-ui-react";
+
+const request = Connection.createClass();
 
 export default class MainProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 1,
-      inputUsing: false,
-      mouseCount: 0
+      value: 1
     }
-    axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
   }
+  
   handleChange = (event) => {
-    if ((event.target.value > 0 && event.target.value < 1000 && event.target.value <= this.props.dataR.amount) || event.target.value == '')
-      this.setState({ value: event.target.value });
-
+    event.preventDefault();
+    this.setState({ value: event.target.value });
   }
-  plus = () => {
+
+  outSelect = (event) => {
+    event.preventDefault();
+    if (this.state.value <= 0)
+      this.setState({ value: 1 });
+    else if (this.state.value > this.props.dataR.amount)
+      this.setState({ value: this.props.dataR.amount });
+    else if (this.state.value > 1000)
+      this.setState({ value: 999 });
+    else if (typeof(this.state.value) != "number")
+      this.setState({ value: 1 });
+  }
+
+  plus = (event) => {
+    event.preventDefault();
     if (this.state.value == '') return;
     if (this.state.value + 1 < 1000 && this.state.value + 1 <= this.props.dataR.amount)
       this.setState({ value: Number(this.state.value) + 1 });
   }
-  minus = () => {
+
+  minus = (event) => {
+    event.preventDefault();
     if (this.state.value - 1 > 0)
       this.setState({ value: Number(this.state.value) - 1 });
   }
-  checkout = () => {
-    if (this.state.mouseCount == 1) {
-      this.setState({ mouseCount: 0 });
-      if (this.state.value == '') {
-        this.setState({ value: 1 });
-      }
-    }
-  }
-  addFev = () => {
-    axios.post('/api/favourite/add', { productID: this.props.id })
-      .then((res) => { console.log(res.data.data) })
-      .catch((error) => {
-        console.log(error)
+
+  addFev = (event, { ident }) => {
+    event.preventDefault();
+    request.post('/api/favourite/add', { productID : ident }, true)
+    .then(res => {
+      this.props.setMessage({
+        content: res,
+        hidden: false,
+        className: 'success'
       });
+    })
+    .catch(err => {
+      if(Token.isLogin)
+        this.props.setMessage({
+          content: err,
+          hidden: false,
+          className: 'negative'
+        });
+      else
+        this.messageLogin();
+    });
+    window.scrollTo({ top: 0 ,behavior: 'smooth' });
   }
 
-  send = () => {
+  messageLogin = () => {
+    this.props.setMessage({
+      content: "Please login to use favorites function",
+      hidden: false,
+      className: 'warning'
+    });
+  }
+
+  send = (event, { ident }) => { //checking login
+    event.preventDefault();
     const myOrder = {
-      productID: this.props.dataR.id,
+      productID: ident,
       amount: this.state.value
     }
-    axios.post('/api/order/add', myOrder)
-      .then((res) => { console.log(res.data.data) })
-      .catch((error) => {
-        console.log(error)
-      });
-    window.location = "/order";
-  };
+    request.post('/api/order/add', myOrder, true)
+    .then(() => {
+      window.location = "/order";
+    })
+    .catch(err => {
+      console.log(err)
+      if(Token.isLogin)
+        this.props.setMessage({
+          content: err,
+          hidden: false,
+          className: 'negative'
+        });
+      else
+        this.messageLogin();
+    });
+    window.scrollTo({ top: 0 ,behavior: 'smooth' });
+  }
+
   render() {
+    const { productImage, name, discount, discountPrice, price, score, description, brand, amount, id } = this.props.dataR;
+    const pictureFragment = <Item.Image size="large" src={productImage} />;
+    const twoButtonFragment = (
+      <React.Fragment>
+        <Button color="blue" content="add to cart" id={id} icon="cart" onClick={this.send} />
+        <Button color="red" icon="heart" iden={id} onClick={this.addFev} />
+      </React.Fragment>
+    );
+    const headFragment = (
+      <Item.Header>
+        <Header>
+          <div className="productName">
+            <Icon name="leaf" className="inlineE" />
+            <h1 className="inlineE">{name}</h1>
+          </div>
+        </Header>
+      </Item.Header>
+    );
+    const priceFragment = (
+      <div className="priceSpace">
+        <h3 className="inlineE">฿{discount ? discountPrice : price} </h3>
+        <h4 className="oldPrice">{discount ? "฿" + price : null} </h4>
+        &nbsp;&nbsp;&nbsp;
+        <Label color='olive'>
+          <Icon name='star' /> {score}
+        </Label>
+      </div>
+    );
+    const descriptionFragement = <Item.Description className="padd15" as='p'>{description}</Item.Description>;
+    const brandFragement = (
+      <React.Fragment>
+        <Icon name="fort awesome" className='CON' />
+        <div className='CON'>{brand}</div>
+      </React.Fragment>
+    );
+    const amountFragement = (
+      <React.Fragment>
+        <b>Amount :</b> &nbsp;
+        <Input labelPosition='right' type='text'>
+          <Label className="PointerEdit button" onClick={this.minus}><Icon name="minus" fitted /></Label>
+          <input className="centerText" maxlength="3" size="3" value={this.state.value} onChange={this.handleChange}
+            onBlur={this.outSelect}/>
+          <Label className="PointerEdit button" onClick={this.plus}><Icon name="plus" fitted /></Label>
+        </Input>
+        <br />
+        <Item.Extra className="indent">There are {amount} available</Item.Extra>
+        <br />
+      </React.Fragment>
+    );
     return (
-      <Container onMouseDown={this.checkout}>
+      <Container>
         <Segment>
           <Grid columns={2} stackable stretched>
             <Grid.Row>
               <Grid.Column textAlign="center">
-                <Item.Image size="large" src={this.props.dataR.productImage} />
+                {pictureFragment}
               </Grid.Column>
-
-
               <Grid.Column>
-
-
                 <Item.Group>
-                  <Item>
-                    <Item.Content>
-                      <Item.Header>
-                        <Header>
-                          <div className="productName">
-                            <Icon name="leaf" className="inlineE" />
-                            <h1 className="inlineE">{this.props.dataR.name}</h1>
-                          </div>
-                        </Header>
-                      </Item.Header>
-                      <Divider />
-                      <Item.Meta>
-                        <div className="priceSpace">
-                          <h3 className="inlineE">฿{this.props.dataR.discount ? this.props.dataR.discountPrice : this.props.dataR.price} </h3>
-                          <h4 className="oldPrice">{this.props.dataR.discount ? "฿" + this.props.dataR.price : null} </h4>
-                          &nbsp;&nbsp;&nbsp;
-                          <Label color='olive'>
-                            <Icon name='star' /> {this.props.dataR.score}
-                          </Label>
-                        </div>
-                      </Item.Meta>
-                      <Item.Description className="padd15" as='p'>{this.props.dataR.description}</Item.Description>
+                    <Item>
                       <Item.Content>
-                        <Icon name="fort awesome" className='CON' /><div className='CON'>{this.props.dataR.brand}</div>
-                        <br /><br />
-                        <b>Amount :</b> &nbsp;
-                        <Input labelPosition='right' type='text'>
-                          <Label className="PointerEdit button" onClick={this.minus}><Icon name="minus" fitted /></Label>
-                          <input className="centerText" maxlength="3" size="3" value={this.state.value} onChange={this.handleChange}
-                            onSelect={() => this.setState({ inputUsing: true, mouseCount: 1 })} />
-                          <Label className="PointerEdit button" onClick={this.plus}><Icon name="plus" fitted /></Label>
-                        </Input>
-                        <br />
-                        <Item.Extra className="indent">There are {this.props.dataR.amount} available</Item.Extra>
-                        <br />
-                        <Button color="blue" content="add to cart" icon="cart" onClick={() => { this.send() }} />
-                        <Button color="red" icon="heart" onClick={() => { this.addFev() }} />
-                        <Divider className="margin7" hidden />
+                        {headFragment}
+                        <Divider />
+                        <Item.Meta>
+                          {priceFragment}
+                        </Item.Meta>
+                        {descriptionFragement}
+                        <Item.Content>
+                          {brandFragement}
+                          <br /><br />
+                          {amountFragement}
+                          {twoButtonFragment}
+                          <Divider className="margin7" hidden />
+                        </Item.Content>
                       </Item.Content>
-                    </Item.Content>
-                  </Item>
-                </Item.Group>
-
-
+                    </Item>
+                  </Item.Group>
               </Grid.Column>
             </Grid.Row>
           </Grid>

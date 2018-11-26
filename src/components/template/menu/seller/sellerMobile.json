@@ -1,8 +1,0 @@
-[
-    { "show": "PERSON" , "url" : "/seller" },
-    { "show": "Home" , "url" : "/" },
-    { "show": "About US" , "url" : "/AboutUs" },
-    { "show": "Product" , "url" : "/product" },
-    { "show": "Track" , "url" : "/under" },
-    { "show": "Logout" , "url" : "NON_USE" }
-]

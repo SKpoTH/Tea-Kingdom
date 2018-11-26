@@ -1,86 +1,72 @@
 import React, { Component } from "react";
 import TemplateTKD from "../template/TemplateTKD";
 import "semantic-ui-css/semantic.css";
-
+import { Message, Loading, Padding } from '../template/TKDcomponent';
 import MainProduct from "./MainProduct";
-import SubProduct from "./SubProduct";
 import Review from "./Review";
-import axios from 'axios'
-import { Message, Dimmer, Loader } from "semantic-ui-react";
+import Connection from '../pomLib/connection';
+
+const request = Connection.createClass();
 
 class ProductDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message:
-        { massageHidden: true, content: '', status: "" },
-      id: props.params.id,
-      loading: "active"
+      message: {
+        content: '',
+        hidden: true,
+        className: ''
+      },
+      loading: true,
+      cantLoad: false,
+      loadData: {}
     }
   }
   componentDidMount() {
     this.getData();
   }
   getData = () => {
-    axios.post('/api/product/load/one', { productID: this.state.id })
-      .then((res) => {
-        let jsonReturn = res.data.data;
-        // console.log(jsonReturn);
-        if (res.data.status === "found") {
+    request.post('/api/product/load/one', { productID: this.props.params.id }, false)
+      .then(res => {
+        if (res.status === "Successfully Loaded a Product") {
           this.setState({
-            name: jsonReturn.name,
-            brand: jsonReturn.brand,
-            type: jsonReturn.type,
-            discountPrice: jsonReturn.discountPrice,
-            price: jsonReturn.price,
-            weight: jsonReturn.weight,
-            region: jsonReturn.region,
-            description: jsonReturn.description,
-            review: jsonReturn.review,
-            score: jsonReturn.score,
-            process: jsonReturn.process,
-            amount: jsonReturn.amount,
-            pending: jsonReturn.pending,
-            productImage: jsonReturn.productImage,
-            discount: jsonReturn.discount,
+            loadData: res.data,
             cantLoad: false,
-            loading: ""
+            loading: false
           })
-
         } else {
           this.setState({
-            message:
-              { massageHidden: false, content: 'We don\'t have this product.', status: "negative" },
+            message: {
+              content: 'We don\'t have this product.',
+              hidden: false,
+              className: 'negative'
+            },
             cantLoad: true,
-            loading: ""
+            loading: false
           });
         }
-
       })
-      .catch((error) => {
-        this.setState({ cantLoad: true });
-        this.setState({
-          message:
-          {
-            massageHidden: false,
-            content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
-            status: "negative",
-            loading: ""
-          }
-        }
-        );
+      .catch(err => {
+        this.setMessage({
+          content: err,
+          hidden: false,
+          className: 'negative'
+        });
       });
   };
+  setMessage = (mess) => {
+    this.setState({ message: mess });
+  }
   render() {
+    const { message, loading, loadData } = this.state;
+    const id = this.props.params.id;
     return (
       <TemplateTKD>
-        <Dimmer className={this.state.loading} inverted>
-          <Loader size='large'>Loading</Loader>
-        </Dimmer>
-        <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status} />
-        {this.state.cantLoad ? null : <MainProduct dataR={this.state} />}
-        {/* <SubProduct /> */}
-        {this.state.cantLoad ? null : <Review idR={this.state.id} />}
+        <Loading loading={loading}/>
+        <Message data={message} />
+        <Padding length="1" />
+        {this.state.cantLoad ? null : <MainProduct dataR={loadData} setMessage={this.setMessage} />}
+        {this.state.cantLoad ? null : <Review idR={id} setMessage={this.setMessage}/>}
       </TemplateTKD>
     );
   }

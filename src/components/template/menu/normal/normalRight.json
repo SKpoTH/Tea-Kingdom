@@ -1,4 +1,0 @@
-[
-    { "show": "Register" , "url" : "/register" },
-    { "show": "Login" , "url" : "/login" }
-]

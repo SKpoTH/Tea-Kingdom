@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import Connection from '../pomLib/connection';
 import "semantic-ui-css/semantic.css";
 import { Container, Button, Form, Message } from "semantic-ui-react";
-import axios from "axios";
 import TemplateTKD from "../template/TemplateTKD";
+
+const request = Connection.createClass();
 
 export default class Login extends Component {
   constructor(props) {
@@ -43,18 +45,18 @@ export default class Login extends Component {
           { massageHidden: false, content: 'You must containt datas in all field.', status: "negative" }
       });
     } else {
-      axios.post('/api/login', Account)
+      request.post('/api/login', Account, false)
         .then((res) => {
-          console.log(res.data.data);
-          if (res.data.status === "User and Password are not matched") {
+          console.log(res.data);
+          if (res.status === "User and Password are not matched") {
             this.setState({
               message:
-                { massageHidden: false, content: res.data.status, status: "negative" }
+                { massageHidden: false, content: res.status, status: "negative" }
             });
             this.password.value = "";
             this.email.value = "";
           } else {
-            localStorage.setItem('token', res.data.token);
+            localStorage.setItem('token', res.token);
             window.location = '/';
           }
         })
@@ -63,7 +65,7 @@ export default class Login extends Component {
             message:
             {
               massageHidden: false,
-              content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
+              content: error,
               status: "negative"
             }
           }
