@@ -26,7 +26,7 @@ router.get('/load', passport.authenticate('jwt', { session: false}), function(re
             else{
                 // Response if Not found order
                 res.json({
-                    data: [],
+                    data: orders,
                     status: "Not Found Any orders"
                 });
             }

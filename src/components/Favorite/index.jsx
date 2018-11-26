@@ -5,6 +5,7 @@ import { Container, Responsive } from 'semantic-ui-react';
 import { Image, Button, Table, Card, Grid, Label } from 'semantic-ui-react'
 import axios from 'axios';
 import styled from 'styled-components'
+import mget from './get'
 
 //wait//-------------------------
 
@@ -33,10 +34,10 @@ export default class Favorite extends Component {
 
     removeItem = (index) => {
         const sent = {
-            productID: this.state.product[index]._id
+            productID: this.state.product[index].productID
         }
 
-        console.log(this.state.product[index]._id);
+        console.log(sent.productID);
 
         axios.post('api/favourite/remove', sent, { headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
@@ -57,26 +58,37 @@ export default class Favorite extends Component {
             })
     }
 
-    getData = () => {
-        axios.get('/api/userData/load/', { headers: { Authorization: localStorage.getItem("token") } })
-            .then((res) => {
-                this.setState({
-                    product: res.data.data.favorite
-                });
-            })
-            .catch((error) => {
-                this.setState({ cantLoad: true });
-                this.setState({
-                    message:
-                    {
-                        massageHidden: false,
-                        // content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
-                        status: "negative"
-                    }
-                }
-                );
-            });
-    };
+    // getData = () => {
+    //     axios.get('/api/userData/load/', { headers: { Authorization: localStorage.getItem("token") } })
+    //         .then((res) => {
+    //             console.log(res.data.data);
+    //             this.setState({
+    //                 product: res.data.data.favourite
+    //             });
+    //             console.log(this.state.product)
+    //         })
+    //         .catch((error) => {
+    //             this.setState({ cantLoad: true });
+    //             this.setState({
+    //                 message:
+    //                 {
+    //                     massageHidden: false,
+    //                     // content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
+    //                     status: "negative"
+    //                 }
+    //             }
+    //             );
+    //         });
+    // };
+
+    async getData() {
+        const get = await mget('/api/userData/load/')
+        console.log(get);
+        this.setState({
+            product: get.data.favourite
+        })
+        console.log(this.state.product)
+    }
 
     render() {
         let Count = 1;

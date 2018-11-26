@@ -17,7 +17,6 @@ const Head = styled.div`
     color: black;
  
 `
-
 const Normal = styled.div`
     font-size: 16px;
     text-align: center;

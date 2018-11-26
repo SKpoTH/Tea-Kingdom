@@ -14,6 +14,7 @@ const UploadImage = styled.div`
 export default class EditUser extends Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
 			message:
 				{ massageHidden: true, content: '', status: "" },
@@ -21,8 +22,8 @@ export default class EditUser extends Component {
 			Lname: '',
 			address: '',
 			phone: '',
-
 		}
+
 		this._handleImageChange = this._handleImageChange.bind(this);
 		this._handleSubmit = this._handleSubmit.bind(this);
 		axios.defaults.headers.common['Authorization'] = localStorage.getItem("token"); //Importand 
@@ -37,6 +38,7 @@ export default class EditUser extends Component {
 		e.preventDefault();
 
 		let reader = new FileReader();
+
 		let file = e.target.files[0];
 
 		reader.onloadend = () => {
@@ -44,10 +46,74 @@ export default class EditUser extends Component {
 				file: file,
 				imagePreviewUrl: reader.result
 			});
-
 		}
+
 		reader.readAsDataURL(file)
 		// reader.readAsArrayBuffer(file)
+	}
+
+	CheckEmpty(state) {
+		for (let a in state) {
+			if (state[a] === "" || state[a] === undefined) {
+				return true;
+			}
+		}
+		return false
+	}
+
+	CheckFileEmpty(file) {
+		if (file === undefined) {
+			console.log('No upload File');
+			return true
+		}
+		return false
+	}
+
+	emptyData() {
+		this.setState({
+			message:
+				{ massageHidden: false, content: 'You must containt datas in all field.', status: "negative" }
+		});
+	}
+
+	errorPage(error) {
+		this.setState({
+			message:
+			{
+				massageHidden: false,
+				content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
+				status: "negative"
+			}
+		}
+		);
+
+	}
+
+	sendData(userData) {
+		axios({
+			method: 'post',
+			url: '/api/userData/edit',
+			data: userData,
+			config: { headers: { 'Content-Type': 'multipart/form-data' } }
+		})
+			.then((res) => {
+				console.log(res.data.status);
+				window.location = '/user';
+
+			})
+			.catch((error) => {
+				this.errorPage(error)
+			});
+
+	}
+
+	submitData(state, file, userData) {
+		if (this.CheckEmpty(state) && this.CheckFileEmpty(file)) {
+			this.emptyData()
+		} else {
+			this.sendData(userData)
+		}
+
 	}
 
 	onSubmit = (event) => {
@@ -65,49 +131,49 @@ export default class EditUser extends Component {
 
 		console.log(this.state.file);
 
-		var checkEmpty = false;
+		// var checkEmpty = false;
+		// for (var a in this.state) {
+		// 	if (this.state[a] === "" || this.state[a] === undefined) {
+		// 		console.log("Don't have data at -> " + a);
+		// 		checkEmpty = true;
+		// 	}
+		// }
 
-		for (var a in this.state) {
-			if (this.state[a] === "" || this.state[a] === undefined) {
-				console.log("Don't have data at -> " + a);
-				checkEmpty = true;
-			}
-		}
 		//Check if image file is empty
-		if (this.state.file === undefined) {
-			console.log('No upload File');
-			checkEmpty = true;
-		}
+		// if (this.state.file === undefined) {
+		// 	console.log('No upload File');
+		// 	checkEmpty = true;
+		// }
 
-		if (checkEmpty) {
-			this.setState({
-				message:
-					{ massageHidden: false, content: 'You must containt datas in all field.', status: "negative" }
-			});
-		} else {
-			axios({
-				method: 'post',
-				url: '/api/userData/edit',
-				data: userData,
-				config: { headers: { 'Content-Type': 'multipart/form-data' } }
-			})
-				.then((res) => {
-					console.log(res.data.status);
-					window.location = '/user';
-					// window.location = '/login' + user.email;
-				})
-				.catch((error) => {
-					this.setState({
-						message:
-						{
-							massageHidden: false,
-							content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
-							status: "negative"
-						}
-					}
-					);
-				});
-		}
+		this.submitData(this.state, this.state.file, userData)
+
+		// if (this.CheckEmpty(this.state) && this.CheckFileEmpty(this.state.file)) {
+		// 	this.emptyData()
+		// } else {
+		// 	this.sendData(userData)
+		// 	// axios({
+		// 	// 	method: 'post',
+		// 	// 	url: '/api/userData/edit',
+		// 	// 	data: userData,
+		// 	// 	config: { headers: { 'Content-Type': 'multipart/form-data' } }
+		// 	// })
+		// 	// 	.then((res) => {
+		// 	// 		console.log(res.data.status);
+		// 	// 		window.location = '/user';
+		// 	// 		// window.location = '/login' + user.email;
+		// 	// 	})
+		// 	// 	.catch((error) => {
+		// 	// 		this.setState({
+		// 	// 			message:
+		// 	// 			{
+		// 	// 				massageHidden: false,
+		// 	// 				content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
+		// 	// 				status: "negative"
+		// 	// 			}
+		// 	// 		}
+		// 	// 		);
+		// 	// 	});
+		// }
 	}
 
 	render() {
@@ -128,6 +194,7 @@ export default class EditUser extends Component {
 
 
 		return (
+
 			<TemplateTKD>
 				<Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status} />
 				<Form onSubmit={this.onSubmit} >

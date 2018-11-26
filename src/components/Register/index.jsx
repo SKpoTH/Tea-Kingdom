@@ -21,8 +21,100 @@ export default class Registration extends Component {
 		}
 	}
 
+	CheckEmpty(user) {
+		let check = false
+		for (let a in user) {
+			if (user[a] === "" || user[a] === undefined) {
+				check = true;
+			}
+		}
+		return check
+	}
+
+	CheckMessage(message, user) {
+		if (message === "Email already used") {
+			this.setState({
+				message:
+					{ massageHidden: false, content: message, status: "negative" }
+			});
+		}
+		else {
+			window.location = '/login' + user.email;
+		}
+	}
+
+	sendData(user) {
+		axios.post('/api/signup', user)
+			.then((res) => {
+				this.CheckMessage(res.data.status, user)
+
+			})
+			.catch((error) => {
+				this.setState({
+					message:
+					{
+						massageHidden: false,
+						content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
+						status: "negative"
+					}
+				}
+				);
+			});
+	}
+
+	emptyData() {
+		this.setState({
+			message:
+				{ massageHidden: false, content: 'You must containt datas in all field.', status: "negative" }
+		});
+	}
+
+	checkPasswordMatch(password, rePassword) {
+		if (password !== rePassword) {
+			return true
+		}
+		else return false
+	}
+
+	passwordDontMatch() {
+		this.setState({
+			message:
+				{ massageHidden: false, content: 'You password doesn\'t match.', status: "negative" }
+		});
+	}
+
+	checkAgreement(agreement) {
+		return !agreement
+	}
+
+	agreementMessage() {
+		this.setState({
+			message:
+				{ massageHidden: false, content: 'You must consider ours agreement.', status: "negative" }
+		});
+	}
+
+	SubmitValue(user, password, rePassword, agree) {
+		if (this.CheckEmpty(user)) {
+			this.emptyData()
+		}
+		else if (this.checkPasswordMatch(password, rePassword)) {
+			this.passwordDontMatch()
+			password = ""
+			rePassword = ""
+		}
+		else if (this.checkAgreement(agree)) {
+			this.agreementMessage()
+		}
+		else {
+			this.sendData(user)
+		}
+
+	}
+
 	onSubmit = (event) => {
 		event.preventDefault();
+
 		const user = {
 			firstname: this.firstname,
 			lastname: this.lastname,
@@ -31,54 +123,8 @@ export default class Registration extends Component {
 			address: this.address,
 			phone: this.phone
 		}
-		let checkEmpty = false;
-		for (let a in user) {
-			if (user[a] === "" || user[a] === undefined) {
-				checkEmpty = true;
-			}
-		}
-		if (checkEmpty) {
-			this.setState({
-				message:
-					{ massageHidden: false, content: 'You must containt datas in all field.', status: "negative" }
-			});
-		} else if (this.password.value !== this.rePassword.value) {
-			this.setState({
-				message:
-					{ massageHidden: false, content: 'You password doesn\'t match.', status: "negative" }
-			});
-			this.password.value = "";
-			this.rePassword.value = "";
-		} else if (!this.state.agree) {
-			this.setState({
-				message:
-					{ massageHidden: false, content: 'You must consider ours agreement.', status: "negative" }
-			});
-		} else {
-			axios.post('/api/signup', user)
-				.then((res) => {
-					// console.log(res.data);
-					if (res.data.status === "Email already used") {
-						this.setState({
-							message:
-								{ massageHidden: false, content: res.data.status, status: "negative" }
-						});
-					} else {
-						window.location = '/login' + user.email;
-					}
-				})
-				.catch((error) => {
-					this.setState({
-						message:
-						{
-							massageHidden: false,
-							content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
-							status: "negative"
-						}
-					}
-					);
-				});
-		}
+
+		this.SubmitValue(user, this.password.value, this.rePassword.value, this.state.agree)
 	}
 	render() {
 		return (
@@ -113,9 +159,11 @@ export default class Registration extends Component {
 						<Form.Input label='address' placeholder='Address' onChange={(e, data) => { this.address = data.value }} />
 						<Form.Input label='phone' placeholder='Phone' onChange={(e, data) => { this.phone = data.value }} />
 					</Form.Group>
+
 					<Form.Group inline>
 						<Form.Field control={Checkbox} onChange={() => { this.setState({ agree: !this.state.agree }) }} />
 						I agree to the&nbsp;
+
 						<Modal trigger={<AA>Terms and Conditions</AA>}>
 							<Modal.Header>ข้อตกลง</Modal.Header>
 							<Modal.Content>

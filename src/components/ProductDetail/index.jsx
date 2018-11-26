@@ -25,6 +25,7 @@ class ProductDetail extends Component {
   componentDidMount() {
     this.getData();
   }
+
   getData = () => {
     request.post('/api/product/load/one', { productID: this.props.params.id }, false)
       .then(res => {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TemplateTKD from '../template/TemplateTKD';
 import 'semantic-ui-css/semantic.css';
-import {Icon, Header,Container,Segment,Button,Divider,Form,Radio,TextArea,Image,Checkbox,Input,Select } from 'semantic-ui-react'
+import { Icon, Header, Container, Segment, Button, Divider, Form, Radio, TextArea, Image, Checkbox, Input, Select } from 'semantic-ui-react'
 
 const options = [
   { key: 'm', text: 'Male', value: 'male' },
@@ -11,6 +11,7 @@ const options = [
 class Content extends Component {
   state = {}
   handleChange = (e, { value }) => this.setState({ value })
+
   render() {
     const { value } = this.state
     return (
@@ -27,7 +28,7 @@ class Content extends Component {
             <Form>
               <b>Card Type</b>
               <Form.Field
-                style={{margin:'10px 0px 0px'}}
+                style={{ margin: '10px 0px 0px' }}
                 control={Radio}
                 label='Visa'
                 value='1'
@@ -42,7 +43,7 @@ class Content extends Component {
                 onChange={this.handleChange}
               />
               <Form.Field
-                style={{margin:'0px 0px 10px'}}
+                style={{ margin: '0px 0px 10px' }}
                 control={Radio}
                 label='Discover'
                 value='3'
@@ -50,6 +51,7 @@ class Content extends Component {
                 onChange={this.handleChange}
               />
             </Form>
+
             <Form.Field control={TextArea} rows={1} label='Card Number' placeholder='xxxx xxxx xxxx' />
             <Form.Group widths='equal'>
               <Form.Field control={TextArea} rows={1} label='Expiration Date' placeholder='MM / YY' />
