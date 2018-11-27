@@ -82,6 +82,57 @@ export default class AddProduct extends Component {
 		reader.readAsDataURL(file)
 		// reader.readAsArrayBuffer(file)
 	}
+	checkEmpty(state, file) {
+		var isEmpty = false
+		for (var a in state) {
+			if (state[a] === "" || state[a] === undefined) {
+				console.log("Don't have data at -> " + a);
+				isEmpty = true;
+			}
+		}
+
+		//Check if image file is empty
+		if (file === undefined) {
+			console.log('No upload File');
+			isEmpty = true;
+		}
+		return isEmpty
+
+	}
+
+	messageEmpty() {
+		this.setState({
+			message: { massageHidden: false, content: 'You must contain data in all field.', status: "negative" }
+		});
+	}
+
+	messageAgreement() {
+		this.setState({
+			message:
+				{ massageHidden: false, content: 'You must consider ours agreement.', status: "negative" }
+		});
+	}
+
+	sendData(bodyFormData) {
+		axios({
+			method: 'post',
+			url: '/api/product/seller/add',
+			data: bodyFormData,
+			config: { headers: { 'Content-Type': 'multipart/form-data' } }
+		})
+			.then((res) => {
+				if (res.data.status === "no company name") {
+					this.setState({
+						message: { massageHidden: false, content: res.data.status, status: "negative" }
+					});
+				} else {
+					console.log(res.data.status);
+					window.location = '/seller';
+				}
+			})
+			.catch(err => console.error(err));
+
+	}
 
 	onSubmit = (event) => {
 		event.preventDefault();
@@ -109,50 +160,38 @@ export default class AddProduct extends Component {
 
 		console.log(this.state.file);
 
-		var isEmpty = false;
 
-		//Check if image file is empty
-		for (var a in this.state) {
-			if (this.state[a] === "" || this.state[a] === undefined) {
-				console.log("Don't have data at -> " + a);
-				isEmpty = true;
-			}
-		}
-
-		//Check if image file is empty
-		if (this.state.file === undefined) {
-			console.log('No upload File');
-			isEmpty = true;
-		}
-
-		if (isEmpty) {
-			this.setState({
-				message: { massageHidden: false, content: 'You must contain data in all field.', status: "negative" }
-			});
+		if (this.checkEmpty(this.state, this.state.file)) {
+			// this.setState({
+			// 	message: { massageHidden: false, content: 'You must contain data in all field.', status: "negative" }
+			// });
+			this.messageEmpty()
 		} else if (!this.state.agree) {
-			this.setState({
-				message:
-					{ massageHidden: false, content: 'You must consider ours agreement.', status: "negative" }
-			});
+			// this.setState({
+			// 	message:
+			// 		{ massageHidden: false, content: 'You must consider ours agreement.', status: "negative" }
+			// });
+			this.messageAgreement()
 		} else {
+			this.sendData(bodyFormData)
 			//console.log(addnewproduct);
-			axios({
-				method: 'post',
-				url: '/api/product/seller/add',
-				data: bodyFormData,
-				config: { headers: { 'Content-Type': 'multipart/form-data' } }
-			})
-				.then((res) => {
-					if (res.data.status === "no company name") {
-						this.setState({
-							message: { massageHidden: false, content: res.data.status, status: "negative" }
-						});
-					} else {
-						console.log(res.data.status);
-						window.location = '/seller';
-					}
-				})
-				.catch(err => console.error(err));
+			// axios({
+			// 	method: 'post',
+			// 	url: '/api/product/seller/add',
+			// 	data: bodyFormData,
+			// 	config: { headers: { 'Content-Type': 'multipart/form-data' } }
+			// })
+			// 	.then((res) => {
+			// 		if (res.data.status === "no company name") {
+			// 			this.setState({
+			// 				message: { massageHidden: false, content: res.data.status, status: "negative" }
+			// 			});
+			// 		} else {
+			// 			console.log(res.data.status);
+			// 			window.location = '/seller';
+			// 		}
+			// 	})
+			// 	.catch(err => console.error(err));
 		}
 	}
 
