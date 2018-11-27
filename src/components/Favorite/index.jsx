@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import TemplateTKD from '../template/TemplateTKD';
 import 'semantic-ui-css/semantic.css';
 import { Container, Responsive, Divider } from 'semantic-ui-react';
-import { Image, Button, Table, Card, Grid, Label } from 'semantic-ui-react'
+import { Image, Button, Table, Grid } from 'semantic-ui-react'
 import axios from 'axios';
 import styled from 'styled-components'
-// import mget from './get'
 
-//wait//-------------------------
+import Connection from '../pomLib/connection';
+import Token from '../pomLib/token';
 
+const request = Connection.createClass();
 const Head = styled.div`
         font-size: 25px;
         font-weight: bold;
@@ -53,7 +54,7 @@ export default class Favorite extends Component {
         }
 
         console.log(sent.productID);
-
+        // request.post('api/favourite/remove', sent, true)
         axios.post('api/favourite/remove', sent, { headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
                 console.log(res.data.status);
@@ -73,9 +74,6 @@ export default class Favorite extends Component {
             })
     }
 
-    // addToCart = () => {
-
-    // }
 
     seeFullDetail = (event, { ident }) => {
         event.preventDefault();
@@ -85,6 +83,7 @@ export default class Favorite extends Component {
 
     getData = () => {
         axios.get('/api/userData/load/', { headers: { Authorization: localStorage.getItem("token") } })
+            // request.get('/api/userData/load/', true)
             .then((res) => {
                 console.log(res.data.data);
                 this.setState({

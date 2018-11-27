@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.css';
 import { Image, Button, Table, Icon, Grid, Label } from 'semantic-ui-react'
 import axios from 'axios';
-// import MyRender from './Render';
+
 
 import './style.css';
 

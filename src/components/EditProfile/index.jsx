@@ -208,11 +208,11 @@ export default class EditUser extends Component {
 							</form>
 
 							<br />
-							<Form.Input label='First name' placeholder='First name' onChange={(e, data) => this.setState({ Fname : data.value })} />
-							<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => this.setState({ Lname : data.value })} />
+							<Form.Input label='First name' placeholder='First name' onChange={(e, data) => this.setState({ Fname: data.value })} />
+							<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => this.setState({ Lname: data.value })} />
 
-							<Form.Input label='Address' placeholder='Address' onChange={(e, data) => this.setState({ address : data.value })} />
-							<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => this.setState({ phone : data.value })} />
+							<Form.Input label='Address' placeholder='Address' onChange={(e, data) => this.setState({ address: data.value })} />
+							<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => this.setState({ phone: data.value })} />
 							<Button primary type='submit'>Submit</Button>
 						</Container>
 
@@ -236,11 +236,11 @@ export default class EditUser extends Component {
 									</Grid.Column>
 									<Grid.Column width={8}>
 										<br />
-										<Form.Input label='First name' placeholder='First name' onChange={(e, data) => this.setState({ Fname : data.value })} />
-										<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => this.setState({ Lname : data.value })} />
+										<Form.Input label='First name' placeholder='First name' onChange={(e, data) => this.setState({ Fname: data.value })} />
+										<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => this.setState({ Lname: data.value })} />
 
-										<Form.Input label='Address' placeholder='Address' onChange={(e, data) => this.setState({ address : data.value })} />
-										<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => this.setState({ phone : data.value })} />
+										<Form.Input label='Address' placeholder='Address' onChange={(e, data) => this.setState({ address: data.value })} />
+										<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => this.setState({ phone: data.value })} />
 										<Button primary type='submit'>Submit</Button>
 									</Grid.Column>
 
@@ -268,11 +268,11 @@ export default class EditUser extends Component {
 									</Grid.Column>
 									<Grid.Column width={8}>
 										<br />
-										<Form.Input label='First name' placeholder='First name' onChange={(e, data) => this.setState({ Fname : data.value })} />
-										<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => this.setState({ Lname : data.value })} />
+										<Form.Input label='First name' placeholder='First name' onChange={(e, data) => this.setState({ Fname: data.value })} />
+										<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => this.setState({ Lname: data.value })} />
 
-										<Form.Input label='Address' placeholder='Address' onChange={(e, data) => this.setState({ address : data.value })} />
-										<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => this.setState({ phone : data.value })} />
+										<Form.Input label='Address' placeholder='Address' onChange={(e, data) => this.setState({ address: data.value })} />
+										<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => this.setState({ phone: data.value })} />
 										<Button primary type='submit'>Submit</Button>
 									</Grid.Column>
 
