@@ -82,114 +82,117 @@ export default class TemplateTKD extends Component {
 
   render() {
     const icon = "imgs/mylogo2.png";
-    const { activeItem } = this.state;
-    const { visible } = this.state;
-    const left = menu[this.state.userData.type].Left;
-    const right = menu[this.state.userData.type].Right;
-    const mobile = menu[this.state.userData.type].Mobile;
-    return (
-      <React.Fragment>
-        {/* slider */}
-        <Sidebar.Pushable>
-          <Sidebar
-            as={Menu}
-            animation="overlay"
-            icon="labeled"
-            inverted
-            onHide={this.handleSidebarHide}
-            vertical
-            visible={visible}
-          >
-            
-            {mobile.map(item => 
+    const { activeItem, visible } = this.state;
+    const { type, profileImage, name, chart } = this.state.userData;
+    const left = menu[type].Left;
+    const right = menu[type].Right;
+    const mobile = menu[type].Mobile;
+    const moblieSliderMenu = (
+      <Sidebar
+        as={Menu}
+        animation="overlay"
+        icon="labeled"
+        inverted
+        onHide={this.handleSidebarHide}
+        vertical
+        visible={visible}
+      >
+        {mobile.map(item => 
+          <React.Fragment>
+            {item.show === "PERSON" ? <Menu.Item page={item.url} onClick={this.handleItemClick}><Image src={profileImage} avatar /><br />{name}</Menu.Item> : 
+              item.show === "Logout" ? <Menu.Item name={item.show} onClick={this.sendLogot} /> :
+              <Menu.Item
+                name={item.show}
+                active={activeItem === item.show}
+                onClick={this.handleItemClick}
+                page={item.url}
+              />
+            }
+          </React.Fragment>
+        )}
+      </Sidebar>
+    );
+    const mobileTopMenu = ( 
+      <Menu secondary>
+        <Menu.Item compact>
+          <Button
+            icon="bars"
+            compact
+            onClick={this.handleButtonClick}
+          />
+        </Menu.Item>
+        <Menu.Item>
+          <Image src={icon} className="small" alt="" />
+        </Menu.Item>
+      </Menu>     
+    );
+    const desktopTopMenu = (
+      <Container>
+        <Menu secondary>
+          <Menu.Item>
+            <Image src={icon} className="small" alt="" />
+          </Menu.Item>
+          {left.map(item => 
+          <Menu.Item
+            name={item.show}
+            active={activeItem === item.show}
+            onClick={this.handleItemClick}
+            page={item.url}
+          />
+          )}
+          <Menu.Menu position="right">
+            {right.map(item => 
               <React.Fragment>
-                {item.show === "PERSON" ? <Menu.Item page={item.url} onClick={this.handleItemClick}><Image src={this.state.userData.profileImage} avatar /><br />{this.state.userData.name}</Menu.Item> : 
-                  item.show === "Logout" ? <Menu.Item name={item.show} onClick={this.sendLogot} /> :
-                  <Menu.Item
-                    name={item.show}
-                    active={activeItem === item.show}
-                    onClick={this.handleItemClick}
-                    page={item.url}
-                  />
+                {item.show === "Cart" ? <Menu.Item page={item.url} onClick={this.handleItemClick} ><Icon name='cart' />{chart > 0 ? <Label circular size='tiny' color='teal' floating>{chart}</Label> : null}</Menu.Item> : 
+                  item.show === "PERSON" ? <Menu.Item page={item.url} onClick={this.handleItemClick}><Image src={profileImage} avatar />{name}</Menu.Item> : 
+                    item.show === "Loading" ? <Menu.Item><Loader active/></Menu.Item> :
+                      item.show === "Logout" ? <Menu.Item name={item.show} active={activeItem === item.show} onClick={this.sendLogot} /> :
+                        <Menu.Item
+                          name={item.show}
+                          active={activeItem === item.show}
+                          onClick={this.handleItemClick}
+                          page={item.url}
+                        />
                 }
               </React.Fragment>
             )}
-
-
-          </Sidebar>
+          </Menu.Menu>
+        </Menu>
+      </Container>
+    );
+    const contentChild = (
+      this.props.marginNon === 'true' ? 
+      <React.Fragment>
+        {this.props.children}
+        <Container>
+          <Divider fitted />
+        </Container> 
+      </React.Fragment>
+      : 
+      <React.Fragment>
+        <Divider fitted />
+        <Container>
+          <Segment vertical>
+            {this.props.children}
+          </Segment>
+          <Divider hidden /> 
+        </Container>
+      </React.Fragment>
+    );
+    return (
+      <React.Fragment>
+        <Sidebar.Pushable>
+          {moblieSliderMenu}
           <Sidebar.Pusher dimmed={visible}>
             {/* totalMenu */}
-            {/* mobile */}
             <Responsive {...Responsive.onlyMobile}>
-              <Menu secondary>
-                <Menu.Item compact>
-                  <Button
-                    icon="bars"
-                    compact
-                    onClick={this.handleButtonClick}
-                  />
-                </Menu.Item>
-                <Menu.Item>
-                  <Image src={icon} className="small" alt="" />
-                </Menu.Item>
-              </Menu>
+              {mobileTopMenu}
             </Responsive>
-            {/* desktop */}
             <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-              <Container>
-                <Menu secondary>
-                  <Menu.Item>
-                    <Image src={icon} className="small" alt="" />
-                  </Menu.Item>
-                  {left.map(item => 
-                  <Menu.Item
-                    name={item.show}
-                    active={activeItem === item.show}
-                    onClick={this.handleItemClick}
-                    page={item.url}
-                  />
-                  )}
-                  <Menu.Menu position="right">
-                    {right.map(item => 
-                      <React.Fragment>
-                        {item.show === "Cart" ? <Menu.Item page={item.url} onClick={this.handleItemClick} ><Icon name='cart' />{this.state.userData.chart > 0 ? <Label circular size='tiny' color='teal' floating>{this.state.userData.chart}</Label> : null}</Menu.Item> : 
-                          item.show === "PERSON" ? <Menu.Item page={item.url} onClick={this.handleItemClick}><Image src={this.state.userData.profileImage} avatar />{this.state.userData.name}</Menu.Item> : 
-                            item.show === "Loading" ? <Menu.Item><Loader active/></Menu.Item> :
-                              item.show === "Logout" ? <Menu.Item name={item.show} active={activeItem === item.show} onClick={this.sendLogot} /> :
-                                <Menu.Item
-                                  name={item.show}
-                                  active={activeItem === item.show}
-                                  onClick={this.handleItemClick}
-                                  page={item.url}
-                                />
-                        }
-                      </React.Fragment>
-                    )}
-                  </Menu.Menu>
-                </Menu>
-              </Container>
+              {desktopTopMenu}
             </Responsive>
-            
             {/* totalMenu */}
-            {/* content */}
-            {this.props.marginNon === 'true' ? 
-              <React.Fragment>
-                {this.props.children}
-                <Container>
-                  <Divider fitted />
-                </Container> 
-              </React.Fragment>
-              : 
-              <React.Fragment>
-                <Divider fitted />
-                <Container>
-                  <Segment vertical>
-                    {this.props.children}
-                  </Segment>
-                  <Divider hidden /> 
-                </Container>
-              </React.Fragment>
-            }
+            {contentChild}
             <FooterTKD />
           </Sidebar.Pusher>
         </Sidebar.Pushable>
