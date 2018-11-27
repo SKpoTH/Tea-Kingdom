@@ -57,6 +57,7 @@ export default class Connection {
 	handleErr(err) {
 		if(err == "Error: Request failed with status code 401" && token.isLogin) {
 				token.destroy();
+				window.location = '/login';
 		} else if(err == "Error: Request failed with status code 500") {
 				return E500;
 		} else {
