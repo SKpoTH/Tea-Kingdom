@@ -35,7 +35,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "vows --spec",
     "deploy": "sh deploy.sh",
     "eject": "react-scripts eject"
   },
