@@ -1,6 +1,0 @@
-[
-    { "show": "ProductQualify" , "url" : "/itemqualify" },
-    { "show": "promote" , "url" : "/admin" },
-    { "show": "PERSON" , "url" : "/user" },
-    { "show": "Logout" , "url" : "NON_USE" }
-]

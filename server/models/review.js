@@ -10,7 +10,8 @@ var Review = new Schema({
     reply:      [{
             email:      { type: String, require: true },
             text:       { type: String, require: true}
-    }]
+    }],
+    created_at: { type: Date, required: true, default: Date.now }
 }, {
     collection: 'review'
 });

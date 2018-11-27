@@ -41,6 +41,7 @@ export default class Content extends Component {
     getData = () => {
         axios.get('/api/order/load', { headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
+                console.log(res.data.status)
                 this.setState({
                     product: res.data.data.product
                 });
@@ -65,6 +66,42 @@ export default class Content extends Component {
         window.location = '/order';
     }
 
+    checkEmpty(billData) {
+        for (let a in billData) {
+            if (billData[a] === "" || billData[a] === undefined) {
+                return true
+            }
+        }
+        return false
+    }
+
+    emptyData() {
+        this.setState({
+            message:
+                { massageHidden: false, content: 'You must containt datas in all field.', status: "negative" }
+        });
+    }
+
+    sendData(billData, token) {
+        axios.post('/api/payment/confirm', billData, { headers: { Authorization: token } })
+            .then((res) => {
+                console.log(res.data.status);
+                window.location = '/track';
+            })
+            .catch((error) => {
+                this.setState({ cantLoad: true });
+                this.setState({
+                    message:
+                    {
+                        massageHidden: false,
+                        // content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
+                        status: "negative"
+                    }
+                }
+                );
+            })
+
+    }
 
 
     onSubmit = (event) => {
@@ -76,42 +113,21 @@ export default class Content extends Component {
             cvv: this.state.cvv
         }
 
-        var checkEmpty = false;
+        // var checkEmpty = false;
 
-        for (let a in billData) {
-            if (billData[a] === "" || billData[a] === undefined) {
-                checkEmpty = true;
-            }
+        // for (let a in billData) {
+        //     if (billData[a] === "" || billData[a] === undefined) {
+        //         checkEmpty = true;
+        //     }
 
-        }
-
-
+        // }
 
         console.log(billData);
 
-        if (checkEmpty) {
-            this.setState({
-                message:
-                    { massageHidden: false, content: 'You must containt datas in all field.', status: "negative" }
-            });
+        if (this.checkEmpty(billData)) {
+            this.emptyData()
         } else {
-            axios.post('/api/payment/confirm', billData, { headers: { Authorization: localStorage.getItem("token") } })
-                .then((res) => {
-                    console.log(res.data.status);
-                    window.location = '/track';
-                })
-                .catch((error) => {
-                    this.setState({ cantLoad: true });
-                    this.setState({
-                        message:
-                        {
-                            massageHidden: false,
-                            // content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
-                            status: "negative"
-                        }
-                    }
-                    );
-                })
+            this.sendData(billData, localStorage.getItem("token"))
         }
     }
 

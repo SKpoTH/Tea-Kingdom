@@ -10,10 +10,6 @@ import Content2 from "./Mobile/Content4"
 const Container = styled(Limit)`
   padding: 1em;
 `
-const AddBG = styled.div`
-    background-color: lightgrey; 
-`
-
 
 export default class Computer extends Component {
     render() {

@@ -1,3 +1,6 @@
 .hidD {
     display: none !important;
 }
+.rightLoading {
+    float: right;
+}

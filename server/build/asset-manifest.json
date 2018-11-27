@@ -1,8 +1,8 @@
 {
   "main.css": "static/css/main.115c3637.css",
   "main.css.map": "static/css/main.115c3637.css.map",
-  "main.js": "static/js/main.edfd73c9.js",
-  "main.js.map": "static/js/main.edfd73c9.js.map",
+  "main.js": "static/js/main.8af6998e.js",
+  "main.js.map": "static/js/main.8af6998e.js.map",
   "static/media/back.png": "static/media/back.a19be5d0.png",
   "static/media/bottom.jpg": "static/media/bottom.47a662ed.jpg",
   "static/media/brand-icons.eot": "static/media/brand-icons.13db00b7.eot",
@@ -25,6 +25,5 @@
   "static/media/store.jpg": "static/media/store.fbb973ea.jpg",
   "static/media/tea1.jpg": "static/media/tea1.9b7724e7.jpg",
   "static/media/tea2.jpg": "static/media/tea2.02715d47.jpg",
-  "static/media/tea3.jpg": "static/media/tea3.5aa242c3.jpg",
-  "static/media/test.jpg": "static/media/test.3cb1d450.jpg"
+  "static/media/tea3.jpg": "static/media/tea3.5aa242c3.jpg"
 }

@@ -16,19 +16,39 @@ export default class User extends Component {
         }
         this.getData()
 
-        //axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
 
     }
+
+    contactUs() {
+        this.setState({ cantLoad: true });
+        this.setState({
+            message:
+                { massageHidden: false, content: 'Please contact us.', status: "negative" }
+        });
+
+    }
+
+    cantLoad() {
+        this.setState({ cantLoad: true });
+        this.setState({
+            message:
+            {
+                massageHidden: false,
+                status: "negative"
+            }
+        }
+        );
+
+    }
+
     getData = () => {
         var self = this;
-
-        //console.log(this.state.id);
-        console.log('=================');
 
         axios.get('/api/userData/load', { headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
                 let jsonReturn = res.data.data;
                 console.log(res.data.status);
+
                 if (res.data.status === "Successfully Load User Data") {
                     self.setState({
                         Fname: jsonReturn.firstname,        //fix Fname -> firstname
@@ -39,29 +59,15 @@ export default class User extends Component {
                         phone: jsonReturn.phone,
                         cantLoad: false
                     })
-
+                    //unsuccess load data
                     console.log(this.state);
 
                 } else {
-                    self.setState({ cantLoad: true });
-                    self.setState({
-                        message:
-                            { massageHidden: false, content: 'Please contact us.', status: "negative" }
-                    });
+                    this.contactUs()
                 }
-
             })
             .catch((error) => {
-                self.setState({ cantLoad: true });
-                self.setState({
-                    message:
-                    {
-                        massageHidden: false,
-                        //content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
-                        status: "negative"
-                    }
-                }
-                );
+                this.cantLoad()
             });
     };
 
@@ -74,10 +80,12 @@ export default class User extends Component {
                     <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status} />
                     {this.state.cantLoad ? null : <Mobile data={this.state} />}
                 </Responsive>
+
                 <Responsive {...Responsive.onlyTablet}>
                     <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status} />
                     {this.state.cantLoad ? null : <Computer data={this.state} />}
                 </Responsive>
+
                 <Responsive {...Responsive.onlyComputer}>
                     <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status} />
                     {this.state.cantLoad ? null : <Computer data={this.state} />}

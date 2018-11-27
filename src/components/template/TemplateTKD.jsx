@@ -1,5 +1,9 @@
-import React, { Component } from "react";
-import "semantic-ui-css/semantic.css";
+import React, { Component } from 'react';
+import Connection from '../pomLib/connection';
+import token from '../pomLib/token';
+import FooterTKD from './FooterTKD';
+import 'semantic-ui-css/semantic.css';
+import * as menu from './menu.json';
 import {
   Menu,
   Container,
@@ -9,25 +13,12 @@ import {
   Image,
   Sidebar,
   Icon,
-  Label
-} from "semantic-ui-react";
-import FooterTKD from "./FooterTKD";
-import axios from 'axios';
+  Label,
+  Segment,
+  Loader,
+} from 'semantic-ui-react';
 
-import * as normalLeft from './menu/normal/normalLeft.json';
-import * as normalRight from './menu/normal/normalRight.json';
-import * as normalMobile from './menu/normal/normalMobile.json';
-import * as userLeft from './menu/user/userLeft.json';
-import * as userRight from './menu/user/userRight.json';
-import * as userMobile from './menu/user/userMobile.json';
-import * as adminLeft from './menu/admin/adminLeft.json';
-import * as adminRight from './menu/admin/adminRight.json';
-import * as adminMobile from './menu/admin/adminMobile.json';
-import * as sellerLeft from './menu/seller/sellerLeft.json';
-import * as sellerRight from './menu/seller/sellerRight.json';
-import * as sellerMobile from './menu/seller/sellerMobile.json';
-
-const icon = "imgs/mylogo2.png";
+const request = Connection.createClass();
 
 export default class TemplateTKD extends Component {
   constructor(props) {
@@ -35,170 +26,177 @@ export default class TemplateTKD extends Component {
     this.state = {
       visible: false,
       userData :
-        { name :undefined, profileImage: undefined, type: undefined, chart: 0 },
+        { name :undefined,
+          profileImage: undefined,
+          type: "Loading",
+          chart: 0
+        },
     }
+  }
+
+  componentDidMount() {
     this.getData();
   }
+
   getData = () => {
-    if(localStorage.getItem("token")) {
-      // console.log(localStorage.getItem("token"));
-      axios.get('/api/authen/load',{ headers: { Authorization: localStorage.getItem("token") } })
+    if(token.isLogin) {
+      request.get('/api/authen/load', true)
       .then((res) => {
-        // console.log(res)
-        if(res.data.status === "logged in")
-          this.setState({userData : {name :  res.data.firstname , profileImage: res.data.profileImage, type: res.data.type, chart: res.data.chart }});
+        if(res.status == "logged in") {
+          this.setState({
+            userData: {
+              name: res.firstname,
+              profileImage: res.profileImage,
+              type: res.type,
+              chart: res.chart
+            }
+          });
+        }
       })
-      .catch((error) => {
-        console.log(error.response.data);
+    } else {
+      this.setState({
+        userData: {
+          type: "Normal",
+        }
       });
     }
-  };
-  sendLogot = () => {
-    if(localStorage.getItem("token")) {
-      localStorage.clear();
-    }
-    window.location = '/';
-  };
+  }
 
-  handleButtonClick = () => this.setState({ visible: !this.state.visible });
-  handleSidebarHide = () => this.setState({ visible: false });
-  handleItemClick = (e, { page }) => (window.location = page);
+  sendLogot = () => {
+    token.destroy();
+    window.location = '/';
+  }
+
+  handleButtonClick = () => {
+    this.setState({ visible: !this.state.visible });
+  }
+
+  handleSidebarHide = () => {
+    this.setState({ visible: false });
+  }
+
+  handleItemClick = (event, { page }) => {
+    event.preventDefault()
+    window.location = page;
+  }
 
   render() {
-    const { activeItem } = this.state;
-    const { visible } = this.state;
-    let left, right, mobile;
-    console.log(this.state.userData.type);
-    switch(this.state.userData.type) {
-      case "Consumer":
-        left = userLeft;
-        right = userRight;
-        mobile = userMobile;
-        break;
-      case "Seller":
-        left = sellerLeft;
-        right = sellerRight;
-        mobile = sellerMobile;
-        break;
-      case "Admin":
-        left = adminLeft;
-        right = adminRight;
-        mobile = adminMobile;
-        break;
-      default:
-        left = normalLeft;
-        right = normalRight;
-        mobile = normalMobile;
-    }
-    return (
-      <div>
-        {/* slider */}
-        <Sidebar.Pushable>
-          <Sidebar
-            as={Menu}
-            animation="overlay"
-            icon="labeled"
-            inverted
-            onHide={this.handleSidebarHide}
-            vertical
-            visible={visible}
-          >
-            
-            {mobile.map(item => 
+    const icon = "imgs/mylogo2.png";
+    const { activeItem, visible } = this.state;
+    const { type, profileImage, name, chart } = this.state.userData;
+    const left = menu[type].Left;
+    const right = menu[type].Right;
+    const mobile = menu[type].Mobile;
+    const moblieSliderMenu = (
+      <Sidebar
+        as={Menu}
+        animation="overlay"
+        icon="labeled"
+        inverted
+        onHide={this.handleSidebarHide}
+        vertical
+        visible={visible}
+      >
+        {mobile.map(item => 
+          <React.Fragment>
+            {item.show === "PERSON" ? <Menu.Item page={item.url} onClick={this.handleItemClick}><Image src={profileImage} avatar /><br />{name}</Menu.Item> : 
+              item.show === "Logout" ? <Menu.Item name={item.show} onClick={this.sendLogot} /> :
+              <Menu.Item
+                name={item.show}
+                active={activeItem === item.show}
+                onClick={this.handleItemClick}
+                page={item.url}
+              />
+            }
+          </React.Fragment>
+        )}
+      </Sidebar>
+    );
+    const mobileTopMenu = ( 
+      <Menu secondary>
+        <Menu.Item compact>
+          <Button
+            icon="bars"
+            compact
+            onClick={this.handleButtonClick}
+          />
+        </Menu.Item>
+        <Menu.Item>
+          <Image src={icon} className="small" alt="" />
+        </Menu.Item>
+      </Menu>     
+    );
+    const desktopTopMenu = (
+      <Container>
+        <Menu secondary>
+          <Menu.Item>
+            <Image src={icon} className="small" alt="" />
+          </Menu.Item>
+          {left.map(item => 
+          <Menu.Item
+            name={item.show}
+            active={activeItem === item.show}
+            onClick={this.handleItemClick}
+            page={item.url}
+          />
+          )}
+          <Menu.Menu position="right">
+            {right.map(item => 
               <React.Fragment>
-                {item.show === "PERSON" ? <Menu.Item page={item.url} onClick={this.handleItemClick}><Image src={this.state.userData.profileImage} avatar /><br />{this.state.userData.name}</Menu.Item> : 
-                  item.show === "Logout" ? <Menu.Item name={item.show} onClick={this.sendLogot} /> :
-                  <Menu.Item
-                    name={item.show}
-                    active={activeItem === item.show}
-                    onClick={this.handleItemClick}
-                    page={item.url}
-                  />
+                {item.show === "Cart" ? <Menu.Item page={item.url} onClick={this.handleItemClick} ><Icon name='cart' />{chart > 0 ? <Label circular size='tiny' color='teal' floating>{chart}</Label> : null}</Menu.Item> : 
+                  item.show === "PERSON" ? <Menu.Item page={item.url} onClick={this.handleItemClick}><Image src={profileImage} avatar />{name}</Menu.Item> : 
+                    item.show === "Loading" ? <Menu.Item><Loader active/></Menu.Item> :
+                      item.show === "Logout" ? <Menu.Item name={item.show} active={activeItem === item.show} onClick={this.sendLogot} /> :
+                        <Menu.Item
+                          name={item.show}
+                          active={activeItem === item.show}
+                          onClick={this.handleItemClick}
+                          page={item.url}
+                        />
                 }
               </React.Fragment>
             )}
-
-
-          </Sidebar>
+          </Menu.Menu>
+        </Menu>
+      </Container>
+    );
+    const contentChild = (
+      this.props.marginNon === 'true' ? 
+      <React.Fragment>
+        {this.props.children}
+        <Container>
+          <Divider fitted />
+        </Container> 
+      </React.Fragment>
+      : 
+      <React.Fragment>
+        <Divider fitted />
+        <Container>
+          <Segment vertical>
+            {this.props.children}
+          </Segment>
+          <Divider hidden /> 
+        </Container>
+      </React.Fragment>
+    );
+    return (
+      <React.Fragment>
+        <Sidebar.Pushable>
+          {moblieSliderMenu}
           <Sidebar.Pusher dimmed={visible}>
             {/* totalMenu */}
-            {/* mobile */}
             <Responsive {...Responsive.onlyMobile}>
-              <Menu secondary>
-                <Menu.Item compact>
-                  <Button
-                    icon="bars"
-                    compact
-                    onClick={this.handleButtonClick}
-                  />
-                </Menu.Item>
-                <Menu.Item>
-                  <Image src={icon} className="small" alt="" />
-                </Menu.Item>
-              </Menu>
+              {mobileTopMenu}
             </Responsive>
-            {/* desktop */}
             <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-              <Container>
-                <Menu secondary>
-                  <Menu.Item>
-                    <Image src={icon} className="small" alt="" />
-                  </Menu.Item>
-                  {left.map(item => 
-                  <Menu.Item
-                    name={item.show}
-                    active={activeItem === item.show}
-                    onClick={this.handleItemClick}
-                    page={item.url}
-                  />
-                  )}
-                  <Menu.Menu position="right">
-                    {right.map(item => 
-                      <React.Fragment>
-                        {item.show === "Cart" ? <Menu.Item page={item.url} onClick={this.handleItemClick} ><Icon name='cart' />{this.state.userData.chart > 0 ? <Label circular size='tiny' color='teal' floating>{this.state.userData.chart}</Label> : null}</Menu.Item> : 
-                          item.show === "PERSON" ? <Menu.Item page={item.url} onClick={this.handleItemClick}><Image src={this.state.userData.profileImage} avatar />{this.state.userData.name}</Menu.Item> : 
-                           item.show === "Logout" ? <Menu.Item name={item.show} active={activeItem === item.show} onClick={this.sendLogot} /> :
-                            <Menu.Item
-                              name={item.show}
-                              active={activeItem === item.show}
-                              onClick={this.handleItemClick}
-                              page={item.url}
-                            />
-                        }
-                      </React.Fragment>
-                    )}
-                  </Menu.Menu>
-                </Menu>
-              </Container>
+              {desktopTopMenu}
             </Responsive>
-            
             {/* totalMenu */}
-            {/* content */}
-            {this.props.marginNon === 'true' ? 
-              <React.Fragment>
-                {this.props.children}
-                <Container>
-                  <Divider fitted />
-                </Container> 
-              </React.Fragment>
-              : 
-              <React.Fragment>
-                <Divider fitted />
-                <Divider hidden />
-                <Container>
-                  {this.props.children}
-                  <Divider hidden />
-                  <Divider fitted /> 
-                </Container>
-              </React.Fragment>
-            }
-            
-
+            {contentChild}
             <FooterTKD />
-            {/* content */}
           </Sidebar.Pusher>
         </Sidebar.Pushable>
-      </div>
+      </React.Fragment>
     );
   }
 }

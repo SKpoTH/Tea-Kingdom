@@ -14,7 +14,6 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "git": "^0.1.5",
-    "jest": "^23.6.0",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.3.1",
     "morgan": "^1.9.1",
@@ -36,7 +35,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "react-scripts test --env=jsdom",
     "deploy": "sh deploy.sh",
     "eject": "react-scripts eject"
   },
@@ -55,4 +54,3 @@
     }
   }
 }
-
