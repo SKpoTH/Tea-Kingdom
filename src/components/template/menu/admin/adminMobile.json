@@ -4,6 +4,7 @@
     { "show": "About US" , "url" : "/AboutUs" },
     { "show": "Product" , "url" : "/product" },
     { "show": "ProductQualify" , "url" : "/itemqualify" },
+    { "show": "Add Tracking" , "url" : "/addtracking" },
     { "show": "promote" , "url" : "/admin" },
     { "show": "Logout" , "url" : "NON_USE" }
 ]

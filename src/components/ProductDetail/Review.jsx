@@ -108,7 +108,7 @@ export default class Review extends Component {
               )}
             </div>
           )}
-          {localStorage.getItem("token") != undefined ? 
+          {localStorage.getItem("token") !== undefined ? 
           <Form reply>
             <div className={"ui fluid right labeled input "+this.state.show}>
               <input className='info' type="text" value={"Reply : "+this.state.name_reply}  disabled/>

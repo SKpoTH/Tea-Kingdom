@@ -3,6 +3,6 @@
     { "show": "Home" , "url" : "/" },
     { "show": "About US" , "url" : "/AboutUs" },
     { "show": "Product" , "url" : "/product" },
-    { "show": "Track" , "url" : "/under" },
+    { "show": "Add" , "url" : "/addproduct" },
     { "show": "Logout" , "url" : "NON_USE" }
 ]

@@ -45,7 +45,6 @@ export default class AddProduct extends Component {
 			brand: '',
 			process: '',
 			region: '',
-			region: '',
 			amount: '',
 			type: '',
 			email: 'skpoxpolice@gmailc.com',

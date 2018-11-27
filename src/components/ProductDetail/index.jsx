@@ -3,7 +3,6 @@ import TemplateTKD from "../template/TemplateTKD";
 import "semantic-ui-css/semantic.css";
 
 import MainProduct from "./MainProduct";
-import SubProduct from "./SubProduct";
 import Review from "./Review";
 import axios from 'axios'
 import { Message, Dimmer, Loader } from "semantic-ui-react";

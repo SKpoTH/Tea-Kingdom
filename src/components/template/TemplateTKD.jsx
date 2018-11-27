@@ -68,7 +68,7 @@ export default class TemplateTKD extends Component {
     const { activeItem } = this.state;
     const { visible } = this.state;
     let left, right, mobile;
-    console.log(this.state.userData.type);
+    // console.log(this.state.userData.type);
     switch(this.state.userData.type) {
       case "Consumer":
         left = userLeft;

@@ -1,6 +1,5 @@
 [
-    { "show": "Track" , "url" : "/under" },
-    { "show": "AddProduct" , "url" : "/addproduct" },
+    { "show": "Add" , "url" : "/addproduct" },
     { "show": "PERSON" , "url" : "/seller" },
     { "show": "Logout" , "url" : "NON_USE" }
 ]

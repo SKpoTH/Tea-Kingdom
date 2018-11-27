@@ -74,7 +74,7 @@ router.post('/load', passport.authenticate('jwt', { session: false}), function(r
 })
 
 // Edit product in database
-router.get('/edit', upload.single('productImage'), passport.authenticate('jwt', { session: false}), function(req, res){
+router.post('/edit', upload.single('productImage'), passport.authenticate('jwt', { session: false}), function(req, res){
     
     console.log(req.file);
 
