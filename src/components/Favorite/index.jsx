@@ -5,7 +5,7 @@ import { Container, Responsive } from 'semantic-ui-react';
 import { Image, Button, Table, Card, Grid, Label } from 'semantic-ui-react'
 import axios from 'axios';
 import styled from 'styled-components'
-import mget from './get'
+// import mget from './get'
 
 //wait//-------------------------
 
@@ -58,37 +58,40 @@ export default class Favorite extends Component {
             })
     }
 
-    // getData = () => {
-    //     axios.get('/api/userData/load/', { headers: { Authorization: localStorage.getItem("token") } })
-    //         .then((res) => {
-    //             console.log(res.data.data);
-    //             this.setState({
-    //                 product: res.data.data.favourite
-    //             });
-    //             console.log(this.state.product)
-    //         })
-    //         .catch((error) => {
-    //             this.setState({ cantLoad: true });
-    //             this.setState({
-    //                 message:
-    //                 {
-    //                     massageHidden: false,
-    //                     // content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
-    //                     status: "negative"
-    //                 }
-    //             }
-    //             );
-    //         });
-    // };
+    // addToCart = () => {
 
-    async getData() {
-        const get = await mget('/api/userData/load/')
-        console.log(get);
-        this.setState({
-            product: get.data.favourite
-        })
-        console.log(this.state.product)
+    // }
+
+    seeFullDetail = (event, { ident }) => {
+        event.preventDefault();
+        window.location = "/ProductDetail" + ident;
     }
+
+
+    getData = () => {
+        axios.get('/api/userData/load/', { headers: { Authorization: localStorage.getItem("token") } })
+            .then((res) => {
+                console.log(res.data.data);
+                this.setState({
+                    product: res.data.data.favourite
+                });
+                console.log(this.state.product)
+            })
+            .catch((error) => {
+                this.setState({ cantLoad: true });
+                this.setState({
+                    message:
+                    {
+                        massageHidden: false,
+                        // content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
+                        status: "negative"
+                    }
+                }
+                );
+            });
+    };
+
+
 
     render() {
         let Count = 1;
@@ -119,7 +122,8 @@ export default class Favorite extends Component {
                                             {item.name}
                                         </Table.Cell>
                                         <Table.Cell width='2'>
-                                            Detail
+
+                                            <Button color="blue" content="see details" icon="eye" ident={item.productID} onClick={this.seeFullDetail} />
                                         </Table.Cell>
                                         <Table.Cell width='2'>
                                             <Button color='red' icon='remove' onClick={() => { this.removeItem(i) }} />
@@ -165,7 +169,7 @@ export default class Favorite extends Component {
                                             {item.name}
                                         </Table.Cell>
                                         <Table.Cell width='2'>
-                                            Detail
+                                            <Button color="blue" center content="see details" ident={item.productID} onClick={this.seeFullDetail} />
                                         </Table.Cell>
                                         <Table.Cell width='2'>
                                             <Button color='red' icon='remove' onClick={() => { this.removeItem(i) }} />
@@ -210,11 +214,11 @@ export default class Favorite extends Component {
                                     </Card.Content>
 
                                     <Card.Content>
-                                        <Button.Group floated='left'>
+                                        <Button.Group size='mini'>
                                             <Button color='red' onClick={() => { this.removeItem(i) }} >Remove</Button>
                                             <Button color='blue' onClick={() => { (this.state.product[i].amount - 1) > 0 ? this.updateItem(i, { amount: this.state.product[i].amount - 1 }) : null }}>Minus</Button>
                                             <Button color='green' onClick={() => { this.updateItem(i, { amount: this.state.product[i].amount + 1 }) }} >Plus</Button>
-
+                                            <Button color="blue" content="see details" ident={item.productID} onClick={this.seeFullDetail} />
                                         </Button.Group>
                                     </Card.Content>
 
@@ -229,6 +233,7 @@ export default class Favorite extends Component {
                             <Button primary onClick={() => { this.sendData() }} >Update</Button>
                             <Button color='red' onClick={() => { this.removeOrder() }} >Clear</Button>
                             <Button primary onClick={() => { window.location = '/confirm' }}>Checkout</Button>
+
                         </Grid>
 
                         <br />

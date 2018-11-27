@@ -113,15 +113,6 @@ export default class Content extends Component {
             cvv: this.state.cvv
         }
 
-        // var checkEmpty = false;
-
-        // for (let a in billData) {
-        //     if (billData[a] === "" || billData[a] === undefined) {
-        //         checkEmpty = true;
-        //     }
-
-        // }
-
         console.log(billData);
 
         if (this.checkEmpty(billData)) {
