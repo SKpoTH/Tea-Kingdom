@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import Connection from '../pomLib/connection';
 import 'semantic-ui-css/semantic.css';
 import "./style.css";
-import { Loading } from '../template/TKDcomponent';
+import { Loading, Padding } from '../template/TKDcomponent';
 import {
   Table,
   Button,
   Checkbox,
   Dropdown,
   Image,
+  Responsive,
 } from 'semantic-ui-react';
 
 const request = Connection.createClass();
@@ -114,11 +115,19 @@ export default class Admin extends Component {
       { key: 'Seller', text: 'Seller', value: 'Seller' },
       { key: 'Admin', text: 'Admin', value: 'Admin' },
     ]
-    const head = (
+    const headDesktop = (
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>Edit</Table.HeaderCell>
           <Table.HeaderCell colSpan='2'>Email</Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+    );
+    const headMobile = (
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell>Edit</Table.HeaderCell>
+          <Table.HeaderCell colSpan='3'>Email</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
     );
@@ -128,7 +137,7 @@ export default class Admin extends Component {
       </p>
     );
     const { loading, tableData } = this.state;
-    const tableRow = tableData.map((user, i) =>
+    const tableRowDesktop = tableData.map((user, i) =>
       <Table.Row>
         <Table.Cell collapsing>
           <Checkbox slider checked={user.show === '' ? true : false} i={i} onChange={this.sliderHandle} />
@@ -141,15 +150,53 @@ export default class Admin extends Component {
         </Table.Cell>
       </Table.Row>
     );
+    const tableRowMobile = tableData.map((user, i) =>
+      <React.Fragment>
+        <Table.Row>
+          <Table.Cell collapsing rowSpan='2'>
+            <Checkbox slider checked={user.show === '' ? true : false} i={i} onChange={this.sliderHandle} />
+          </Table.Cell>
+          <Table.Cell colSpan='3' className="bgColorr">
+            <Image src={user.profileImage} size='mini' verticalAlign='middle' /> <span>{user.email}</span>
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          {options.map(level => 
+            <Table.Cell>
+              <Button size='tiny' fluid className={(user.type == level.value ? " " : "basic ")+user.show+" padd"} value={level.value} i={i} onClick={this.dropdownHandle} >
+                {level.value}
+              </Button>
+            </Table.Cell>
+          )}
+        </Table.Row>
+      </React.Fragment>
+    );
+    const mobileTable = (
+      <Table celled structured unstackable>
+        {headMobile}
+        <Table.Body>
+          {tableRowMobile}
+        </Table.Body>
+      </Table>
+    );
+    const desktopTable = (
+      <Table celled striped unstackable>
+        {headDesktop}
+        <Table.Body>
+          {tableRowDesktop}
+        </Table.Body>
+      </Table>
+    );
     return (
       <React.Fragment>
         <Loading loading={loading}/>
-        <Table celled striped unstackable>
-          {head}
-          <Table.Body>
-            {tableRow}
-          </Table.Body>
-        </Table>
+        <Responsive {...Responsive.onlyMobile}>
+          {mobileTable}
+        </Responsive>
+        <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+          {desktopTable}
+        </Responsive>
+        <br />
         {saveButtonRight}
       </React.Fragment>
     );

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Connection from '../pomLib/connection';
-import { Loading } from '../template/TKDcomponent';
+import { Loading, Padding } from '../template/TKDcomponent';
 import 'semantic-ui-css/semantic.css';
-import { Table, Button, Checkbox, Image } from 'semantic-ui-react'
+import { Table, Button, Checkbox, Image, Icon, Responsive } from 'semantic-ui-react'
 import "./style.css";
 
 const request = Connection.createClass();
@@ -139,15 +139,51 @@ export default class QualifyProduct extends Component {
         )
       })
     )
+    const desktopTable = (
+      <Table celled striped unstackable>
+        {head}
+        <Table.Body>
+          {tableRow}
+        </Table.Body>
+      </Table>
+    );
+    const mobileTable = spritCard.map((item, i) => {
+      let show = item.pending ? null : "disabled";
+      return (
+        <Table fixed unstackable>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell colSpan='4' >
+                <Image src={item.productImage} size='mini' verticalAlign='middle' />
+                &nbsp;
+                {item.name}
+                <Button icon basic className={item.className} floated='right'>
+                  <Icon name='check' />
+                </Button>
+              </Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell>Enable</Table.Cell>
+              <Table.Cell><Checkbox slider checked={item.pending} i={i} fieldUpdate="pending" onChange={this.handleSlide} /></Table.Cell>
+              <Table.Cell className={show}>Discount</Table.Cell>
+              <Table.Cell><Checkbox slider onUsing={item.pending} className={show} i={i} fieldUpdate="discount" checked={item.discount} onChange={this.handleDiscount} /></Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
+      )
+    });
     return (
       <React.Fragment>
         <Loading loading={loading}/>
-        <Table celled striped unstackable>
-          {head}
-          <Table.Body>
-            {tableRow}
-          </Table.Body>
-        </Table>
+        <Responsive {...Responsive.onlyMobile}>
+          {mobileTable}
+        </Responsive>
+        <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+          {desktopTable}
+        </Responsive>
+        <Padding length="1" />
         {buttonPage}
       </React.Fragment>
     );
