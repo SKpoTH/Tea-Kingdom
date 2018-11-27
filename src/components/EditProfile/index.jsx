@@ -205,17 +205,14 @@ export default class EditUser extends Component {
 							<form onSubmit={this._handleSubmit}>
 								{$imagePreview}
 								<input type="file" onChange={this._handleImageChange} />
-								{/* <Button type='file' onChange={this._handleImageChange}>Upload</Button> */}
-								{/* <button type="submit" onClick={this._handleSubmit} style={{display:'block'}}>Upload Image</button> */}
 							</form>
 
 							<br />
+							<Form.Input label='First name' placeholder='First name' onChange={(e, data) => this.setState({ Fname : data.value })} />
+							<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => this.setState({ Lname : data.value })} />
 
-							<Form.Input label='First name' placeholder='First name' onChange={(e, data) => { this.state.Fname = data.value }} />
-							<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => { this.state.Lname = data.value }} />
-
-							<Form.Input label='Address' placeholder='Address' onChange={(e, data) => { this.state.address = data.value }} />
-							<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => { this.state.phone = data.value }} />
+							<Form.Input label='Address' placeholder='Address' onChange={(e, data) => this.setState({ address : data.value })} />
+							<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => this.setState({ phone : data.value })} />
 							<Button primary type='submit'>Submit</Button>
 						</Container>
 
@@ -234,19 +231,16 @@ export default class EditUser extends Component {
 										<form onSubmit={this._handleSubmit}>
 											{$imagePreview}
 											<input type="file" onChange={this._handleImageChange} />
-											{/* <Button type='file' onChange={this._handleImageChange}>Upload</Button> */}
-											{/* <button type="submit" onClick={this._handleSubmit} style={{display:'block'}}>Upload Image</button> */}
 										</form>
 
 									</Grid.Column>
 									<Grid.Column width={8}>
 										<br />
+										<Form.Input label='First name' placeholder='First name' onChange={(e, data) => this.setState({ Fname : data.value })} />
+										<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => this.setState({ Lname : data.value })} />
 
-										<Form.Input label='First name' placeholder='First name' onChange={(e, data) => { this.state.Fname = data.value }} />
-										<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => { this.state.Lname = data.value }} />
-
-										<Form.Input label='Address' placeholder='Address' onChange={(e, data) => { this.state.address = data.value }} />
-										<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => { this.state.phone = data.value }} />
+										<Form.Input label='Address' placeholder='Address' onChange={(e, data) => this.setState({ address : data.value })} />
+										<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => this.setState({ phone : data.value })} />
 										<Button primary type='submit'>Submit</Button>
 									</Grid.Column>
 
@@ -269,19 +263,16 @@ export default class EditUser extends Component {
 										<form onSubmit={this._handleSubmit}>
 											{$imagePreview}
 											<input type="file" onChange={this._handleImageChange} />
-											{/* <Button type='file' onChange={this._handleImageChange}>Upload</Button> */}
-											{/* <button type="submit" onClick={this._handleSubmit} style={{display:'block'}}>Upload Image</button> */}
 										</form>
 
 									</Grid.Column>
 									<Grid.Column width={8}>
 										<br />
+										<Form.Input label='First name' placeholder='First name' onChange={(e, data) => this.setState({ Fname : data.value })} />
+										<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => this.setState({ Lname : data.value })} />
 
-										<Form.Input label='First name' placeholder='First name' onChange={(e, data) => { this.state.Fname = data.value }} />
-										<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => { this.state.Lname = data.value }} />
-
-										<Form.Input label='Address' placeholder='Address' onChange={(e, data) => { this.state.address = data.value }} />
-										<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => { this.state.phone = data.value }} />
+										<Form.Input label='Address' placeholder='Address' onChange={(e, data) => this.setState({ address : data.value })} />
+										<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => this.setState({ phone : data.value })} />
 										<Button primary type='submit'>Submit</Button>
 									</Grid.Column>
 
