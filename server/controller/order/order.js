@@ -81,6 +81,7 @@ module.exports.update = function(req, res){
 
 module.exports.add = function(req, res){
     // Find current order of logged in user
+    console.log(req.body.productID);
     Order.findOne({ 
         email: req.user.email,
         status: 'Ordering' 
@@ -158,7 +159,7 @@ module.exports.add = function(req, res){
                     .then( product => {
                         // Create new order with add first product
                         var newOrder = new Order({
-                            email: user_email,
+                            email: req.user.email,
                             product: [{
                                 productID: product._id,
                     

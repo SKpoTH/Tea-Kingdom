@@ -35,4 +35,4 @@ router.use('/tracking', tracking)
 // Path User Data Operation
 router.use('/userData', userData)
 
-module.exports = router
+module.exports = router;
