@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TemplateTKD from '../template/TemplateTKD';
 import 'semantic-ui-css/semantic.css';
-import { Container, Responsive } from 'semantic-ui-react';
+import { Container, Responsive, Divider } from 'semantic-ui-react';
 import { Image, Button, Table, Card, Grid, Label } from 'semantic-ui-react'
 import axios from 'axios';
 import styled from 'styled-components'
@@ -10,14 +10,29 @@ import styled from 'styled-components'
 //wait//-------------------------
 
 const Head = styled.div`
-    font-size: 25px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-    
-`
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+        
+    `
 const Marg = styled.div`
-    margin: 20px;
+        margin: 20px;
+    `
+
+const BigFont = styled.div`
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+    `
+const SmallFont = styled.div`
+        font-size: 16px;
+        text-align: center;
+`
+const Bottom = styled.div`
+    margin-bottom: 5px;
+    margin-top : 30px;
+
 `
 export default class Favorite extends Component {
     constructor(props) {
@@ -94,39 +109,39 @@ export default class Favorite extends Component {
 
 
     render() {
-        let Count = 1;
+
         return (
             <TemplateTKD marginNon='true'>
                 <Container>
                     <Responsive {...Responsive.onlyComputer}>
+
                         <Head>Favorite</Head>
                         <Table celled fixed>
                             <Table.Header>
                                 <Table.Row>
-                                    <Table.HeaderCell width='1'></Table.HeaderCell>
-                                    <Table.HeaderCell width='4'><center>Product</center></Table.HeaderCell>
+
+                                    <Table.HeaderCell width='3'><center>Product</center></Table.HeaderCell>
                                     <Table.HeaderCell width='3'><center>Name</center></Table.HeaderCell>
                                     <Table.HeaderCell width='2'><center>Detail</center></Table.HeaderCell>
-                                    <Table.HeaderCell width='2'><center>Delete</center></Table.HeaderCell>
+                                    <Table.HeaderCell width='1'><center>Delete</center></Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
 
                             {this.state.product.map((item, i) =>
                                 <Table.Body>
                                     <Table.Row>
-                                        <Table.Cell width='1'>{Count++}</Table.Cell>
-                                        <Table.Cell width='4'>
-                                            <Image src={item.productImage} style={{ width: '20%', height: '20%', display: 'inline' }} />
+
+                                        <Table.Cell width='3'>
+                                            <center><Image src={item.productImage} style={{ width: '20%', height: '20%', display: 'inline' }} /></center>
                                         </Table.Cell>
                                         <Table.Cell width='3'>
-                                            {item.name}
+                                            <BigFont>{item.name}</BigFont>
                                         </Table.Cell>
                                         <Table.Cell width='2'>
-
-                                            <Button color="blue" content="see details" icon="eye" ident={item.productID} onClick={this.seeFullDetail} />
+                                            <center><Button content="see details" icon="eye" ident={item.productID} onClick={this.seeFullDetail} /></center>
                                         </Table.Cell>
-                                        <Table.Cell width='2'>
-                                            <Button color='red' icon='remove' onClick={() => { this.removeItem(i) }} />
+                                        <Table.Cell width='1'>
+                                            <center><Button color='red' icon='remove' onClick={() => { this.removeItem(i) }} /></center>
                                         </Table.Cell>
                                     </Table.Row>
                                 </Table.Body>
@@ -138,7 +153,7 @@ export default class Favorite extends Component {
 
                             </Grid.Column>
                             <Grid.Column floated='right' width={3}>
-                                <Button primary onClick={() => { window.location = '/confirm' }}>Checkout</Button>
+                                {/* <Button primary onClick={() => { window.location = '/confirm' }}>Checkout</Button> */}
                             </Grid.Column>
 
                         </Grid>
@@ -150,7 +165,7 @@ export default class Favorite extends Component {
                         <Table celled fixed>
                             <Table.Header>
                                 <Table.Row>
-                                    <Table.HeaderCell width='1'></Table.HeaderCell>
+
                                     <Table.HeaderCell width='4'><center>Product</center></Table.HeaderCell>
                                     <Table.HeaderCell width='3'><center>Name</center></Table.HeaderCell>
                                     <Table.HeaderCell width='2'><center>Detail</center></Table.HeaderCell>
@@ -161,18 +176,18 @@ export default class Favorite extends Component {
                             {this.state.product.map((item, i) =>
                                 <Table.Body>
                                     <Table.Row>
-                                        <Table.Cell width='1'>{Count++}</Table.Cell>
+
                                         <Table.Cell width='4'>
-                                            <Image src={item.productImage} style={{ width: '20%', height: '20%', display: 'inline' }} />
+                                            <center><Image src={item.productImage} style={{ width: '20%', height: '20%', display: 'inline' }} /></center>
                                         </Table.Cell>
                                         <Table.Cell width='3'>
-                                            {item.name}
+                                            <BigFont>  {item.name}</BigFont>
                                         </Table.Cell>
                                         <Table.Cell width='2'>
-                                            <Button color="blue" center content="see details" ident={item.productID} onClick={this.seeFullDetail} />
+                                            <Button center content="see details" ident={item.productID} onClick={this.seeFullDetail} />
                                         </Table.Cell>
                                         <Table.Cell width='2'>
-                                            <Button color='red' icon='remove' onClick={() => { this.removeItem(i) }} />
+                                            <center><Button color='red' icon='remove' onClick={() => { this.removeItem(i) }} /></center>
                                         </Table.Cell>
                                     </Table.Row>
                                 </Table.Body>
@@ -180,12 +195,12 @@ export default class Favorite extends Component {
                         </Table>
                         <Grid>
                             <Grid.Column floated='left' width={5}>
-                                <Button primary onClick={() => { this.sendData() }} >Update</Button>
+                                {/* <Button primary onClick={() => { this.sendData() }} >Update</Button> */}
                                 <Button color='red' onClick={() => { this.removeOrder() }} >Clear</Button>
 
                             </Grid.Column>
                             <Grid.Column floated='right' width={3}>
-                                <Button primary onClick={() => { window.location = '/confirm' }}>Checkout</Button>
+                                {/* <Button primary onClick={() => { window.location = '/confirm' }}>Checkout</Button> */}
                             </Grid.Column>
 
                         </Grid>
@@ -196,44 +211,49 @@ export default class Favorite extends Component {
                     <Responsive {...Responsive.onlyMobile}>
                         <Head>
                             Favorite
-                        </Head>
+                            </Head>
+                        <Divider />
 
                         {this.state.product.map((item, i) =>
-                            <Card.Group centered>
-                                <Card color='black'>
-                                    <Card.Content>
-                                        <Card.Header><center>{item.name}</center></Card.Header>
-                                        <Marg>
-                                            <Image size='small' src={item.productImage} />
-                                        </Marg>
+                            <Marg>
+                                <Container>
+                                    <Grid>
+                                        <Grid.Row>
+                                            <Grid.Column width={5}>
+                                                <Image size='medium' src={item.productImage} />
+                                            </Grid.Column>
 
-                                        <Card.Meta><center>{item.brand}</center></Card.Meta>
+                                            <Grid.Column width={10}>
+                                                <Grid.Row>
+                                                    <SmallFont>{item.name}</SmallFont>
 
-                                        <h5 style={{ marginTop: '5px' }}><center>Price : {item.price} ฿</center></h5>
-                                        <h5 style={{ marginTop: '5px' }}><center>Amount : {item.amount}</center></h5>
-                                    </Card.Content>
+                                                    <SmallFont>From:  {item.brand}</SmallFont>
 
-                                    <Card.Content>
-                                        <Button.Group size='mini'>
-                                            <Button color='red' onClick={() => { this.removeItem(i) }} >Remove</Button>
-                                            <Button color='blue' onClick={() => { (this.state.product[i].amount - 1) > 0 ? this.updateItem(i, { amount: this.state.product[i].amount - 1 }) : null }}>Minus</Button>
-                                            <Button color='green' onClick={() => { this.updateItem(i, { amount: this.state.product[i].amount + 1 }) }} >Plus</Button>
-                                            <Button color="blue" content="see details" ident={item.productID} onClick={this.seeFullDetail} />
-                                        </Button.Group>
-                                    </Card.Content>
+                                                    <SmallFont> Price: THB  {item.price}</SmallFont>
+                                                    <Divider />
+                                                    <Bottom attached='bottom'>
+                                                        <center>
+                                                            <Button.Group size='medium' attached='bottom'>
+                                                                <Button color='red' onClick={() => { this.removeItem(i) }} >Remove</Button>
+                                                                <Button color="blue" icon='eye' content="see details" ident={item.productID} onClick={this.seeFullDetail} />
+                                                            </Button.Group>
+                                                        </center>
+                                                    </Bottom>
 
-                                </Card>
-                            </Card.Group>
+                                                </Grid.Row>
+                                            </Grid.Column>
+                                        </Grid.Row>
+                                    </Grid>
+
+                                </Container>
+                            </Marg>
                         )}
-
+                        <Divider />
                         <br />
-                        <br />
-
                         <Grid centered>
-                            <Button primary onClick={() => { this.sendData() }} >Update</Button>
+                            {/* <Button primary onClick={() => { this.sendData() }} >Update</Button> */}
                             <Button color='red' onClick={() => { this.removeOrder() }} >Clear</Button>
-                            <Button primary onClick={() => { window.location = '/confirm' }}>Checkout</Button>
-
+                            {/* <Button primary onClick={() => { window.location = '/confirm' }}>Checkout</Button> */}
                         </Grid>
 
                         <br />
