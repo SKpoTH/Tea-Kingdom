@@ -1,13 +1,7 @@
-var express = require('express');
-var router = express.Router();
+const Product = require('../../models/product');
+const Order = require('../../models/order');
 
-var passport = require('passport');
-
-var Product = require('../../models/product');
-var Order = require('../../models/order');
-
-// Load Data
-router.get('/load', passport.authenticate('jwt', { session: false}), function(req, res){
+module.exports.load = function(req, res){
     // Find order of the logged in user
     Order.findOne({ 
         email: req.user.email,
@@ -37,11 +31,9 @@ router.get('/load', passport.authenticate('jwt', { session: false}), function(re
                 status: "Error "+err+" : You have to Log in first"
             })
         })
-})
+}
 
-// Update the amount of product in order
-router.post('/update', passport.authenticate('jwt', { session: false}), function(req, res){
-    
+module.exports.update = function(req, res){
     // Find order of logged in user
     Order.findOne({
         email: req.user.email,
@@ -85,10 +77,9 @@ router.post('/update', passport.authenticate('jwt', { session: false}), function
                 status: "Error "+err+" : Can't find order"
             })
         })
-})
+}
 
-router.post('/add', passport.authenticate('jwt', { session: false}), function(req, res){
-    
+module.exports.add = function(req, res){
     // Find current order of logged in user
     Order.findOne({ 
         email: req.user.email,
@@ -219,13 +210,9 @@ router.post('/add', passport.authenticate('jwt', { session: false}), function(re
                 status: "Error "+err+" : Can't find order"
             })
         })
-})
+}
 
-
-
-// Remove Current Order
-router.get('/remove/all', passport.authenticate('jwt', { session: false}), function(req, res){
-
+module.exports.removeAll = function(req, res){
     // Find only one and Remove the order
     Order.findOneAndRemove({
         email: req.user.email,
@@ -243,11 +230,9 @@ router.get('/remove/all', passport.authenticate('jwt', { session: false}), funct
                 status: "Error "+err+" : Can't find order"
             })
         })
-})
+}
 
-// Remove one Product from current order
-router.post('/remove/one', passport.authenticate('jwt', { session: false}), function(req, res){
-
+module.exports.removeOne = function(req, res){
     // Find only one order
     Order.findOne({
         email: req.user.email,
@@ -277,7 +262,4 @@ router.post('/remove/one', passport.authenticate('jwt', { session: false}), func
                 status: "Error "+err+" : Can't find order"
             })
         })
-})
-
-
-module.exports = router;
+}

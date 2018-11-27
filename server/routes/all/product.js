@@ -1,49 +1,13 @@
 const express = require('express');
 const router = express.Router();
-//const passport = require('passport');
 
-const Product = require('../../models/product');
+// Import Controllers
+const productAll = require('../../controller/product/product-all')
 
-// Load a product Data
-router.post('/load/one', function(req, res){
-    // Find Product from prodcutID
-    Product.findOne({ 
-        _id: req.body.productID 
-    })
-        .then( product => {
-            // Response If Success
-            res.json({
-                data: product,
-                status: "Successfully Loaded a Product"
-            });
-        })
-        .catch( err => {
-            // Response If Error
-            res.json({
-                status : "Error "+err+" : Can't find product"
-            })
-        })
-})
+// Path: '/api/product/load/one'    | Load a product Data
+router.post('/load/one', productAll.loadOne)
 
-// Load all product that ready to sell
-router.get('/load/all', function(req, res){
-    // Find all pending products
-    Product.find({
-        pending: true
-    })
-        .then( products => {
-            // Response If Success
-            res.json({
-                data: products,
-                status: "Successfully Loaded Pending Products"
-            })
-        })
-        .catch( err => {
-            // Response If Error
-            res.json({
-                status : "Error "+err+" : Can't find products"
-            })
-        })
-})
+// Path: '/api/product/load/all'    | Load all product that ready to sell
+router.get('/load/all', productAll.loadAll)
 
-module.exports = router;
+module.exports = router

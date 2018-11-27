@@ -1,14 +1,7 @@
-const express = require('express');
-const router = express.Router();
-
-const passport = require('passport');
-
 const User = require('../../models/user');
 const Product = require('../../models/product');
 
-// Add product to favourite list
-router.post('/add', passport.authenticate('jwt', { session: false}), function(req, res){
-    
+module.exports.add = function(req, res){
     // Find logged in user email
     User.findOne({
         email: req.user.email
@@ -101,12 +94,9 @@ router.post('/add', passport.authenticate('jwt', { session: false}), function(re
                 status: "Error "+err+" : You have to Log in first"
             })
         })
-})
+}
 
-
-// Remove product from favourite list
-router.post('/remove', passport.authenticate('jwt', { session: false}), function(req, res){
-    
+module.exports.remove = function(req, res){
     // Find logged in user
     User.findOne({
         email: req.user.email
@@ -158,8 +148,4 @@ router.post('/remove', passport.authenticate('jwt', { session: false}), function
                 status: "Error "+err+" : You have to Log in first"
             })
         })
-})
-
-
-
-module.exports = router;
+}

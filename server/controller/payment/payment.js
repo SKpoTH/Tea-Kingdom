@@ -1,15 +1,9 @@
-const express = require('express');
-const router = express.Router();
-
-const passport = require('passport');
-
 const Product = require('../../models/product');
 const Order = require('../../models/order');
 const Tracking = require('../../models/tracking');
 
-// Confirm to pay for products
-router.post('/confirm', passport.authenticate('jwt', { session: false}), function(req, res){
 
+module.exports.confirm = function(req, res){
     // Show that credit was sent to verify to bank
     console.log('=====Credit Card=====');
     let credit = {
@@ -79,6 +73,4 @@ router.post('/confirm', passport.authenticate('jwt', { session: false}), functio
             status: 'Invalid Creadit Card'
         });
     }
-})
-
-module.exports = router;
+}

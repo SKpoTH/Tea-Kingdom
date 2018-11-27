@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const order = require('../../models/order');
 
-router.get('/load', passport.authenticate('jwt', { session: false}), (req, res) =>{
+module.exports = function(req, res){
     order.aggregate([  
         { $match: { email : req.user.email, status: 'Ordering' } },
         { $unwind: { path :"$product", preserveNullAndEmptyArrays : false } },
@@ -24,6 +24,4 @@ router.get('/load', passport.authenticate('jwt', { session: false}), (req, res) 
         }
         res.json(info)
     })
-})
-
-module.exports = router;
+}

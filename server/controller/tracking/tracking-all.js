@@ -1,13 +1,6 @@
-const express = require('express');
-const router = express.Router();
-
-const passport = require('passport')
-
 const Tracking = require('../../models/tracking')
 
-// Load Data
-router.get('/consumer/load', passport.authenticate('jwt', { session: false}), function(req, res){
-
+module.exports.load = function(req, res){
     // Find the tracking of Logged in user
     Tracking.findOne({
         email: req.user.email,
@@ -26,6 +19,4 @@ router.get('/consumer/load', passport.authenticate('jwt', { session: false}), fu
                 status: "Error"+err+" : Can't find tracking"
             })
         })
-})
-
-module.exports = router;
+}

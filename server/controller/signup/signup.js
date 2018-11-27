@@ -1,10 +1,8 @@
-const express = require('express');
-const router = express.Router();
 const bcrypt = require('bcryptjs')
 
-const User = require('../../models/user');
-
-router.post('/signup', (req, res) => {
+const User = require('../../models/user')
+    
+module.exports = function(req, res){
     //find email if it was used
     User.findOne({
         email: req.body.email
@@ -50,6 +48,4 @@ router.post('/signup', (req, res) => {
                 })
             }
         })
-})
-
-module.exports = router;
+   }
