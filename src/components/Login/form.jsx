@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import Connection from '../pomLib/connection';
 import Token from '../pomLib/token';
 import "semantic-ui-css/semantic.css";
-import { Container, Button, Form, Message } from "semantic-ui-react";
-import TemplateTKD from "../template/TemplateTKD";
+import { Button, Form } from "semantic-ui-react";
 
 const request = Connection.createClass();
 
