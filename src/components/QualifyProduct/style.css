@@ -4,3 +4,10 @@
 .rightLoading {
     float: right;
 }
+.bgColorr {
+    background: #f9fafb;
+}
+.padd {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
