@@ -1,277 +1,301 @@
 {
-  "Admin":{
-    "Left":[
+  "Admin": {
+    "Left": [
       {
-        "show":"Home",
-        "url":"/"
+        "show": "Home",
+        "url": "/"
       },
       {
-        "show":"About US",
-        "url":"/AboutUs"
+        "show": "About US",
+        "url": "/AboutUs"
       },
       {
-        "show":"Product",
-        "url":"/product"
+        "show": "Product",
+        "url": "/product"
       }
     ],
-    "Right":[
+    "Right": [
       {
-        "show":"ProductQualify",
-        "url":"/itemqualify"
+        "show": "ProductQualify",
+        "url": "/itemqualify"
       },
       {
-        "show":"promote",
-        "url":"/admin"
+        "show": "promote",
+        "url": "/admin"
       },
       {
-        "show":"PERSON",
-        "url":"/user"
+        "show": "favorite",
+        "url": "/favorite"
       },
       {
-        "show":"Logout",
-        "url":"NON_USE"
+        "show": "PERSON",
+        "url": "/user"
+      },
+      {
+        "show": "Logout",
+        "url": "NON_USE"
       }
     ],
-    "Mobile":[
+    "Mobile": [
       {
-        "show":"PERSON",
-        "url":"/user"
+        "show": "PERSON",
+        "url": "/user"
       },
       {
-        "show":"Home",
-        "url":"/"
+        "show": "Home",
+        "url": "/"
       },
       {
-        "show":"About US",
-        "url":"/AboutUs"
+        "show": "About US",
+        "url": "/AboutUs"
       },
       {
-        "show":"Product",
-        "url":"/product"
+        "show": "Product",
+        "url": "/product"
       },
       {
-        "show":"ProductQualify",
-        "url":"/itemqualify"
+        "show": "favorite",
+        "url": "/favorite"
       },
       {
-        "show":"promote",
-        "url":"/admin"
+        "show": "ProductQualify",
+        "url": "/itemqualify"
       },
       {
-        "show":"Logout",
-        "url":"NON_USE"
+        "show": "promote",
+        "url": "/admin"
+      },
+      {
+        "show": "Logout",
+        "url": "NON_USE"
       }
     ]
   },
-  "Seller":{
-    "Left":[
+  "Seller": {
+    "Left": [
       {
-        "show":"Home",
-        "url":"/"
+        "show": "Home",
+        "url": "/"
       },
       {
-        "show":"About US",
-        "url":"/AboutUs"
+        "show": "About US",
+        "url": "/AboutUs"
       },
       {
-        "show":"Product",
-        "url":"/product"
+        "show": "Product",
+        "url": "/product"
       }
     ],
-    "Right":[
+    "Right": [
       {
-        "show":"Track",
-        "url":"/under"
+        "show": "Track",
+        "url": "/under"
       },
       {
-        "show":"AddProduct",
-        "url":"/addproduct"
+        "show": "AddProduct",
+        "url": "/addproduct"
       },
       {
-        "show":"PERSON",
-        "url":"/seller"
+        "show": "favorite",
+        "url": "/favorite"
       },
       {
-        "show":"Logout",
-        "url":"NON_USE"
+        "show": "PERSON",
+        "url": "/seller"
+      },
+      {
+        "show": "Logout",
+        "url": "NON_USE"
       }
     ],
-    "Mobile":[
+    "Mobile": [
       {
-        "show":"PERSON",
-        "url":"/seller"
+        "show": "PERSON",
+        "url": "/seller"
       },
       {
-        "show":"Home",
-        "url":"/"
+        "show": "Home",
+        "url": "/"
       },
       {
-        "show":"About US",
-        "url":"/AboutUs"
+        "show": "About US",
+        "url": "/AboutUs"
       },
       {
-        "show":"Product",
-        "url":"/product"
+        "show": "Product",
+        "url": "/product"
       },
       {
-        "show":"Track",
-        "url":"/under"
+        "show": "favorite",
+        "url": "/favorite"
       },
       {
-        "show":"AddProduct",
-        "url":"/addproduct"
+        "show": "Track",
+        "url": "/under"
       },
       {
-        "show":"Logout",
-        "url":"NON_USE"
+        "show": "AddProduct",
+        "url": "/addproduct"
+      },
+      {
+        "show": "Logout",
+        "url": "NON_USE"
       }
     ]
   },
-  "Consumer":{
-    "Left":[
+  "Consumer": {
+    "Left": [
       {
-        "show":"Home",
-        "url":"/"
+        "show": "Home",
+        "url": "/"
       },
       {
-        "show":"About US",
-        "url":"/AboutUs"
+        "show": "About US",
+        "url": "/AboutUs"
       },
       {
-        "show":"Product",
-        "url":"/product"
+        "show": "Product",
+        "url": "/product"
       }
     ],
-    "Right":[
+    "Right": [
       {
-        "show":"Track",
-        "url":"/track"
+        "show": "Track",
+        "url": "/track"
       },
       {
-        "show":"Cart",
-        "url":"/order"
+        "show": "favorite",
+        "url": "/favorite"
       },
       {
-        "show":"PERSON",
-        "url":"/user"
+        "show": "Cart",
+        "url": "/order"
       },
       {
-        "show":"Logout",
-        "url":"NON_USE"
+        "show": "PERSON",
+        "url": "/user"
+      },
+      {
+        "show": "Logout",
+        "url": "NON_USE"
       }
     ],
-    "Mobile":[
+    "Mobile": [
       {
-        "show":"PERSON",
-        "url":"/user"
+        "show": "PERSON",
+        "url": "/user"
       },
       {
-        "show":"Home",
-        "url":"/"
+        "show": "Home",
+        "url": "/"
       },
       {
-        "show":"About US",
-        "url":"/AboutUs"
+        "show": "About US",
+        "url": "/AboutUs"
       },
       {
-        "show":"Product",
-        "url":"/product"
+        "show": "Product",
+        "url": "/product"
       },
       {
-        "show":"Cart",
-        "url":"/order"
+        "show": "favorite",
+        "url": "/favorite"
       },
       {
-        "show":"Track",
-        "url":"/track"
+        "show": "Cart",
+        "url": "/order"
       },
       {
-        "show":"Logout",
-        "url":"NON_USE"
+        "show": "Track",
+        "url": "/track"
+      },
+      {
+        "show": "Logout",
+        "url": "NON_USE"
       }
     ]
   },
-  "Normal":{
-    "Left":[
+  "Normal": {
+    "Left": [
       {
-        "show":"Home",
-        "url":"/"
+        "show": "Home",
+        "url": "/"
       },
       {
-        "show":"About US",
-        "url":"/AboutUs"
+        "show": "About US",
+        "url": "/AboutUs"
       },
       {
-        "show":"Product",
-        "url":"/product"
+        "show": "Product",
+        "url": "/product"
       }
     ],
-    "Right":[
+    "Right": [
       {
-        "show":"Register",
-        "url":"/register"
+        "show": "Register",
+        "url": "/register"
       },
       {
-        "show":"Login",
-        "url":"/login"
+        "show": "Login",
+        "url": "/login"
       }
     ],
-    "Mobile":[
+    "Mobile": [
       {
-        "show":"Home",
-        "url":"/"
+        "show": "Home",
+        "url": "/"
       },
       {
-        "show":"About US",
-        "url":"/AboutUs"
+        "show": "About US",
+        "url": "/AboutUs"
       },
       {
-        "show":"Product",
-        "url":"/product"
+        "show": "Product",
+        "url": "/product"
       },
       {
-        "show":"Register",
-        "url":"/register"
+        "show": "Register",
+        "url": "/register"
       },
       {
-        "show":"Login",
-        "url":"/login"
+        "show": "Login",
+        "url": "/login"
       }
     ]
   },
-  "Loading":{
-    "Left":[
+  "Loading": {
+    "Left": [
       {
-        "show":"Home",
-        "url":"/"
+        "show": "Home",
+        "url": "/"
       },
       {
-        "show":"About US",
-        "url":"/AboutUs"
+        "show": "About US",
+        "url": "/AboutUs"
       },
       {
-        "show":"Product",
-        "url":"/product"
+        "show": "Product",
+        "url": "/product"
       }
     ],
-    "Right":[
+    "Right": [
       {
-        "show":"Loading",
-        "url":"NON_USE"
+        "show": "Loading",
+        "url": "NON_USE"
       }
     ],
-    "Mobile":[
+    "Mobile": [
       {
-        "show":"Home",
-        "url":"/"
+        "show": "Home",
+        "url": "/"
       },
       {
-        "show":"About US",
-        "url":"/AboutUs"
+        "show": "About US",
+        "url": "/AboutUs"
       },
       {
-        "show":"Product",
-        "url":"/product"
+        "show": "Product",
+        "url": "/product"
       }
     ]
   }
