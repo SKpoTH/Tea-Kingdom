@@ -5,39 +5,40 @@ import TemplateTKD from "../template/TemplateTKD";
 import SellerProduct from "./SellerProduct";
 import { getData } from "../API/get";
 
-const url_get = '/api/product/seller/load/all'
+const url_get = '/api/seller/product/load/all'
 
 export default class Seller extends Component {
-	constructor(props){
-		super(props);
-		this.state = { 
-			message:
-				{ massageHidden: true, content: '', status: "" },
+    constructor(props) {
+        super(props);
+        this.state = {
+            message:
+                { massageHidden: true, content: '', status: "" },
             product: [],
-            load : true
+            load: true
         }
         this.handleGET();
     }
-    async handleGET(){
+    async handleGET() {
         const tmp = await getData(url_get)
         this.setState({
-            product : tmp,
-            load : false
+            product: tmp,
+            load: false
         })
-        console.log("product data >> ",this.state.product.data)
+        console.log(tmp)
+        console.log("product data >> ", this.state.product.data)
     }
 
-	render() {
-        if(this.state.load){
+    render() {
+        if (this.state.load) {
             return null
         } else {
             return (
                 <TemplateTKD>
-                    <Message content={this.state.message.content} 
-                                hidden={this.state.message.massageHidden} 
-                                className={this.state.message.status}/>
-                    <SellerProduct DataRender={this.state}/>
-                </TemplateTKD>   
+                    <Message content={this.state.message.content}
+                        hidden={this.state.message.massageHidden}
+                        className={this.state.message.status} />
+                    <SellerProduct DataRender={this.state} />
+                </TemplateTKD>
             );
         }
     }

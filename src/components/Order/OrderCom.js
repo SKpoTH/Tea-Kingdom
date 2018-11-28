@@ -182,7 +182,7 @@ export default class OrderCom extends Component {
 							<Table.Row>
 								<Table.Cell width='1'>{Count++}</Table.Cell>
 								<Table.Cell width='5'>
-									<center><Image src={item.productImage} size='medium' />
+									<center><Image src={item.productImage} size='small' />
 										<h3>{item.name}</h3></center>
 								</Table.Cell>
 								<Table.Cell width='2'>

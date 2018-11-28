@@ -105,7 +105,7 @@ export default class MainProduct extends Component {
     const pictureFragment = <Item.Image size="large" src={productImage} />;
     const twoButtonFragment = (
       <React.Fragment>
-        <Button color="blue" content="add to cart" id={id} icon="cart" onClick={this.send} />
+        <Button color="blue" content="add to cart" ident={id} icon="cart" onClick={this.send} />
         <Button color="red" icon="heart" iden={id} onClick={this.addFev} />
       </React.Fragment>
     );
