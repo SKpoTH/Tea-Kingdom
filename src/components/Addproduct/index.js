@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+// import axios from 'axios'
 import 'semantic-ui-css/semantic.css';
 import { Form, Button, Message, Modal, Checkbox, TextArea, Responsive, Grid, Image, Label, Header, Popup } from 'semantic-ui-react';
 import TemplateTKD from "../template/TemplateTKD";
 import styled from 'styled-components'
+
+import Connection from '../pomLib/connection';
+
+const request = Connection.createClass();
 
 
 const Center = styled.div`
@@ -59,7 +63,7 @@ export default class AddProduct extends Component {
 		this._handleImageChange = this._handleImageChange.bind(this);
 		this._handleSubmit = this._handleSubmit.bind(this);
 
-		axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
+		// axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
 	}
 
 	_handleSubmit(e) {
@@ -114,19 +118,22 @@ export default class AddProduct extends Component {
 	}
 
 	sendData(bodyFormData) {
-		axios({
-			method: 'post',
-			url: '/api/product/seller/add',
-			data: bodyFormData,
-			config: { headers: { 'Content-Type': 'multipart/form-data' } }
-		})
+
+		// axios({
+		// 	method: 'post',
+		// 	url: '/api/product/seller/add',
+		// 	data: bodyFormData,
+		// 	config: { headers: { 'Content-Type': 'multipart/form-data' } }
+		// })
+
+		request.postPicture('/api/product/seller/add', bodyFormData)
 			.then((res) => {
-				if (res.data.status === "no company name") {
+				if (res.status === "no company name") {
 					this.setState({
-						message: { massageHidden: false, content: res.data.status, status: "negative" }
+						message: { massageHidden: false, content: res.status, status: "negative" }
 					});
 				} else {
-					console.log(res.data.status);
+					console.log(res.status);
 					window.location = '/seller';
 				}
 			})

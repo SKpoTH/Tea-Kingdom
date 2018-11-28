@@ -13,7 +13,7 @@ export default class MainProduct extends Component {
       value: 1
     }
   }
-  
+
   handleChange = (event) => {
     event.preventDefault();
     this.setState({ value: event.target.value });
@@ -27,7 +27,7 @@ export default class MainProduct extends Component {
       this.setState({ value: this.props.dataR.amount });
     else if (this.state.value > 1000)
       this.setState({ value: 999 });
-    else if (typeof(this.state.value) != "number")
+    else if (typeof (this.state.value) != "number")
       this.setState({ value: 1 });
   }
 
@@ -46,25 +46,25 @@ export default class MainProduct extends Component {
 
   addFev = (event, { ident }) => {
     event.preventDefault();
-    request.post('/api/favourite/add', { productID : ident }, true)
-    .then(res => {
-      this.props.setMessage({
-        content: res,
-        hidden: false,
-        className: 'success'
-      });
-    })
-    .catch(err => {
-      if(Token.isLogin)
+    request.post('/api/favourite/add', { productID: ident }, true)
+      .then(res => {
         this.props.setMessage({
-          content: err,
+          content: res,
           hidden: false,
-          className: 'negative'
+          className: 'success'
         });
-      else
-        this.messageLogin();
-    });
-    window.scrollTo({ top: 0 ,behavior: 'smooth' });
+      })
+      .catch(err => {
+        if (Token.isLogin)
+          this.props.setMessage({
+            content: err,
+            hidden: false,
+            className: 'negative'
+          });
+        else
+          this.messageLogin();
+      });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   messageLogin = () => {
@@ -81,22 +81,23 @@ export default class MainProduct extends Component {
       productID: ident,
       amount: this.state.value
     }
+    console.log(myOrder)
     request.post('/api/order/add', myOrder, true)
-    .then(() => {
-      window.location = "/order";
-    })
-    .catch(err => {
-      console.log(err)
-      if(Token.isLogin)
-        this.props.setMessage({
-          content: err,
-          hidden: false,
-          className: 'negative'
-        });
-      else
-        this.messageLogin();
-    });
-    window.scrollTo({ top: 0 ,behavior: 'smooth' });
+      .then(() => {
+        window.location = "/order";
+      })
+      .catch(err => {
+        console.log(err)
+        if (Token.isLogin)
+          this.props.setMessage({
+            content: err,
+            hidden: false,
+            className: 'negative'
+          });
+        else
+          this.messageLogin();
+      });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   render() {
@@ -141,7 +142,7 @@ export default class MainProduct extends Component {
         <Input labelPosition='right' type='text'>
           <Label className="PointerEdit button" onClick={this.minus}><Icon name="minus" fitted /></Label>
           <input className="centerText" maxlength="3" size="3" value={this.state.value} onChange={this.handleChange}
-            onBlur={this.outSelect}/>
+            onBlur={this.outSelect} />
           <Label className="PointerEdit button" onClick={this.plus}><Icon name="plus" fitted /></Label>
         </Input>
         <br />
@@ -159,24 +160,24 @@ export default class MainProduct extends Component {
               </Grid.Column>
               <Grid.Column>
                 <Item.Group>
-                    <Item>
+                  <Item>
+                    <Item.Content>
+                      {headFragment}
+                      <Divider />
+                      <Item.Meta>
+                        {priceFragment}
+                      </Item.Meta>
+                      {descriptionFragement}
                       <Item.Content>
-                        {headFragment}
-                        <Divider />
-                        <Item.Meta>
-                          {priceFragment}
-                        </Item.Meta>
-                        {descriptionFragement}
-                        <Item.Content>
-                          {brandFragement}
-                          <br /><br />
-                          {amountFragement}
-                          {twoButtonFragment}
-                          <Divider className="margin7" hidden />
-                        </Item.Content>
+                        {brandFragement}
+                        <br /><br />
+                        {amountFragement}
+                        {twoButtonFragment}
+                        <Divider className="margin7" hidden />
                       </Item.Content>
-                    </Item>
-                  </Item.Group>
+                    </Item.Content>
+                  </Item>
+                </Item.Group>
               </Grid.Column>
             </Grid.Row>
           </Grid>

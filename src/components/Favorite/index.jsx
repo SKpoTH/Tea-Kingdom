@@ -3,13 +3,14 @@ import TemplateTKD from '../template/TemplateTKD';
 import 'semantic-ui-css/semantic.css';
 import { Container, Responsive, Divider } from 'semantic-ui-react';
 import { Image, Button, Table, Grid } from 'semantic-ui-react'
-import axios from 'axios';
+
 import styled from 'styled-components'
 
 import Connection from '../pomLib/connection';
-import Token from '../pomLib/token';
+
 
 const request = Connection.createClass();
+
 const Head = styled.div`
         font-size: 25px;
         font-weight: bold;
@@ -54,10 +55,9 @@ export default class Favorite extends Component {
         }
 
         console.log(sent.productID);
-        // request.post('api/favourite/remove', sent, true)
-        axios.post('api/favourite/remove', sent, { headers: { Authorization: localStorage.getItem("token") } })
+        request.post('api/favourite/remove', sent, true)
             .then((res) => {
-                console.log(res.data.status);
+                console.log(res.status);
                 this.getData();
             })
             .catch((error) => {
@@ -82,12 +82,11 @@ export default class Favorite extends Component {
 
 
     getData = () => {
-        axios.get('/api/userData/load/', { headers: { Authorization: localStorage.getItem("token") } })
-            // request.get('/api/userData/load/', true)
+        request.get('/api/userData/load/', true)
             .then((res) => {
-                console.log(res.data.data);
+                console.log(res.data);
                 this.setState({
-                    product: res.data.data.favourite
+                    product: res.data.favourite
                 });
                 console.log(this.state.product)
             })

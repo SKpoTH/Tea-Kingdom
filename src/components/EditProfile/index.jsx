@@ -5,6 +5,11 @@ import { Form, Button, Message, Image, Responsive, Grid, Container } from 'seman
 import TemplateTKD from "../template/TemplateTKD";
 import styled from 'styled-components';
 
+import Connection from '../pomLib/connection';
+
+const request = Connection.createClass();
+
+
 
 const UploadImage = styled.div`
     margin-top: 20px ;
@@ -26,7 +31,7 @@ export default class EditUser extends Component {
 
 		this._handleImageChange = this._handleImageChange.bind(this);
 		this._handleSubmit = this._handleSubmit.bind(this);
-		axios.defaults.headers.common['Authorization'] = localStorage.getItem("token"); //Importand 
+		// axios.defaults.headers.common['Authorization'] = localStorage.getItem("token"); //Importand 
 
 	}
 
@@ -90,14 +95,15 @@ export default class EditUser extends Component {
 	}
 
 	sendData(userData) {
-		axios({
-			method: 'post',
-			url: '/api/userData/edit',
-			data: userData,
-			config: { headers: { 'Content-Type': 'multipart/form-data' } }
-		})
+		// axios({
+		// 	method: 'post',
+		// 	url: '/api/userData/edit',
+		// 	data: userData,
+		// 	config: { headers: { 'Content-Type': 'multipart/form-data' } }
+		// })
+		request.postPicture('/api/userData/edit', userData)
 			.then((res) => {
-				console.log(res.data.status);
+				console.log(res.status);
 				window.location = '/user';
 
 			})

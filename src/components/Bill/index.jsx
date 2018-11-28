@@ -4,9 +4,9 @@ import 'semantic-ui-css/semantic.css';
 import { Segment, Button, Divider, Grid, Form, Responsive, Message } from 'semantic-ui-react';
 import axios from 'axios';
 import styled from 'styled-components'
-// import Connection from '../pomLib/connection';
+import Connection from '../pomLib/connection';
 
-// const request = Connection.createClass();
+const request = Connection.createClass();
 
 const Head = styled.div`
     font-size: 25px; 
@@ -42,13 +42,13 @@ export default class Content extends Component {
     }
 
     getData = () => {
-        // request.get('/api/order/load', { Authorization: localStorage.getItem("token") })
+        request.get('/api/order/load', true)
 
-        axios.get('/api/order/load', { headers: { Authorization: localStorage.getItem("token") } })
+            // axios.get('/api/order/load', { headers: { Authorization: localStorage.getItem("token") } })
             .then((res) => {
-                console.log(res.data.status)
+                console.log(res.status)
                 this.setState({
-                    product: res.data.data.product
+                    product: res.data.product
                 });
             })
             .catch((error) => {
@@ -68,8 +68,8 @@ export default class Content extends Component {
     cancel = (event) => {
         console.log('cancel');
 
-        // request.post('/api/payment/cancel', null, { Authorization: localStorage.getItem("token") })
-        axios.post('/api/payment/cancel', null, { headers: { Authorization: localStorage.getItem("token") } })
+        request.post('/api/payment/cancel', null, true)
+        // axios.post('/api/payment/cancel', null, { headers: { Authorization: localStorage.getItem("token") } })
         window.location = '/order';
     }
 
@@ -90,9 +90,10 @@ export default class Content extends Component {
     }
 
     sendData(billData, token) {
-        axios.post('/api/payment/confirm', billData, { headers: { Authorization: token } })
+        // axios.post('/api/payment/confirm', billData, { headers: { Authorization: token } })
+        request.post('/api/payment/confirm', billData, true)
             .then((res) => {
-                console.log(res.data.status);
+                console.log(res.status);
                 window.location = '/track';
             })
             .catch((error) => {
@@ -261,6 +262,7 @@ export default class Content extends Component {
 
                         </Grid>
                     </Responsive>
+
                     <Responsive  {...Responsive.onlyComputer}>
                         <Grid>
                             <Grid.Column width={10}>

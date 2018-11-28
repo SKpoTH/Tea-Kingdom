@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.css';
 import { Image, Button, Table, Icon, Grid, Label } from 'semantic-ui-react'
-import axios from 'axios';
 
+// import './style.css';
+import Connection from '../pomLib/connection';
 
-import './style.css';
-
+const request = Connection.createClass();
 
 export default class OrderCom extends Component {
 	constructor(props) {
@@ -40,10 +40,10 @@ export default class OrderCom extends Component {
 		const sent = {
 			product: this.state.product
 		}
-
-		axios.post('/api/order/update', sent, { headers: { Authorization: localStorage.getItem("token") } })
+		request.post('/api/order/update', sent, true)
+			// axios.post('/api/order/update', sent, { headers: { Authorization: localStorage.getItem("token") } })
 			.then((res) => {
-				console.log(res.data.status);
+				console.log(res.status);
 				this.getData();
 			})
 			.catch((error) => {
@@ -66,10 +66,10 @@ export default class OrderCom extends Component {
 		}
 
 		console.log(this.state.product[index]._id);
-
-		axios.post('/api/order/remove/one', sent, { headers: { Authorization: localStorage.getItem("token") } })
+		request.post('/api/order/remove/one', sent, true)
+			// axios.post('/api/order/remove/one', sent, { headers: { Authorization: localStorage.getItem("token") } })
 			.then((res) => {
-				console.log(res.data.status);
+				console.log(res.status);
 				this.getData();
 			})
 			.catch((error) => {
@@ -87,9 +87,10 @@ export default class OrderCom extends Component {
 	}
 
 	removeOrder = () => {
-		axios.get('/api/order/remove/all', { headers: { Authorization: localStorage.getItem("token") } })
+		request.get('/api/order/remove/all', true)
+			// axios.get('/api/order/remove/all', { headers: { Authorization: localStorage.getItem("token") } })
 			.then((res) => {
-				console.log(res.data.status);
+				console.log(res.status);
 				this.getData();
 			})
 			.catch((error) => {
@@ -114,10 +115,11 @@ export default class OrderCom extends Component {
 				productID: this.state.product[i].productID
 			}
 
-			axios.post('/api/product/load/one', stockProduct)
+			request.post('/api/product/load/one', stockProduct)
+				// axios.post('/api/product/load/one', stockProduct)
 				.then(res => {
-					console.log(res.data.status);
-					this.state.product[i].stock = res.data.data.amount;
+					console.log(res.status);
+					this.state.product[i].stock = res.data.amount;
 				})
 				.catch(err => {
 					console.log('Error');
@@ -128,11 +130,12 @@ export default class OrderCom extends Component {
 
 	// Get loaded Data from back-end
 	getData = () => {
-		axios.get('/api/order/load', { headers: { Authorization: localStorage.getItem("token") } })
+		request.get('/api/order/load', true)
+			// axios.get('/api/order/load', { headers: { Authorization: localStorage.getItem("token") } })
 			.then((res) => {
-				console.log(res.data.status);
+				console.log(res.status);
 				this.setState({
-					product: res.data.data.product
+					product: res.data.product
 				});
 
 				this.getStock();
@@ -166,11 +169,11 @@ export default class OrderCom extends Component {
 					<Table.Header>
 						<Table.Row>
 							<Table.HeaderCell width='1'></Table.HeaderCell>
-							<Table.HeaderCell width='5'>Product</Table.HeaderCell>
-							<Table.HeaderCell width='2'>Price</Table.HeaderCell>
-							<Table.HeaderCell width='4'>Amount</Table.HeaderCell>
-							<Table.HeaderCell width='2'>Total</Table.HeaderCell>
-							<Table.HeaderCell width='2'>Delete</Table.HeaderCell>
+							<Table.HeaderCell width='5'><h3><center>Product</center></h3></Table.HeaderCell>
+							<Table.HeaderCell width='2'><h3><center>Price</center></h3></Table.HeaderCell>
+							<Table.HeaderCell width='4'><h3><center>Amount</center></h3></Table.HeaderCell>
+							<Table.HeaderCell width='2'><h3><center>Total</center></h3></Table.HeaderCell>
+							<Table.HeaderCell width='2'><h3><center>Delete</center></h3></Table.HeaderCell>
 						</Table.Row>
 					</Table.Header>
 
@@ -179,8 +182,8 @@ export default class OrderCom extends Component {
 							<Table.Row>
 								<Table.Cell width='1'>{Count++}</Table.Cell>
 								<Table.Cell width='5'>
-									<Image src={item.productImage} style={{ width: '20%', height: '20%', display: 'inline' }} />
-									{item.name}
+									<center><Image src={item.productImage} size='medium' />
+										<h3>{item.name}</h3></center>
 								</Table.Cell>
 								<Table.Cell width='2'>
 									<h4 className='inlineE'>
@@ -192,33 +195,39 @@ export default class OrderCom extends Component {
 									</h4>
 								</Table.Cell>
 								<Table.Cell width='4'>
-									<Label className="PointerEdit button" onClick={() => { (this.state.product[i].amount - 1) > 0 ? this.updateItem(i, { amount: this.state.product[i].amount - 1 }) : null }}>
-										<Icon name="minus" fitted />
-									</Label>
-									{item.amount}
-									<Label className="PointerEdit button" onClick={() => { (this.state.product[i].amount + 1) < 30 ? this.updateItem(i, { amount: this.state.product[i].amount + 1 }) : null }}>
-										<Icon name="plus" fitted />
-									</Label>
+									<center>
+										<Label className="PointerEdit button" onClick={() => { (this.state.product[i].amount - 1) > 0 ? this.updateItem(i, { amount: this.state.product[i].amount - 1 }) : null }}>
+											<Icon name="minus" fitted />
+										</Label>
+										{item.amount}
+										<Label className="PointerEdit button" onClick={() => { (this.state.product[i].amount + 1) < 30 ? this.updateItem(i, { amount: this.state.product[i].amount + 1 }) : null }}>
+											<Icon name="plus" fitted />
+										</Label>
+									</center>
 								</Table.Cell>
 								<Table.Cell width='2'>
-									<h4 className='inlineE'>
-										{
-											item.discount ?
-												item.discountPrice * item.amount :
-												item.price * item.amount
-										}
-									</h4>
-									&nbsp;&nbsp;&nbsp;
+									<center>
+										<h4 className='inlineE'>
+											{
+												item.discount ?
+													item.discountPrice * item.amount :
+													item.price * item.amount
+											}
+										</h4>
+										&nbsp;&nbsp;&nbsp;
 									<h4 className='oldPrice'>
-										{
-											item.discount ?
-												item.price * item.amount :
-												null
-										}
-									</h4>
+											{
+												item.discount ?
+													item.price * item.amount :
+													null
+											}
+										</h4>
+									</center>
 								</Table.Cell>
 								<Table.Cell width='2'>
-									<Button color='red' icon='remove' onClick={() => { this.removeItem(i) }} />
+									<center>
+										<Button color='red' icon='remove' onClick={() => { this.removeItem(i) }} />
+									</center>
 								</Table.Cell>
 							</Table.Row>
 						</Table.Body>
