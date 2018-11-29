@@ -21,7 +21,7 @@ export default class AddTracking extends Component {
     async handleGET(){
         const tmp = await getData(url_get)
         this.setState({
-          mymessage : tmp.data.data
+          mymessage : tmp.data
         })
     }
 

@@ -24,10 +24,6 @@
         "url": "/admin"
       },
       {
-        "show": "favorite",
-        "url": "/favorite"
-      },
-      {
         "show": "PERSON",
         "url": "/user"
       },
@@ -52,10 +48,6 @@
       {
         "show": "Product",
         "url": "/product"
-      },
-      {
-        "show": "favorite",
-        "url": "/favorite"
       },
       {
         "show": "ProductQualify",
@@ -96,10 +88,6 @@
         "url": "/addproduct"
       },
       {
-        "show": "favorite",
-        "url": "/favorite"
-      },
-      {
         "show": "PERSON",
         "url": "/seller"
       },
@@ -124,10 +112,6 @@
       {
         "show": "Product",
         "url": "/product"
-      },
-      {
-        "show": "favorite",
-        "url": "/favorite"
       },
       {
         "show": "Track",

@@ -2,6 +2,7 @@ import axios from 'axios'
 
 export async function postData(url,updateData){
     let status = ""
+    console.log(url)
     await axios.post(url,updateData,{ headers: { Authorization: localStorage.getItem("token") } })
         .then((res) => {
             console.log("URL post > ",url)

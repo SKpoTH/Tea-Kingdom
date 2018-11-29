@@ -1,16 +1,19 @@
 import axios from 'axios'
 
-export async function getData(url) {
+export async function getData(url){
     let newproduct = {
-        data: []
+        data : [],
+        status : ""
     }
     await axios.get(url, { headers: { Authorization: localStorage.getItem("token") } })
         .then((res) => {
-            newproduct.data = res.data.data
-
+            newproduct.data = res.data.data,
+            newproduct.status = res.data.status
+            // console.log("RES >> ",res)
         })
         .catch((error) => {
             console.log(error)
         })
-    return newproduct
+    // console.log("GET PRODUCT >> ",newproduct)
+    return  newproduct
 }

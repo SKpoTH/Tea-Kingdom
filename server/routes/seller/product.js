@@ -39,7 +39,7 @@ router.get('/load/all', passport.authenticate('jwt', { session: false}), product
 router.post('/add', upload.single('productImage'), passport.authenticate('jwt', { session: false}), productSeller.add)
 
 // Path: '/api/seller/product/edit'     | Edit product by seller
-router.get('/edit', upload.single('productImage'), passport.authenticate('jwt', { session: false}), productSeller.edit)
+router.post('/edit', upload.single('productImage'), passport.authenticate('jwt', { session: false}), productSeller.edit)
     
 // Path: '/api/seller/product/update'   | Update a Product
 router.post('/update', productSeller.update)

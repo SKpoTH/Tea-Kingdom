@@ -4,7 +4,7 @@ import { Grid, Segment, Header, Modal, Form, TextArea, Button, Label } from 'sem
 import styled from 'styled-components'
 import { postData } from "../API/post"
 
-const url_post = '/api/product/seller/edit'
+const url_post = '/api/seller/product/edit'
 
 const Comment = styled.div`
 	margin-top: 25px;
@@ -35,7 +35,7 @@ class MySellerProduct extends Component {
 			weight: '',
 			description: ''
         }
-        this.handleChange = this.handleChange.bind();
+        // this.handleChange = this.handleChange.bind();
     }
     handleSet = (item) => {
         this.setState({
@@ -143,7 +143,7 @@ class MySellerProduct extends Component {
                     </Form>
                     </Modal.Content>
                     <Modal.Actions>
-                        <Button type='submit' color='green' onClick={this.onSubmit(this.state)}>Update Data</Button> 
+                        <Button type='submit' color='green' onClick={event => this.onSubmit(this.state)}>Update Data</Button> 
                     </Modal.Actions>
                     </Modal> 
                 </Segment>
@@ -166,6 +166,7 @@ export default class SellerProduct extends Component {
                         <Segment inverted textAlign='center' style={{background:'#556B2F'}}>
                             <b style={{fontSize:'20px'}}>Product Status</b>
                         </Segment>
+                        {console.log("DATARENDER > ",this.props.DataRender)}
                         {this.props.DataRender.product.data.map( item => 
                             <MySellerProduct name = {item.name}
                                              pending = {item.pending}
