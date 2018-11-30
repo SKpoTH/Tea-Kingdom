@@ -55,7 +55,7 @@ export default class Favorite extends Component {
         }
 
         console.log(sent.productID);
-        request.post('api/favourite/remove', sent, true)
+        request.post('api/favourite/remove/one', sent, true)
             .then((res) => {
                 console.log(res.status);
                 this.getData();
@@ -73,6 +73,26 @@ export default class Favorite extends Component {
                 );
             })
     }
+
+    removeFavourite = () => {
+		request.get('/api/favourite/remove/all', true)
+			.then((res) => {
+				console.log(res.status);
+				this.getData();
+			})
+			.catch((error) => {
+				this.setState({ cantLoad: true });
+				this.setState({
+					message:
+					{
+						massageHidden: false,
+						// content: "Error : " + error.response.status + " => " + error.response.data.split("<pre>")[1].split("</pre>")[0],
+						status: "negative"
+					}
+				}
+				);
+			})
+	}
 
 
     seeFullDetail = (event, { ident }) => {
@@ -147,7 +167,7 @@ export default class Favorite extends Component {
                         </Table>
                         <Grid>
                             <Grid.Column floated='left' width={5}>
-                                <Button color='red' onClick={() => { this.removeOrder() }} >Clear</Button>
+                                <Button color='red' onClick={() => { this.removeFavourite() }} >Clear</Button>
 
                             </Grid.Column>
                             <Grid.Column floated='right' width={3}>

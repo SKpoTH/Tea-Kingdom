@@ -31,6 +31,8 @@ export default class EditUser extends Component {
 
 		this._handleImageChange = this._handleImageChange.bind(this);
 		this._handleSubmit = this._handleSubmit.bind(this);
+
+		this.getData();
 		// axios.defaults.headers.common['Authorization'] = localStorage.getItem("token"); //Importand 
 
 	}
@@ -114,7 +116,7 @@ export default class EditUser extends Component {
 	}
 
 	submitData(state, file, userData) {
-		if (this.CheckEmpty(state) || this.CheckFileEmpty(file)) {
+		if (this.CheckEmpty(state)) {
 			this.emptyData()
 		} else {
 			this.sendData(userData)
@@ -132,8 +134,10 @@ export default class EditUser extends Component {
 		userData.set('lastname', this.state.Lname);
 		userData.set('address', this.state.address);
 		userData.set('phone', this.state.phone);
-		userData.append('profileImage', this.state.file);
-
+		
+		if(!this.CheckFileEmpty(this.state.file)){
+			userData.append('profileImage', this.state.file);
+		}
 
 		console.log(this.state.file);
 
@@ -182,6 +186,22 @@ export default class EditUser extends Component {
 		// }
 	}
 
+	getData = () => {
+		request.get('/api/userData/load', true)
+			.then( res => {
+				this.setState({
+					Fname: res.data.firstname,
+					Lname: res.data.lastname,
+					address: res.data.address,
+					phone: res.data.phone,
+					profileImage: res.data.profileImage
+				})
+			})
+			.catch( err => {
+				console.log(err);
+			})
+	}
+
 	render() {
 		let { imagePreviewUrl } = this.state;
 		let $imagePreview = null;
@@ -192,7 +212,7 @@ export default class EditUser extends Component {
 			$imagePreview = (
 				<center>
 					<UploadImage>
-						<Image src='/imgs/unupload_image.png' size='medium' wrapped />
+						<Image src={this.state.profileImage} size='medium' wrapped />
 					</UploadImage>
 				</center>
 			);
@@ -214,11 +234,11 @@ export default class EditUser extends Component {
 							</form>
 
 							<br />
-							<Form.Input label='First name' placeholder='First name' onChange={(e, data) => this.setState({ Fname: data.value })} />
-							<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => this.setState({ Lname: data.value })} />
+							<Form.Input label='First name' value={this.state.Fname} placeholder='First name' onChange={(e, data) => this.setState({ Fname: data.value })} />
+							<Form.Input label='Last name' value={this.state.Lname} placeholder='Last name' onChange={(e, data) => this.setState({ Lname: data.value })} />
 
-							<Form.Input label='Address' placeholder='Address' onChange={(e, data) => this.setState({ address: data.value })} />
-							<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => this.setState({ phone: data.value })} />
+							<Form.Input label='Address' value={this.state.address} placeholder='Address' onChange={(e, data) => this.setState({ address: data.value })} />
+							<Form.Input label='Phone' value={this.state.phone} placeholder='Phone' onChange={(e, data) => this.setState({ phone: data.value })} />
 							<Button primary type='submit'>Submit</Button>
 						</Container>
 
@@ -242,11 +262,11 @@ export default class EditUser extends Component {
 									</Grid.Column>
 									<Grid.Column width={8}>
 										<br />
-										<Form.Input label='First name' placeholder='First name' onChange={(e, data) => this.setState({ Fname: data.value })} />
-										<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => this.setState({ Lname: data.value })} />
+										<Form.Input label='First name' value={this.state.Fname} placeholder='First name' onChange={(e, data) => this.setState({ Fname: data.value })} />
+										<Form.Input label='Last name' value={this.state.Lname} placeholder='Last name' onChange={(e, data) => this.setState({ Lname: data.value })} />
 
-										<Form.Input label='Address' placeholder='Address' onChange={(e, data) => this.setState({ address: data.value })} />
-										<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => this.setState({ phone: data.value })} />
+										<Form.Input label='Address' value={this.state.address} placeholder='Address' onChange={(e, data) => this.setState({ address: data.value })} />
+										<Form.Input label='Phone' value={this.state.phone} placeholder='Phone' onChange={(e, data) => this.setState({ phone: data.value })} />
 										<Button primary type='submit'>Submit</Button>
 									</Grid.Column>
 
@@ -274,11 +294,11 @@ export default class EditUser extends Component {
 									</Grid.Column>
 									<Grid.Column width={8}>
 										<br />
-										<Form.Input label='First name' placeholder='First name' onChange={(e, data) => this.setState({ Fname: data.value })} />
-										<Form.Input label='Last name' placeholder='Last name' onChange={(e, data) => this.setState({ Lname: data.value })} />
+										<Form.Input label='First name' value={this.state.Fname} placeholder='First name' onChange={(e, data) => this.setState({ Fname: data.value })} />
+										<Form.Input label='Last name' value={this.state.Lname} placeholder='Last name' onChange={(e, data) => this.setState({ Lname: data.value })} />
 
-										<Form.Input label='Address' placeholder='Address' onChange={(e, data) => this.setState({ address: data.value })} />
-										<Form.Input label='Phone' placeholder='Phone' onChange={(e, data) => this.setState({ phone: data.value })} />
+										<Form.Input label='Address' value={this.state.address} placeholder='Address' onChange={(e, data) => this.setState({ address: data.value })} />
+										<Form.Input label='Phone' value={this.state.phone} placeholder='Phone' onChange={(e, data) => this.setState({ phone: data.value })} />
 										<Button primary type='submit'>Submit</Button>
 									</Grid.Column>
 

@@ -96,7 +96,7 @@ module.exports.add = function(req, res){
         })
 }
 
-module.exports.remove = function(req, res){
+module.exports.removeOne = function(req, res){
     // Find logged in user
     User.findOne({
         email: req.user.email
@@ -148,4 +148,43 @@ module.exports.remove = function(req, res){
                 status: "Error "+err+" : You have to Log in first"
             })
         })
+}
+
+module.exports.removeAll = function(req, res){
+    // Find logged in user
+    User.findOne({
+        email: req.user.email
+    })
+    .then( user => {
+        // User exist
+        if(user){
+            // Find in favourite list
+            let i = user.favourite.length;
+
+            // Find until getting object or end of the list
+            while(i--){
+                user.favourite[i].remove();
+            }
+
+            user.save();
+
+            // Response if Success (Found)
+            res.json({
+                status: "Successfully Clear Favourite"
+            })
+
+        // User not exist
+        } else {
+            // Response if not Logged in
+            res.json({
+                status: "The User doesn't exist"
+            })
+        }
+    })
+    .catch( err => {
+        // Response if Error
+        res.json({
+            status: "Error "+err+" : You have to Log in first"
+        })
+    })
 }

@@ -37,17 +37,28 @@ module.exports.edit = function(req, res){
             // User exist
             if(user) {
                 
-                // Make path for the uploaded file
-                var path = req.file.path;
-                var slicePath = path.slice(13)
+                // If update only text data
+                if(req.file === undefined){
+                    user.firstname = req.body.firstname;
+                    user.lastname = req.body.lastname;
+                    user.address = req.body.address;
+                    user.phone = req.body.phone;
 
-                // Update user data
-                user.firstname = req.body.firstname;
-                user.lastname = req.body.lastname;
-                user.address = req.body.address;
-                user.phone = req.body.phone;
-                user.profileImage = slicePath;
-                
+                // If update all data
+                } else {
+                    // Make path for the uploaded file
+                    var path = req.file.path;
+                    var slicePath = path.slice(13)
+
+                    // Update user data
+                    user.firstname = req.body.firstname;
+                    user.lastname = req.body.lastname;
+                    user.address = req.body.address;
+                    user.phone = req.body.phone;
+                    user.profileImage = slicePath;
+                }
+
+                // Save change in database
                 user.save()
                     .then( user => {
                         // Response if Successful Edit
@@ -62,6 +73,7 @@ module.exports.edit = function(req, res){
                             status: "Error "+err+" : Can't edit profile"
                         })
                     })
+
             // User not exist
             } else{
                 // Response if Error
