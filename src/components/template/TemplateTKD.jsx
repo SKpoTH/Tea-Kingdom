@@ -115,7 +115,7 @@ export default class TemplateTKD extends Component {
     );
     const mobileTopMenu = ( 
       <Menu secondary>
-        <Menu.Item className="burgerBar compact">
+        <Menu.Item compact>
           <Button
             icon="bars"
             compact
