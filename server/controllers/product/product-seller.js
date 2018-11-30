@@ -103,6 +103,7 @@ module.exports.add = function(req, res){
 
 module.exports.edit = function(req, res){
     // Find the product that will be edit
+    console.log(req.body.productID)
     Product.findOne({ 
         email: req.user.email,
         _id: req.body.productID 

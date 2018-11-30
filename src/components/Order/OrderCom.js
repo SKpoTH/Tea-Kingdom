@@ -62,7 +62,7 @@ export default class OrderCom extends Component {
 	// Remove a product in order
 	removeItem = (index) => {
 		const sent = {
-			productID: this.state.product[index]._id
+			productID: this.state.product[index].productID
 		}
 
 		console.log(this.state.product[index]._id);

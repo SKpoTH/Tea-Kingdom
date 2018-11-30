@@ -247,10 +247,12 @@ module.exports.removeOne = function(req, res){
             //order.product.id(req.body.productID).remove();
             
             var i = order.product.length;
-        
+
             while(i--){
+                console.log(order.product[i].productID);
                 if(order.product[i].productID == req.body.productID){
                     order.product[i].remove();
+                    console.log("Remove pai leaw !!!!!!");
                 }
             }
 
