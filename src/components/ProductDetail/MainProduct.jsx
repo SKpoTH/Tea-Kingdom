@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Connection from '../pomLib/connection';
 import Token from '../pomLib/token';
 import "./ProductDetail.css";
-import { Container, Header, Segment, Item, Divider, Label, Icon, Input, Button, Grid } from "semantic-ui-react";
+import { Container, Header, Segment, Item, Divider, Label, Icon, Input, Button, Grid, Dimmer } from "semantic-ui-react";
 
 const request = Connection.createClass();
 
@@ -150,9 +150,11 @@ export default class MainProduct extends Component {
         <br />
       </React.Fragment>
     );
+    const oostock = amount > 0 ? null : <Dimmer inverted active><h1 class="frontOutof">Out of stock</h1></Dimmer>;
     return (
       <Container>
         <Segment>
+          {oostock}
           <Grid columns={2} stackable stretched>
             <Grid.Row>
               <Grid.Column textAlign="center">
