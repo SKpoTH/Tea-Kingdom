@@ -128,6 +128,7 @@ export default class Tablet extends Component {
     render() {
         let prePrice = 0, Shipment = 40;
         return (
+            <Form onSubmit={this.onSubmit} >
             <Grid>
                 <Grid.Column width={10}>
                     <Segment.Group color='white' >
@@ -190,6 +191,7 @@ export default class Tablet extends Component {
                 </Grid.Column>
 
             </Grid>
+            </Form>
         )
     }
 }

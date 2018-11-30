@@ -46,14 +46,18 @@ module.exports.confirm = function(req, res){
                 order.status = 'Paid';
                 
                 order.save();
+
+
                 // Create the Tracking 
                 let track = new Tracking({
-                    email: user_email,
+                    email: req.user.email,
                     orderID: order._id,
                     location: req.user.address,
                     date: Date.now(),
                     status: 'Get Order from Customer'
                 })
+
+                console.log(track);
 
                 track.save();
                 // Response If Success

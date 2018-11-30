@@ -134,6 +134,7 @@ export default class Mobile extends Component {
         let prePrice = 0, Shipment = 40;
         return (
             <div>
+                <Form onSubmit={this.onSubmit} >
                 <Marg>
                     <Segment.Group color='white' >
 
@@ -195,6 +196,7 @@ export default class Mobile extends Component {
 
                     </Segment.Group>
                 </Marg>
+                </Form>
             </div>
         )
     }

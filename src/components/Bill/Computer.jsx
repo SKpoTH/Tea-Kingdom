@@ -129,6 +129,7 @@ export default class Computer extends Component {
         let prePrice = 0, Shipment = 40;
         return (
             <div>
+                <Form onSubmit={this.onSubmit} >
                 <Grid>
                     <Grid.Column width={10}>
                         <Segment.Group color='white' >
@@ -189,6 +190,7 @@ export default class Computer extends Component {
 
                     </Grid.Column>
                 </Grid>
+                </Form>
             </div>
         )
     }

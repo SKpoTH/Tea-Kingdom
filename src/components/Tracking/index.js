@@ -25,7 +25,7 @@ class Content extends Component {
     // console.log("DATA FORM GET0 >> ",tmp_Track)
     // console.log("DATA FORM GET1 >> ",tmp_Addr)
     this.setState({
-      status : tmp_Track.status,
+      status : tmp_Track.data.status,
       date : tmp_Track.data.date,
       addr : tmp_Addr.data.address
     })
