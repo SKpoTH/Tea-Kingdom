@@ -1,8 +1,13 @@
 .max-lines {
-    display: block; /* or inline-block */
-    text-overflow: ellipsis;
+    display: block;
+    text-overflow: ellipsis !important;
+    white-space: normal;
     word-wrap: break-word;
     overflow: hidden;
-    max-height: 3.6em;
+    height: 5.4em;
     line-height: 1.8em;
+}
+.buttoMM {
+    padding: 14px 17px 14px 17px;
+    border-top: 1px solid rgba(34, 36, 38, 0.1)
 }
