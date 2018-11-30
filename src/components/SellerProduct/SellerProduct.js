@@ -82,6 +82,7 @@ class MySellerProduct extends Component {
 
     render() {
         let count = 1;
+        // delete
         return (
             <React.Fragment>
                 <Segment basic>
