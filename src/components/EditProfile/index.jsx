@@ -114,7 +114,7 @@ export default class EditUser extends Component {
 	}
 
 	submitData(state, file, userData) {
-		if (this.CheckEmpty(state) && this.CheckFileEmpty(file)) {
+		if (this.CheckEmpty(state) || this.CheckFileEmpty(file)) {
 			this.emptyData()
 		} else {
 			this.sendData(userData)
