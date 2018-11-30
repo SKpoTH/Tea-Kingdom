@@ -5,7 +5,8 @@ import { Container } from 'semantic-ui-react'
 import { getData } from "../API/get"
 import Track from "./Tracking"
 
-const url_get = '/api/tracking/consumer/load'
+const url_get = '/api/tracking/load'
+const url_get_addr = '/api/userData/load'
 
 class Content extends Component {
   constructor(props) {
@@ -19,11 +20,14 @@ class Content extends Component {
     this.handleGET();
   }
   async handleGET(){
-    const tmp = await getData(url_get)
-    console.log("DATA FORM GET >> ",tmp)
+    const tmp_Track = await getData(url_get)
+    const tmp_Addr = await getData(url_get_addr)
+    // console.log("DATA FORM GET0 >> ",tmp_Track)
+    // console.log("DATA FORM GET1 >> ",tmp_Addr)
     this.setState({
-      status : tmp.status,
-      date : tmp.data.date
+      status : tmp_Track.status,
+      date : tmp_Track.data.date,
+      addr : tmp_Addr.data.address
     })
     console.log("THIS.STATE > ",this.state)
   }
@@ -31,7 +35,7 @@ class Content extends Component {
   render() {
     return (
       <Container textAlign='center'>
-        {/* อาจจะพัง ยังไม่ได้ลอง เพราะเปลี่ยน folder server */}
+      
         <Track DataRender={this.state}/>
 
       </Container>
