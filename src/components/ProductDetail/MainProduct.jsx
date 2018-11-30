@@ -49,7 +49,7 @@ export default class MainProduct extends Component {
     request.post('/api/favourite/add', { productID: ident }, true)
       .then(res => {
         this.props.setMessage({
-          content: res,
+          content: res.status,
           hidden: false,
           className: 'success'
         });
@@ -101,12 +101,12 @@ export default class MainProduct extends Component {
   }
 
   render() {
-    const { productImage, name, discount, discountPrice, price, score, description, brand, amount, id } = this.props.dataR;
+    const { productImage, name, discount, discountPrice, price, score, description, brand, amount, _id } = this.props.dataR;
     const pictureFragment = <Item.Image size="large" src={productImage} />;
     const twoButtonFragment = (
       <React.Fragment>
-        <Button color="blue" content="add to cart" ident={id} icon="cart" onClick={this.send} />
-        <Button color="red" icon="heart" iden={id} onClick={this.addFev} />
+        <Button color="blue" content="add to cart" ident={_id} icon="cart" onClick={this.send} />
+        <Button color="red" icon="heart" ident={_id} onClick={this.addFev} />
       </React.Fragment>
     );
     const headFragment = (
