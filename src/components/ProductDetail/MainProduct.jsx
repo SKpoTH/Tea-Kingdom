@@ -81,13 +81,13 @@ export default class MainProduct extends Component {
       productID: ident,
       amount: this.state.value
     }
-    console.log(myOrder)
+    // console.log(myOrder)
     request.post('/api/order/add', myOrder, true)
       .then(() => {
         window.location = "/order";
       })
       .catch(err => {
-        console.log(err)
+        // console.log(err)
         if (Token.isLogin)
           this.props.setMessage({
             content: err,
