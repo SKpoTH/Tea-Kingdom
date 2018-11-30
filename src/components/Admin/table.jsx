@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Connection from '../pomLib/connection';
 import 'semantic-ui-css/semantic.css';
 import "./style.css";
-import { Loading, Padding } from '../template/TKDcomponent';
+import { Loading } from '../template/TKDcomponent';
 import {
   Table,
   Button,
