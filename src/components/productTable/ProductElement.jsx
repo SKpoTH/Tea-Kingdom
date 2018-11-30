@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Card, Image, Button, Message } from "semantic-ui-react";
 import { Padding } from "../template/TKDcomponent";
+import LinesEllipsis from 'react-lines-ellipsis'
 import Connection from '../pomLib/connection';
 import Token from '../pomLib/token';
 import "semantic-ui-css/semantic.css";
@@ -56,7 +57,14 @@ class ProductElement extends Component {
     );
     const content = (
       <Card.Content>
-        <Card.Description className="max-lines">{des}</Card.Description>
+        <Card.Description>
+          <LinesEllipsis
+            text={des}
+            maxLine='3'
+            ellipsis='...'
+            trimRight
+          />
+        </Card.Description>
         <Card.Description>
           <h3 className="inlineE">฿{discount ?  discountPrice : price}</h3>
           &nbsp;&nbsp;&nbsp;
@@ -65,12 +73,10 @@ class ProductElement extends Component {
       </Card.Content>
     );
     const twoButton = (
-      <Card.Content>
-        <div className="ui two buttons">
-          <Button color="red" content="favorite" icon="heart" ident={id} onClick={this.addFev} />
-          <Button color="blue" content="see details" icon="eye" ident={id} onClick={this.seeFullDetail} />
-        </div>
-      </Card.Content>
+      <div className="ui two buttons buttoMM">
+        <Button color="red" content="favorite" icon="heart" ident={id} onClick={this.addFev} />
+        <Button color="blue" content="see details" icon="eye" ident={id} onClick={this.seeFullDetail} />
+      </div>
     );
     return (
       <Card color="red">
