@@ -48,10 +48,6 @@ app.get('*', (req,res) =>{
 //for deploy only end
 
 
-if (process.env.NODE_ENV !== 'test') {
-    app.listen(PORT, () => {
-        console.log('Server is running on Port: ', PORT);
-    });
-}
-
-module.exports = app;
+app.listen(PORT, () => {
+    console.log('Server is running on Port: ', PORT);
+});

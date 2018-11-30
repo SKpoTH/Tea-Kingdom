@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Import Controllers
-const productAll = require('../../controllers/product/product-all')
+const productAll = require('../../controller/product/product-all')
 
 // Path: '/api/product/load/one'    | Load a product Data
 router.post('/load/one', productAll.loadOne)

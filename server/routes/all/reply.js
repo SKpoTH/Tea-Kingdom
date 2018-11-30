@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 
 // Import Controllers
-const reply = require('../../controllers/reply/reply');
+const reply = require('../../controller/reply/reply');
 
 // Path: '/api/reply/new'   | Post New Comment
 router.post('/new', passport.authenticate('jwt', { session: false }), reply.new)

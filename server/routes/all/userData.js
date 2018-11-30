@@ -30,7 +30,7 @@ const upload = multer({storage: storage, limits: {
 //=======================================================================
 
 // Import Controllers
-const userData = require('../../controllers/userData/userData-all');
+const userData = require('../../controller/userData/userData-all');
 
 // Path: '/api/userData/load'   | Load Data
 router.get('/load', passport.authenticate('jwt', { session: false}), userData.load)
