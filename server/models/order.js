@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-//order Schema
+//order Schemas
 const OrderSchema = new Schema({
     email:         { type: String, require: true},
     product:[{ 

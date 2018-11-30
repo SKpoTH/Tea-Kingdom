@@ -10,14 +10,17 @@
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "debug": "^4.0.1",
+    "dupertest": "^1.0.2",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "git": "^0.1.5",
+    "jest": "^23.6.0",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.3.1",
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
+    "node-mocks-http": "^1.7.3",
     "nodemon": "^1.18.6",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
@@ -30,12 +33,15 @@
     "react-sticky-header": "^0.2.0",
     "semantic-ui-css": "^2.4.0",
     "semantic-ui-react": "^0.82.5",
-    "styled-components": "^3.4.9"
+    "styled-components": "^3.4.9",
+    "superagent": "^4.0.0",
+    "supertest": "^3.3.0",
+    "test-controller": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "vows --spec",
+    "test": "SET NODE_ENV=test | jest --forceExit",
     "deploy": "sh deploy.sh",
     "eject": "react-scripts eject"
   },
@@ -52,5 +58,6 @@
       "target": "http://localhost:5000",
       "ws": true
     }
-  }
+  },
+  "devDependencies": {}
 }

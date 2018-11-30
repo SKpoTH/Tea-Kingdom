@@ -30,7 +30,7 @@ const upload = multer({storage: storage, limits: {
 //=======================================================================
 
 
-const productSeller = require('../../controller/product/product-seller');
+const productSeller = require('../../controllers/product/product-seller');
 
 // Path: '/api/seller/product/load/all' | Load product whose are seller
 router.get('/load/all', passport.authenticate('jwt', { session: false}), productSeller.loadAll)

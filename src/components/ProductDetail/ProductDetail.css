@@ -72,3 +72,7 @@
 .margin7 {
     margin: 7px 0 7px 0 !important;
 }
+
+.frontOutof {
+    color: rgba(0, 0, 0, 0.65) !important;
+}

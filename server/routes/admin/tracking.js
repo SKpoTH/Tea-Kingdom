@@ -4,7 +4,7 @@ const router = express.Router();
 const passport = require('passport')
 
 // Import Controller
-const trackingAdmin = require('../../controller/tracking/tracking-admin');
+const trackingAdmin = require('../../controllers/tracking/tracking-admin');
 
 // Path: '/api/admin/tracking/load'     | Load Data 
 router.get('/load', passport.authenticate('jwt', { session: false }), trackingAdmin.load)

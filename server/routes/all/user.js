@@ -3,9 +3,9 @@ const router = express.Router();
 const passport = require('passport');
 
 // Import Controller
-const signup = require('../../controller/signup/signup');
-const login = require('../../controller/login/login');
-const authen = require('../../controller/authen/authen');
+const signup = require('../../controllers/signup/signup');
+const login = require('../../controllers/login/login');
+const authen = require('../../controllers/authen/authen');
 
 // Path: '/api/signup'      | Sign Up new Account
 router.post('/signup', signup)

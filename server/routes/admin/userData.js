@@ -4,7 +4,7 @@ const router = express.Router();
 const passport = require('passport');
 
 // Import Controller
-const userDataAdmin = require('../../controller/userData/userData-admin');
+const userDataAdmin = require('../../controllers/userData/userData-admin');
 
 // Path: '/api/admin/userData/load/all' | Load All user
 router.get('/load/all', passport.authenticate('jwt', { session: false }), userDataAdmin.loadAll)
