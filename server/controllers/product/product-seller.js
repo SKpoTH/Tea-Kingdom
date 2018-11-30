@@ -102,6 +102,7 @@ module.exports.add = function(req, res){
 
 
 module.exports.edit = function(req, res){
+    console.log(req.body)
     // Find the product that will be edit
     console.log(req.body.productID)
     Product.findOne({ 
@@ -111,9 +112,6 @@ module.exports.edit = function(req, res){
         .then(product => {
             // Product Exist
             if(product){
-                // This is the tacnical edit the path to save the file in the public location
-                let path = req.file.path;
-                let slicePath = path.slice(13);
 
                 //edit and save to database
                 product.name = req.body.name;
@@ -128,8 +126,7 @@ module.exports.edit = function(req, res){
                 product.description = req.body.description;
                 product.process = req.body.process;
                 product.amount = req.body.amount;
-                product.pending = false;
-                product.productImage = slicePath;
+                product.pending = false; 
 
                 product.save()
                     .then( product => {
