@@ -20,7 +20,7 @@ export default class FooterTKD extends Component {
             <Grid.Column>
               <Header as='h4'>Customer Service</Header>
               <List link>
-                <List.Item as='a'>Help</List.Item>
+                <List.Item as='a' onClick={() => { window.location = '/help' }}>Help</List.Item>
                 <List.Item as='a' onClick={() => { window.location = '/AboutUs' }}>About Us</List.Item>
                 <List.Item as='a' onClick={() => { window.location = '/policy' }}>General Policies</List.Item>
               </List>
