@@ -3,7 +3,6 @@ import TKD from '../template/TemplateTKD';
 import 'semantic-ui-css/semantic.css';
 import { Form, Responsive, } from 'semantic-ui-react';
 
-import Connection from '../pomLib/connection';
 import Computer from './Computer'
 import Mobile from './Mobile'
 import Tablet from './Tablet'
