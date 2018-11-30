@@ -8,7 +8,7 @@ module.exports.load = function(req, res){
         status: 'Ordering' 
     })
         .then( orders => {
-            // Order exist
+            // Order exists
             if(orders){
                 // Response if Success
                 res.json({
