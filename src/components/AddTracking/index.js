@@ -21,15 +21,15 @@ export default class AddTracking extends Component {
     async handleGET(){
         const tmp = await getData(url_get)
         this.setState({
-          mymessage : tmp.data.data
+          mymessage : tmp.data
         })
+        console.log("index this.state : ",this.state)
     }
 
     render() {
         return (
             <TemplateTKD>
                 <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status} />
-                
                 <AddTrack DataRender={this.state}/>
                 
                 <Divider hidden />

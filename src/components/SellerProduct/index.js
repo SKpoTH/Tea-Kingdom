@@ -5,7 +5,7 @@ import TemplateTKD from "../template/TemplateTKD";
 import SellerProduct from "./SellerProduct";
 import { getData } from "../API/get";
 
-const url_get = '/api/product/seller/load/all'
+const url_get = '/api/seller/product/load/all'
 
 export default class Seller extends Component {
 	constructor(props){

@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.css';
 import { Image, Button, Card, Container, Header, Grid } from 'semantic-ui-react'
-import axios from 'axios';
+// import axios from 'axios';
 // import MyRender from './Render';
-import './style.css';
+// import './style.css';
+
+import Connection from '../pomLib/connection';
+
+const request = Connection.createClass();
 
 export default class OrderCom extends Component {
   constructor(props) {
@@ -38,10 +42,10 @@ export default class OrderCom extends Component {
     const sent = {
       product: this.state.product
     }
-
-    axios.post('/api/order/update', sent, { headers: { Authorization: localStorage.getItem("token") } })
+    request.post('/api/order/update', sent, true)
+      // axios.post('/api/order/update', sent, { headers: { Authorization: localStorage.getItem("token") } })
       .then((res) => {
-        console.log(res.data.status);
+        console.log(res.status);
         this.getData();
       })
       .catch((error) => {
@@ -65,10 +69,10 @@ export default class OrderCom extends Component {
     }
 
     console.log(this.state.product[index]._id);
-
-    axios.post('/api/order/remove/one', sent, { headers: { Authorization: localStorage.getItem("token") } })
+    request.post('/api/order/remove/one', sent, true)
+      // axios.post('/api/order/remove/one', sent, { headers: { Authorization: localStorage.getItem("token") } })
       .then((res) => {
-        console.log(res.data.status);
+        console.log(res.status);
         this.getData();
       })
       .catch((error) => {
@@ -86,9 +90,10 @@ export default class OrderCom extends Component {
   }
 
   removeOrder = () => {
-    axios.get('/api/order/remove/all', { headers: { Authorization: localStorage.getItem("token") } })
+    request.get('/api/order/remove/all', true)
+      // axios.get('/api/order/remove/all', { headers: { Authorization: localStorage.getItem("token") } })
       .then((res) => {
-        console.log(res.data.status);
+        console.log(res.status);
         this.getData();
       })
       .catch((error) => {
@@ -107,7 +112,8 @@ export default class OrderCom extends Component {
 
   // Get loaded Data from back-end
   getData = () => {
-    axios.get('/api/order/load', { headers: { Authorization: localStorage.getItem("token") } })
+    request.get('/api/order/load', true)
+      // axios.get('/api/order/load', { headers: { Authorization: localStorage.getItem("token") } })
       .then((res) => {
         this.setState({
           product: res.data.product
@@ -144,7 +150,7 @@ export default class OrderCom extends Component {
               <Card.Content>
                 <Card.Header><center>{item.name}</center></Card.Header>
                 <br />
-                <Image size='small' src={item.productImage} style={{ margin: '0px 0px 5% 20%' }} />
+                <center><Image src={item.productImage} size='medium' /></center>
                 <br />
 
                 <Card.Meta><center>{item.brand}</center></Card.Meta>

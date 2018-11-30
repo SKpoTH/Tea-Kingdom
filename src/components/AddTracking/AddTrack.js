@@ -61,7 +61,7 @@ export default class AddTrack extends Component {
         return (
             <React.Fragment>
                 <h1>Tracking by Admin</h1>
-                {console.log(this.props.DataRender)}
+                {console.log("AddTrack DataRender > ",this.props.DataRender)}
                 {this.props.DataRender.mymessage.map((order) => (
                     <MyTrack email  = {order.email}
                              status = {order.status}

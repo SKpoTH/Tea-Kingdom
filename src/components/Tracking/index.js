@@ -5,7 +5,7 @@ import { Container } from 'semantic-ui-react'
 import { getData } from "../API/get"
 import Track from "./Tracking"
 
-const url = '/api/tracking/consumer/load'
+const url_get = '/api/tracking/consumer/load'
 
 class Content extends Component {
   constructor(props) {
@@ -19,11 +19,13 @@ class Content extends Component {
     this.handleGET();
   }
   async handleGET(){
-    const tmp = await getData(url)
+    const tmp = await getData(url_get)
+    console.log("DATA FORM GET >> ",tmp)
     this.setState({
-      status : tmp.data.data.status,
-      date : tmp.data.data.date
+      status : tmp.status,
+      date : tmp.data.date
     })
+    console.log("THIS.STATE > ",this.state)
   }
 
   render() {
