@@ -23,13 +23,13 @@ export default class AddTracking extends Component {
         this.setState({
           mymessage : tmp.data
         })
+        console.log("index this.state : ",this.state)
     }
 
     render() {
         return (
             <TemplateTKD>
                 <Message content={this.state.message.content} hidden={this.state.message.massageHidden} className={this.state.message.status} />
-                
                 <AddTrack DataRender={this.state}/>
                 
                 <Divider hidden />

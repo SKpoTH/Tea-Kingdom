@@ -16,6 +16,10 @@
     ],
     "Right": [
       {
+        "show": "Add Track",
+        "url": "/addtracking"
+      },
+      {
         "show": "ProductQualify",
         "url": "/itemqualify"
       },
@@ -48,6 +52,10 @@
       {
         "show": "Product",
         "url": "/product"
+      },
+      {
+        "show": "Add Track",
+        "url": "/addtracking"
       },
       {
         "show": "ProductQualify",
@@ -80,10 +88,6 @@
     ],
     "Right": [
       {
-        "show": "Track",
-        "url": "/under"
-      },
-      {
         "show": "AddProduct",
         "url": "/addproduct"
       },
@@ -112,10 +116,6 @@
       {
         "show": "Product",
         "url": "/product"
-      },
-      {
-        "show": "Track",
-        "url": "/under"
       },
       {
         "show": "AddProduct",

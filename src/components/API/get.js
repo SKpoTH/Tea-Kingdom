@@ -9,11 +9,11 @@ export async function getData(url){
         .then((res) => {
             newproduct.data = res.data.data,
             newproduct.status = res.data.status
-            // console.log("RES >> ",res)
+            console.log("API GET RES >> ",res)
         })
         .catch((error) => {
             console.log(error)
         })
-    // console.log("GET PRODUCT >> ",newproduct)
+    console.log("API GET PRODUCT >> ",newproduct)
     return  newproduct
 }
