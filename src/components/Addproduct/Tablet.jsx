@@ -128,7 +128,7 @@ export default class Tablet extends Component {
         // 	config: { headers: { 'Content-Type': 'multipart/form-data' } }
         // })
 
-        request.postPicture('/api/product/seller/add', bodyFormData)
+        request.postPicture('/api/seller/product/add', bodyFormData)
             .then((res) => {
                 if (res.status === "no company name") {
                     this.setState({
