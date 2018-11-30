@@ -3,6 +3,7 @@ import Connection from '../pomLib/connection';
 import token from '../pomLib/token';
 import FooterTKD from './FooterTKD';
 import 'semantic-ui-css/semantic.css';
+import './style.css'
 import * as menu from './menu.json';
 import {
   Menu,
@@ -114,15 +115,15 @@ export default class TemplateTKD extends Component {
     );
     const mobileTopMenu = ( 
       <Menu secondary>
-        <Menu.Item compact>
+        <Menu.Item className="burgerBar compact">
           <Button
             icon="bars"
             compact
             onClick={this.handleButtonClick}
           />
         </Menu.Item>
-        <Menu.Item>
-          <Image src={icon} className="small" alt="" />
+        <Menu.Item className="logoMiddle">
+          <Image src={icon} className="small imgG" alt="" />
         </Menu.Item>
       </Menu>     
     );
@@ -185,10 +186,10 @@ export default class TemplateTKD extends Component {
           {moblieSliderMenu}
           <Sidebar.Pusher dimmed={visible}>
             {/* totalMenu */}
-            <Responsive {...Responsive.onlyMobile}>
+            <Responsive maxWidth={Responsive.onlyTablet.maxWidth}>
               {mobileTopMenu}
             </Responsive>
-            <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+            <Responsive minWidth={Responsive.onlyComputer.minWidth}>
               {desktopTopMenu}
             </Responsive>
             {/* totalMenu */}

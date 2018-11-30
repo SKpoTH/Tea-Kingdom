@@ -1,0 +1,10 @@
+.logoMiddle{
+    flex-grow: 1 !important;
+}
+.imgG {
+    display: inline-block;
+    margin: auto;
+}
+.burgerBar {
+    position: absolute !important;
+}
