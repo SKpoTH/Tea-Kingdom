@@ -41,7 +41,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "SET NODE_ENV=test | jest",
+    "test": "SET NODE_ENV=test | jest --forceExit",
     "deploy": "sh deploy.sh",
     "eject": "react-scripts eject"
   },
