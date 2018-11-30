@@ -5,7 +5,7 @@ import TemplateTKD from "../template/TemplateTKD";
 import { getData } from "../API/get"
 import AddTrack from "./AddTrack"
 
-const url_get = '/api/tracking/admin/load'
+const url_get = '/api/admin/tracking/load'
 
 export default class AddTracking extends Component {
     constructor(props) {
