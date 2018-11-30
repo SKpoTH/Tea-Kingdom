@@ -41,9 +41,10 @@ module.exports.load = function(req, res){
         { $unwind: { path :"$reply", preserveNullAndEmptyArrays : true } },
         { $lookup: { from: "users", localField: "reply.email", foreignField: "email", as: "user" } },
         { $addFields: { reply : { prof : { $arrayElemAt: [ "$user", 0 ] } }}},
-        { $group : { _id : { uniqueIID : "$uniqueIID", productID : "$productID", email : "$email", text : "$text" }, reply : { $push: "$reply"} } },
+        { $group : { _id : { uniqueIID : "$uniqueIID", productID : "$productID", email : "$email", text : "$text" , created_at: "$created_at" }, reply : { $push: "$reply"} } },
         { $lookup: { from: "users", localField: "_id.email", foreignField: "email", as: "user" } },
-        { $project : { _id : "$_id.uniqueIID", productID : "$_id.productID", text: "$_id.text", user : { $arrayElemAt: [ "$user", 0 ] }, reply : "$reply" } }
+        { $project : { _id : "$_id.uniqueIID", productID : "$_id.productID", text: "$_id.text", created_at: "$_id.created_at", user : { $arrayElemAt: [ "$user", 0 ] }, reply : "$reply" } },
+        { $sort: { created_at: 1 }}
     ])
         .then(s => {
             // console.log(s)

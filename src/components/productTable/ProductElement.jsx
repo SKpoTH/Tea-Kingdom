@@ -18,7 +18,7 @@ class ProductElement extends Component {
     request.post('/api/favourite/add', { productID : ident }, true)
     .then(res => {
       this.props.setMessage({
-        content: res,
+        content: res.status,
         hidden: false,
         className: 'success'
       });

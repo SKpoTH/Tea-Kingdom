@@ -1,0 +1,286 @@
+{
+  "Admin": {
+    "Left": [
+      {
+        "show": "Home",
+        "url": "/"
+      },
+      {
+        "show": "About US",
+        "url": "/AboutUs"
+      },
+      {
+        "show": "Product",
+        "url": "/product"
+      }
+    ],
+    "Right": [
+      {
+        "show": "Add Track",
+        "url": "/addtracking"
+      },
+      {
+        "show": "ProductQualify",
+        "url": "/itemqualify"
+      },
+      {
+        "show": "promote",
+        "url": "/admin"
+      },
+      {
+        "show": "PERSON",
+        "url": "/user"
+      },
+      {
+        "show": "Logout",
+        "url": "NON_USE"
+      }
+    ],
+    "Mobile": [
+      {
+        "show": "PERSON",
+        "url": "/user"
+      },
+      {
+        "show": "Home",
+        "url": "/"
+      },
+      {
+        "show": "About US",
+        "url": "/AboutUs"
+      },
+      {
+        "show": "Product",
+        "url": "/product"
+      },
+      {
+        "show": "Add Track",
+        "url": "/addtracking"
+      },
+      {
+        "show": "ProductQualify",
+        "url": "/itemqualify"
+      },
+      {
+        "show": "promote",
+        "url": "/admin"
+      },
+      {
+        "show": "Logout",
+        "url": "NON_USE"
+      }
+    ]
+  },
+  "Seller": {
+    "Left": [
+      {
+        "show": "Home",
+        "url": "/"
+      },
+      {
+        "show": "About US",
+        "url": "/AboutUs"
+      },
+      {
+        "show": "Product",
+        "url": "/product"
+      }
+    ],
+    "Right": [
+      {
+        "show": "AddProduct",
+        "url": "/addproduct"
+      },
+      {
+        "show": "PERSON",
+        "url": "/seller"
+      },
+      {
+        "show": "Logout",
+        "url": "NON_USE"
+      }
+    ],
+    "Mobile": [
+      {
+        "show": "PERSON",
+        "url": "/seller"
+      },
+      {
+        "show": "Home",
+        "url": "/"
+      },
+      {
+        "show": "About US",
+        "url": "/AboutUs"
+      },
+      {
+        "show": "Product",
+        "url": "/product"
+      },
+      {
+        "show": "AddProduct",
+        "url": "/addproduct"
+      },
+      {
+        "show": "Logout",
+        "url": "NON_USE"
+      }
+    ]
+  },
+  "Consumer": {
+    "Left": [
+      {
+        "show": "Home",
+        "url": "/"
+      },
+      {
+        "show": "About US",
+        "url": "/AboutUs"
+      },
+      {
+        "show": "Product",
+        "url": "/product"
+      }
+    ],
+    "Right": [
+      {
+        "show": "Track",
+        "url": "/track"
+      },
+      {
+        "show": "favorite",
+        "url": "/favorite"
+      },
+      {
+        "show": "Cart",
+        "url": "/order"
+      },
+      {
+        "show": "PERSON",
+        "url": "/user"
+      },
+      {
+        "show": "Logout",
+        "url": "NON_USE"
+      }
+    ],
+    "Mobile": [
+      {
+        "show": "PERSON",
+        "url": "/user"
+      },
+      {
+        "show": "Home",
+        "url": "/"
+      },
+      {
+        "show": "About US",
+        "url": "/AboutUs"
+      },
+      {
+        "show": "Product",
+        "url": "/product"
+      },
+      {
+        "show": "favorite",
+        "url": "/favorite"
+      },
+      {
+        "show": "Cart",
+        "url": "/order"
+      },
+      {
+        "show": "Track",
+        "url": "/track"
+      },
+      {
+        "show": "Logout",
+        "url": "NON_USE"
+      }
+    ]
+  },
+  "Normal": {
+    "Left": [
+      {
+        "show": "Home",
+        "url": "/"
+      },
+      {
+        "show": "About US",
+        "url": "/AboutUs"
+      },
+      {
+        "show": "Product",
+        "url": "/product"
+      }
+    ],
+    "Right": [
+      {
+        "show": "Register",
+        "url": "/register"
+      },
+      {
+        "show": "Login",
+        "url": "/login"
+      }
+    ],
+    "Mobile": [
+      {
+        "show": "Home",
+        "url": "/"
+      },
+      {
+        "show": "About US",
+        "url": "/AboutUs"
+      },
+      {
+        "show": "Product",
+        "url": "/product"
+      },
+      {
+        "show": "Register",
+        "url": "/register"
+      },
+      {
+        "show": "Login",
+        "url": "/login"
+      }
+    ]
+  },
+  "Loading": {
+    "Left": [
+      {
+        "show": "Home",
+        "url": "/"
+      },
+      {
+        "show": "About US",
+        "url": "/AboutUs"
+      },
+      {
+        "show": "Product",
+        "url": "/product"
+      }
+    ],
+    "Right": [
+      {
+        "show": "Loading",
+        "url": "NON_USE"
+      }
+    ],
+    "Mobile": [
+      {
+        "show": "Home",
+        "url": "/"
+      },
+      {
+        "show": "About US",
+        "url": "/AboutUs"
+      },
+      {
+        "show": "Product",
+        "url": "/product"
+      }
+    ]
+  }
+}

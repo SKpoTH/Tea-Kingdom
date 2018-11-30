@@ -11,7 +11,7 @@ const telluser = [
     { key: '4', text: 'Done', value: 'Done' }
 ]
 
-const url_post = '/api/tracking/admin/update'
+const url_post = '/api/admin/tracking/update'
 
 class MyTrack extends Component {
     async update (e,data){
