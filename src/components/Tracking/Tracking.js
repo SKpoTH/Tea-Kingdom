@@ -51,7 +51,7 @@ export default class Track extends Component {
                             <Icon name='map marker alternate' /><b>Address</b>
                         </Grid.Column>
                         <Grid.Column width={11} textAlign='left'>
-                            50 Ngam Wong Wan Rd. Ladyao Chatuchak Bangkok 10900
+                            {this.props.DataRender.addr}
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
