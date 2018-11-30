@@ -4,7 +4,7 @@ const router = express.Router();
 const passport = require('passport');
 
 // Import Controller
-const productAdmin = require('../../controller/product/product-admin')
+const productAdmin = require('../../controllers/product/product-admin')
 
 // Path: '/api/admin/product/load/all'  | Load all products for addmin
 router.get('/load/all', passport.authenticate('jwt', { session: false } ), productAdmin.loadAll) 

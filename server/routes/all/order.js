@@ -4,7 +4,7 @@ const router = express.Router();
 const passport = require('passport');
 
 // Import Controller
-const order = require('../../controller/order/order')
+const order = require('../../controllers/order/order')
 
 // Path: '/api/order/load'      | Load Data
 router.get('/load', passport.authenticate('jwt', { session: false}), order.load)
