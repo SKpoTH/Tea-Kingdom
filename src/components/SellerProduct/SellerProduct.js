@@ -23,6 +23,7 @@ class MySellerProduct extends Component {
     constructor(props){
         super(props)
         this.state = {
+            productID: '',
             name: '',
 			company: '',
 			brand: '',
@@ -38,6 +39,7 @@ class MySellerProduct extends Component {
         // this.handleChange = this.handleChange.bind();
     }
     handleSet = (item) => {
+        this.state.productID = item._id
         this.setState({
             name: item.name,
 			company: item.company,
@@ -59,8 +61,8 @@ class MySellerProduct extends Component {
     }
 
     async onSubmit(item) {
-        let update = []
-        update.push({
+        let update = {
+            productID : this.state.productID,
             name: item.name,
 			company: item.company,
 			brand: item.brand,
@@ -72,7 +74,7 @@ class MySellerProduct extends Component {
 			discountPrice: item.discountPrice,
 			weight: item.weight,
 			description: item.description
-        })
+        }
         console.log("THIS IS DATA UPDATE >> ",update)
         const returnPost = await postData(url_post,update)
         console.log("RETURN POST : ",returnPost)
