@@ -43,12 +43,12 @@ describe('POST /api/userData/edit', () => {
     it('Should response data successfully edit', (done) => {
         request
             .post('/api/userData/edit')
-            .set('Authorization', auth.token)
             .field('firstname', 'Kunsuk')
             .field('lastname', 'Siwakun')
             .field('address', '29/154')
             .field('phone', '0877172990')
             .attach('profileImage', 'server/test/testImage/user_profile.jpg')
+            .set('Authorization', auth.token)
             .then( res => {
                 expect(res.statusCode).toBe(200);
                 expect(res.type).toBe('application/json');
