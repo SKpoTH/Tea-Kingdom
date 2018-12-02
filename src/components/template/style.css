@@ -3,8 +3,5 @@
 }
 .imgG {
     display: inline-block;
-    margin: auto;
-}
-.burgerBar {
-    position: absolute !important;
+    left: calc(50% - 110px);
 }
