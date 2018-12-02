@@ -150,7 +150,7 @@ export default class MainProduct extends Component {
         <br />
       </React.Fragment>
     );
-    const oostock = amount < 0 ? <Dimmer inverted active><h1 class="frontOutof">Out of stock</h1></Dimmer> : null;
+    const oostock = amount <= 0 ? <Dimmer inverted active><h1 class="frontOutof">Out of stock</h1></Dimmer> : null;
     return (
       <Container>
         <Segment>
