@@ -22,7 +22,7 @@ export default class Track extends Component {
                         </Grid.Column>
                         </Grid.Row>
                     </Grid>
-
+ 
                     <Segment celled textAlign='left' inverted color='olive'>
                         <Icon name='truck' /><b>Tracking Information</b>
                         <Table celled>
@@ -33,15 +33,19 @@ export default class Track extends Component {
                             </Table.Row>
                         </Table.Header>
 
+                        {this.props.DataRender.tracking.map( item =>
                         <Table.Body>
                             <Table.Row>
-                            <Table.Cell>{this.props.DataRender.date}</Table.Cell>
-                            <Table.Cell>{this.props.DataRender.status}</Table.Cell>
+                            <Table.Cell>{item.date}</Table.Cell>
+                            <Table.Cell>{item.status}</Table.Cell>
                             </Table.Row>
 
                         </Table.Body>
+                         )}
+
                         </Table>
                     </Segment>
+
                 </Responsive>
             
                 <Responsive maxWidth={767}>
@@ -55,16 +59,18 @@ export default class Track extends Component {
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
+
                     <Segment textAlign='left'>
                         <Icon name='truck' /><b>Tracking Information</b>
                         <Segment color='teal'>
+                        {this.props.DataRender.tracking.map( item => 
                             <Grid padded>
                             <Grid.Row>
                                 <Grid.Column width={6} textAlign='left'>
                                 <b>Date</b>
                                 </Grid.Column>
                                 <Grid.Column>
-                                {this.props.DataRender.date}
+                                {item.date}
                                 </Grid.Column>
                             </Grid.Row>
                             <Grid.Row>
@@ -72,10 +78,11 @@ export default class Track extends Component {
                                 <b>Status</b>
                                 </Grid.Column>
                                 <Grid.Column>
-                                {this.props.DataRender.status}
+                                {item.status}
                                 </Grid.Column>
                             </Grid.Row>
                             </Grid>
+                        )}
                         </Segment>
                     </Segment>
                     </Responsive>
