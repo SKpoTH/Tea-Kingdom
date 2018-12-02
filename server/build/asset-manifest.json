@@ -1,15 +1,8 @@
 {
-<<<<<<< HEAD
-  "main.css": "static/css/main.455f76bb.css",
-  "main.css.map": "static/css/main.455f76bb.css.map",
-  "main.js": "static/js/main.fcade585.js",
-  "main.js.map": "static/js/main.fcade585.js.map",
-=======
   "main.css": "static/css/main.747f423c.css",
   "main.css.map": "static/css/main.747f423c.css.map",
-  "main.js": "static/js/main.f77b4164.js",
-  "main.js.map": "static/js/main.f77b4164.js.map",
->>>>>>> 6edea99f405dca7786aa869ef10f59b419de978b
+  "main.js": "static/js/main.5299e462.js",
+  "main.js.map": "static/js/main.5299e462.js.map",
   "static/media/back.png": "static/media/back.a19be5d0.png",
   "static/media/bottom.jpg": "static/media/bottom.47a662ed.jpg",
   "static/media/brand-icons.eot": "static/media/brand-icons.13db00b7.eot",
